@@ -13,6 +13,7 @@ import HomeView from './views/HomeView';
 import OffersView from './views/OffersView';
 import Error404View from './views/Error404View';
 
+
 export default function App() {
   const navigate = useNavigate();
   const [user, setUser] = useState(null);
@@ -32,6 +33,9 @@ export default function App() {
 
       <Routes>
         <Route path="/" element={<HomeView />} />
+        <Route path="/charlotte" element={<CharlottesView />} />
+        <Route path="/irene" element={<IreneView />} />
+
         <Route path="charlotte" element={<CharlottesView />} />
         <Route path="irene" element={<IreneView />} />
         <Route path="profile" element={<ProfileView />} />
