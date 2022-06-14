@@ -7,6 +7,7 @@ import Navbar from './components/Navbar';
 import CharlottesView from './views/CharlottesView';
 import HomeView from './views/HomeView';
 import Error404View from './views/Error404View';
+import IreneView from './views/IreneView';
 
 
 const InitialUsers = [
@@ -25,7 +26,7 @@ function App() {
       <Routes>
         <Route path="/" element={<HomeView />} />
         <Route path="/charlotte" element={<CharlottesView />} />
-        <Route path="/irene" element={<CharlottesView />} />
+        <Route path="/irene" element={<IreneView />} />
 
         <Route path="*" element={<Error404View />} />
         {/*
