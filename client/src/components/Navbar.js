@@ -5,7 +5,7 @@ import { NavLink } from 'react-router-dom';
 function Navbar() {
     return (
         <nav className="Navbar">
-            <ul>
+            <ul className='flex gap-10 justify-center'>
                 <li><NavLink to="/">Home</NavLink></li>
                 {/* <li><NavLink to="/about">About</NavLink></li>
                 <li><NavLink to="/users">Users</NavLink></li>
