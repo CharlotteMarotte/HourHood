@@ -22,6 +22,27 @@ CREATE TABLE service_post (
     service_title VARCHAR(100),
     service_description TEXT(255),
     capacity INT NOT NULL,
-    category INT NOT NULL,
+    category_id INT NOT NULL,
     provider_id INT NOT NULL,
 FOREIGN KEY (provider_id) REFERENCES users (id) ON DELETE SET NULL
+
+);
+
+INSERT INTO service_post(service_title, service_description, capacity, category, provider_id)
+    VALUES ('Babysitting', 'I am open to spend time this week to take care of your children If you need it.', 2, 1 )
+
+
+DROP TABLE IF EXISTS service_categories;
+CREATE TABLE service_categories (
+    id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    category_title VARCHAR(100),
+    photo VARCHAR(100),
+FOREIGN KEY (id) REFERENCES service_post (category_id) ON DELETE SET NULL
+
+
+);
+
+INSERT INTO service_categories (category_title, photo)
+    VALUES ('Food',''), ('Home Services & Repairs',''), ('Health & Wellness', ''), ('Hobbies', ''), ('Transport', ''), ('Education', ''), ('IT', ''), ('Children & Pets', ''), ('Bureaucracy', ''), ('Others', '');
+
+
