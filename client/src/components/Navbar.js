@@ -11,6 +11,11 @@ function Navbar(props) {
           </NavLink>
         </li>
         <li className="collapse navbar-collapse flex-grow items-center">
+          <NavLink className="text-xl text-white pr-2 font-semibold" to="/offers">
+            Offers
+          </NavLink>
+        </li>
+        <li className="collapse navbar-collapse flex-grow items-center">
           <NavLink
             className="text-xl text-white pr-2 font-semibold"
             to="/profile"
