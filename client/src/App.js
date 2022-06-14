@@ -19,7 +19,7 @@ function App() {
   const [users, setUsers] = useState(InitialUsers);
 
   return (
-    <div className="App">
+    <div className="App bg-[#FFF7A3] h-screen w-screen">
       <Navbar />
 
       <Routes>
