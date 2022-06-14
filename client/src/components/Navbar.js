@@ -9,7 +9,10 @@ function Navbar() {
           <NavLink className="text-xl text-white pr-2 font-semibold" to="/">Home</NavLink>
         </li>
         <li className="collapse navbar-collapse flex-grow items-center">
-          <NavLink className="text-xl text-white pr-2 font-semibold" to="/bad-route">Bad!</NavLink>
+          <NavLink className="text-xl text-white pr-2 font-semibold" to="/Charlotte">Irene</NavLink>
+        </li>
+        <li className="collapse navbar-collapse flex-grow items-center">
+          <NavLink className="text-xl text-white pr-2 font-semibold" to="/Charlotte">Charlotte</NavLink>
         </li>
       </ul>
     </nav>
