@@ -3,9 +3,8 @@ import React from 'react';
 
 function HomeView() {
     return (
-        <div className="HomeView">
-            <h2>Home</h2>
-            <p>Welcome!</p>
+        <div className="HomeView text-3xl font-bold text-red-500 underline">
+            <h2>Home View</h2>
         </div>
     );
 }
