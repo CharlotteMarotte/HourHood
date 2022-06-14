@@ -12,7 +12,7 @@ import IreneView from './views/IreneView';
 import HomeView from './views/HomeView';
 import OffersView from './views/OffersView';
 import Error404View from './views/Error404View';
-import IreneView from './views/IreneView';
+
 
 export default function App() {
   const navigate = useNavigate();
