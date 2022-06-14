@@ -5,38 +5,42 @@ import './App.css';
 import Navbar from './components/Navbar';
 
 import CharlottesView from './views/CharlottesView';
+import ProfileView from './views/ProfileView';
+import BookingsView from './views/BookingsView';
+import RequestsView from './views/RequestsView';
+import IreneView from './views/IreneView';
 import HomeView from './views/HomeView';
+import OffersView from './views/OffersView';
 import Error404View from './views/Error404View';
 
-
-const InitialUsers = [
-  { id: 1, name: 'User 1' },
-  { id: 2, name: 'User 2' },
-];
-
-function App() {
+export default function App() {
   const navigate = useNavigate();
-  const [users, setUsers] = useState(InitialUsers);
+  const [user, setUser] = useState(null);
+
+  function switchUser(id){
+    if(id){
+      setUser({id, name: "User " + id})
+    }else{
+      setUser(null);
+    }
+    navigate('/offers');
+  }
 
   return (
     <div className="App bg-[#FFF7A3] h-screen w-screen">
-      <Navbar />
+      <Navbar switchUserCb={id => switchUser(id)}/>
 
       <Routes>
         <Route path="/" element={<HomeView />} />
-        <Route path="/charlotte" element={<CharlottesView />} />
-        <Route path="/irene" element={<CharlottesView />} />
-
+        <Route path="charlotte" element={<CharlottesView />} />
+        <Route path="irene" element={<IreneView />} />
+        <Route path="profile" element={<ProfileView />} />
+        <Route path="bookings" element={<BookingsView />} />
+        <Route path="offers" element={<OffersView user={user}/>} />
+        <Route path="requests" element={<RequestsView />} />
         <Route path="*" element={<Error404View />} />
-        {/*
-                <Route path="about" element={<AboutView userCount={users.length} />} />
-                <Route path="users" element={<UsersView users={users} />} />
-                <Route path="users/:id" element={<UserProfileView users={users} />} />
-                <Route path="add-user" element={<AddUserView addUserCb={name => addUser(name)} />} />
-                */}
       </Routes>
     </div>
   );
 }
 
-export default App;
