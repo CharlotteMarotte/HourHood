@@ -4,6 +4,7 @@ import logo from './logo.svg';
 import './App.css';
 import Navbar from './components/Navbar';
 
+import CharlottesView from './views/CharlottesView';
 import HomeView from './views/HomeView';
 import Error404View from './views/Error404View';
 
@@ -23,6 +24,9 @@ function App() {
 
       <Routes>
         <Route path="/" element={<HomeView />} />
+        <Route path="/charlotte" element={<CharlottesView />} />
+        <Route path="/irene" element={<CharlottesView />} />
+
         <Route path="*" element={<Error404View />} />
         {/*
                 <Route path="about" element={<AboutView userCount={users.length} />} />
