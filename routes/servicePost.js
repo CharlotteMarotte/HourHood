@@ -38,13 +38,13 @@ function joinToJson(results) {
   let row0 = results.data[0];
 
   let category = {
-    id: row0.catId,
+    id: row0.id, // change it
     title: row0.category_title,
     photo: row0.photo 
   }
 
   let sPost = {
-    id: row0.sPostId,
+    id: row0.id, //change it
     title: row0.service_title,
     description: row0.service_description,
     capacity: row0.capacity,
@@ -53,49 +53,6 @@ function joinToJson(results) {
 
   return sPost;
 }
-
-  // Create array of post items 
-//   let sPosts = [];
-//   if (row0.sPostId) {
-//       sPosts = results.data.map(p => ({
-//           id: p.sPostId,
-//           title: p.service_title,
-//           description: p.service_description,
-//           capacity: p.capacity,
-
-
-
-    // }
-        //   category: {
-        //     catId: p.fk_category_id,
-        //     title: p.category_title,
-        //     photo: p.photo,
-        //     },
-        //   provider: {
-        //     providerId: p.fk_provider_id,
-        //     firstName: p.first_name,
-        //     lastName: p.last_name,
-        //     street: p.street,
-        //     houseNumber: p.house_number,
-        //     cityCode: p.city_code,
-        //     cityName: p.city_name,
-        //     country: p.country,
-        //     email: p.email,
-        //     uDescription: p.user_description,
-        //     photo: p.photo
-        //   }
-         
-    //   }));
-//   }
- 
-  // Create exercise object
-//   let exercise = {
-//       id: row0.exerciseId,
-//       title: row0.title,
-//       category: row0.category,
-//       level: row0.level,
-//       items
-//   };
 
 /**
  * Routes
@@ -127,10 +84,10 @@ router.get('/:id', ensurePostExists, async function(req, res) {
         // Get service_post; we know it exists, thanks to guard
         // Use LEFT JOIN to also return authors and publisher
         let sql = `
-        SELECT service_categories.*, service_post.*, service_categories.id AS catId, service_post.id AS sPostId
+        SELECT service_categories.*, service_post.*
         FROM service_post 
-        LEFT JOIN service_categories ON catId = sPostId
-        WHERE sPostId = ${req.params.id}
+        LEFT JOIN service_categories ON  service_categories.id = service_post.id
+        WHERE service_post.id = ${req.params.id}
         `;
         let results = await db(sql);
         // Convert DB results into "sensible" JSON
@@ -145,9 +102,9 @@ router.get('/:id', ensurePostExists, async function(req, res) {
 });
 
 
-// // POST a new post
+// // // POST a new post
 // router.post('/', async function(req, res) {
-//     let { title, pages, publisherId, authorIds } = req.body;
+//     let { service_title, capacity, service_description,} = req.body;
 
 //     let sql = `
 //         INSERT INTO posts (title, pages, publisherId)
