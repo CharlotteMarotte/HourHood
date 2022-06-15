@@ -54,7 +54,7 @@ function Navbar(props) {
               className=" items-center justify-center cursor-pointer h-8"
             >
               <h3
-                className={` text-center px-6 text-xl font-semibold pt-[10px] transform duration-200 ease-in-out -translate-y-2 ${open}`}
+                className={`text-white text-center px-6 text-xl font-semibold pt-[10px] transform duration-200 ease-in-out -translate-y-2 ${open}`}
               >
                 Users
               </h3>
@@ -79,19 +79,19 @@ function Navbar(props) {
                 <div className="flex items-center justify-center absolute flex-col">
                   <button
                     className="text-white bg-[#361201dd] hover:bg-[#361201] hover:text-[#FF9940] px-10 py-4 font-semibold"
-                    onClick={(e) => props.switchUserCb(null)}
+                    onClick={(e) => {props.switchUserCb(null); setOpen(!open)}}
                   >
                     Anonymous{" "}
                   </button>
                   <button
                     className=" text-white bg-[#361201dd] px-16 py-4 hover:bg-[#361201] hover:text-[#FF9940] font-medium"
-                    onClick={(e) => props.switchUserCb(1)}
+                    onClick={(e) => {props.switchUserCb(1); setOpen(!open)}}
                   >
                     User1{" "}
                   </button>
                   <button
                     className="text-white bg-[#361201dd] px-[63px] py-4 rounded-b-lg hover:text-[#FF9940] hover:bg-[#361201] font-medium"
-                    onClick={(e) => props.switchUserCb(2)}
+                    onClick={(e) => {props.switchUserCb(2); setOpen(!open)}}
                   >
                    User2
                   </button>
