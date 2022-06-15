@@ -1,6 +1,24 @@
-import React from 'react';
+import React, { useContext, useEffect, useState } from 'react';
+import AppContext from '../AppContext';
+import OfferCard from '../components/OfferCard';
+import { Link } from 'react-router-dom';
 
 export default function ProfileView() {
+  let { user, offers } = useContext(AppContext);
+  // doesn't work, direct filter before map
+  // let [myOffers, setMyOffers] = useState(offers);
+
+  // useEffect(() => {
+  //   getMyOffers();
+  // }, []);
+
+  // function getMyOffers() {
+  //   if (user) {
+  //     let filteredOffers = offers.filter((e) => e.providerId === user.id);
+  //     setMyOffers(filteredOffers);
+  //   }
+  // }
+
   return (
     // Code thanks to https://codepen.io/tariq01/pen/jOyLrRJ
     <div className="font-sans antialiased text-gray-900 leading-normal tracking-wider bg-cover">
@@ -16,8 +34,6 @@ export default function ProfileView() {
           className="w-full lg:w-3/5 rounded-lg lg:rounded-l-lg lg:rounded-r-none bg-white opacity-75 mx-6 lg:mx-0"
         >
           <div className="p-4 md:p-12 text-center lg:text-left">
-            <div className="block lg:hidden rounded-full shadow-xl mx-auto -mt-16 h-48 w-48 bg-cover bg-center"></div>
-
             <h1 className="text-3xl font-bold pt-8 lg:pt-0">My Profile</h1>
             <div className="mx-auto lg:mx-0 w-4/5 pt-3 border-b-2 border-amber-500 opacity-25"></div>
 
@@ -44,6 +60,26 @@ export default function ProfileView() {
               </button>
             </div>
           </div>
+        </div>
+      </div>
+      <div className="container">
+        <h1 className="text-3xl font-bold pt-8 lg:pt-0">
+          My current offerings
+        </h1>
+        <div className="mx-auto lg:mx-0 w-4/5 py-3 border-b-2 border-amber-500 opacity-25"></div>
+        <Link
+          to={'/service-post'}
+          className="block bg-lime-600 mt-5 p-4 w-1/4 h-1/6 mx-auto border-2 border-lime-800 rounded-lg overflow-hidden text-white"
+        >
+          Add a new offer +
+        </Link>
+        <div className="px-5 py-24 mx-auto md:block lg:flex space-x-6 flex flex-wrap -m-4">
+          {offers
+            .filter((e) => e.providerId === user.id)
+            .map((o) => (
+              <OfferCard key={o.id} offer={o} view={'profile'} />
+            ))}
+          
         </div>
       </div>
     </div>

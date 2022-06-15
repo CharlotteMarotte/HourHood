@@ -30,28 +30,27 @@ export default function RequestServiceView() {
               <p className="font-bold text-2xl text-amber-600">{offer.title}</p>
             </header>
             <form onSubmit={handleSubmit}>
-              <div className="xl:flex :lg-flex-col-1">
-                <div className="w-full px-3 mb-5">
+              <div className="xl:flex :lg-flex-col-1 space-x-2">
+                <div className="w-full mb-5">
                   <label
-                    htmlFor="estimatetime-input"
+                    htmlFor="time-needed-input"
                     className="text-xs font-semibold px-1"
                   >
-                    Estimated time needed (in h)
+                    Time needed (in h)
                   </label>
                   <div className="flex">
-                    <div className="w-10 z-10 pl-1 text-center poniter-events-none flex items-center justify-center">
-                      <i className="mdi mdi-account-outline text-amber-400 text-lg"></i>
+                    <div className="w-10 z-10 text-center poniter-events-none flex items-center justify-center">
                     </div>
                     <input
                       required
-                      id="estimatetime-input"
+                      id="time-needed-input"
                       type="number"
                       className="w-full -ml-10 pl-10 pr-3 py-2 rounded-lg border-2 border-amber-200 outline-none focus:border-lime-700"
                       placeholder="1"
                     />
                   </div>
                 </div>
-                <div className="w-full px-3 mb-5">
+                <div className="w-full mb-5">
                   <label
                     htmlFor="proposed-date-input"
                     className="text-xs font-semibold px-1"
@@ -59,8 +58,7 @@ export default function RequestServiceView() {
                     Proposed Date
                   </label>
                   <div className="flex">
-                    <div className="w-10 z-10 pl-1 text-center poniter-events-none flex items-center justify-center">
-                      <i className="mdi mdi-account-outline text-amber-400 text-lg"></i>
+                    <div className="w-10 z-10 text-center poniter-events-none flex items-center justify-center">
                     </div>
                     <input
                       required
@@ -78,7 +76,6 @@ export default function RequestServiceView() {
                   </label>
                   <div className="flex">
                     <div className="w-10 z-10 pl-1 text-center pointer-events-none flex items-center justify-center">
-                      <i className="mdi mdi-email-outline text-amber-400 text-lg"></i>
                     </div>
                     <textarea
                       id="message-input"
