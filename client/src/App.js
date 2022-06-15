@@ -4,11 +4,9 @@ import logo from './logo.svg';
 import './App.css';
 import Navbar from './components/Navbar';
 
-import CharlottesView from './views/CharlottesView';
 import ProfileView from './views/ProfileView';
 import BookingsView from './views/BookingsView';
 import RequestsView from './views/RequestsView';
-import IreneView from './views/IreneView';
 import HomeView from './views/HomeView';
 import OffersView from './views/OffersView';
 import Error404View from './views/Error404View';
@@ -33,11 +31,6 @@ export default function App() {
 
       <Routes>
         <Route path="/" element={<HomeView />} />
-        <Route path="/charlotte" element={<CharlottesView />} />
-        <Route path="/irene" element={<IreneView />} />
-
-        <Route path="charlotte" element={<CharlottesView />} />
-        <Route path="irene" element={<IreneView />} />
         <Route path="profile" element={<ProfileView />} />
         <Route path="bookings" element={<BookingsView />} />
         <Route path="offers" element={<OffersView user={user}/>} />
