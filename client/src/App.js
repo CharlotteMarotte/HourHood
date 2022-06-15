@@ -82,11 +82,18 @@ export default function App() {
 
   return (
     <div className="App bg-[#FFF7A3] h-screen w-screen">
-      <Navbar switchUserCb={(id) => switchUser(id)} />
+      <Navbar switchUserCb={(id) => switchUser(id)} user={user}/>
 
       <Routes>
         <Route path="/" element={<HomeView />} />
-        <Route path="profile" element={<ProfileView />} />
+        <Route
+          path="profile"
+          element={
+            <AppContext.Provider value={contextObj}>
+              <ProfileView />
+            </AppContext.Provider>
+          }
+        />
         <Route path="signup" element={<SignUpView />} />
         <Route path="login" element={<LogInView />} />
         <Route path="bookings" element={<BookingsView />} />
