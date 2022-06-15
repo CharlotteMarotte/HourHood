@@ -1,9 +1,7 @@
 import React, { useState } from 'react';
 import { Route, Routes, useNavigate } from 'react-router-dom';
-import logo from './logo.svg';
 import './App.css';
 import Navbar from './components/Navbar';
-
 import ProfileView from './views/ProfileView';
 import BookingsView from './views/BookingsView';
 import RequestsView from './views/RequestsView';
