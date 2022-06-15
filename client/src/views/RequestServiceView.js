@@ -16,13 +16,13 @@ export default function RequestServiceView() {
     <div className="min-w-screen min-h-scree flex py-16 px-16">
       <div className="bg-amber-100 text-amber-500 rounded-xl w-full overflow-hidden border-solid border-2 border-amber-200">
         <div className="md:flex w-full">
-          <div className="hidden md:block bg-white w-3/5 py-5 px-5 object-cover border-solid border-r-2 border-amber-00">
+          <div className="hidden md:block bg-white md:w-4/7 lg:w-3/5 py-5 px-5 object-cover border-solid border-r-2 border-amber-00">
             <img
               className="rounded-xl"
               src="https://i.pinimg.com/originals/01/1b/24/011b24f9cb707b842aeb862ef9d54e5a.gif"
             />
           </div>
-          <div className="w-full md:w-2/5 py-5 px-5 md:px-10">
+          <div className="w-full md:w-3/7 lg:w-2/5 py-20 px-5 md:px-10">
             <header className="text-center mb-10">
               <h1 className="font-bold text-4xl text-amber-900">
                 Request a service
@@ -30,8 +30,8 @@ export default function RequestServiceView() {
               <p className="font-bold text-2xl text-amber-600">{offer.title}</p>
             </header>
             <form onSubmit={handleSubmit}>
-              <div className="flex -mx-3">
-                <div className="w-1/2 px-3 mb-5">
+              <div className="xl:flex :lg-flex-col-1">
+                <div className="w-full px-3 mb-5">
                   <label
                     htmlFor="estimatetime-input"
                     className="text-xs font-semibold px-1"
@@ -51,7 +51,7 @@ export default function RequestServiceView() {
                     />
                   </div>
                 </div>
-                <div className="w-1/2 px-3 mb-5">
+                <div className="w-full px-3 mb-5">
                   <label
                     htmlFor="proposed-date-input"
                     className="text-xs font-semibold px-1"
