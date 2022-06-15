@@ -28,8 +28,8 @@ CREATE TABLE service_post (
 
 );
 
-INSERT INTO service_post (service_title, service_description, capacity, category, provider_id)
-    VALUES ('Babysitting', 'I am open to spend time this week to take care of your children If you need it.', 2, 1 )
+-- INSERT INTO service_post (service_title, service_description, capacity, category, provider_id)
+--     VALUES ('Babysitting', 'I am open to spend time this week to take care of your children If you need it.', 2, 1, 1 )
 
 
 -- DROP TABLE IF EXISTS service_categories;
