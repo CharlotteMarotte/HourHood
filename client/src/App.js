@@ -10,6 +10,8 @@ import RequestsView from './views/RequestsView';
 import HomeView from './views/HomeView';
 import OffersView from './views/OffersView';
 import Error404View from './views/Error404View';
+import SignUpView from './views/SignUpView';
+import LogInView from "./views/LogInView"
 
 const INIT_OFFERS = [
   {
@@ -75,6 +77,8 @@ export default function App() {
       <Routes>
         <Route path="/" element={<HomeView />} />
         <Route path="profile" element={<ProfileView />} />
+        <Route path="signup" element={<SignUpView />} />
+        <Route path="login" element={<LogInView />} />
         <Route path="bookings" element={<BookingsView />} />
         <Route
           path="offers"
