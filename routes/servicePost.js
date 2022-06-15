@@ -2,10 +2,6 @@ var express = require('express');
 var router = express.Router();
 const db = require('../model/helper');
 
-
-
-
-
 /**
  * Helpers
  **/
@@ -17,6 +13,22 @@ async function sendAllPosts(res) {
     res.send(results.data);
 }
 
+async function ensurePostExists(req, res, next) {
+    try {
+        let results = await db(`SELECT * FROM service_post WHERE id = ${req.params.id}`);
+        console.log('I am resuts', results);
+        if (results.data.length === 1) {
+            // post was found; save it in response obj for the route function to use
+            res.locals.servicePost = results.data[0];
+            // Let next middleware function run
+            next();
+        } else {
+            res.status(404).send({ error: 'post not found' });
+        }
+    } catch (err) {
+        res.status(500).send({ error: err.message });
+    }
+}
 
 // Convert the DB results into a useful JSON format:
 // A post obj with nested publisher obj and nested array of author objs
@@ -25,18 +37,57 @@ function joinToJson(results) {
     // Get first row
   let row0 = results.data[0];
 
-  // Create array of post items 
-  let post = [];
-  if (row0.servicePost.id) {
-      post = results.data.map(p => ({
-          id: p.id,
-          title: p.service_title,
-          description: p.service_description,
-          capacity: p.capacity
-      }));
+  let category = {
+    id: row0.catId,
+    title: row0.category_title,
+    photo: row0.photo 
   }
-  return post;
+
+  let sPost = {
+    id: row0.sPostId,
+    title: row0.service_title,
+    description: row0.service_description,
+    capacity: row0.capacity,
+    category
+  }
+
+  return sPost;
 }
+
+  // Create array of post items 
+//   let sPosts = [];
+//   if (row0.sPostId) {
+//       sPosts = results.data.map(p => ({
+//           id: p.sPostId,
+//           title: p.service_title,
+//           description: p.service_description,
+//           capacity: p.capacity,
+
+
+
+    // }
+        //   category: {
+        //     catId: p.fk_category_id,
+        //     title: p.category_title,
+        //     photo: p.photo,
+        //     },
+        //   provider: {
+        //     providerId: p.fk_provider_id,
+        //     firstName: p.first_name,
+        //     lastName: p.last_name,
+        //     street: p.street,
+        //     houseNumber: p.house_number,
+        //     cityCode: p.city_code,
+        //     cityName: p.city_name,
+        //     country: p.country,
+        //     email: p.email,
+        //     uDescription: p.user_description,
+        //     photo: p.photo
+        //   }
+         
+    //   }));
+//   }
+ 
   // Create exercise object
 //   let exercise = {
 //       id: row0.exerciseId,
@@ -65,22 +116,6 @@ router.get('/', async function(req, res) {
  **/
 
 
- async function ensurePostExists(req, res, next) {
-    try {
-        let results = await db(`SELECT * FROM service_post WHERE id = ${req.params.id}`);
-        if (results.data.length === 1) {
-            // post was found; save it in response obj for the route function to use
-            res.locals.servicePost = results.data[0];
-            // Let next middleware function run
-            next();
-        } else {
-            res.status(404).send({ error: 'post not found' });
-        }
-    } catch (err) {
-        res.status(500).send({ error: err.message });
-    }
-}
-
 // GET service_post by ID
 router.get('/:id', ensurePostExists, async function(req, res) {
     // If we get here we know the post exists (thanks to guard)
@@ -92,14 +127,15 @@ router.get('/:id', ensurePostExists, async function(req, res) {
         // Get service_post; we know it exists, thanks to guard
         // Use LEFT JOIN to also return authors and publisher
         let sql = `
-        SELECT users.*, service_categories.*
-        FROM users 
-        LEFT JOIN service_categories ON ${servicePost.fk_category_id} = service_categories.id
-        WHERE users.id = ${servicePost.fk_provider_id} 
+        SELECT service_categories.*, service_post.*, service_categories.id AS catId, service_post.id AS sPostId
+        FROM service_post 
+        LEFT JOIN service_categories ON catId = sPostId
+        WHERE sPostId = ${req.params.id}
         `;
         let results = await db(sql);
         // Convert DB results into "sensible" JSON
         servicePost = joinToJson(results);
+        //servicePost = results.data
         console.log('I am service post', servicePost);
 
         res.send(servicePost);
