@@ -11,7 +11,9 @@ import HomeView from './views/HomeView';
 import OffersView from './views/OffersView';
 import Error404View from './views/Error404View';
 import SignUpView from './views/SignUpView';
-import LogInView from "./views/LogInView"
+import LogInView from './views/LogInView';
+import RequestServiceView from './views/RequestServiceView';
+import PostOfferView from './views/PostOfferView';
 
 const INIT_OFFERS = [
   {
@@ -19,7 +21,7 @@ const INIT_OFFERS = [
     title: 'Babysitting',
     description: 'Only available in evenings Monday/Wednesday/Friday',
     providerId: 1,
-    category: "Children & Pets",
+    category: 'Children & Pets',
     img: 'https://img.freepik.com/free-vector/mother-with-many-children-flat-vector-illustration-tired-single-mom-naughty-kids-cartoon-characters-parenthood-routine-motherhood-burnout-babysitting-concept-exhausted-housewife_198278-8159.jpg',
   },
   {
@@ -27,7 +29,7 @@ const INIT_OFFERS = [
     title: 'Cutting hair',
     description: 'Takes my about 1h for shoulder long hair',
     providerId: 1,
-    category: "Health & Wellness",
+    category: 'Health & Wellness',
     img: 'https://img.freepik.com/free-vector/beauty-salon-concept-modern-flat-design-hairdresser-washes-client-hair-before-cutting_9209-6739.jpg',
   },
   {
@@ -35,7 +37,7 @@ const INIT_OFFERS = [
     title: 'Cleaning flat',
     description: 'Only available on the weekends',
     providerId: 2,
-    category: "Home Services & Repairs",
+    category: 'Home Services & Repairs',
     img: 'https://i.pinimg.com/originals/4e/31/15/4e3115b585d68dd5e312224dd3ee8611.jpg',
   },
   {
@@ -43,7 +45,7 @@ const INIT_OFFERS = [
     title: 'Teaching guitar',
     description: 'For beginners to intermediate',
     providerId: 1,
-    category: "Education",
+    category: 'Education',
     img: 'https://i.pinimg.com/originals/34/b1/5d/34b15d58b31424d570d8160d814ca420.png',
   },
   {
@@ -51,7 +53,7 @@ const INIT_OFFERS = [
     title: 'Cooking lesson Catalan Food',
     description: 'Will show you how to prepare three dishes',
     providerId: 2,
-    category: "Food",
+    category: 'Food',
     img: 'https://img.freepik.com/free-vector/girl-cooking-food-flat-illustration_288067-132.jpg',
   },
 ];
@@ -70,7 +72,13 @@ export default function App() {
     navigate('/offers');
   }
 
-  
+  function requestService() {
+    console.log('Service got requested');
+    navigate('/bookings');
+  }
+
+  const contextObj = { offers, user };
+  const chosenUserObj = { offer: offers[1], requestServiceCb: requestService };
 
   return (
     <div className="App bg-[#FFF7A3] h-screen w-screen">
@@ -85,11 +93,20 @@ export default function App() {
         <Route
           path="offers"
           element={
-            <AppContext.Provider value={offers}>
-              <OffersView user={user} />
+            <AppContext.Provider value={contextObj}>
+              <OffersView />
             </AppContext.Provider>
           }
         />
+        <Route
+          path="service-request"
+          element={
+            <AppContext.Provider value={chosenUserObj}>
+              <RequestServiceView />
+            </AppContext.Provider>
+          }
+        />
+        <Route path="service-post" element={<PostOfferView />} />
         <Route path="requests" element={<RequestsView />} />
         <Route path="*" element={<Error404View />} />
       </Routes>

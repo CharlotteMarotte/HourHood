@@ -3,9 +3,10 @@ import AppContext from '../AppContext';
 import OfferCard from './OfferCard';
 
 export default function OfferGrid() {
-  let offers = useContext(AppContext);
+  let { offers } = useContext(AppContext);
 
   return (
+    // Code thanks to https://codepen.io/asdasdadddddddddd/pen/ExXjdPM
     <div>
       <a
         href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css"
