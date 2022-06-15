@@ -32,26 +32,7 @@ function joinToJson(results) {
           id: p.id,
           title: p.service_title,
           description: p.service_description,
-          capacity: p.capacity,
-          category: {
-            catId: p.fk_category_id,
-            title: p.category_title,
-            photo: p.photo,
-            },
-          provider: {
-            providerId: p.fk_provider_id,
-            firstName: p.first_name,
-            lastName: p.last_name,
-            street: p.street,
-            houseNumber: p.house_number,
-            cityCode: p.city_code,
-            cityName: p.city_name,
-            country: p.country,
-            email: p.email,
-            uDescription: p.user_description,
-            photo: p.photo
-          }
-         
+          capacity: p.capacity
       }));
   }
   return post;
@@ -87,7 +68,6 @@ router.get('/', async function(req, res) {
  async function ensurePostExists(req, res, next) {
     try {
         let results = await db(`SELECT * FROM service_post WHERE id = ${req.params.id}`);
-        console.log('I am resuts', results);
         if (results.data.length === 1) {
             // post was found; save it in response obj for the route function to use
             res.locals.servicePost = results.data[0];
@@ -119,8 +99,7 @@ router.get('/:id', ensurePostExists, async function(req, res) {
         `;
         let results = await db(sql);
         // Convert DB results into "sensible" JSON
-        //servicePost = joinToJson(results);
-        servicePost = (results);
+        servicePost = joinToJson(results);
         console.log('I am service post', servicePost);
 
         res.send(servicePost);
