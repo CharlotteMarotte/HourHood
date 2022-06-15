@@ -16,12 +16,12 @@ export default function OfferCard(props) {
           <h1 className="title-font text-2xl font-medium text-amber-900 mb-3">
             {props.offer.title}
           </h1>
-          <p className="leading-relaxed mb-3 text-amber-500 ">{props.offer.description}</p>
+          <p className="leading-relaxed mb-3 text-amber-500 ">"{props.offer.description}"</p>
           <div className="flex justify-center flex-wrap space-x-2 md:space-y-2 lg:space-y-0">
             <button className="bg-transparent hover:bg-amber-500 text-amber-700 font-semibold hover:text-white py-2 px-4 border border-amber-500 hover:border-transparent rounded">
               Add to Favs{' '}
             </button>
-            <button className="bg-transparent hover:bg-amber-500 text-amber-700 font-semibold hover:text-white py-2 px-4 border border-amber-500 hover:border-transparent rounded">
+            <button className="bg-transparent hover:bg-lime-600 text-lime-700 font-semibold hover:text-white py-2 px-4 border border-lime-600 hover:border-transparent rounded">
               Request
             </button>
           </div>
