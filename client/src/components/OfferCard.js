@@ -7,7 +7,7 @@ export default function OfferCard(props) {
 
 
   return (
-    <div className="p-4 w-full md:w-1/2 lg:w-1/3 xl:w-1/4">
+    <div className="p-4 w-full md:w-1/2 lg:w-1/3">
       <div className="h-full border-2 border-amber-800 rounded-lg overflow-hidden bg-amber-100">
         <div className="lg:h-72 md:h-36 m-5">
         <img
