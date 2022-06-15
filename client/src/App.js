@@ -70,6 +70,8 @@ export default function App() {
     navigate('/offers');
   }
 
+  
+
   return (
     <div className="App bg-[#FFF7A3] h-screen w-screen">
       <Navbar switchUserCb={(id) => switchUser(id)} />
