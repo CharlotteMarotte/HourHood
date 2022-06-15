@@ -40,14 +40,6 @@ function Navbar(props) {
             Bookings
           </NavLink>
         </li>
-        {/* <li className="collapse navbar-collapse flex-grow items-center">
-          <NavLink className="text-xl text-white pr-2 font-semibold" to="/irene">Irene</NavLink>
-        </li>
-        <li className="collapse navbar-collapse flex-grow items-center">
-          <NavLink className="text-xl text-white pr-2 font-semibold" to="/charlotte">Charlotte</NavLink>
-        </li> */}
-
-        {/* to provide some fake login procedure */}
         <li
           className="text-xl text-white pr-2 font-semibold"
           onClick={(e) => props.switchUserCb(null)}
