@@ -7,7 +7,7 @@ export default function RequestServiceView() {
 
   function handleSubmit(event) {
     event.preventDefault();
-    // Call callback we got from CatContext
+    // Call callback we got from AppContext
     requestServiceCb();
   }
 

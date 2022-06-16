@@ -77,6 +77,11 @@ export default function App() {
     navigate('/bookings');
   }
 
+  function postService() {
+    console.log('Service got posted');
+    navigate('/profile');
+  }
+
   const contextObj = { offers, user };
   const chosenUserObj = { offer: offers[1], requestServiceCb: requestService };
 
@@ -113,7 +118,7 @@ export default function App() {
             </AppContext.Provider>
           }
         />
-        <Route path="service-post" element={<PostOfferView />} />
+        <Route path="service-post" element={<PostOfferView  postServiceCb={postService}/>} />
         <Route path="requests" element={<RequestsView />} />
         <Route path="*" element={<Error404View />} />
       </Routes>
