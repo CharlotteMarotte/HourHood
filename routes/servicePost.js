@@ -109,7 +109,6 @@ router.get('/:id', ensurePostExists, async function(req, res) {
         let results = await db(sql);
         // Convert DB results into "sensible" JSON
         servicePost = joinToJson(results);
-        //servicePost = results.data
         console.log('I am service post', servicePost);
 
         res.send(servicePost);
@@ -119,58 +118,40 @@ router.get('/:id', ensurePostExists, async function(req, res) {
 });
 
 
-// // // POST a new post
-// router.post('/', async function(req, res) {
-//     let { service_title, capacity, service_description,} = req.body;
+// POST a new post 
+router.post('/', async function(req, res) { 
 
-//     let sql = `
-//         INSERT INTO posts (title, pages, publisherId)
-//         VALUES ('${title}', ${pages}, ${publisherId});
-//         SELECT LAST_INSERT_ID();
-//     `;
+    let { service_title, service_description, capacity, donation, fk_category_id, fk_provider_id } = req.body; 
+    
+    let sql = ` 
+    INSERT INTO service_post (service_title, service_description, capacity, donation, fk_category_id, fk_provider_id)
+    VALUES ('${service_title}', '${service_description}', ${capacity}, ${donation}, ${fk_category_id}, ${fk_provider_id})`; 
 
-//     try {
-//         // Insert the post
-//         let results = await db(sql);
-//         // The results contain the new ID thanks to SELECT LAST_INSERT_ID()
-//         let newpostId = results.data[0].insertId;
-
-//         // Add post/authors to junction table
-//         if (authorIds && authorIds.length) {
-//             let vals = [];
-//             for (let authId of authorIds) {
-//                 vals.push( `(${newpostId}, ${authId})` );
-//             }
-//             let sql = `
-//                 INSERT INTO posts_authors (postId, authorId) 
-//                 VALUES ${vals.join(',')}
-//                 `;
-//             await db(sql);
-//         }
-
-//         // Set status code for "resource created" and return all posts
-//         res.status(201);
-//         sendAllposts(res);
-//     } catch (err) {
-//         res.status(500).send({ error: err.message });  
-//     }
-// });
-
-
-// // DELETE post by ID
-// router.delete('/:id', ensurepostExists, async function(req, res) {
-//     // If we get here we know the post exists (thanks to guard)
-//     let post = res.locals.post;
-
-//     try {
-//         // Delete post and junction table entries
-//         // (thanks to ON DELETE CASCADE)
-//         await db(`DELETE FROM posts WHERE id = ${post.id}`);
-//         sendAllposts(res);
-//     } catch (err) {
-//         res.status(500).send({ error: err.message });  
-//     }
-// });
-
+    try { 
+    // Insert the post
+    await db(sql); 
+    // Set status code for "resource created" and return all posts 
+    // res.status(201).send("posted"); 
+    sendAllPosts(res); 
+    } catch (err) { 
+    res.status(500).send({ error: err.message });  
+    } 
+}); 
+    
+     
+// DELETE post by ID 
+router.delete('/:id', ensurePostExists, async function(req, res) { 
+    // If we get here we know the post exists (thanks to guard) 
+    let post = res.locals.servicePost; 
+    console.log(post);
+    
+    try { 
+    // Delete post and other entires thanks to cascade 
+    await db(`DELETE FROM service_post WHERE id = ${post.id}`); 
+    sendAllPosts(res); 
+    } catch (err) { 
+    res.status(500).send({ error: err.message });  
+    } 
+}); 
 
 module.exports = router;
