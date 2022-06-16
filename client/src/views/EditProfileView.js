@@ -25,7 +25,7 @@ export default function EditProfileView() {
               type="button"
               className="bg-transparent hover:bg-amber-500 text-amber-700 font-semibold hover:text-white py-2 px-4 border border-amber-500 hover:border-transparent rounded"
             >
-              Upload new photo{' '}
+              Upload a new photo{' '}
             </button>{' '}
           </div>
           <div className="w-full md:w-4/7 lg:w-3/5 py-20 px-5 md:px-10">
@@ -36,7 +36,7 @@ export default function EditProfileView() {
             </header>
             <form onSubmit={handleSubmit}>
               <div className="">
-                <div className="w-full xl:flex :lg-flex-col-1 space-x-2">
+                <div className="w-full xl:flex :lg-flex-col-1 space-x-4">
                   <div className="w-1/2 mb-5">
                     <label
                       htmlFor="firstname-input"
@@ -74,7 +74,7 @@ export default function EditProfileView() {
                     </div>
                   </div>
                 </div>
-                <div className="w-full xl:flex :lg-flex-col-1 space-x-2">
+                <div className="w-full xl:flex :lg-flex-col-1 space-x-4">
                   <div className="w-1/2 mb-5">
                     <label
                       htmlFor="street-input"
