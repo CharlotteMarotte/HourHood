@@ -35,7 +35,7 @@ export default function LogInView(props) {
           </div>
           <button
             type="submit"
-            className="bg-[#FF9940] hover:bg-[#fe8923] hover:shadow-[#C8E242] hover:shadow-md hover:font-extrabold px-10 py-2 text-md uppercase text-white font-bold rounded-xl"
+            className="bg-[#ff9940e3] hover:bg-[#fe8923] hover:shadow-[#C8E242] hover:shadow-md hover:font-extrabold px-10 py-2 text-md uppercase text-white font-bold rounded-xl"
           >
             Login
           </button>
