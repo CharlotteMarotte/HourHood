@@ -85,7 +85,7 @@ export default function ProfileView() {
         </div>
       </div>
     </div>
-) : <Link className="title-font text-2xl font-medium bg-amber-200 p-4 rounded-lg text-amber-900 my-1" to="/offers">No User logged in - back to offers</Link>}
+) : <Link className="title-font text-2xl font-medium bg-amber-200 p-4 rounded-lg text-amber-900 my-1" to="/">No User logged in - back to offers</Link>}
 </>
   );
 }

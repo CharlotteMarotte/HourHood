@@ -97,7 +97,7 @@ export default function RequestServiceView() {
               </div>
               <div className="flex justify-center flex-wrap space-x-2 lg:space-y-0">
                 <Link
-                  to={'/offers'}
+                  to={'/'}
                   className="bg-transparent hover:bg-lime-600 text-lime-700 font-semibold hover:text-white py-2 px-4 border border-lime-600 hover:border-transparent rounded"
                 >
                   Back
