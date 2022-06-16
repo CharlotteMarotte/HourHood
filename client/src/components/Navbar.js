@@ -11,7 +11,7 @@ function Navbar(props) {
   };
 
   return (
-    <div className="sticky top-0">
+    <div className="sticky top-0 z-50">
       <nav className="bg-[#361201] shadow-md shadow-[#361201a2] navbar navbar-expand-lg navbar-light">
         {/* One we have the login, change sm:pl-32 for sm:px-32 in the div below */}
         <div className="sm:flex hidden items-center justify-between sm:pl-32 py-3">

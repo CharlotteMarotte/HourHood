@@ -133,6 +133,8 @@ export default function App() {
   return (
     <div className="App bg-gradient-to-t from-[#FFF7A3] via-[#FFF7A3] to-[#ff994091]">
       <Navbar switchUserCb={(id) => switchUser(id)} user={user} />
+    <div className="App bg-gradient-to-t from-[#FFF7A3] via-[#FFF7A3] to-[#ff994091] h-screen">
+      <Navbar switchUserCb={(id) => switchUser(id)} user={user}/>
 
       <Routes>
         <Route
