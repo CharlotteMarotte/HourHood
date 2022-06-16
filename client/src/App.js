@@ -15,9 +15,6 @@ import RequestServiceView from './views/RequestServiceView';
 import PostOfferView from './views/PostOfferView';
 import EditProfileView from './views/EditProfileView';
 import GetStarted from './views/GetStarted';
-import OfferGrid from './components/OfferGrid';
-
-
 
 const INIT_OFFERS = [
   {
@@ -62,13 +59,54 @@ const INIT_OFFERS = [
   },
 ];
 
+const bookings = [
+  {
+    id: 1,
+    title: 'Babysitting',
+    provider: 'Rachel',
+    description: 'Only available in evenings Monday/Wednesday/Friday',
+    date: '2022-06-23T14:41:13+00:00',
+    status: 'pending'
+  },
+  {
+    id: 2,
+    title: 'Watering plants',
+    provider: 'Martha',
+    description: 'Only available in summer',
+    date: '2022-07-30T19:41:13+00:00',
+    status: 'accepted'
+  },
+  {
+    id: 3,
+    title: 'Teaching guitar',
+    provider: 'Lisa',
+    description: 'Only available in evenings Monday/Wednesday/Friday',
+    date: '2022-07-25T08:41:13+00:00',
+    status: 'accepted'
+  },
+  {
+    id: 4,
+    title: 'Painting house',
+    provider: 'Luis',
+    description: 'Please contact me via email before',
+    date: '2022-07-30T20:05:13+00:00',
+    status: 'pending'
+  }
+];
 
 export default function App() {
   const navigate = useNavigate();
   const [user, setUser] = useState(null);
   const [offers, setOffers] = useState(INIT_OFFERS);
-  const postalCodes = ['08006', '08012', '08023', '08035', '08024', '08037', '08025'];
-
+  const postalCodes = [
+    '08006',
+    '08012',
+    '08023',
+    '08035',
+    '08024',
+    '08037',
+    '08025',
+  ];
 
   function switchUser(id) {
     if (id) {
@@ -94,7 +132,7 @@ export default function App() {
 
   return (
     <div className="App bg-gradient-to-t from-[#FFF7A3] via-[#FFF7A3] to-[#ff994091]">
-      <Navbar switchUserCb={(id) => switchUser(id)} user={user}/>
+      <Navbar switchUserCb={(id) => switchUser(id)} user={user} />
 
       <Routes>
         <Route
@@ -109,14 +147,14 @@ export default function App() {
           path="profile/edit"
           element={
             <AppContext.Provider value={contextObj}>
-              <EditProfileView postalCodes={postalCodes}/>
+              <EditProfileView postalCodes={postalCodes} />
             </AppContext.Provider>
           }
         />
         <Route path="signup" element={<SignUpView />} />
         <Route path="login" element={<LogInView />} />
         {/* <Route path="offers" element={<OfferGrid />} /> */}
-        <Route path="bookings" element={<BookingsView />} />
+        <Route path="bookings" element={<BookingsView bookings={bookings} />} />
         <Route path="getstarted" element={<GetStarted />} />
         <Route
           path="/"
@@ -134,7 +172,10 @@ export default function App() {
             </AppContext.Provider>
           }
         />
-        <Route path="service-post" element={<PostOfferView  postServiceCb={postService}/>} />
+        <Route
+          path="service-post"
+          element={<PostOfferView postServiceCb={postService} />}
+        />
         <Route path="requests" element={<RequestsView />} />
         <Route path="*" element={<Error404View />} />
       </Routes>
