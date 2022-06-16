@@ -55,7 +55,7 @@ const INIT_OFFERS = [
     description: 'Will show you how to prepare three dishes',
     providerId: 2,
     category: 'Food',
-    img: 'https://img.freepik.com/free-vector/girl-cooking-food-flat-illustration_288067-132.jpg',
+    img: 'https://media.istockphoto.com/vectors/black-man-exercising-in-the-park-illustration-in-flat-style-concept-vector-id1158202184?k=20&m=1158202184&s=612x612&w=0&h=nTnoqg5wjvf44Wwf3N6W0Yo4TIIoWOQvuKOERzcPX3M=',
   },
 ];
 
@@ -63,35 +63,78 @@ const bookings = [
   {
     id: 1,
     title: 'Babysitting',
-    provider: 'Rachel',
+    name: 'Rachel',
     description: 'Only available in evenings Monday/Wednesday/Friday',
     date: '2022-06-23T14:41:13+00:00',
-    status: 'pending'
+    status: 'pending',
+    img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSwhBGoWgheuLGTkcoNqHuBHEiflDd-TBd9OoYARUY2cFq6I6GIjBUvbtI7zwnogvDAwSk&usqp=CAU',
   },
   {
     id: 2,
     title: 'Watering plants',
-    provider: 'Martha',
+    name: 'Martha',
     description: 'Only available in summer',
     date: '2022-07-30T19:41:13+00:00',
-    status: 'accepted'
+    status: 'accepted',
+    img: 'https://i.pinimg.com/originals/b8/da/8d/b8da8da3ffb8647ce7fa6bd743eeb611.png',
   },
   {
     id: 3,
     title: 'Teaching guitar',
-    provider: 'Lisa',
+    name: 'Lisa',
     description: 'Only available in evenings Monday/Wednesday/Friday',
     date: '2022-07-25T08:41:13+00:00',
-    status: 'accepted'
+    status: 'accepted',
+    img: 'https://i.pinimg.com/originals/34/b1/5d/34b15d58b31424d570d8160d814ca420.png',
   },
   {
     id: 4,
     title: 'Painting house',
-    provider: 'Luis',
+    name: 'Luis',
     description: 'Please contact me via email before',
     date: '2022-07-30T20:05:13+00:00',
-    status: 'pending'
-  }
+    status: 'pending',
+    img: 'https://i.pinimg.com/originals/8c/22/4c/8c224c88cbfcf226e3ee5d215e4930fa.png',
+  },
+];
+
+const requests = [
+  {
+    id: 1,
+    title: 'Babysitting',
+    name: 'Amelia',
+    description: "I need help because I'm going out for dinner",
+    date: '2022-06-23T14:41:13+00:00',
+    status: 'pending',
+    img: 'https://media1.thehungryjpeg.com/thumbs2/ori_3828483_pvs5h84dimh89wrk5g11gcc3wjgxg1tts9xyyyfq_flat-illustration-girl-holding-a-laptop.jpg',
+  },
+  {
+    id: 2,
+    title: 'Watering plants',
+    name: 'Elena',
+    description: 'I will be gone on holiday, need watering 1 time/week',
+    date: '2022-07-30T19:41:13+00:00',
+    status: 'accepted',
+    img: 'https://cdn.dribbble.com/users/3543938/screenshots/6603062/flat-illustration.png',
+  },
+  {
+    id: 3,
+    title: 'Teaching guitar',
+    name: 'Lolo',
+    description: 'I want to learn a happy song',
+    date: '2022-07-25T08:41:13+00:00',
+    status: 'accepted',
+    img: 'https://cdn.dribbble.com/users/5352839/screenshots/11892562/character.png',
+  },
+  {
+    id: 4,
+    title: 'Painting house',
+    name: 'Armin',
+    description: 'I broke my arm and cannot hold a brush',
+    date: '2022-07-30T20:05:13+00:00',
+    status: 'pending',
+    img: 'https://www.kindpng.com/picc/m/310-3100872_dancing-man-design-flat-vector-vector-colors-illustration.png',
+  },
 ];
 
 export default function App() {
@@ -131,7 +174,8 @@ export default function App() {
   const chosenUserObj = { offer: offers[1], requestServiceCb: requestService };
 
   return (
-    <div className="App bg-gradient-to-t from-[#FFF7A3] via-[#FFF7A3] to-[#ff994091]">
+    <div className="App bg-gradient-to-t from-[#FFF7A3] via-[#FFF7A3] to-[#ff994091] h-screen">
+
       <Navbar switchUserCb={(id) => switchUser(id)} user={user} />
 
       <Routes>
@@ -176,7 +220,7 @@ export default function App() {
           path="service-post"
           element={<PostOfferView postServiceCb={postService} />}
         />
-        <Route path="requests" element={<RequestsView />} />
+        <Route path="requests" element={<RequestsView requests={requests} />} />
         <Route path="*" element={<Error404View />} />
       </Routes>
     </div>

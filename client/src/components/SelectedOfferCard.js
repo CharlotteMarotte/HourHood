@@ -4,19 +4,19 @@ export default function SelectedOfferCard(props) {
   return (
     // Code thanks to https://codepen.io/egoistdeveloper/pen/xxYrmgd
     <div className="grid mx-20 my-10">
-      <div className="block w-full p-6 bg-white border rounded-lg -z-1 lg:flex lg:flex-row lg:w-2/3 border-amber-200/80">
+      <div className="block w-full p-6 bg-white border-4 rounded-lg -z-1 lg:flex lg:flex-row lg:w-2/3 border-amber-200/80">
         <div className="relative">
           <img
             className="object-cover w-64 h-64"
-            src="https://cdn.dribbble.com/users/5352839/screenshots/11892562/character.png"
+            src={props.offer.img}
             alt="User"
           />
         </div>
 
-        <div className="flex flex-col px-6">
+        <div className="flex flex-col w-full px-6">
           <div className="flex flex-row h-8">
             <h2 className="mb-3 text-2xl font-medium title-font text-amber-900">
-              Babysitting
+              {props.offer.title}
             </h2>
           </div>
 
@@ -34,7 +34,7 @@ export default function SelectedOfferCard(props) {
               </svg>
 
               <div className="text-s text-amber-400/80 hover:text-amber-400">
-                Rachel
+                {props.offer.name}
               </div>
             </div>
 
@@ -57,15 +57,15 @@ export default function SelectedOfferCard(props) {
           </div>
           <div className="w-full p-5 mt-5 space-y-3 text-left rounded-lg justify bg-amber-200">
             <p className="leading-relaxed text-amber-500 ">
-              "Only available in evenings Monday/Wednesday/Friday"
+              Note: "{props.offer.description}"
             </p>
 
             <p className="leading-relaxed text-amber-500 ">
-              Date: 23/06/2022 17:00h
+              {new Date(props.offer.date).toLocaleDateString('en-GB', { weekday:"long", year:"numeric", month:"short", day:"numeric", hour:"2-digit", minute:"2-digit"})}
             </p>
           </div>
-          <div className="flex flex-col items-start justify-end flex-grow pt-6 lg:pt-0 w-100">
-            {props.view === "requests" ? (
+          <div className="flex flex-col items-start justify-end flex-grow w-full pt-6 lg:pt-0 w-100">
+            {props.view === 'requests' ? (
               <div className="flex flex-row space-x-3">
                 <button
                   type="submit"
