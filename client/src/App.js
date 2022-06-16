@@ -15,6 +15,7 @@ import LogInView from './views/LogInView';
 import RequestServiceView from './views/RequestServiceView';
 import PostOfferView from './views/PostOfferView';
 import EditProfileView from './views/EditProfileView';
+import GetStarted from './views/GetStarted';
 
 
 const INIT_OFFERS = [
@@ -60,10 +61,13 @@ const INIT_OFFERS = [
   },
 ];
 
+
 export default function App() {
   const navigate = useNavigate();
   const [user, setUser] = useState(null);
   const [offers, setOffers] = useState(INIT_OFFERS);
+  const postalCodes = ['08006', '08012', '08023', '08035', '08024', '08037', '08025'];
+
 
   function switchUser(id) {
     if (id) {
@@ -106,7 +110,7 @@ export default function App() {
           path="profile/edit"
           element={
             <AppContext.Provider value={contextObj}>
-              <EditProfileView />
+              <EditProfileView postalCodes={postalCodes}/>
             </AppContext.Provider>
           }
         />
