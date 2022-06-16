@@ -21,7 +21,9 @@ export default function ProfileView() {
 
   return (
     // Code thanks to https://codepen.io/tariq01/pen/jOyLrRJ
-    <div className="font-sans antialiased text-gray-900 leading-normal tracking-wider bg-cover">
+    <>
+    {user ? (
+    <div className="font-sans antialiased text-gray-900 leading-normal tracking-wider bg-cover">     
       <div className="max-w-4xl flex items-center h-auto lg:h-screen flex-wrap mx-auto my-24 lg:my-0">
         <div className="w-full lg:w-2/5">
           <img
@@ -83,5 +85,7 @@ export default function ProfileView() {
         </div>
       </div>
     </div>
+) : <Link className="title-font text-2xl font-medium bg-amber-200 p-4 rounded-lg text-amber-900 my-1" to="/offers">No User logged in - back to offers</Link>}
+</>
   );
 }

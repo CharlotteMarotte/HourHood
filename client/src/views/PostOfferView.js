@@ -1,11 +1,11 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-export default function PostOfferView() {
+export default function PostOfferView(props) {
   function handleSubmit(event) {
     event.preventDefault();
-    // Call callback we got from CatContext
-    // requestServiceCb();
+
+    props.postServiceCb();
   }
 
   return (
@@ -37,7 +37,7 @@ export default function PostOfferView() {
                   <div className="flex">
                     <div className="w-10  text-center poniter-events-none flex items-center justify-center"></div>
                     <input
-                      requiamber
+                      require
                       id="title-input"
                       type="text"
                       className="w-full -ml-10 pl-10 pr-3 py-2 rounded-lg border-2 border-amber-200 outline-none focus:border-lime-700"
@@ -56,7 +56,7 @@ export default function PostOfferView() {
                     <div className="flex">
                       <div className="w-10  text-center poniter-events-none flex items-center justify-center"></div>
                       <input
-                        requiamber
+                        require
                         id="capacity-input"
                         type="number"
                         className="w-full -ml-10 pl-10 pr-3 py-2 rounded-lg border-2 border-amber-200 outline-none focus:border-lime-700"
@@ -64,14 +64,14 @@ export default function PostOfferView() {
                       />
                     </div>
                   </div>
-                    <div className="w-full lg:w-1/2 px-3 space-x-3 mt-7 mb-5">
-                      <input
-                        type="checkbox"
-                        id="donation"
-                        className="bg-lime-700 hover:bg-lime-700 focus:bg-lime-700"
-                      />
-                      <label htmlFor="donation">I accept donations</label>
-                    </div>
+                  <div className="w-full lg:w-1/2 px-3 space-x-3 mt-7 mb-5">
+                    <input
+                      type="checkbox"
+                      id="donation"
+                      className="bg-lime-700 hover:bg-lime-700 focus:bg-lime-700"
+                    />
+                    <label htmlFor="donation">I accept donations</label>
+                  </div>
                 </div>
                 <div className="w-full mb-5 px-3 pr-6">
                   <div className="block">
@@ -84,6 +84,7 @@ export default function PostOfferView() {
                     </label>
                     <div class="relative">
                       <select
+                      require
                         class="p-4 mt-2 mb-0 min-w-full rounded-lg bg-white focus:outline-none focus:border-amber-500 text-md border-solid border-2 border-amber-200 transition ease-in duration-200"
                         name="category"
                         id="select_category"
