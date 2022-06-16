@@ -13,7 +13,8 @@ function Navbar(props) {
   return (
     <div className="sticky top-0">
       <nav className="bg-[#361201] shadow-md shadow-[#361201a2] navbar navbar-expand-lg navbar-light">
-        <div className="sm:flex hidden items-center justify-between sm:px-32 py-3">
+        {/* One we have the login, change sm:pl-32 for sm:px-32 in the div below */}
+        <div className="sm:flex hidden items-center justify-between sm:pl-32 py-3">
           <NavLink className="text-xl text-white pr-2 font-semibold" to="/">
             Hour Hood
           </NavLink>
@@ -45,7 +46,6 @@ function Navbar(props) {
               Profile
             </NavLink>
           </div>
-          {/* <div> */}
 
           {props.user && (
             <>
@@ -74,36 +74,38 @@ function Navbar(props) {
               </NavLink>
             </div>
           )}
+          <div className="flex gap-4 py-4 pr-10">
+          <div className="text-white font-semibold">|</div>
+            <button
+              className="text-white hover:bg-[#361201] hover:text-[#FF9940] font-semibold"
+              onClick={(e) => {
+                props.switchUserCb(null);
+                setOpen(!open);
+              }}
+            >
+              Anonymous{" "}
+            </button>
+            <button
+              className=" text-white hover:bg-[#361201] hover:text-[#FF9940] font-medium"
+              onClick={(e) => {
+                props.switchUserCb(1);
+                setOpen(!open);
+              }}
+            >
+              User1{" "}
+            </button>
+            <button
+              className="text-white rounded-b-lg hover:text-[#FF9940] hover:bg-[#361201] font-medium"
+              onClick={(e) => {
+                props.switchUserCb(2);
+                setOpen(!open);
+              }}
+            >
+              User2
+            </button>
+            <div className="text-white font-semibold">|</div>
+          </div>
         </div>
-        {/* <div className="flex flex-col">
-          <button
-            className="text-white hover:bg-[#361201] hover:text-[#FF9940] px-10 py-4 font-semibold"
-            onClick={(e) => {
-              props.switchUserCb(null);
-              setOpen(!open);
-            }}
-          >
-            Anonymous{" "}
-          </button>
-          <button
-            className=" text-white px-[64px] py-4 hover:bg-[#361201] hover:text-[#FF9940] font-medium"
-            onClick={(e) => {
-              props.switchUserCb(1);
-              setOpen(!open);
-            }}
-          >
-            User1{" "}
-          </button>
-          <button
-            className="text-white  px-[63px] py-4 rounded-b-lg hover:text-[#FF9940] hover:bg-[#361201] font-medium"
-            onClick={(e) => {
-              props.switchUserCb(2);
-              setOpen(!open);
-            }}
-          >
-            User2
-          </button>
-        </div> */}
 
         <div className="flex py-3 pl-4 xl:hidden lg:hidden md:hidden sm:hidden">
           <div className="flex flex-col">
@@ -128,12 +130,11 @@ function Navbar(props) {
                   }`}
                 ></div>
               </div>
-              <div className=" px-20">
+              <div className="text-center pl-14">
                 {open && (
                   <div className="flex rounded-b-lg bg-[#361201e6] flex-col">
                     <NavLink
                       onClick={(e) => {
-                        props.switchUserCb(null);
                         setOpen(!open);
                       }}
                       className="text-white pr-2 font-semibold hover:bg-[#361201] hover:text-[#FF9940]"
@@ -141,8 +142,8 @@ function Navbar(props) {
                     >
                       Hour Hood
                     </NavLink>
-                    <NavLink  onClick={(e) => {
-                        props.switchUserCb(1);
+                    <NavLink
+                      onClick={(e) => {
                         setOpen(!open);
                       }}
                       className="text-white hover:bg-[#361201] hover:text-[#FF9940] pr-2 font-semibold"
@@ -151,15 +152,65 @@ function Navbar(props) {
                       Offers
                     </NavLink>
 
-                    <button
-                      className="text-white py-4 rounded-b-lg hover:text-[#FF9940] hover:bg-[#361201] font-medium"
-                      onClick={(e) => {
-                        props.switchUserCb(2);
-                        setOpen(!open);
-                      }}
-                    >
-                      User2
-                    </button>
+                    {props.user && (
+                      <>
+                        <NavLink
+                          onClick={(e) => {
+                            setOpen(!open);
+                          }}
+                          className="text-white pr-2 font-semibold"
+                          to="/requests"
+                        >
+                          Requests
+                        </NavLink>
+                        <NavLink
+                          onClick={(e) => {
+                            setOpen(!open);
+                          }}
+                          className="text-white pr-2 font-semibold"
+                          to="/bookings"
+                        >
+                          Bookings
+                        </NavLink>
+                        <NavLink
+                          onClick={(e) => {
+                            setOpen(!open);
+                          }}
+                          className="text-white pr-2 font-semibold"
+                          to="/profile"
+                        >
+                          Profile
+                        </NavLink>
+                      </>
+                    )}
+                    <div className="flex gap-3">
+                      <button
+                        className="text-white hover:bg-[#361201] hover:text-[#FF9940] font-semibold"
+                        onClick={(e) => {
+                          setOpen(!open);
+                        }}
+                      >
+                        Anonymous{" "}
+                      </button>
+                      <div className="text-white font-semibold">|</div>
+                      <button
+                        className=" text-white hover:bg-[#361201] hover:text-[#FF9940] font-medium"
+                        onClick={(e) => {
+                          setOpen(!open);
+                        }}
+                      >
+                        User1{" "}
+                      </button>
+                      <div className="text-white font-semibold">|</div>
+                      <button
+                        className="text-white rounded-b-lg hover:text-[#FF9940] hover:bg-[#361201] font-medium"
+                        onClick={(e) => {
+                          setOpen(!open);
+                        }}
+                      >
+                        User2
+                      </button>
+                    </div>
                   </div>
                 )}
               </div>
