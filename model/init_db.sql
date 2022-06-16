@@ -15,10 +15,13 @@ CREATE TABLE users (
     country VARCHAR(100),
     email VARCHAR(100) UNIQUE NOT NULL,
     user_description TEXT(255),
-    photo VARCHAR(100) 
+    hobbies TEXT(255),
+    superpower TEXT(255),
+    photo VARCHAR(100),
+    password VARCHAR(200) NOT NULL
 );
 
-INSERT INTO users (first_name, last_name, street, house_number, city_code, city_name, country, email, user_description, photo) VALUES ('John', 'Smith', 'Carrer de Grassot', '101-A', 08025, 'Barcelona', 'Spain','johnsmith14062022@gmail.com', "Hi , I love pop-corn and see films with my family on Fridays", ""), ('Karen', 'Magnamara', 'Carrer de Grassot', '85-B', 08025, 'Barcelona', 'Spain','karenmagnamara14062022@gmail.com', "Hi , I'm Karen I would like to be able to have more time to spend with my child.", "");
+INSERT INTO users (first_name, last_name, street, house_number, city_code, city_name, country, email, user_description, photo, password) VALUES ('John', 'Smith', 'Carrer de Grassot', '101-A', 08025, 'Barcelona', 'Spain','johnsmith14062022@gmail.com', "Hi , I love pop-corn and see films with my family on Fridays", "", '$2b$12$eFzMWbS9SogNtxkmo3J7aO8FQMFQSKbtpwLMIOVsF6GGKpTQdgq.W'), ('Karen', 'Magnamara', 'Carrer de Grassot', '85-B', 08025, 'Barcelona', 'Spain','karenmagnamara14062022@gmail.com', "Hi , I'm Karen I would like to be able to have more time to spend with my child.", "", '$2b$12$WZcGPyrkCvD5e8m0Qz/nFOdBryUcsp6uDlE2MDo/AjuBhPrQBCfI6');
 
 CREATE TABLE service_categories (
     id INT NOT NULL PRIMARY KEY AUTO_INCREMENT, 
