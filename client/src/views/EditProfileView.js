@@ -118,26 +118,26 @@ export default function EditProfileView(props) {
                       <div className="flex items-center justify-center w-full text-center pointer-events-none"></div>
                       <label
                         for="select_category"
-                        class="w-full text-center pointer-events-none flex items-center justify-center"
+                        className="flex items-center justify-center w-full text-center pointer-events-none"
                       >
                         Postal Code{' '}
                       </label>
-                      <div class="relative">
+                      <div className="relative">
                         <select
                           require
-                          class="p-2.5 mb-0 min-w-full rounded-lg bg-white focus:outline-none focus:border-amber-500 text-md border-solid border-2 border-amber-200 transition ease-in duration-200"
+                          className="p-2.5 mb-0 min-w-full rounded-lg bg-white focus:outline-none focus:border-amber-500 text-md border-solid border-2 border-amber-200 transition ease-in duration-200"
                           name="category"
                           id="select_category"
                         >
                           <option
                             disabled
                             selected
-                            class="hover:bg-amber-100 text-md p-2 "
+                            className="p-2 hover:bg-amber-100 text-md "
                           >
                             -- Select a postal code --
                           </option>
                           {props.postalCodes.map((postalCode, index) => (
-                            <option key={index} class="hover:bg-amber-100 text-md p-4">
+                            <option key={index} className="p-4 hover:bg-amber-100 text-md">
                               {postalCode}
                             </option>
                           ))}

@@ -7,7 +7,7 @@ const db = require('../model/helper');
  **/
 async function sendAllPosts(res) {
     // We don't need try/catch here because we're always called from within one
-    let results = await db('SELECT * FROM service_post ORDER BY service_title');
+    let results = await db('SELECT * FROM service_post ORDER BY id DESC');
     res.send(results.data);
 }
 

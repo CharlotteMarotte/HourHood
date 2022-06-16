@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Route, Routes, useNavigate } from 'react-router-dom';
 import './App.css';
 
@@ -137,19 +137,54 @@ const requests = [
   },
 ];
 
+const postalCodes = [
+  '08006',
+  '08012',
+  '08023',
+  '08035',
+  '08024',
+  '08037',
+  '08025',
+];
+
 export default function App() {
   const navigate = useNavigate();
   const [user, setUser] = useState(null);
   const [offers, setOffers] = useState(INIT_OFFERS);
-  const postalCodes = [
-    '08006',
-    '08012',
-    '08023',
-    '08035',
-    '08024',
-    '08037',
-    '08025',
-  ];
+  const [categories, setCategories] = useState(null);
+
+  useEffect(() => {
+    getCategories();
+    getOffers();
+  }, []);
+
+  async function getCategories() {
+    try {
+      let response = await fetch('/categories'); // does GET by default
+      if (response.ok) {
+        let categories = await response.json();
+        setCategories(categories); // set billCats state with all categories, so it can be used by other components/views
+      } else {
+        console.log(`Server error: ${response.status} ${response.statusText}`);
+      }
+    } catch (err) {
+      console.log(`Server error: ${err.message}`);
+    }
+  }
+
+  async function getOffers() {
+    try {
+      let response = await fetch('/servicePost'); // does GET by default
+      if (response.ok) {
+        let offers = await response.json();
+        setOffers(offers); // set billCats state with all categories, so it can be used by other components/views
+      } else {
+        console.log(`Server error: ${response.status} ${response.statusText}`);
+      }
+    } catch (err) {
+      console.log(`Server error: ${err.message}`);
+    }
+  }
 
   function switchUser(id) {
     if (id) {
@@ -165,9 +200,29 @@ export default function App() {
     navigate('/bookings');
   }
 
-  function postService() {
-    console.log('Service got posted');
-    navigate('/profile');
+
+  async function postService(serviceData) {
+    // Define fetch() options
+    let options = {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(serviceData),
+    };
+
+    try {
+      let response = await fetch('/servicePost/', options); // do POST
+      if (response.ok) {
+        let offers = await response.json(); // set invoices state with all invoices including new ones
+        setOffers(offers);
+        navigate('/profile');
+      } else {
+        console.log(`Server error: ${response.status} ${response.statusText}`);
+      }
+    } catch (err) {
+      console.log(`Server error: ${err.message}`);
+    }
   }
 
   const contextObj = { offers, user };
@@ -218,7 +273,7 @@ export default function App() {
         />
         <Route
           path="service-post"
-          element={<PostOfferView postServiceCb={postService} />}
+          element={<PostOfferView postServiceCb={postService} categories={categories}/>}
         />
         <Route path="requests" element={<RequestsView requests={requests} />} />
         <Route path="*" element={<Error404View />} />
