@@ -11,9 +11,9 @@ async function sendAllPosts(res) {
     let sql = `
         SELECT service_categories.*, service_post.*, users.*, service_categories.id AS catId, service_post.id AS sPostId, users.id AS userId
         FROM service_post 
-        LEFT JOIN service_categories ON  service_categories.id = service_post.fk_category_id
+        LEFT JOIN service_categories ON service_categories.id = service_post.fk_category_id
         LEFT JOIN users ON users.id = service_post.fk_provider_id
-        ORDER BY id DESC
+        ORDER BY sPostId DESC
     `;
     let results = await db(sql);
     let allPosts = joinToJson(results);

@@ -18,13 +18,13 @@ export default function OfferCard(props) {
         </div>
         <div className="p-6">
           <h2 className="mb-1 font-medium tracking-widest text-s title-font text-amber-500">
-            Category: {props.offer.fk_category_id}
+            {props.offer.category.title}
           </h2>
           <h1 className="mb-3 text-2xl font-medium title-font text-amber-900">
             {props.offer.service_title}
           </h1>
           <p className="mb-3 leading-relaxed text-amber-500 ">
-            "{props.offer.service_description}"
+            "{props.offer.description}"
           </p>
           <div className="flex flex-wrap justify-center space-x-2 md:space-y-2 lg:space-y-0">
             {/* depending which view uses card (profile/) buttons change */}
