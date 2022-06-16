@@ -166,6 +166,7 @@ function Navbar(props) {
             </div>
           </div>
         </div>
+        
       </nav>
     </div>
   );
