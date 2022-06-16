@@ -10,7 +10,7 @@ export default function PostOfferView(props) {
 
   return (
     // Code thanks to https://codepen.io/atzinn-herrera/pen/JjMMBxy
-    <div className="min-w-screen min-h-scree flex py-16 px-16">
+    <div className="min-w-screen min-h-screen flex py-16 px-16">
       <div className="bg-amber-100 text-amber-500 rounded-xl w-full overflow-hidden border-solid border-2 border-amber-200">
         <div className="md:flex w-full">
           <div className="hidden md:block bg-white md:w-4/7 lg:w-3/5 py-5 px-5 object-cover border-solid border-r-2 border-amber-00">
