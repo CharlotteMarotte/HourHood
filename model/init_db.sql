@@ -72,11 +72,11 @@ VALUES
 CREATE TABLE service_categories (
     id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
     category_title VARCHAR(100),
-    photo VARCHAR(255)
+    picture VARCHAR(255)
 );
 
 INSERT INTO
-    service_categories (category_title, photo)
+    service_categories (category_title, picture)
 VALUES
     (
         'Food',
