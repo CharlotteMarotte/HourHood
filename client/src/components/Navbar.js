@@ -12,7 +12,7 @@ function Navbar(props) {
 
   return (
     <div className="sticky top-0">
-      <nav className="bg-[#361201] shadow-md shadow-[#361201a2] navbar navbar-expand-lg navbar-light">
+      <nav className="bg-[#361201] navbar navbar-expand-lg navbar-light">
         <div className="sm:flex hidden items-center justify-between sm:px-32 py-3">
           <NavLink className="text-xl text-white pr-2 font-semibold" to="/">
             Hour Hood
