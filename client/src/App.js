@@ -14,6 +14,7 @@ import SignUpView from './views/SignUpView';
 import LogInView from './views/LogInView';
 import RequestServiceView from './views/RequestServiceView';
 import PostOfferView from './views/PostOfferView';
+import EditProfileView from './views/EditProfileView';
 
 const INIT_OFFERS = [
   {
@@ -96,6 +97,15 @@ export default function App() {
           element={
             <AppContext.Provider value={contextObj}>
               <ProfileView />
+            </AppContext.Provider>
+          }
+        />
+        <Route path="/" element={<HomeView />} />
+        <Route
+          path="profile/edit"
+          element={
+            <AppContext.Provider value={contextObj}>
+              <EditProfileView />
             </AppContext.Provider>
           }
         />
