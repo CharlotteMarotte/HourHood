@@ -34,7 +34,7 @@ function joinToJson(results) {
         category: {
             categoryID: row.catId,
             title: row.category_title,
-            photo: row.photo 
+            picture: row.picture
         },
         user: {
             userID: row.userId,
