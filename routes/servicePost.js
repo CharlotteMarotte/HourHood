@@ -5,14 +5,15 @@ const db = require('../model/helper');
 /**
  * Helpers
  **/
-
-
 async function sendAllPosts(res) {
     // We don't need try/catch here because we're always called from within one
     let results = await db('SELECT * FROM service_post ORDER BY service_title');
     res.send(results.data);
 }
 
+/**
+ * Guards
+ **/
 async function ensurePostExists(req, res, next) {
     try {
         let results = await db(`SELECT * FROM service_post WHERE id = ${req.params.id}`);
@@ -84,9 +85,6 @@ router.get('/', async function(req, res) {
     }
 });
 
-/**
- * Guards
- **/
 
 
 // GET service_post by ID
