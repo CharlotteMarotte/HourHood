@@ -16,6 +16,7 @@ import RequestServiceView from './views/RequestServiceView';
 import PostOfferView from './views/PostOfferView';
 import EditProfileView from './views/EditProfileView';
 
+
 const INIT_OFFERS = [
   {
     id: 1,
@@ -112,6 +113,7 @@ export default function App() {
         <Route path="signup" element={<SignUpView />} />
         <Route path="login" element={<LogInView />} />
         <Route path="bookings" element={<BookingsView />} />
+        <Route path="getstarted" element={<GetStarted />} />
         <Route
           path="offers"
           element={
