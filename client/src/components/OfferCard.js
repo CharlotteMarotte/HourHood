@@ -7,38 +7,38 @@ export default function OfferCard(props) {
 
   return (
     <div className={`p-4 w-full ${user ? "w-full lg:w-1/2 xl:w-1/3" : "md:w-1/2 lg:w-1/3 xl:w-1/4"}`}>
-      <div className="h-full border-2 border-amber-800 rounded-lg overflow-hidden bg-amber-100">
-        <div className="lg:h-72 md:h-36 m-5">
+      <div className="h-full overflow-hidden bg-white border-2 rounded-lg shadow-lg shadow-amber-400 border-amber-200 ">
+        <div className="m-5 lg:h-72 md:h-36">
           <img
-            className="h-full w-full object-cover"
+            className="object-cover w-full h-full"
             src={props.offer.img}
             alt="blog"
           />
         </div>
         <div className="p-6">
-          <h2 className="tracking-widest text-s title-font font-medium text-amber-500 mb-1">
+          <h2 className="mb-1 font-medium tracking-widest text-s title-font text-amber-500">
             {props.offer.category}
           </h2>
-          <h1 className="title-font text-2xl font-medium text-amber-900 mb-3">
+          <h1 className="mb-3 text-2xl font-medium title-font text-amber-900">
             {props.offer.title}
           </h1>
-          <p className="leading-relaxed mb-3 text-amber-500 ">
+          <p className="mb-3 leading-relaxed text-amber-500 ">
             "{props.offer.description}"
           </p>
-          <div className="flex justify-center flex-wrap space-x-2 md:space-y-2 lg:space-y-0">
+          <div className="flex flex-wrap justify-center space-x-2 md:space-y-2 lg:space-y-0">
             {/* depending which view uses card (profile/) buttons change */}
             {props.view === 'offers' ? (
               <>
                 <Link
                   to={user ? '/' : '/login'}
-                  className="bg-transparent hover:bg-amber-500 text-amber-700 font-semibold hover:text-white py-2 px-4 border border-amber-500 hover:border-transparent rounded"
+                  className="px-4 py-2 font-semibold bg-transparent border rounded hover:bg-amber-500 text-amber-700 hover:text-white border-amber-500 hover:border-transparent"
                 >
                   User's Profile{' '}
                 </Link>
 
                 <Link
                   to={user ? '/service-request' : '/login'}
-                  className="bg-transparent hover:bg-lime-600 text-lime-700 font-semibold hover:text-white py-2 px-4 border border-lime-600 hover:border-transparent rounded"
+                  className="px-4 py-2 font-semibold bg-transparent border rounded hover:bg-lime-600 text-lime-700 hover:text-white border-lime-600 hover:border-transparent"
                 >
                   Request
                 </Link>
@@ -47,13 +47,13 @@ export default function OfferCard(props) {
               <>
                 <button
                   type="button"
-                  className="bg-transparent hover:bg-lime-600 text-lime-700 font-semibold hover:text-white py-2 px-4 border border-amber-500 hover:border-transparent rounded"
+                  className="px-4 py-2 font-semibold bg-transparent border rounded hover:bg-lime-600 text-lime-700 hover:text-white border-amber-500 hover:border-transparent"
                 >
                   Edit{' '}
                 </button>
                 <button
                   type="button"
-                  className="bg-transparent hover:bg-amber-500 text-amber-700 font-semibold hover:text-white py-2 px-4 border border-amber-500 hover:border-transparent rounded"
+                  className="px-4 py-2 font-semibold bg-transparent border rounded hover:bg-amber-500 text-amber-700 hover:text-white border-amber-500 hover:border-transparent"
                 >
                   Delete{' '}
                 </button>

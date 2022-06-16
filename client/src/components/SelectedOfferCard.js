@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default function SelectedOfferCard() {
+export default function SelectedOfferCard(props) {
   return (
     // Code thanks to https://codepen.io/egoistdeveloper/pen/xxYrmgd
     <div className="grid mx-20 my-10">
@@ -65,20 +65,31 @@ export default function SelectedOfferCard() {
             </p>
           </div>
           <div className="flex flex-col items-start justify-end flex-grow pt-6 lg:pt-0 w-100">
-            <div className="flex flex-row space-x-3">
-              <button
-                type="submit"
-                className="px-4 py-2 font-semibold bg-transparent border rounded hover:bg-amber-500 text-amber-700 hover:text-white border-amber-500 hover:border-transparent"
-              >
-                Decline{' '}
-              </button>{' '}
-              <button
-                type="button"
-                className="px-4 py-2 font-semibold bg-transparent border rounded hover:bg-lime-600 text-lime-700 hover:text-white border-lime-600 hover:border-transparent"
-              >
-                Accept
-              </button>
-            </div>
+            {props.view === "requests" ? (
+              <div className="flex flex-row space-x-3">
+                <button
+                  type="submit"
+                  className="px-4 py-2 font-semibold bg-transparent border rounded hover:bg-amber-500 text-amber-700 hover:text-white border-amber-500 hover:border-transparent"
+                >
+                  Decline{' '}
+                </button>{' '}
+                <button
+                  type="button"
+                  className="px-4 py-2 font-semibold bg-transparent border rounded hover:bg-lime-600 text-lime-700 hover:text-white border-lime-600 hover:border-transparent"
+                >
+                  Accept
+                </button>
+              </div>
+            ) : (
+              <div className="flex flex-row space-x-3">
+                <button
+                  type="submit"
+                  className="px-4 py-2 font-semibold bg-transparent border rounded hover:bg-amber-500 text-amber-700 hover:text-white border-amber-500 hover:border-transparent"
+                >
+                  Cancel{' '}
+                </button>{' '}
+              </div>
+            )}
           </div>
         </div>
       </div>
