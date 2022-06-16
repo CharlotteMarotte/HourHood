@@ -18,8 +18,8 @@ function RulesView () {
         <div className='bg-[#fe8923] w-28 h-1'></div>
         <p className='mb-10 w-[400px] font-semibold'>It’s not about you as an invidiual, it’s about making things happen together. </p>
         <div className='flex gap-10 justify-center'>
-            <Link to="/signup" className='bg-[#ff9940e3] hover:bg-[#fe8923] hover:shadow-white hover:shadow-md hover:font-extrabold px-10 py-2 text-md uppercase text-white font-bold rounded-xl'>Continue</Link>
-            <Link to="/getstarted" className='bg-[#ff9940e3] hover:bg-[#fe8923] hover:shadow-white hover:shadow-md hover:font-extrabold px-10 py-2 text-md uppercase text-white font-bold rounded-xl'>Learn more</Link>
+            <Link to="/signup" className='bg-[#ff9940e3] hover:bg-[#fe8923] hover:shadow-[#ffe600] hover:shadow-lg hover:font-extrabold px-10 py-2 text-md uppercase text-white font-bold rounded-xl'>Continue</Link>
+            <Link to="/getstarted" className='bg-[#ff9940e3] hover:bg-[#fe8923] hover:shadow-[#ff994091] hover:shadow-lg hover:font-extrabold px-10 py-2 text-md uppercase text-white font-bold rounded-xl'>Learn more</Link>
         </div>
 
 
