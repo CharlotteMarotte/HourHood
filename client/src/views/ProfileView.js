@@ -57,9 +57,9 @@ export default function ProfileView() {
             <p className="text-sm">Planning suprise parties</p>
 
             <div className="pt-12 pb-8">
-              <button className="bg-amber-700 hover:bg-amber-900 text-white font-bold py-2 px-4 rounded-full">
+              <Link to="edit" className="bg-amber-700 hover:bg-amber-900 text-white font-bold py-2 px-4 rounded-full">
                 Edit Profile{' '}
-              </button>
+              </Link>
             </div>
           </div>
         </div>
