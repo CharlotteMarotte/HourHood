@@ -94,7 +94,17 @@ export default function ProfileView() {
         >
           No User logged in - back to offers
         </Link>
-      )}
-    </>
+
+        <div className="px-5 py-24 mx-auto md:block lg:flex space-x-6 flex flex-wrap -m-4">
+          {offers
+            .filter((e) => e.providerId === user.id)
+            .map((o) => (
+              <OfferCard key={o.id} offer={o} view={'profile'} />
+            ))}
+          
+        </div>
+      </div>
+    </div>
+) : <Link className="title-font text-2xl font-medium bg-amber-200 p-4 rounded-lg text-amber-900 my-1" to="/">No User logged in - back to offers</Link>}
   );
 }

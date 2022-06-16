@@ -12,12 +12,13 @@ function Navbar(props) {
 
   return (
     <div className="sticky top-0">
-
-    
       <nav className="bg-[#361201] shadow-md shadow-[#361201a2] navbar navbar-expand-lg navbar-light">
         {/* One we have the login, change sm:pl-32 for sm:px-32 in the div below */}
         <div className="sm:flex hidden items-center justify-between sm:pl-32 py-3">
-          <NavLink className="text-xl text-white pr-2 font-semibold hover:text-[#FF9940]" to="/">
+          <NavLink
+            className="text-xl text-white pr-2 font-semibold hover:text-[#FF9940]"
+            to="/"
+          >
             Hour Hood
           </NavLink>
 
@@ -58,7 +59,13 @@ function Navbar(props) {
             </div>
           )}
           <div className="flex gap-4 py-4 pr-10">
-          <div className="text-white font-semibold">|</div>
+            <NavLink
+              className="text-xl text-white pr-2 font-semibold hover:text-[#FF9940]"
+              to="/login"
+            >
+              Login
+            </NavLink>
+            <div className="text-white font-semibold">|</div>
             <button
               className="text-white hover:bg-[#361201] hover:text-[#FF9940] font-semibold"
               onClick={(e) => {
@@ -130,7 +137,7 @@ function Navbar(props) {
                         setOpen(!open);
                       }}
                       className="text-white hover:bg-[#361201] hover:text-[#FF9940] pr-2 font-semibold"
-                      to="/offers"
+                      to="/"
                     >
                       Offers
                     </NavLink>
@@ -166,6 +173,15 @@ function Navbar(props) {
                         </NavLink>
                       </>
                     )}
+                    <NavLink
+                      onClick={(e) => {
+                        setOpen(!open);
+                      }}
+                      className="text-white pr-2 font-semibold hover:text-[#FF9940]"
+                      to="/login"
+                    >
+                      Login
+                    </NavLink>
                     <div className="flex gap-3">
                       <button
                         className="text-white hover:bg-[#361201] hover:text-[#FF9940] font-semibold"
@@ -203,7 +219,6 @@ function Navbar(props) {
             </div>
           </div>
         </div>
-        
       </nav>
     </div>
   );
