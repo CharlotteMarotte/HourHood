@@ -16,7 +16,7 @@ function Navbar(props) {
         {/* One we have the login, change sm:pl-32 for sm:px-32 in the div below */}
         <div className="sm:flex hidden items-center justify-between sm:pl-32 py-3">
           <NavLink
-            className="text-xl text-white pr-2 font-semibold hover:text-[#FFF701]"
+            className="text-xl text-white pr-2 font-semibold hover:text-[#FF9940]"
             to="/"
           >
             Hour Hood
@@ -24,7 +24,7 @@ function Navbar(props) {
 
           <div className="flex gap-20">
             <NavLink
-              className="text-xl text-white pr-2 font-semibold hover:text-[#FFF701]"
+              className="text-xl text-white pr-2 font-semibold hover:text-[#FF9940]"
               to="/getstarted"
             >
               Get started
@@ -34,13 +34,13 @@ function Navbar(props) {
           {props.user && (
             <>
               <NavLink
-                className="text-xl text-white pr-2 font-semibold hover:text-[#FFF701]"
+                className="text-xl text-white pr-2 font-semibold hover:text-[#FF9940]"
                 to="/requests"
               >
                 Requests
               </NavLink>
               <NavLink
-                className="text-xl text-white pr-2 font-semibold hover:text-[#FFF701]"
+                className="text-xl text-white pr-2 font-semibold hover:text-[#FF9940]"
                 to="/bookings"
               >
                 Bookings
@@ -51,7 +51,7 @@ function Navbar(props) {
           {props.user && (
             <div className="flex">
               <NavLink
-                className="text-xl text-white pr-2 font-semibold hover:text-[#FFF701]"
+                className="text-xl text-white pr-2 font-semibold hover:text-[#FF9940]"
                 to="/profile"
               >
                 Profile
@@ -60,14 +60,14 @@ function Navbar(props) {
           )}
           <div className="flex gap-4 py-4 pr-10">
             <NavLink
-              className="text-xl text-white pr-2 font-semibold hover:text-[#FFF701]"
+              className="text-xl text-white pr-2 font-semibold hover:text-[#FF9940]"
               to="/login"
             >
               Login
             </NavLink>
             <div className="text-white font-semibold">|</div>
             <button
-              className="text-white hover:bg-[#361201] hover:text-[#FFF701] font-semibold"
+              className="text-white hover:bg-[#361201] hover:text-[#FF9940] font-semibold"
               onClick={(e) => {
                 props.switchUserCb(null);
                 setOpen(!open);
@@ -76,7 +76,7 @@ function Navbar(props) {
               Anonymous{" "}
             </button>
             <button
-              className=" text-white hover:bg-[#361201] hover:text-[#FFF701] font-medium"
+              className=" text-white hover:bg-[#361201] hover:text-[#FF9940] font-medium"
               onClick={(e) => {
                 props.switchUserCb(1);
                 setOpen(!open);
@@ -85,7 +85,7 @@ function Navbar(props) {
               User1{" "}
             </button>
             <button
-              className="text-white rounded-b-lg hover:text-[#FFF701] hover:bg-[#361201] font-medium"
+              className="text-white rounded-b-lg hover:text-[#FF9940] hover:bg-[#361201] font-medium"
               onClick={(e) => {
                 props.switchUserCb(2);
                 setOpen(!open);
@@ -127,7 +127,7 @@ function Navbar(props) {
                       onClick={(e) => {
                         setOpen(!open);
                       }}
-                      className="text-white pr-2 font-semibold hover:bg-[#361201] hover:text-[#FFF701]"
+                      className="text-white pr-2 font-semibold hover:bg-[#361201] hover:text-[#FF9940]"
                       to="/"
                     >
                       Hour Hood
@@ -136,7 +136,7 @@ function Navbar(props) {
                       onClick={(e) => {
                         setOpen(!open);
                       }}
-                      className="text-white hover:bg-[#361201] hover:text-[#FFF701] pr-2 font-semibold"
+                      className="text-white hover:bg-[#361201] hover:text-[#FF9940] pr-2 font-semibold"
                       to="/"
                     >
                       Offers
@@ -177,14 +177,14 @@ function Navbar(props) {
                       onClick={(e) => {
                         setOpen(!open);
                       }}
-                      className="text-white pr-2 font-semibold hover:text-[#FFF701]"
+                      className="text-white pr-2 font-semibold hover:text-[#FF9940]"
                       to="/login"
                     >
                       Login
                     </NavLink>
                     <div className="flex gap-3">
                       <button
-                        className="text-white hover:bg-[#361201] hover:text-[#FFF701] font-semibold"
+                        className="text-white hover:bg-[#361201] hover:text-[#FF9940] font-semibold"
                         onClick={(e) => {
                           props.switchUserCb(null);
                           setOpen(!open);
@@ -194,7 +194,7 @@ function Navbar(props) {
                       </button>
                       <div className="text-white font-semibold">|</div>
                       <button
-                        className=" text-white hover:bg-[#361201] hover:text-[#FFF701] font-medium"
+                        className=" text-white hover:bg-[#361201] hover:text-[#FF9940] font-medium"
                         onClick={(e) => {
                           props.switchUserCb(1);
                           setOpen(!open);
@@ -204,7 +204,7 @@ function Navbar(props) {
                       </button>
                       <div className="text-white font-semibold">|</div>
                       <button
-                        className="text-white rounded-b-lg hover:text-[#FFF701] hover:bg-[#361201] font-medium"
+                        className="text-white rounded-b-lg hover:text-[#FF9940] hover:bg-[#361201] font-medium"
                         onClick={(e) => {
                           props.switchUserCb(2);
                           setOpen(!open);
