@@ -8,7 +8,7 @@ import OfferGrid from './OfferGrid';
 function Home() {
     return (
         <div>
-        <div className="sm:h-[78vh] xl:h-[80vh] scroll-smooth h-[70vh] bg-[#FFF701] z-0 flex flex-col justify-center items-center">
+        <div className="sm:h-[78vh] xl:h-[80vh] scroll-smooth h-[70vh] bg-[#FFE500] z-0 flex flex-col justify-center items-center">
           <img src={logo} className="w-[660px] md:w-[700px] xl:w-[640px] 2xl:w-[800px] 2xl:mt-28 md:mt-56 mt-20 xl:mt-24 mb-4" />
           <div className='md:mt-20 mt-4 flex flex-col xl:mt-1 md:mx-16 mx-8'>
           <h2 className="font-bold text-md xl:text-xl 2xl:text-3xl md:text-2xl">
