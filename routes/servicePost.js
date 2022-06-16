@@ -7,9 +7,51 @@ const db = require('../model/helper');
  **/
 async function sendAllPosts(res) {
     // We don't need try/catch here because we're always called from within one
-    let results = await db('SELECT * FROM service_post ORDER BY service_title');
-    res.send(results.data);
+    let sql = `
+        SELECT service_categories.*, service_post.*, users.*, service_categories.id AS catId, service_post.id AS sPostId, users.id AS userId
+        FROM service_post 
+        LEFT JOIN service_categories ON  service_categories.id = service_post.fk_category_id
+        LEFT JOIN users ON users.id = service_post.fk_provider_id
+        ORDER BY service_post.id
+    `;
+    let results = await db(sql);
+    let allPosts = joinToJson(results);
+    res.send(allPosts);
 }
+
+
+// Convert the DB results into a useful JSON format:
+// A nested post obj with nested category obj and nested user obj
+function joinToJson(results) {
+  
+    let sPost = results.data.map(row => ({
+        postID: row.sPostId,
+        title: row.service_title,
+        description: row.service_description,
+        capacity: row.capacity,
+        donation: row.donation,
+        category: {
+            categoryID: row.catId,
+            title: row.category_title,
+            photo: row.photo 
+        },
+        user: {
+            userID: row.userId,
+            firstName: row.first_name,
+            lastName: row.last_name,
+            street: row.street,
+            houseNumber: row.house_number,
+            cityCode: row.city_code,
+            cityName: row.city_name,
+            country: row.country,
+            email: row.email,
+            userDescription: row.user_description,
+            profilePicture: row.photo
+        }
+    }));
+    
+      return sPost;
+    }
 
 /**
  * Guards
@@ -31,50 +73,9 @@ async function ensurePostExists(req, res, next) {
     }
 }
 
-// Convert the DB results into a useful JSON format:
-// A post obj with nested publisher obj and nested array of author objs
-function joinToJson(results) {
-
-    // Get first row
-  let row0 = results.data[0];
-
-  let category = {
-    categoryID: row0.catId, // change it
-    title: row0.category_title,
-    photo: row0.photo 
-  }
-
-  let user = {
-    userID: row0.userId,
-    firstName: row0.first_name,
-    lastName: row0.last_name,
-    street: row0.street,
-    houseNumber: row0.house_number,
-    cityCode: row0.city_code,
-    cityName: row0.city_name,
-    country: row0.country,
-    email: row0.email,
-    userDescription: row0.user_description,
-    profilePicture: row0.photo
-  }
-
-  let sPost = {
-    postID: row0.sPostId, //change it
-    title: row0.service_title,
-    description: row0.service_description,
-    capacity: row0.capacity,
-    donation: row0.donation,
-    category,
-    user
-  }
-
-  return sPost;
-}
-
 /**
  * Routes
  **/
-
 
 // GET all posts
 router.get('/', async function(req, res) {
@@ -86,17 +87,14 @@ router.get('/', async function(req, res) {
 });
 
 
-
 // GET service_post by ID
 router.get('/:id', ensurePostExists, async function(req, res) {
     // If we get here we know the post exists (thanks to guard)
-    
     let servicePost = res.locals.servicePost;
-    console.log('I am service post outside', servicePost);
 
     try {
         // Get service_post; we know it exists, thanks to guard
-        // Use LEFT JOIN to also return authors and publisher
+        // Use LEFT JOIN to also return users and service_categories
         let sql = `
         SELECT service_categories.*, service_post.*, users.*, service_categories.id AS catId, service_post.id AS sPostId, users.id AS userId
         FROM service_post 
@@ -107,8 +105,6 @@ router.get('/:id', ensurePostExists, async function(req, res) {
         let results = await db(sql);
         // Convert DB results into "sensible" JSON
         servicePost = joinToJson(results);
-        console.log('I am service post', servicePost);
-
         res.send(servicePost);
     } catch (err) {
         res.status(500).send({ error: "problem" });
@@ -128,8 +124,7 @@ router.post('/', async function(req, res) {
     try { 
     // Insert the post
     await db(sql); 
-    // Set status code for "resource created" and return all posts 
-    // res.status(201).send("posted"); 
+    // Return all posts 
     sendAllPosts(res); 
     } catch (err) { 
     res.status(500).send({ error: err.message });  

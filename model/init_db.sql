@@ -44,8 +44,8 @@ CREATE TABLE service_post (
     FOREIGN KEY (fk_category_id) REFERENCES service_categories (id) ON DELETE SET NULL
 );
 
-INSERT INTO service_post (service_title, service_description, capacity, fk_category_id, fk_provider_id) 
-VALUES ('Babysitting', 'I am open to spend time this week to take care of your children if you need it.', 2, 8, 1), ('Haircut', 'I am a hairdresser and I am willing to cut your hair in my free time', 1, 3, 2); 
+INSERT INTO service_post (service_title, service_description, capacity, donation, fk_category_id, fk_provider_id) 
+VALUES ('Babysitting', 'I am open to spend time this week to take care of your children if you need it.', 2, 1, 8, 1), ('Haircut', 'I am a hairdresser and I am willing to cut your hair in my free time', 1, 0, 3, 2); 
 
 
 
