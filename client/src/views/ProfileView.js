@@ -91,7 +91,7 @@ export default function ProfileView() {
             </Link>
             <div className="flex flex-wrap px-5 py-24 mx-auto -m-4 space-x-6 md:block lg:flex">
               {offers
-                .filter((e) => e.providerId === user.id)
+                .filter((e) => e.fk_provider_id === user.id)
                 .map((o) => (
                   <OfferCard key={o.id} offer={o} view={'profile'} />
                 ))}

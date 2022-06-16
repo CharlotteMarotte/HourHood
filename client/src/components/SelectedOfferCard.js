@@ -4,7 +4,7 @@ export default function SelectedOfferCard(props) {
   return (
     // Code thanks to https://codepen.io/egoistdeveloper/pen/xxYrmgd
     <div className="grid mx-20 my-10">
-      <div className="block w-full p-6 bg-white border-4 rounded-lg -z-1 lg:flex lg:flex-row lg:w-2/3 border-amber-200/80">
+      <div className="block w-full p-6 bg-white border-4 rounded-lg -z-1 md:flex md:flex-row lg:mx-auto lg:w-4/5 border-amber-200/80">
         <div className="relative">
           <img
             className="object-cover w-64 h-64"

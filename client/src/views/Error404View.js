@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 function Error404View() {
   return (
-    <div className="min-w-screen min-h-screen py-8 px-16">
+    <div className="min-h-screen px-16 py-8 min-w-screen">
       <svg
         xmlns="http://www.w3.org/2000/svg"
         data-name="Layer 1"
@@ -156,7 +156,7 @@ function Error404View() {
       </svg>
       <Link
         to={'/'}
-        className="block bg-transparent w-1/5 mx-auto my-5 hover:bg-amber-600 text-amber-700 font-semibold hover:text-white py-2 px-4 border border-amber-600 hover:border-transparent rounded"
+        className="block w-1/5 px-4 py-2 mx-auto my-5 font-semibold bg-transparent border rounded hover:bg-amber-600 text-amber-700 hover:text-white border-amber-600 hover:border-transparent"
       >
         Back to Homepage
       </Link>
@@ -170,6 +170,11 @@ function Error404View() {
       <a href="https://iconscout.com/contributors/iconscout" target="_blank">
         IconScout Store
       </a>{' '}
+      <a href="https://www.freepik.com/vectors/family-cooking">Family cooking vector created by pch.vector - www.freepik.com</a>
+      <a href="https://www.freepik.com/vectors/plant-care">Plant care vector created by freepik - www.freepik.com</a>
+      <a href="https://www.freepik.com/vectors/badminton-player">Badminton player vector created by storyset - www.freepik.com</a>
+      <a href="https://www.freepik.com/vectors/play-guitar">Play guitar vector created by redgreystock - www.freepik.com</a>
+      <a href='https://www.freepik.com/vectors/car-sharing'>Car sharing vector created by vectorjuice - www.freepik.com</a>
     </div>
   );
 }

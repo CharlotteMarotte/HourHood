@@ -11,16 +11,17 @@ export default function OfferCard(props) {
         <div className="m-5 lg:h-72 md:h-36">
           <img
             className="object-cover w-full h-full"
-            src={props.offer.img}
+            // should be img from servicePost obj
+            src="https://img.freepik.com/free-vector/mother-with-many-children-flat-vector-illustration-tired-single-mom-naughty-kids-cartoon-characters-parenthood-routine-motherhood-burnout-babysitting-concept-exhausted-housewife_198278-8159.jpg"
             alt="blog"
           />
         </div>
         <div className="p-6">
           <h2 className="mb-1 font-medium tracking-widest text-s title-font text-amber-500">
-            {props.offer.category}
+            {props.offer.category.title}
           </h2>
           <h1 className="mb-3 text-2xl font-medium title-font text-amber-900">
-            {props.offer.title}
+            {props.offer.service_title}
           </h1>
           <p className="mb-3 leading-relaxed text-amber-500 ">
             "{props.offer.description}"

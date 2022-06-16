@@ -7,12 +7,13 @@ const db = require('../model/helper');
  **/
 async function sendAllPosts(res) {
     // We don't need try/catch here because we're always called from within one
+
     let sql = `
         SELECT service_categories.*, service_post.*, users.*, service_categories.id AS catId, service_post.id AS sPostId, users.id AS userId
         FROM service_post 
-        LEFT JOIN service_categories ON  service_categories.id = service_post.fk_category_id
+        LEFT JOIN service_categories ON service_categories.id = service_post.fk_category_id
         LEFT JOIN users ON users.id = service_post.fk_provider_id
-        ORDER BY service_post.id
+        ORDER BY sPostId DESC
     `;
     let results = await db(sql);
     let allPosts = joinToJson(results);
