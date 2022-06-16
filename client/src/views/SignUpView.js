@@ -12,7 +12,7 @@ export default function SignUpView(props) {
     <div className="bg-white flex flex-col pt-20 w-[500px] rounded-lg shadow-lg shadow-[#ff994091] mt-20 mb-20 pb-20">
       <h3 className="text-2xl text-[#361201] font-bold mt-2">
         Welcome to the community! <br />
-        <span className="text-[#fe8923] text-3xl">Login</span>
+        <span className="text-[#fe8923] text-3xl">Singn Up</span>
       </h3>
       <form className="flex flex-col items-center gap-10 mt-10">
         <div className="flex gap-10 items-center">
@@ -37,17 +37,17 @@ export default function SignUpView(props) {
           type="submit"
           className="bg-[#FF9940] hover:bg-[#fe8923] hover:shadow-[#C8E242] hover:shadow-md hover:font-extrabold px-10 py-2 text-md uppercase text-white font-bold rounded-xl"
         >
-          Login
+          Sign Up
         </button>
 
         <div className="flex flex-col items-center">
           <div className="flex items-center mt-4 gap-6">
             <div className="bg-[#C8E242] w-20 h-[0.1rem]"></div>
-            <h3 className="text-lg text-[#361201] font-bold">Or</h3>
+            <h3 className="text-lg text-[#361201] font-bold">Now</h3>
             <div className="bg-[#C8E242] w-20 h-[0.1rem]"></div>
           </div>
           <h3 className="text-2xl text-[#361201] font-bold">
-            Do you want to <Link to="/signup" className="text-[#ff994093] text-3xl cursor-pointer hover:text-[#fe8923]">register</Link>?
+            Go to <Link to="/login" className="text-[#ff994093] text-3xl cursor-pointer hover:text-[#fe8923]">Login</Link>!
           </h3>
         </div>
       </form>
