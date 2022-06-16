@@ -35,7 +35,7 @@ export default function LogInView(props) {
           </div>
           <button
             type="submit"
-            className="bg-[#FF9940] hover:bg-[#fe8923] hover:shadow-[#C8E242] hover:shadow-md hover:font-extrabold px-10 py-2 text-md uppercase text-white font-bold rounded-xl"
+            className="bg-[#ff9940e3] hover:bg-[#fe8923] hover:shadow-[#C8E242] hover:shadow-md hover:font-extrabold px-10 py-2 text-md uppercase text-white font-bold rounded-xl"
           >
             Login
           </button>
@@ -47,7 +47,7 @@ export default function LogInView(props) {
               <div className="bg-[#C8E242] w-20 h-[0.1rem]"></div>
             </div>
             <h3 className="text-2xl text-[#361201] font-bold">
-              Do you want to <Link to="/signup" className="text-[#ff994093] text-3xl cursor-pointer hover:text-[#fe8923]">register</Link>?
+              Do you want to <Link to="/rules" className="text-[#ff994093] text-3xl cursor-pointer hover:text-[#fe8923]">register</Link>?
             </h3>
           </div>
         </form>

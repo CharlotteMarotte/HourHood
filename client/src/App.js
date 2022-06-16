@@ -15,6 +15,7 @@ import RequestServiceView from './views/RequestServiceView';
 import PostOfferView from './views/PostOfferView';
 import EditProfileView from './views/EditProfileView';
 import GetStarted from './views/GetStarted';
+import RulesView from './views/RulesView';
 
 const INIT_OFFERS = [
   {
@@ -229,7 +230,8 @@ export default function App() {
   const chosenUserObj = { offer: offers[1], requestServiceCb: requestService };
 
   return (
-    <div className="App bg-gradient-to-t from-[#FFF7A3] via-[#FFF7A3] to-[#ff994091] h-screen">
+
+    <div className="App bg-gradient-to-t from-[#FFF7A3] via-[#FFF7A3] to-[#ff994091] h-full pb-28">
 
       <Navbar switchUserCb={(id) => switchUser(id)} user={user} />
 
@@ -252,6 +254,7 @@ export default function App() {
         />
         <Route path="signup" element={<SignUpView />} />
         <Route path="login" element={<LogInView />} />
+        <Route path="rules" element={<RulesView />} />
         {/* <Route path="offers" element={<OfferGrid />} /> */}
         <Route path="bookings" element={<BookingsView bookings={bookings} />} />
         <Route path="getstarted" element={<GetStarted />} />

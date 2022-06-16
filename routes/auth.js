@@ -10,21 +10,21 @@ const db = require("../model/helper");
  * Register a user
  **/
 
-router.post('/register', async (req, res) => {
-    let { username, password, email } = req.body;
-    let hashedPassword = await bcrypt.hash(password, BCRYPT_WORK_FACTOR);
+// router.post('/signup', async (req, res) => {
+//     let { first_name, last_name, street, house_number, city_code, city_name, country, email, user_description, hobbies, superpower, photo, password } = req.body;
+//     let hashedPassword = await bcrypt.hash(password, BCRYPT_WORK_FACTOR);
 
-    try {
-        let sql = `
-            INSERT INTO users (username, password, email)
-            VALUES ('${username}', '${hashedPassword}', '${email}')
-        `;
-        await db(sql);
-        res.send({ message: 'Registration succeeded' });
-    } catch (err) {
-        res.status(500).send({ error: err.message });
-    }
-});
+//     try {
+//         let sql = `
+//             INSERT INTO users (first_name, last_name, street, house_number, city_code, city_name, country, email, user_description, hobbies, superpower, photo, password)
+//             VALUES (first_name = '${first_name}', last_name = '${last_name}', street = '${street}', house_number = '${house_number}', city_code = ${city_code}, city_name = '${city_name}', country = '${country}', email = '${email}', user_description = '${user_description}', hobbies = '${hobbies}', superpower = '${superpower}', photo = '${photo}', password = '${hashedPassword}');
+//         `;
+//         await db(sql);
+//         res.send({ message: 'Registration succeeded' });
+//     } catch (err) {
+//         res.status(500).send({ error: err.message });
+//     }
+// });
 
 
 /**
