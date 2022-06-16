@@ -18,6 +18,7 @@ import GetStarted from './views/GetStarted';
 import OfferGrid from './components/OfferGrid';
 
 
+
 const INIT_OFFERS = [
   {
     id: 1,
@@ -61,10 +62,13 @@ const INIT_OFFERS = [
   },
 ];
 
+
 export default function App() {
   const navigate = useNavigate();
   const [user, setUser] = useState(null);
   const [offers, setOffers] = useState(INIT_OFFERS);
+  const postalCodes = ['08006', '08012', '08023', '08035', '08024', '08037', '08025'];
+
 
   function switchUser(id) {
     if (id) {
@@ -105,7 +109,7 @@ export default function App() {
           path="profile/edit"
           element={
             <AppContext.Provider value={contextObj}>
-              <EditProfileView />
+              <EditProfileView postalCodes={postalCodes}/>
             </AppContext.Provider>
           }
         />
