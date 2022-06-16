@@ -14,8 +14,8 @@ export default function BookingsView(props) {
       </div>
       {props.bookings
         .filter((e) => e.status === 'pending')
-        .map((e) => (
-          <SelectedOfferCard view={'bookings'} />
+        .map((booking) => (
+          <SelectedOfferCard view={'bookings'} offer={booking} key={booking.id}/>
         ))}
       <div className="container ">
         <h1 className="pt-4 ml-20 text-3xl font-bold text-left border-b-2 border-opacity-25 text-amber-700 border-amber-700">
@@ -24,8 +24,8 @@ export default function BookingsView(props) {
       </div>
       {props.bookings
         .filter((e) => e.status === 'accepted')
-        .map((e) => (
-          <SelectedOfferCard view={'bookings'} />
+        .map((booking) => (
+          <SelectedOfferCard view={'bookings'} offer={booking} key={booking.id}/>
         ))}{' '}
     </div>
   );
