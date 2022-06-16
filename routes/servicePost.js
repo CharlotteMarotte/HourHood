@@ -38,17 +38,33 @@ function joinToJson(results) {
   let row0 = results.data[0];
 
   let category = {
-    id: row0.id, // change it
+    categoryID: row0.catId, // change it
     title: row0.category_title,
     photo: row0.photo 
   }
 
+  let user = {
+    userID: row0.userId,
+    firstName: row0.first_name,
+    lastName: row0.last_name,
+    street: row0.street,
+    houseNumber: row0.house_number,
+    cityCode: row0.city_code,
+    cityName: row0.city_name,
+    country: row0.country,
+    email: row0.email,
+    userDescription: row0.user_description,
+    profilePicture: row0.photo
+  }
+
   let sPost = {
-    id: row0.id, //change it
+    postID: row0.sPostId, //change it
     title: row0.service_title,
     description: row0.service_description,
     capacity: row0.capacity,
-    category
+    donation: row0.donation,
+    category,
+    user
   }
 
   return sPost;
@@ -84,9 +100,10 @@ router.get('/:id', ensurePostExists, async function(req, res) {
         // Get service_post; we know it exists, thanks to guard
         // Use LEFT JOIN to also return authors and publisher
         let sql = `
-        SELECT service_categories.*, service_post.*
+        SELECT service_categories.*, service_post.*, users.*, service_categories.id AS catId, service_post.id AS sPostId, users.id AS userId
         FROM service_post 
-        LEFT JOIN service_categories ON  service_categories.id = service_post.id
+        LEFT JOIN service_categories ON  service_categories.id = service_post.fk_category_id
+        LEFT JOIN users ON users.id = service_post.fk_provider_id
         WHERE service_post.id = ${req.params.id}
         `;
         let results = await db(sql);

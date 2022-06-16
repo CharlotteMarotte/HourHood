@@ -34,6 +34,7 @@ CREATE TABLE service_post (
     service_title VARCHAR(100),
     service_description TEXT(255),
     capacity INTEGER NOT NULL,
+    donation TINYINT,
     fk_category_id INT,
     fk_provider_id INT,
     FOREIGN KEY (fk_provider_id) REFERENCES users (id) ON DELETE CASCADE,
@@ -41,7 +42,7 @@ CREATE TABLE service_post (
 );
 
 INSERT INTO service_post (service_title, service_description, capacity, fk_category_id, fk_provider_id) 
-VALUES ('Babysitting', 'I am open to spend time this week to take care of your children if you need it.', 2, 8, 1); 
+VALUES ('Babysitting', 'I am open to spend time this week to take care of your children if you need it.', 2, 8, 1), ('Haircut', 'I am a hairdresser and I am willing to cut your hair in my free time', 1, 3, 2); 
 
 
 
