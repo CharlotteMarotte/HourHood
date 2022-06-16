@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 
 
 export default function OfferGrid() {
-  let { offers } = useContext(AppContext);
+  let { offers, user } = useContext(AppContext);
 
   return (
     // Code thanks to https://codepen.io/asdasdadddddddddd/pen/ExXjdPM
@@ -16,7 +16,7 @@ export default function OfferGrid() {
             <OfferCard key={o.id} offer={o} view={"offers"}/>
           ))}
         </div>
-        <div className="hidden lg:block w-full md:w-1/2 lg:w-1/3 h-64 bg-amber-100 border-2 border-amber-800 rounded-lg">
+        <div className={`${user ? "lg:block " : "hidden"}  ${user ? "w-full lg:w-1/2 xl:w-1/3" : "md:w-1/2 lg:w-1/3 xl:w-1/4"} h-64 bg-amber-100 border-2 border-amber-800 rounded-lg`}>
           <img
             className="w-1/2 object-cover mx-auto mt-3 rounded-full"
             src="https://mir-s3-cdn-cf.behance.net/project_modules/max_1200/285ce8115100471.6047eaa30896a.jpg"

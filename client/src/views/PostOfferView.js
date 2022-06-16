@@ -30,14 +30,14 @@ export default function PostOfferView() {
                 <div className="w-full mb-5">
                   <label
                     htmlFor="title-input"
-                    className="text-xs font-semibold px-1"
+                    className="text-s font-semibold px-1"
                   >
                     Title
                   </label>
                   <div className="flex">
-                    <div className="w-10 z-10 text-center poniter-events-none flex items-center justify-center"></div>
+                    <div className="w-10  text-center poniter-events-none flex items-center justify-center"></div>
                     <input
-                      required
+                      requiamber
                       id="title-input"
                       type="text"
                       className="w-full -ml-10 pl-10 pr-3 py-2 rounded-lg border-2 border-amber-200 outline-none focus:border-lime-700"
@@ -45,87 +45,102 @@ export default function PostOfferView() {
                     />
                   </div>
                 </div>
-                <div className="w-1/2 mb-5">
-                  <label
-                    htmlFor="capacity-input"
-                    className="text-xs font-semibold px-1"
-                  >
-                    Capacity (times/month)
-                  </label>
-                  <div className="flex">
-                    <div className="w-10 z-10 text-center poniter-events-none flex items-center justify-center"></div>
-                    <input
-                      required
-                      id="capacity-input"
-                      type="number"
-                      className="w-full -ml-10 pl-10 pr-3 py-2 rounded-lg border-2 border-amber-200 outline-none focus:border-lime-700"
-                      placeholder="1"
-                    />
+                <div className="block lg:flex">
+                  <div className="w-full lg:w-1/2 mb-5">
+                    <label
+                      htmlFor="capacity-input"
+                      className="text-s font-semibold px-1"
+                    >
+                      Capacity (times/month)
+                    </label>
+                    <div className="flex">
+                      <div className="w-10  text-center poniter-events-none flex items-center justify-center"></div>
+                      <input
+                        requiamber
+                        id="capacity-input"
+                        type="number"
+                        className="w-full -ml-10 pl-10 pr-3 py-2 rounded-lg border-2 border-amber-200 outline-none focus:border-lime-700"
+                        placeholder="1"
+                      />
+                    </div>
+                  </div>
+                    <div className="w-full lg:w-1/2 px-3 space-x-3 mt-7 mb-5">
+                      <input
+                        type="checkbox"
+                        id="donation"
+                        className="bg-lime-700 hover:bg-lime-700 focus:bg-lime-700"
+                      />
+                      <label htmlFor="donation">I accept donations</label>
+                    </div>
+                </div>
+                <div className="w-full mb-5 px-3 pr-6">
+                  <div className="block">
+                    <div className="w-full  text-center poniter-events-none flex items-center justify-center"></div>
+                    <label
+                      for="select_category"
+                      class="text-s font-semibold px-1"
+                    >
+                      Select a category
+                    </label>
+                    <div class="relative">
+                      <select
+                        class="p-4 mt-2 mb-0 min-w-full rounded-lg bg-white focus:outline-none focus:border-amber-500 text-md border-solid border-2 border-amber-200 transition ease-in duration-200"
+                        name="category"
+                        id="select_category"
+                      >
+                        <option
+                          disabled
+                          selected
+                          class="hover:bg-amber-100 text-md p-4 "
+                        >
+                          -- Choose a category --
+                        </option>
+                        <option class="hover:bg-amber-100 text-md p-4">
+                          Health & Wellness
+                        </option>
+                        <option class="hover:bg-amber-100 text-md p-4">
+                          Food
+                        </option>
+                        <option class="hover:bg-amber-100 text-md p-4">
+                          Children & Pets
+                        </option>
+                      </select>
+                    </div>
                   </div>
                 </div>
                 <div className="flex -mx-3">
-                  <div className="w-1/2 px-3 space-x-3 mb-5">
-                    <input
-                      type="checkbox"
-                      id="donation"
-                      className="bg-lime-700 hover:bg-lime-700 focus:bg-lime-700"
-                    />
-                    <label htmlFor="donation">I accept donations</label>
-                  </div>
-                </div>
-                <div className="w-full mb-5">
-                  <label
-                    htmlFor="categories"
-                    className="text-xs font-semibold px-1"
-                  >
-                    Select an option
-                  </label>
-                  <div className="block">
-                    <div className="w-full z-10 text-center poniter-events-none flex items-center justify-center"></div>
-                    <select
-                      id="categories"
-                      className="w-full bg-white pl-10 pr-3 py-2 rounded-lg border-2 border-amber-200 outline-none focus:border-lime-700"
+                  <div className="w-full px-3 mb-5">
+                    <label
+                      htmlFor="message-input"
+                      className="text-s font-semibold px-1"
                     >
-                      <option selected>Choose a categorie</option>
-                      <option value="Children & Pets">Children & Pets</option>
-                      <option value="Health & Wellness">
-                        Health & Wellness
-                      </option>
-                      <option value="IT">IT</option>
-                      <option value="Hobbies">Hobbies</option>
-                    </select>
+                      Description
+                    </label>
+                    <div className="flex">
+                      <div className="w-10  pl-1 text-center pointer-events-none flex items-center justify-center"></div>
+                      <textarea
+                        id="message-input"
+                        rows="3"
+                        className="w-full -ml-10 pl-10 pr-3 py-2 rounded-lg border-2 border-amber-200 outline-none focus:border-lime-700"
+                      ></textarea>
+                    </div>
                   </div>
                 </div>
-              </div>
-              <div className="flex -mx-3">
-                <div className="w-full px-3 mb-5">
-                  <label htmlFor="message-input" className="text-semibold px-1">
-                    Description
-                  </label>
-                  <div className="flex">
-                    <div className="w-10 z-10 pl-1 text-center pointer-events-none flex items-center justify-center"></div>
-                    <textarea
-                      id="message-input"
-                      rows="3"
-                      className="w-full -ml-10 pl-10 pr-3 py-2 rounded-lg border-2 border-amber-200 outline-none focus:border-lime-700"
-                    ></textarea>
-                  </div>
-                </div>
-              </div>
 
-              <div className="flex justify-center flex-wrap space-x-2 lg:space-y-0">
-                <Link
-                  to={'/offers'}
-                  className="bg-transparent hover:bg-lime-600 text-lime-700 font-semibold hover:text-white py-2 px-4 border border-lime-600 hover:border-transparent rounded"
-                >
-                  Back
-                </Link>
-                <button
-                  type="submit"
-                  className="bg-transparent hover:bg-amber-500 text-amber-700 font-semibold hover:text-white py-2 px-4 border border-amber-500 hover:border-transparent rounded"
-                >
-                  Publish{' '}
-                </button>
+                <div className="flex justify-center flex-wrap space-x-2 lg:space-y-0">
+                  <Link
+                    to={'/offers'}
+                    className="bg-transparent hover:bg-lime-600 text-lime-700 font-semibold hover:text-white py-2 px-4 border border-lime-600 hover:border-transparent rounded"
+                  >
+                    Back
+                  </Link>
+                  <button
+                    type="submit"
+                    className="bg-transparent hover:bg-amber-500 text-amber-700 font-semibold hover:text-white py-2 px-4 border border-amber-500 hover:border-transparent rounded"
+                  >
+                    Publish{' '}
+                  </button>
+                </div>
               </div>
             </form>
           </div>
