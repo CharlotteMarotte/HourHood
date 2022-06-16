@@ -9,7 +9,7 @@ export default function LogInView(props) {
   }
   return (
     <div className="flex justify-center">
-      <div className="bg-white flex flex-col py-20 w-[500px] rounded-lg shadow-lg shadow-[#fff70188] mt-20">
+      <div className="bg-white flex flex-col py-20 w-[500px] rounded-lg shadow-lg shadow-[#361201a2] mt-20">
         <h3 className="text-2xl text-[#361201] font-bold mt-2">
           Already part of the community? <br />
           <span className="text-[#fe8923] text-3xl">Login</span>
@@ -34,7 +34,7 @@ export default function LogInView(props) {
               placeholder="Password"
             />
           </div>
-          <button className="bg-[#FF9940] hover:bg-[#fe8923] hover:shadow-[#fe89239b] hover:shadow-md hover:font-extrabold px-10 py-2 text-md uppercase text-white font-bold rounded-xl">
+          <button className="bg-[#FF9940] hover:bg-[#fe8923] hover:shadow-[#C8E242] hover:shadow-md hover:font-extrabold px-10 py-2 text-md uppercase text-white font-bold rounded-xl">
             Login
           </button>
         </form>

@@ -93,7 +93,7 @@ export default function App() {
   const chosenUserObj = { offer: offers[1], requestServiceCb: requestService };
 
   return (
-    <div className="App bg-[#FFF7A3] h-screen w-screen">
+    <div className="App bg-gradient-to-t from-[#FFF7A3] via-[#FFF7A3] to-[#ff994091]">
       <Navbar switchUserCb={(id) => switchUser(id)} user={user}/>
 
       <Routes>
