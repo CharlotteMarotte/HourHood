@@ -8,13 +8,14 @@ import ProfileView from './views/ProfileView';
 import BookingsView from './views/BookingsView';
 import RequestsView from './views/RequestsView';
 import HomeView from './views/HomeView';
-import OffersView from './views/OffersView';
 import Error404View from './views/Error404View';
 import SignUpView from './views/SignUpView';
 import LogInView from './views/LogInView';
 import RequestServiceView from './views/RequestServiceView';
 import PostOfferView from './views/PostOfferView';
 import EditProfileView from './views/EditProfileView';
+import GetStarted from './views/GetStarted';
+import OfferGrid from './components/OfferGrid';
 
 
 const INIT_OFFERS = [
@@ -71,7 +72,7 @@ export default function App() {
     } else {
       setUser(null);
     }
-    navigate('/offers');
+    navigate('/');
   }
 
   function requestService() {
@@ -92,7 +93,6 @@ export default function App() {
       <Navbar switchUserCb={(id) => switchUser(id)} user={user}/>
 
       <Routes>
-        <Route path="/" element={<HomeView />} />
         <Route
           path="profile"
           element={
@@ -101,7 +101,6 @@ export default function App() {
             </AppContext.Provider>
           }
         />
-        <Route path="/" element={<HomeView />} />
         <Route
           path="profile/edit"
           element={
@@ -112,13 +111,14 @@ export default function App() {
         />
         <Route path="signup" element={<SignUpView />} />
         <Route path="login" element={<LogInView />} />
+        {/* <Route path="offers" element={<OfferGrid />} /> */}
         <Route path="bookings" element={<BookingsView />} />
         <Route path="getstarted" element={<GetStarted />} />
         <Route
-          path="offers"
+          path="/"
           element={
             <AppContext.Provider value={contextObj}>
-              <OffersView />
+              <HomeView />
             </AppContext.Provider>
           }
         />

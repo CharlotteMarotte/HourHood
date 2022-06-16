@@ -26,7 +26,7 @@ export default function OfferCard(props) {
             "{props.offer.description}"
           </p>
           <div className="flex justify-center flex-wrap space-x-2 md:space-y-2 lg:space-y-0">
-            {/* depending which view uses card (profile/offers) buttons change */}
+            {/* depending which view uses card (profile/) buttons change */}
             {props.view === 'offers' ? (
               <>
                 <Link
