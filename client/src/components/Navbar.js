@@ -15,48 +15,29 @@ function Navbar(props) {
       <nav className="bg-[#361201] shadow-md shadow-[#361201a2] navbar navbar-expand-lg navbar-light">
         {/* One we have the login, change sm:pl-32 for sm:px-32 in the div below */}
         <div className="sm:flex hidden items-center justify-between sm:pl-32 py-3">
-          <NavLink className="text-xl text-white pr-2 font-semibold" to="/">
+          <NavLink className="text-xl text-white pr-2 font-semibold hover:text-[#FF9940]" to="/">
             Hour Hood
           </NavLink>
 
           <div className="flex gap-20">
             <NavLink
-              className="text-xl text-white pr-2 font-semibold"
-              to="/offers"
+              className="text-xl text-white pr-2 font-semibold hover:text-[#FF9940]"
+              to="/getstarted"
             >
-              Offers
-            </NavLink>
-
-            <NavLink
-              className="text-xl text-white pr-2 font-semibold"
-              to="/requests"
-            >
-              Requests
-            </NavLink>
-            <NavLink
-              className="text-xl text-white pr-2 font-semibold"
-              to="/bookings"
-            >
-              Bookings
-            </NavLink>
-            <NavLink
-              className="text-xl text-white pr-2 font-semibold"
-              to="/profile"
-            >
-              Profile
+              Get started
             </NavLink>
           </div>
 
           {props.user && (
             <>
               <NavLink
-                className="text-xl text-white pr-2 font-semibold"
+                className="text-xl text-white pr-2 font-semibold hover:text-[#FF9940]"
                 to="/requests"
               >
                 Requests
               </NavLink>
               <NavLink
-                className="text-xl text-white pr-2 font-semibold"
+                className="text-xl text-white pr-2 font-semibold hover:text-[#FF9940]"
                 to="/bookings"
               >
                 Bookings
@@ -67,7 +48,7 @@ function Navbar(props) {
           {props.user && (
             <div className="flex">
               <NavLink
-                className="text-xl text-white pr-2 font-semibold"
+                className="text-xl text-white pr-2 font-semibold hover:text-[#FF9940]"
                 to="/profile"
               >
                 Profile
@@ -187,6 +168,7 @@ function Navbar(props) {
                       <button
                         className="text-white hover:bg-[#361201] hover:text-[#FF9940] font-semibold"
                         onClick={(e) => {
+                          props.switchUserCb(null);
                           setOpen(!open);
                         }}
                       >
@@ -196,6 +178,7 @@ function Navbar(props) {
                       <button
                         className=" text-white hover:bg-[#361201] hover:text-[#FF9940] font-medium"
                         onClick={(e) => {
+                          props.switchUserCb(1);
                           setOpen(!open);
                         }}
                       >
@@ -205,6 +188,7 @@ function Navbar(props) {
                       <button
                         className="text-white rounded-b-lg hover:text-[#FF9940] hover:bg-[#361201] font-medium"
                         onClick={(e) => {
+                          props.switchUserCb(2);
                           setOpen(!open);
                         }}
                       >
