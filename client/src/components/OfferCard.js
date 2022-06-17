@@ -14,7 +14,7 @@ export default function OfferCard(props) {
       }`}
     >
       <div className="overflow-hidden bg-white border-2 rounded-lg shadow-lg shadow-amber-400 border-amber-200">
-        <div className="m-5 lg:h-64 md:h-36">
+        <div className="m-5 lg:h-48 md:h-36">
           <img
             className="object-cover w-full h-full "
             // should be img from servicePost obj
@@ -29,9 +29,11 @@ export default function OfferCard(props) {
           <h1 className="mb-3 text-2xl font-medium title-font text-amber-900">
             {props.offer.title}
           </h1>
-          <p className="mb-3 leading-relaxed text-amber-500 ">
-            "{props.offer.description}"
+          <div className="h-24 p-2 mb-5 rounded-lg bg-amber-100">
+          <p className="leading-relaxed text-amber-500 ">
+            Note: "{props.offer.description}"
           </p>
+          </div>
           {/* if in profile view show extra information */}
           {props.view === 'profile' && (
             <p className="mb-3 leading-relaxed text-amber-500">
@@ -44,7 +46,7 @@ export default function OfferCard(props) {
               I {!props.offer.donation && "don't"} accept donations
             </p>
           )}
-          <div className="relative flex flex-wrap justify-center space-x-2 bottom-1 md:space-y-2 lg:space-y-0">
+          <div className="relative flex flex-wrap justify-center space-x-2 bottom-1">
             {/* depending which view uses card (profile/) buttons change */}
             {props.view === 'offers' ? (
               <>
