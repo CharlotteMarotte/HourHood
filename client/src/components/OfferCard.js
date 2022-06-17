@@ -12,7 +12,7 @@ export default function OfferCard(props) {
           <img
             className="object-cover w-full h-full"
             // should be img from servicePost obj
-            src="https://img.freepik.com/free-vector/mother-with-many-children-flat-vector-illustration-tired-single-mom-naughty-kids-cartoon-characters-parenthood-routine-motherhood-burnout-babysitting-concept-exhausted-housewife_198278-8159.jpg"
+            src= {props.offer.category.picture}
             alt="blog"
           />
         </div>
