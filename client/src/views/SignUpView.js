@@ -13,7 +13,7 @@ export default function SignUpView(props) {
       <div className="bg-white flex flex-col pt-20 w-[600px] rounded-lg shadow-lg shadow-[#ff994091] mt-20 mb-20 pb-20">
         <h3 className="text-2xl text-[#361201] font-bold mt-2">
           Welcome to the community! <br />
-          <span className="text-[#fe8923] text-3xl">Singn Up</span>
+          <span className="text-[#fe8923] text-3xl">Sign Up</span>
         </h3>
         <p className="text-sm text-[#ff994093] font-semibold">( It's free )</p>
         <form className="flex flex-col items-center gap-5 mt-10">
