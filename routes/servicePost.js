@@ -120,7 +120,7 @@ router.post('/', async function(req, res) {
     
     let sql = ` 
     INSERT INTO service_post (service_title, service_description, capacity, donation, fk_category_id, fk_provider_id)
-    VALUES ('${service_title}', '${service_description}', ${capacity}, ${donation}, ${fk_category_id}, ${fk_provider_id})`; 
+    VALUES ("${service_title}", "${service_description}", ${capacity}, ${donation}, ${fk_category_id}, ${fk_provider_id})`; 
 
     try { 
     // Insert the post
