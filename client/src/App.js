@@ -158,7 +158,6 @@ export default function App() {
     navigate('/bookings');
   }
 
-
   async function postService(serviceData) {
     // Define fetch() options
     let options = {
@@ -183,7 +182,27 @@ export default function App() {
     }
   }
 
-  const contextObj = { offers, user };
+  // DELETE a duck
+  async function deleteDuck(id) {
+    // Define fetch() options
+    let options = {
+      method: 'DELETE',
+    };
+
+    try {
+      let response = await fetch(`/servicePost/${id}`, options); // do DELETE
+      if (response.ok) {
+        let offers = await response.json();
+        setOffers(offers);
+      } else {
+        console.log(`Server error: ${response.status} ${response.statusText}`);
+      }
+    } catch (err) {
+      console.log(`Server error: ${err.message}`);
+    }
+  }
+
+  const contextObj = { offers, user, deleteDuckCb: deleteDuck };
   const chosenUserObj = { offer: offers[1], requestServiceCb: requestService };
 
   return (
@@ -231,7 +250,13 @@ export default function App() {
         />
         <Route
           path="service-post"
-          element={<PostOfferView postServiceCb={postService} categories={categories} user={user}/>}
+          element={
+            <PostOfferView
+              postServiceCb={postService}
+              categories={categories}
+              user={user}
+            />
+          }
         />
         <Route path="requests" element={<RequestsView requests={requests} />} />
         <Route path="*" element={<Error404View />} />
