@@ -89,11 +89,11 @@ export default function ProfileView() {
               </svg>
               Add a new offer{' '}
             </Link>
-            <div className="flex flex-wrap px-5 py-24 mx-auto -m-4 space-x-6 md:block lg:flex">
+            <div className="px-5 py-24 mx-auto -m-4 lg:flex-wrap md:block lg:flex">
               {offers
-                .filter((e) => e.fk_provider_id === user.id)
+                .filter((e) => e.user.userID === user.id)
                 .map((o) => (
-                  <OfferCard key={o.id} offer={o} view={'profile'} />
+                  <OfferCard key={o.postID} offer={o} view={'profile'} />
                 ))}
             </div>
           </div>
