@@ -7,6 +7,9 @@ DROP TABLE IF EXISTS service_post;
 
 DROP TABLE IF EXISTS service_categories;
 
+DROP TABLE IF EXISTS bookings;
+
+
 SET
     foreign_key_checks = 1;
 
@@ -140,6 +143,7 @@ CREATE TABLE bookings (
     estimated_time INT,
     need_donation TINYINT,
     booking_status VARCHAR (100),
+    service_time INT,
     fk_requestor_id INT,
     fk_service_post_id INT,
     FOREIGN KEY (fk_requestor_id) REFERENCES users (id) ON DELETE CASCADE,
@@ -151,6 +155,7 @@ INSERT INTO
     bookings (
         booking_description,
         estimated_time,
+        service_time,
         need_donation,
         booking_status,
         fk_requestor_id,
@@ -160,17 +165,35 @@ VALUES
     (
         'Ok, I would appreciate some help with my kids this Saturday',
         4,
+        2,
         1,
-        "pending",
+        "confirmed",
         2,
         1
     ),
     (
         'Hi Karen! I would like to use your service, because I really need to cut my hair.',
         1,
+        3,
         0,
+        "confirmed",
+        1,
+        2
+    ), (
+        "I haven't ot been to the hair dresser since the beginning of the pandemic, I need help!",
+        2,
+        null,
+        1,
         "pending",
         1,
+        2
+    ), (
+        'We will get married on Sunday, could you watch our children?',
+        8,
+        null,
+        1,
+        "pending",
+        2,
         2
     );
 

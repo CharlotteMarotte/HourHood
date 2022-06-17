@@ -15,6 +15,7 @@ export default function OfferGrid() {
             <OfferCard key={o.postID} offer={o} view={'offers'} />
           ))}
         </div>
+        {user &&
         <div
           className={`${
             user ? 'lg:block ' : 'hidden'
@@ -26,7 +27,7 @@ export default function OfferGrid() {
             alt="avatar"
           />
           <h1 className="my-2 text-2xl font-medium title-font text-amber-900">
-            Hello Jane!
+            Hello {user.first_name}!
           </h1>
           <p className="my-2 leading-relaxed text-amber-500 ">Wallet: 10h</p>
           <Link
@@ -36,6 +37,7 @@ export default function OfferGrid() {
             My Profile
           </Link>
         </div>
+        }
       </div>
     </div>
   );
