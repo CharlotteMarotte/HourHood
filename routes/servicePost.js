@@ -101,7 +101,7 @@ router.get('/:id', ensurePostExists, async function(req, res) {
         FROM service_post 
         LEFT JOIN service_categories ON  service_categories.id = service_post.fk_category_id
         LEFT JOIN users ON users.id = service_post.fk_provider_id
-        WHERE service_post.id = ${req.params.id}
+        WHERE service_post.id = ${servicePost.id}
         `;
         let results = await db(sql);
         // Convert DB results into "sensible" JSON
