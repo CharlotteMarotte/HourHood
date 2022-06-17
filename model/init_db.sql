@@ -132,3 +132,45 @@ VALUES
         3,
         2
     );
+
+CREATE TABLE bookings (
+    id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    booking_description TEXT(255),
+    proposed_date DATE,
+    estimated_time INT,
+    need_donation TINYINT,
+    booking_status VARCHAR (100),
+    fk_requestor_id INT,
+    fk_service_post_id INT,
+    FOREIGN KEY (fk_requestor_id) REFERENCES users (id) ON DELETE CASCADE,
+    FOREIGN KEY (fk_service_post_id) REFERENCES service_post (id) ON DELETE
+    SET NULL
+);
+
+INSERT INTO
+    bookings (
+        booking_description,
+        estimated_time,
+        need_donation,
+        booking_status,
+        fk_requestor_id,
+        fk_service_post_id
+    )
+VALUES
+    (
+        'Ok, I would appreciate some help with my kids this Saturday',
+        4,
+        1,
+        "pending",
+        2,
+        1
+    ),
+    (
+        'Hi Karen! I would like to use your service, because I really need to cut my hair.',
+        1,
+        0,
+        "pending",
+        1,
+        2
+    );
+
