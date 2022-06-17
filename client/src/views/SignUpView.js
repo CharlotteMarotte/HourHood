@@ -6,7 +6,7 @@ export default function SignUpView(props) {
   function handleSubmit(event) {
     event.preventDefault();
 
-    props.postServiceCb();
+    props.addNewUserCb();
   }
   return (
     <div className="flex justify-center">
@@ -20,14 +20,14 @@ export default function SignUpView(props) {
           <div className="flex gap-10 items-center">
             <input
               require
-              id="firstName-input"
+              name="firstName-input"
               type="text"
               className="rounded-lg py-2 w-64 px-8 border-2 text-text-[#fe8923] border-[#fe8923] outline-none focus:border-[#C8E242]"
               placeholder="First Name"
             />
             <input
               require
-              id="lastName-input"
+              name="lastName-input"
               type="text"
               className="rounded-lg py-2 w-64 px-8 border-2 text-[#fe8923] border-[#fe8923] outline-none focus:border-[#C8E242]"
               placeholder="Last Name"
@@ -36,14 +36,14 @@ export default function SignUpView(props) {
           <div className="flex gap-10 items-center">
             <input
               require
-              id="street-input"
+              name="street-input"
               type="text"
               className="rounded-lg w-64 py-2 px-8 border-2 text-text-[#fe8923] border-[#fe8923] outline-none focus:border-[#C8E242]"
               placeholder="E.g. : Carrer d'en Grassot"
             />
             <input
               require
-              id="houseNumber-input"
+              name="houseNumber-input"
               type="text"
               className="rounded-lg py-2 px-8 w-64 border-2 text-[#fe8923] border-[#fe8923] outline-none focus:border-[#C8E242]"
               placeholder="E.g. : 101 "
@@ -52,14 +52,14 @@ export default function SignUpView(props) {
           <div className="flex gap-10 items-center">
             <input
               require
-              id="postalCode-input"
+              name="postalCode-input"
               type="text"
               className="rounded-lg w-64 py-2 px-8 border-2 text-text-[#fe8923] border-[#fe8923] outline-none focus:border-[#C8E242]"
               placeholder="E.g. : 08025"
             />
             <input
               require
-              id="city-input"
+              name="city-input"
               type="text"
               className="rounded-lg py-2 px-8 w-64 border-2 text-[#fe8923] border-[#fe8923] outline-none focus:border-[#C8E242]"
               placeholder="E.g. : Barcelona "
@@ -67,7 +67,7 @@ export default function SignUpView(props) {
           </div>
           <input
             require
-            id="country-input"
+            name="country-input"
             type="text"
             className="rounded-lg py-2 px-8 w-[553px] border-2 text-[#fe8923] border-[#fe8923] outline-none focus:border-[#C8E242]"
             placeholder="E.g. : Spain "
@@ -75,14 +75,14 @@ export default function SignUpView(props) {
           <img src={map} alt="location" className="w-[553px] rounded-lg" />
           <input
             require
-            id="email-input"
+            name="email-input"
             type="email"
             className="rounded-lg py-2 px-8 w-[553px] border-2 text-[#fe8923] border-[#fe8923] outline-none focus:border-[#C8E242]"
             placeholder="E.g. : codeop@grassot.com "
           />
           <input
             require
-            id="password-input"
+            name="password-input"
             type="text"
             className="rounded-lg py-2 px-8 w-[553px] border-2 text-[#fe8923] border-[#fe8923] outline-none focus:border-[#C8E242]"
             placeholder="Password"
