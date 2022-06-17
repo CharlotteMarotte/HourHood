@@ -1,16 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
-const EMPTY_FORM = {
-  service_title: '',
-  service_description: '',
-  capacity: 0,
-  donation: false,
-  fk_category_id: 0,
-  fk_provider_id: 1
-};
-
 export default function PostOfferView(props) {
+  const EMPTY_FORM = {
+    service_title: '',
+    service_description: '',
+    capacity: 0,
+    donation: false,
+    fk_category_id: 0,
+    fk_provider_id: props.user.id,
+  };
+
   const [serviceData, setServiceData] = useState(EMPTY_FORM);
 
   const handleInputChange = (event) => {

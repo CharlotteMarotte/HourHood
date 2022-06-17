@@ -6,11 +6,11 @@ export default function OfferCard(props) {
   let { user } = useContext(AppContext);
 
   return (
-    <div className={`p-4 w-full ${user ? "w-full lg:w-1/2 xl:w-1/3" : "md:w-1/2 lg:w-1/3"}`}>
+    <div className={`p-4 w-full ${user && props.view==="offers" ? "md:w-1/2 xl:w-1/3 2xl:1/4" : "md:w-1/2 lg:w-1/3 xl:w-1/4"}`}>
       <div className="h-full overflow-hidden bg-white border-2 rounded-lg shadow-lg shadow-amber-400 border-amber-200 ">
         <div className="m-5 lg:h-72 md:h-36">
           <img
-            className="object-cover w-full h-full"
+            className="object-scale-down w-full h-full "
             // should be img from servicePost obj
             src= {props.offer.category.picture}
             alt="blog"
@@ -21,12 +21,17 @@ export default function OfferCard(props) {
             {props.offer.category.title}
           </h2>
           <h1 className="mb-3 text-2xl font-medium title-font text-amber-900">
-            {props.offer.service_title}
+            {props.offer.title}
           </h1>
           <p className="mb-3 leading-relaxed text-amber-500 ">
             "{props.offer.description}"
           </p>
-          <div className="flex flex-wrap justify-center space-x-2 md:space-y-2 lg:space-y-0">
+          {/* {
+            props.view === 'profile' && (
+              <p className="mb-3 leading-relaxed text-amber-500>Haha</p>
+            )
+          } */}
+          <div className="relative flex flex-wrap justify-center space-x-2 bottom-1 md:space-y-2 lg:space-y-0">
             {/* depending which view uses card (profile/) buttons change */}
             {props.view === 'offers' ? (
               <>
