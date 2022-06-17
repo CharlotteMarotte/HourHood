@@ -59,7 +59,7 @@ export default function PostOfferView(props) {
                     <div className="flex items-center justify-center w-10 text-center poniter-events-none"></div>
                     <input
                       require="true"
-                      maxlength="25"
+                      maxlength="25______________________"
                       id="title-input"
                       name="service_title"
                       value={serviceData.service_title}
