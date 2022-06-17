@@ -10,7 +10,7 @@ export default function OfferGrid() {
     // Code thanks to https://codepen.io/asdasdadddddddddd/pen/ExXjdPM
     <div>
       <div className="container px-5 py-24 mx-auto space-x-6 md:block lg:flex">
-        <div className="flex flex-wrap w-full -m-4">
+        <div className="flex flex-wrap items-stretch w-full -m-4 ">
           {offers.map((o) => (
             <OfferCard key={o.postID} offer={o} view={'offers'} />
           ))}

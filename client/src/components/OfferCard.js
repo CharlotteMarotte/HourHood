@@ -13,10 +13,10 @@ export default function OfferCard(props) {
           : 'md:w-1/2 lg:w-1/3 xl:w-1/4'
       }`}
     >
-      <div className="h-full overflow-hidden bg-white border-2 rounded-lg shadow-lg shadow-amber-400 border-amber-200 ">
-        <div className="m-5 lg:h-72 md:h-36">
+      <div className="overflow-hidden bg-white border-2 rounded-lg shadow-lg shadow-amber-400 border-amber-200">
+        <div className="m-5 lg:h-64 md:h-36">
           <img
-            className="object-scale-down w-full h-full "
+            className="object-cover w-full h-full "
             // should be img from servicePost obj
             src={props.offer.category.picture}
             alt="blog"
