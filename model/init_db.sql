@@ -101,9 +101,7 @@ CREATE TABLE service_post (
     fk_category_id INT,
     fk_provider_id INT,
     FOREIGN KEY (fk_provider_id) REFERENCES users (id) ON DELETE CASCADE,
-    FOREIGN KEY (fk_category_id) REFERENCES service_categories (id) ON DELETE
-    SET
-        NULL
+    FOREIGN KEY (fk_category_id) REFERENCES service_categories (id) ON DELETE SET NULL
 );
 
 INSERT INTO
