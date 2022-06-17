@@ -7,6 +7,8 @@ DROP TABLE IF EXISTS service_post;
 
 DROP TABLE IF EXISTS service_categories;
 
+DROP TABLE IF EXISTS bookings;
+
 SET
     foreign_key_checks = 1;
 
