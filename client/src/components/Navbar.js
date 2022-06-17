@@ -13,8 +13,7 @@ function Navbar(props) {
   return (
     <div className="sticky top-0 z-50">
       <nav className="bg-[#361201] shadow-md shadow-[#361201a2] navbar navbar-expand-lg navbar-light">
-        {/* One we have the login, change sm:pl-32 for sm:px-32 in the div below */}
-        <div className="sm:flex hidden items-center justify-between sm:pl-32 py-3">
+        <div className="sm:flex hidden items-center justify-between sm:px-32 py-3">
           <NavLink
             className="text-xl text-white pr-2 font-semibold hover:text-[#FF9940]"
             to="/"
@@ -59,41 +58,22 @@ function Navbar(props) {
             </div>
           )}
           <div className="flex gap-4 py-4 pr-10">
-            <NavLink
-              className="text-xl text-white pr-2 font-semibold hover:text-[#FF9940]"
-              to="/login"
-            >
-              Login
-            </NavLink>
-            <div className="text-white font-semibold">|</div>
-            <button
-              className="text-white hover:bg-[#361201] hover:text-[#FF9940] font-semibold"
-              onClick={(e) => {
-                props.switchUserCb(null);
-                setOpen(!open);
-              }}
-            >
-              Anonymous{" "}
-            </button>
-            <button
-              className=" text-white hover:bg-[#361201] hover:text-[#FF9940] font-medium"
-              onClick={(e) => {
-                props.switchUserCb(1);
-                setOpen(!open);
-              }}
-            >
-              User1{" "}
-            </button>
-            <button
-              className="text-white rounded-b-lg hover:text-[#FF9940] hover:bg-[#361201] font-medium"
-              onClick={(e) => {
-                props.switchUserCb(2);
-                setOpen(!open);
-              }}
-            >
-              User2
-            </button>
-            <div className="text-white font-semibold">|</div>
+            {props.user ? (
+              <NavLink
+                className="text-xl text-white pr-2 font-semibold hover:text-[#FF9940]"
+                to="/"
+                onClick={props.logoutCb}
+              >
+                Logout
+              </NavLink>
+            ) : (
+              <NavLink
+                className="text-xl text-white pr-2 font-semibold hover:text-[#FF9940]"
+                to="/login"
+              >
+                Login
+              </NavLink>
+            )}
           </div>
         </div>
 
@@ -141,7 +121,6 @@ function Navbar(props) {
                     >
                       Offers
                     </NavLink>
-
                     {props.user && (
                       <>
                         <NavLink
@@ -173,46 +152,25 @@ function Navbar(props) {
                         </NavLink>
                       </>
                     )}
-                    <NavLink
-                      onClick={(e) => {
-                        setOpen(!open);
-                      }}
-                      className="text-white pr-2 font-semibold hover:text-[#FF9940]"
-                      to="/login"
-                    >
-                      Login
-                    </NavLink>
-                    <div className="flex gap-3">
-                      <button
-                        className="text-white hover:bg-[#361201] hover:text-[#FF9940] font-semibold"
+                    {props.user ? (
+                      <NavLink
+                        className="text-xl text-white pr-2 font-semibold hover:text-[#FF9940]"
+                        to="/"
                         onClick={(e) => {
-                          props.switchUserCb(null);
+                          props.logoutCb();
                           setOpen(!open);
                         }}
                       >
-                        Anonymous{" "}
-                      </button>
-                      <div className="text-white font-semibold">|</div>
-                      <button
-                        className=" text-white hover:bg-[#361201] hover:text-[#FF9940] font-medium"
-                        onClick={(e) => {
-                          props.switchUserCb(1);
-                          setOpen(!open);
-                        }}
+                        Logout
+                      </NavLink>
+                    ) : (
+                      <NavLink
+                        className="text-xl text-white pr-2 font-semibold hover:text-[#FF9940]"
+                        to="/login"
                       >
-                        User1{" "}
-                      </button>
-                      <div className="text-white font-semibold">|</div>
-                      <button
-                        className="text-white rounded-b-lg hover:text-[#FF9940] hover:bg-[#361201] font-medium"
-                        onClick={(e) => {
-                          props.switchUserCb(2);
-                          setOpen(!open);
-                        }}
-                      >
-                        User2
-                      </button>
-                    </div>
+                        Login
+                      </NavLink>
+                    )}
                   </div>
                 )}
               </div>
