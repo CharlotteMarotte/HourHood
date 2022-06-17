@@ -168,13 +168,13 @@ export default function PostOfferView(props) {
                 <div className="flex flex-wrap justify-center space-x-2 lg:space-y-0">
                   <Link
                     to={'/'}
-                    className="px-4 py-2 font-semibold bg-transparent border rounded hover:bg-lime-600 text-lime-700 hover:text-white border-lime-600 hover:border-transparent"
+                    className="px-4 py-2 font-semibold bg-transparent border rounded hover:bg-amber-500 text-amber-700 hover:text-white border-amber-500 hover:border-transparent"
                   >
                     Back
                   </Link>
                   <button
                     type="submit"
-                    className="px-4 py-2 font-semibold bg-transparent border rounded hover:bg-amber-500 text-amber-700 hover:text-white border-amber-500 hover:border-transparent"
+                    className="px-4 py-2 font-semibold bg-transparent border rounded hover:bg-lime-600 text-lime-700 hover:text-white border-lime-600 hover:border-transparent"
                   >
                     Publish{' '}
                   </button>
