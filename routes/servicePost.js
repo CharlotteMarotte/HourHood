@@ -131,6 +131,33 @@ router.post('/', async function(req, res) {
     res.status(500).send({ error: err.message });  
     } 
 }); 
+
+// PUT - edit the post
+router.put("/:postId", async (req, res) => {
+    let { postId } = req.params;
+    
+    let { service_title, service_description, capacity, donation, fk_category_id, fk_provider_id } = req.body;
+  
+    try {
+        let result = await db(`SELECT * FROM service_post WHERE id = ${postId}`);  // does post exist?
+        if (result.data.length === 0) {
+            res.status(404).send({ error: 'Post not found' });
+        } else {
+            let sql = `
+                UPDATE service_post 
+                SET service_title = '${service_title}', service_description = '${service_description}', capacity = '${capacity}', donation = ${donation}, fk_category_id = ${fk_category_id}, fk_provider_id = ${fk_provider_id}
+                WHERE id = ${postId}
+            `;
+  
+            await db(sql);  // update post
+            let result = await db('SELECT * FROM service_post');
+            let posts = result.data;
+            res.send(posts);  // return updated array
+        }
+    } catch (err) {
+        res.status(500).send({ error: err.message });
+    }
+  });
     
      
 // DELETE post by ID 
