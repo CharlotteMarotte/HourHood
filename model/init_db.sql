@@ -167,7 +167,7 @@ VALUES
         4,
         2,
         1,
-        "confirmed",
+        "pending",
         2,
         1
     ),
@@ -176,7 +176,7 @@ VALUES
         1,
         3,
         0,
-        "confirmed",
+        "pending",
         1,
         2
     ), (
