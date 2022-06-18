@@ -144,13 +144,13 @@ export default function App() {
   }
 
 // sign up
-  async function addNewUser(username, password, email) {
+  async function addNewUser(newUser ) {
 
-    let myresponse = await Api.RegisterUser(username, password, email);
+    let myresponse = await Api.RegisterUser(newUser );
     if (myresponse.ok) {
       Local.saveUserInfo(myresponse.data.user, myresponse.data.token);
       setUser(myresponse.data.user);
-      //console.log(user)
+      console.log(user)
       setLoginErrorMsg("");
       navigate("/login");
   
@@ -274,7 +274,7 @@ export default function App() {
             </AppContext.Provider>
           }
         />
-        <Route path="signup" element={<SignUpView user = {user} addNewUserCb={(u, p, e) => addNewUser(u, p, e)}/>} />
+        <Route path="signup" element={<SignUpView user = {user} addNewUserCb={(newUser ) => addNewUser(newUser )}/>} />
         <Route
           path="login"
           element={

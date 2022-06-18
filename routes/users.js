@@ -1,7 +1,9 @@
 var express = require('express');
 var router = express.Router();
-//const { ensureSameUser } = require('../middleware/guards');
+const { ensureSameUser } = require('../middleware/guards');
 const db = require('../model/helper');
+const bcrypt = require('bcrypt');
+const { BCRYPT_WORK_FACTOR, SECRET_KEY } = require('../config');
 
 /**
  * Helpers
@@ -65,6 +67,27 @@ router.put("/:userId", async (req, res) => {
   } catch (err) {
       res.status(500).send({ error: err.message });
   }
+});
+
+
+//POST user (sign up)
+
+router.post('/', async (req, res, next) => {
+    let { first_name, last_name, street, house_number, city_code, city_name, country, email, user_description, hobbies, superpower, photo, password } = req.body;
+    console.log(req.body)
+    let hashedPassword = await bcrypt.hash(password, BCRYPT_WORK_FACTOR);
+    let sql = `
+            INSERT INTO users (first_name, last_name, street, house_number, city_code, city_name, country, email, user_description, hobbies, superpower, photo, password)
+            VALUES ('${first_name}', '${last_name}', '${street}', '${house_number}', ${city_code}, '${city_name}', '${country}', '${email}', '${user_description}', '${hobbies}', '${superpower}', '${photo}', '${hashedPassword}');
+        `;
+
+    try {
+        await db(sql);
+        res.status(201);
+        sendAllUsers(res);
+    } catch (err) {
+        res.status(500).send({ error: err.message });
+    }
 });
 
 //DELETE user
