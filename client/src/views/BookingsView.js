@@ -5,7 +5,7 @@ export default function BookingsView(props) {
   return (
     <div>
       <h1 className="pt-8 text-4xl font-bold text-left ml-14 text-amber-900">
-        Bookings{' '}
+        Receiving help{' '}
       </h1>
       <div className="container">
         <h1 className="pt-4 ml-20 text-3xl font-bold text-left border-b-2 border-opacity-25 text-amber-700 border-amber-700">

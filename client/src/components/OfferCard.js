@@ -3,7 +3,7 @@ import AppContext from '../AppContext';
 import { Link } from 'react-router-dom';
 
 export default function OfferCard(props) {
-  let { user, deleteDuckCb } = useContext(AppContext);
+  let { user, deleteService } = useContext(AppContext);
 
   return (
     <div
@@ -54,7 +54,7 @@ export default function OfferCard(props) {
                   to={user ? '/' : '/login'}
                   className="px-4 py-2 font-semibold bg-transparent border rounded hover:bg-amber-500 text-amber-700 hover:text-white border-amber-500 hover:border-transparent"
                 >
-                  User's Profile{' '}
+                  {props.offer.user.firstName}'s Profile{' '}
                 </Link>
 
                 <Link
@@ -68,7 +68,7 @@ export default function OfferCard(props) {
               <>
                 <button
                   type="button"
-                  onClick={(e) => deleteDuckCb(props.offer.postID)}
+                  onClick={(e) => deleteService(props.offer.postID)}
                   className="px-4 py-2 font-semibold bg-transparent border rounded hover:bg-amber-500 text-amber-700 hover:text-white border-amber-500 hover:border-transparent"
                 >
                   Delete{' '}

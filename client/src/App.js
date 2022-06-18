@@ -128,7 +128,6 @@ export default function App() {
     let myresponse = await Api.loginUser(email, password);
     if (myresponse.ok) {
       Local.saveUserInfo(myresponse.data.token, myresponse.data.email);
-      console.log(myresponse.data.user)
       setUser(myresponse.data.user);
       setLoginErrorMsg("");
       navigate("/");
@@ -150,7 +149,6 @@ export default function App() {
     if (myresponse.ok) {
       Local.saveUserInfo(myresponse.data.user, myresponse.data.token);
       setUser(myresponse.data.user);
-      //console.log(user)
       setLoginErrorMsg("");
       navigate("/login");
   
@@ -158,7 +156,6 @@ export default function App() {
       setLoginErrorMsg("Login failed");
     }
 
-    //console.log(user)
   }
 
 // ********* users *************
@@ -231,7 +228,7 @@ export default function App() {
   }
 
   // DELETE a duck
-  async function deleteDuck(id) {
+  async function deleteService(id) {
     // Define fetch() options
     let options = {
       method: "DELETE",
@@ -250,7 +247,7 @@ export default function App() {
     }
   }
 
-  const contextObj = { offers, user, deleteDuckCb: deleteDuck };
+  const contextObj = { offers, user, deleteServiceCb: deleteService };
   const chosenUserObj = { offer: offers[1], requestServiceCb: requestService };
 
   return (
