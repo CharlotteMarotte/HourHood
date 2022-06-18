@@ -7,6 +7,9 @@ DROP TABLE IF EXISTS service_post;
 
 DROP TABLE IF EXISTS service_categories;
 
+DROP TABLE IF EXISTS bookings;
+
+
 SET
     foreign_key_checks = 1;
 
@@ -64,7 +67,59 @@ VALUES
         'Barcelona',
         'Spain',
         'karenmagnamara14062022@gmail.com',
-        "Hi , I'm Karen I would like to be able to have more time to spend with my child.",
+        "Hi , I am Karen I would like to be able to have more time to spend with my child.",
+        "",
+        '$2b$12$WZcGPyrkCvD5e8m0Qz/nFOdBryUcsp6uDlE2MDo/AjuBhPrQBCfI6'
+    ),
+     (
+        'James',
+        'Obrain',
+        'Carrer de Grassot',
+        '99',
+        08025,
+        'Barcelona',
+        'Spain',
+        'jamesobrain18062022@gmail.com',
+        "Hi, I live with boyfriend and we have a fluffy dog called Mushroom",
+        "",
+        '$2b$12$eFzMWbS9SogNtxkmo3J7aO8FQMFQSKbtpwLMIOVsF6GGKpTQdgq.W'
+    ),
+       (
+        'Tyrion',
+        'Lannister',
+        'Carrer de Grassot',
+        '100',
+        08025,
+        'Barcelona',
+        'Spain',
+        'tyrionlannistes18062022@gmail.com',
+        "Nice to meet you, I have just move to the neighborhood and I would like to know you. Carpentry is my passion. ",
+        "",
+        '$2b$12$eFzMWbS9SogNtxkmo3J7aO8FQMFQSKbtpwLMIOVsF6GGKpTQdgq.W'
+    ),
+      (
+        'Arya',
+        'Stark',
+        'Carrer de Grassot',
+        '100',
+        08025,
+        'Barcelona',
+        'Spain',
+        'aryastark18062022@gmail.com',
+        "Hi , I am Arya. I love do outdoor sports and travel. I work in IT department",
+        "",
+        '$2b$12$WZcGPyrkCvD5e8m0Qz/nFOdBryUcsp6uDlE2MDo/AjuBhPrQBCfI6'
+    ),
+        (
+        'Mary',
+        'Poppins',
+        'Carrer de Grassot',
+        '89',
+        08025,
+        'Barcelona',
+        'Spain',
+        'marypoppins18062022@gmail.com',
+        "Nice to meet you. I am Mery and always available to take care of kids because I miss my nephews",
         "",
         '$2b$12$WZcGPyrkCvD5e8m0Qz/nFOdBryUcsp6uDlE2MDo/AjuBhPrQBCfI6'
     );
@@ -134,10 +189,11 @@ VALUES
 CREATE TABLE bookings (
     id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
     booking_description TEXT(255),
-    proposed_date DATE,
+    proposed_date DATETIME,
     estimated_time INT,
     need_donation TINYINT,
     booking_status VARCHAR (100),
+    service_time INT,
     fk_requestor_id INT,
     fk_service_post_id INT,
     FOREIGN KEY (fk_requestor_id) REFERENCES users (id) ON DELETE CASCADE,
@@ -149,26 +205,52 @@ INSERT INTO
     bookings (
         booking_description,
         estimated_time,
+        service_time,
         need_donation,
         booking_status,
         fk_requestor_id,
-        fk_service_post_id
+        fk_service_post_id,
+        proposed_date
     )
 VALUES
     (
         'Ok, I would appreciate some help with my kids this Saturday',
         4,
-        1,
-        "pending",
         2,
-        1
+        1,
+        "confirmed",
+        2,
+        1,
+        "2022-06-23 14:41:13"
+        
     ),
     (
         'Hi Karen! I would like to use your service, because I really need to cut my hair.',
         1,
+        3,
         0,
+        "confirmed",
+        1,
+        2,
+         "2022-06-23 14:41:13"
+    ), 
+    (
+        "I haven't ot been to the hair dresser since the beginning of the pandemic, I need help!",
+        2,
+        null,
+        1,
         "pending",
         1,
-        2
+        2,
+         "2022-06-23 14:41:13"
+    ), 
+    (
+        'We will get married on Sunday, could you watch our children?',
+        8,
+        null,
+        1,
+        "pending",
+        2,
+        2,
+         "2022-06-23 14:41:13"
     );
-

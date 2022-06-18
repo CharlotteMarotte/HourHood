@@ -59,7 +59,7 @@ export default function PostOfferView(props) {
                     <div className="flex items-center justify-center w-10 text-center poniter-events-none"></div>
                     <input
                       require="true"
-                      maxlength="25______________________"
+                      maxLength="25"
                       id="title-input"
                       name="service_title"
                       value={serviceData.service_title}
@@ -156,7 +156,7 @@ export default function PostOfferView(props) {
                       <div className="flex items-center justify-center w-10 pl-1 text-center pointer-events-none"></div>
                       <textarea
                         id="message-input"
-                        maxlength="110"
+                        maxLength="110"
                         name="service_description"
                         value={serviceData.service_description}
                         onChange={(e) => handleInputChange(e)}
