@@ -12,13 +12,13 @@ export default function RequestsView(props) {
           Pending{' '}
         </h1>
       </div>
-      {props.requests
-        .filter((e) => e.status === 'pending')
+      {props.bookings
+        .filter((e) => e.bookingStatus === 'pending')
         .map((request) => (
           <SelectedOfferCard
             view={'requests'}
-            offer={request}
-            key={request.id}
+            booking={request}
+            key={request.bookingId}
           />
         ))}
       <div className="container ">
@@ -26,13 +26,13 @@ export default function RequestsView(props) {
           Accepted{' '}
         </h1>
       </div>
-      {props.requests
-        .filter((e) => e.status === 'accepted')
+      {props.bookings
+        .filter((e) => e.bookingStatus === 'accepted')
         .map((request) => (
           <SelectedOfferCard
             view={'requests'}
-            offer={request}
-            key={request.id}
+            booking={request}
+            key={request.bookingId}
           />
         ))}{' '}
     </div>

@@ -34,13 +34,13 @@ function Navbar(props) {
             <>
               <NavLink
                 className="text-xl text-white pr-2 font-semibold hover:text-[#FF9940]"
-                to="/requests"
+                to="/giving-help"
               >
                 Giving help
               </NavLink>
               <NavLink
                 className="text-xl text-white pr-2 font-semibold hover:text-[#FF9940]"
-                to="/bookings"
+                to="/receiving-help"
               >
                 Receiving help
               </NavLink>
