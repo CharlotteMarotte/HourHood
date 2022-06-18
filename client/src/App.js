@@ -289,7 +289,7 @@ export default function App() {
           path="/"
           element={
             <AppContext.Provider value={contextObj}>
-              <HomeView />
+              <HomeView user={user} />
             </AppContext.Provider>
           }
         />
