@@ -80,7 +80,7 @@ export default function EditProfileView(props) {
                       htmlFor="street-input"
                       className="flex items-center justify-center w-full text-center pointer-events-none"
                     >
-                      Street + Number
+                      Street 
                     </label>
                     <div className="flex">
                       <div className="z-10 flex items-center justify-center w-10 text-center pointer-events-none"></div>
@@ -89,7 +89,7 @@ export default function EditProfileView(props) {
                         id="street-input"
                         type="text"
                         className="w-full py-2 pl-10 pr-3 -ml-10 border-2 rounded-lg outline-none border-amber-200 focus:border-lime-700"
-                        placeholder="Carrer de Grassot 101"
+                        placeholder="Carrer de Grassot"
                       />
                     </div>
                   </div>
@@ -105,9 +105,9 @@ export default function EditProfileView(props) {
                       <input
                         required
                         id="housenumber-input"
-                        type="text"
+                        type="number"
                         className="w-full py-2 pl-10 pr-3 -ml-10 border-2 rounded-lg outline-none border-amber-200 focus:border-lime-700"
-                        placeholder="1-1"
+                        placeholder="101"
                       />
                     </div>
                   </div>
@@ -117,7 +117,7 @@ export default function EditProfileView(props) {
                     <div className="block">
                       <div className="flex items-center justify-center w-full text-center pointer-events-none"></div>
                       <label
-                        for="select_category"
+                        htmlFor="select_category"
                         className="flex items-center justify-center w-full text-center pointer-events-none"
                       >
                         Postal Code{' '}

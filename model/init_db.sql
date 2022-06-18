@@ -83,7 +83,7 @@ VALUES
         'https://img.freepik.com/free-vector/woman-standing-near-stove-kitchen-holding-spoon_74855-20425.jpg?w=1380&t=st=1655410861~exp=1655411461~hmac=db914b97910a24f02a17a4d78c5c4aebd7e37e93555dc6e58188ba6ba8cdb7bf'
     ),
     ('Home Services & Repairs', 'https://img.freepik.com/free-vector/hand-drawn-people-taking-care-plants_23-2148986963.jpg?t=st=1655410934~exp=1655411534~hmac=67570d359a8bae25e59f311122fb6939eb8d4c3cb573c5b886802a97aa617c89&w=1380'),
-    ('Health & Wellness', 'https://img.freepik.com/free-vector/badminton-concept-illustration_114360-6707.jpg?t=st=1655411026~exp=1655411626~hmac=4bd45feff7328cd9d77c714fef7e3650e82339aa218b19eeb7c6423be4d91203&w=1480'),
+    ('Health & Wellness', 'https://img.freepik.com/free-vector/happy-women-stand-floor-meditating-yoga-pose_90220-362.jpg?t=st=1655453854~exp=1655454454~hmac=fe29235f92351bc8ab93737cbdaac7a993e7bfd039478ea4dd76db34ff47d7e4&w=826'),
     ('Hobbies', 'https://img.freepik.com/free-vector/smiling-woman-standing-near-easel-painting-flat-illustration_74855-11057.jpg?t=st=1655411450~exp=1655412050~hmac=87025b42835fbdae42e7600f71204908dabf65d89184ae34f5b87d2c894d96b5&w=1480'),
     ('Transport', 'https://img.freepik.com/free-vector/carsharing-service-abstract-concept-illustration_335657-3739.jpg?t=st=1655411157~exp=1655411757~hmac=7633dacbf7346137c2703d63a2d830e2bcfe1a8fdd448fbdc0484aea922ad67d&w=996'),
     ('Education', 'https://img.freepik.com/free-vector/online-courses-tutorials_52683-37860.jpg?t=st=1655411487~exp=1655412087~hmac=c4e66347fa55e858861cd5a4ff52234b73a4b63a438163b1cf04c9ef48b8b8ff&w=1480'),
@@ -130,3 +130,45 @@ VALUES
         3,
         2
     );
+
+CREATE TABLE bookings (
+    id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    booking_description TEXT(255),
+    proposed_date DATE,
+    estimated_time INT,
+    need_donation TINYINT,
+    booking_status VARCHAR (100),
+    fk_requestor_id INT,
+    fk_service_post_id INT,
+    FOREIGN KEY (fk_requestor_id) REFERENCES users (id) ON DELETE CASCADE,
+    FOREIGN KEY (fk_service_post_id) REFERENCES service_post (id) ON DELETE
+    SET NULL
+);
+
+INSERT INTO
+    bookings (
+        booking_description,
+        estimated_time,
+        need_donation,
+        booking_status,
+        fk_requestor_id,
+        fk_service_post_id
+    )
+VALUES
+    (
+        'Ok, I would appreciate some help with my kids this Saturday',
+        4,
+        1,
+        "pending",
+        2,
+        1
+    ),
+    (
+        'Hi Karen! I would like to use your service, because I really need to cut my hair.',
+        1,
+        0,
+        "pending",
+        1,
+        2
+    );
+

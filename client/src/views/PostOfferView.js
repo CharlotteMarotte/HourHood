@@ -1,16 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
-const EMPTY_FORM = {
-  service_title: '',
-  service_description: '',
-  capacity: 0,
-  donation: false,
-  fk_category_id: 0,
-  fk_provider_id: 1
-};
-
 export default function PostOfferView(props) {
+  const EMPTY_FORM = {
+    service_title: '',
+    service_description: '',
+    capacity: 0,
+    donation: false,
+    fk_category_id: 0,
+    fk_provider_id: props.user.id,
+  };
+
   const [serviceData, setServiceData] = useState(EMPTY_FORM);
 
   const handleInputChange = (event) => {
@@ -59,6 +59,7 @@ export default function PostOfferView(props) {
                     <div className="flex items-center justify-center w-10 text-center poniter-events-none"></div>
                     <input
                       require="true"
+                      maxlength="25______________________"
                       id="title-input"
                       name="service_title"
                       value={serviceData.service_title}
@@ -155,6 +156,7 @@ export default function PostOfferView(props) {
                       <div className="flex items-center justify-center w-10 pl-1 text-center pointer-events-none"></div>
                       <textarea
                         id="message-input"
+                        maxlength="110"
                         name="service_description"
                         value={serviceData.service_description}
                         onChange={(e) => handleInputChange(e)}
@@ -168,13 +170,13 @@ export default function PostOfferView(props) {
                 <div className="flex flex-wrap justify-center space-x-2 lg:space-y-0">
                   <Link
                     to={'/'}
-                    className="px-4 py-2 font-semibold bg-transparent border rounded hover:bg-lime-600 text-lime-700 hover:text-white border-lime-600 hover:border-transparent"
+                    className="px-4 py-2 font-semibold bg-transparent border rounded hover:bg-amber-500 text-amber-700 hover:text-white border-amber-500 hover:border-transparent"
                   >
                     Back
                   </Link>
                   <button
                     type="submit"
-                    className="px-4 py-2 font-semibold bg-transparent border rounded hover:bg-amber-500 text-amber-700 hover:text-white border-amber-500 hover:border-transparent"
+                    className="px-4 py-2 font-semibold bg-transparent border rounded hover:bg-lime-600 text-lime-700 hover:text-white border-lime-600 hover:border-transparent"
                   >
                     Publish{' '}
                   </button>
