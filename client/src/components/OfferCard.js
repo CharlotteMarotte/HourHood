@@ -3,7 +3,7 @@ import AppContext from '../AppContext';
 import { Link } from 'react-router-dom';
 
 export default function OfferCard(props) {
-  let { user, deleteService } = useContext(AppContext);
+  let { user, deleteService, selectOfferCb } = useContext(AppContext);
 
   return (
     <div
@@ -59,6 +59,7 @@ export default function OfferCard(props) {
 
                 <Link
                   to={user ? '/service-request' : '/login'}
+                  onClick={(e) => selectOfferCb(props.offer.postID)}
                   className="px-4 py-2 font-semibold bg-transparent border rounded hover:bg-lime-600 text-lime-700 hover:text-white border-lime-600 hover:border-transparent"
                 >
                   Request

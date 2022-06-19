@@ -189,7 +189,7 @@ VALUES
 CREATE TABLE bookings (
     id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
     booking_description TEXT(255),
-    proposed_date DATETIME,
+    proposed_date DATE,
     estimated_time INT,
     need_donation TINYINT,
     booking_status VARCHAR (100),
