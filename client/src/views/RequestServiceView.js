@@ -1,15 +1,45 @@
-import React, { useContext } from 'react';
-import AppContext from '../AppContext';
+import React, { useContext, useState} from 'react';
+import BookingContext from '../BookingContext';
 import { Link } from 'react-router-dom';
 
-export default function RequestServiceView() {
-  let { offer, requestServiceCb } = useContext(AppContext);
+export default function RequestServiceView(props) {
+  let { selectedOffer, user, requestServiceCb } = useContext(BookingContext);
+  
+  console.log("I am the requestor(user):", user)
+  console.log("the offer that I selected is:", selectedOffer)
+  console.log("the id of the service post is:", selectedOffer[0].postID)
+  
+  const INIT_FORM = {
+    booking_description: '',
+    proposed_date: '',
+    estimated_time: 0,
+    need_donation: false,
+    booking_status: 'pending',
+    service_time: null,
+    fk_requestor_id: user.id,
+    fk_service_post_id: selectedOffer[0].postID
+  };
+
+  const [requestData, setRequestData] = useState(INIT_FORM);
+
+  const handleInputChange = (event) => {
+    let { name, value } = event.target;
+
+    // gets pressed after each key change
+    setRequestData((state) => ({
+      ...state, // gets replaced by all key-value pairs from obj
+      [name]: value, // updates key [name] with new value
+    }));
+    console.log(requestData);
+  };
 
   function handleSubmit(event) {
     event.preventDefault();
     // Call callback we got from AppContext
-    requestServiceCb();
+    requestServiceCb(requestData);
+    setRequestData(INIT_FORM);
   }
+
 
   return (
     // Code thanks to https://codepen.io/atzinn-herrera/pen/JjMMBxy
@@ -27,7 +57,7 @@ export default function RequestServiceView() {
               <h1 className="font-bold text-4xl text-amber-900">
                 Request a service
               </h1>
-              <p className="font-bold text-2xl text-amber-600">{offer.title}</p>
+              <p className="font-bold text-2xl text-amber-600">{selectedOffer[0].title}</p>
             </header>
             <form onSubmit={handleSubmit}>
               <div className="xl:flex :lg-flex-col-1 space-x-2">
@@ -44,6 +74,9 @@ export default function RequestServiceView() {
                     <input
                       required
                       id="time-needed-input"
+                      name="estimated_time"
+                      value={requestData.estimated_time}
+                      onChange={(e) => handleInputChange(e)}
                       type="number"
                       className="w-full -ml-10 pl-10 pr-3 py-2 rounded-lg border-2 border-amber-200 outline-none focus:border-lime-700"
                       placeholder="1"
@@ -63,6 +96,9 @@ export default function RequestServiceView() {
                     <input
                       required
                       id="proposed-date-input"
+                      name="proposed_date"
+                      value={requestData.proposed_date}
+                      onChange={(e) => handleInputChange(e)}
                       type="date"
                       className="w-full -ml-10 pl-10 pr-3 py-2 rounded-lg border-2 border-amber-200 outline-none focus:border-lime-700"
                     />
@@ -79,6 +115,9 @@ export default function RequestServiceView() {
                     </div>
                     <textarea
                       id="message-input"
+                      name="booking_description"
+                      value={requestData.booking_description}
+                      onChange={(e) => handleInputChange(e)}
                       rows="3"
                       className="w-full -ml-10 pl-10 pr-3 py-2 rounded-lg border-2 border-amber-200 outline-none focus:border-lime-700"
                     ></textarea>
@@ -89,6 +128,9 @@ export default function RequestServiceView() {
                 <div className="w-full px-3 space-x-3 mb-5">
                   <input
                     type="checkbox"
+                    name="need_donation"
+                    value={!requestData.need_donation}
+                    onChange={(e) => handleInputChange(e)}
                     id="donation"
                     className="bg-lime-700 hover:bg-lime-700 focus:bg-lime-700"
                   />

@@ -5,6 +5,7 @@ import Local from "../src/helpers/Local";
 import "./App.css";
 
 import AppContext from "./AppContext";
+import BookingContext from "./BookingContext";
 import Navbar from "./components/Navbar";
 import ProfileView from "./views/ProfileView";
 import BookingsView from "./views/BookingsView";
@@ -113,6 +114,8 @@ export default function App() {
   const [loginErrorMsg, setLoginErrorMsg] = useState("");
   const [offers, setOffers] = useState([]);
   const [categories, setCategories] = useState([]);
+  const [userBookings, setUserBookings] = useState([]);
+  const [selectedOffer, setSelectedOffer] = useState([]);
 
   useEffect(() => {
     getCategories();
@@ -198,9 +201,44 @@ export default function App() {
     navigate("/");
   }
 
-  function requestService() {
-    console.log("Service got requested");
-    navigate("/bookings");
+  async function selectOffer(id) {
+    try {
+      let response = await fetch(`/servicePost/${id}`); // does GET by default
+      if (response.ok) {
+        let selOffer = await response.json();
+        setSelectedOffer(selOffer); // set selectedOffer state with the offer that was chosen by the user, so it can be used by other components/views
+        console.log("I am selected offer:", selectedOffer)
+      } else {
+        console.log(`Server error: ${response.status} ${response.statusText}`);
+      }
+    } catch (err) {
+      console.log(`Server error: ${err.message}`);
+    }
+  }
+
+  async function requestService(requestData) {
+
+    let options = {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(requestData),
+    };
+
+    try {
+      let response = await fetch("/bookings/", options); // do POST
+      if (response.ok) {
+        let userBookings = await response.json(); // set bookings state with all bookings(requests) that the logged in user made, including the new one
+        setUserBookings(userBookings);
+        console.log("Service got requested");
+        navigate("/bookings"); // go to all bookings (Receiving help page)
+      } else {
+        console.log(`Server error: ${response.status} ${response.statusText}`);
+      }
+    } catch (err) {
+      console.log(`Server error: ${err.message}`);
+    }
   }
 
   async function postService(serviceData) {
@@ -247,8 +285,9 @@ export default function App() {
     }
   }
 
-  const contextObj = { offers, user, deleteServiceCb: deleteService };
-  const chosenUserObj = { offer: offers[1], requestServiceCb: requestService };
+  const contextObj = { offers, user, selectOfferCb: selectOffer, deleteServiceCb: deleteService };
+  const chosenUserObj = { selectedOffer, user, requestServiceCb: requestService };
+  console.log("I am chosenUserObj", {chosenUserObj});
 
   return (
     <div className="App bg-gradient-to-t from-[#FFF7A3] via-[#FFF7A3] to-[#ff994091] h-full pb-28">
@@ -296,9 +335,9 @@ export default function App() {
         <Route
           path="service-request"
           element={
-            <AppContext.Provider value={chosenUserObj}>
+            <BookingContext.Provider value={chosenUserObj}>
               <RequestServiceView />
-            </AppContext.Provider>
+            </BookingContext.Provider>
           }
         />
         <Route

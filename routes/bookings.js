@@ -32,6 +32,7 @@ function joinToJson(results) {
         estimatedTime: row.estimated_time,
         needDonation: row.need_donation,
         bookingStatus: row.booking_status,
+        serviceTime: row.service_time,
          requestor: {
             userID: row.userId,
             firstName: row.first_name,
@@ -121,11 +122,11 @@ router.get('/:id', ensureBookingExists, async function(req, res) {
 // POST  - create a booking (request) 
 router.post('/', async function(req, res) { 
 
-    let { booking_description, proposed_time, estimated_time, need_donation, booking_status, fk_requestor_id, fk_service_post_id } = req.body; 
+    let { booking_description, proposed_date, estimated_time, need_donation, booking_status, service_time, fk_requestor_id, fk_service_post_id } = req.body; 
     
     let sql = ` 
-    INSERT INTO bookings (booking_description, proposed_time, estimated_time, need_donation, booking_status, fk_requestor_id, fk_service_post_id)
-    VALUES ('${booking_description}', '${proposed_time}' ${estimated_time}, ${need_donation}, '${booking_status}', ${fk_requestor_id}, ${fk_service_post_id})`; 
+    INSERT INTO bookings (booking_description, proposed_date, estimated_time, need_donation, booking_status, service_time, fk_requestor_id, fk_service_post_id)
+    VALUES ('${booking_description}', '${proposed_date}', ${estimated_time}, ${need_donation}, '${booking_status}', ${service_time}, ${fk_requestor_id}, ${fk_service_post_id})`; 
 
     try { 
     // post the request
@@ -141,7 +142,7 @@ router.post('/', async function(req, res) {
 router.put("/:bookingId", async (req, res) => {
     let { bookingId } = req.params;
     
-    let { booking_description, proposed_date, estimated_time, need_donation, booking_status, fk_requestor_id, fk_service_post_id } = req.body;
+    let { booking_description, proposed_date, estimated_time, need_donation, booking_status, service_time, fk_requestor_id, fk_service_post_id } = req.body;
   
     try {
         let result = await db(`SELECT * FROM bookings WHERE id = ${bookingId}`);  // does booking exist?
@@ -150,7 +151,7 @@ router.put("/:bookingId", async (req, res) => {
         } else {
             let sql = `
                 UPDATE bookings 
-                SET booking_description = '${booking_description}', proposed_date = ${proposed_date}, estimated_time = '${estimated_time}', need_donation = ${need_donation}, booking_status = '${booking_status}', fk_requestor_id = '${fk_requestor_id}', fk_service_post_id = '${fk_service_post_id}'
+                SET booking_description = '${booking_description}', proposed_date = '${proposed_date}', estimated_time = ${estimated_time}, need_donation = ${need_donation}, booking_status = '${booking_status}', service_time = ${service_time}, fk_requestor_id = ${fk_requestor_id}, fk_service_post_id = ${fk_service_post_id}
                 WHERE id = ${bookingId}
             `;
   
