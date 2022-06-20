@@ -3,7 +3,7 @@ import AppContext from '../AppContext';
 import { Link } from 'react-router-dom';
 
 export default function OfferCard(props) {
-  let { user, deleteService, selectOfferCb } = useContext(AppContext);
+  let { user, deleteService, selectOfferCb, toEditCb } = useContext(AppContext);
 
   return (
     <div
@@ -74,13 +74,16 @@ export default function OfferCard(props) {
                 >
                   Delete{' '}
                 </button>
-                <button
-                  type="button"
-                  className="px-4 py-2 font-semibold bg-transparent border rounded hover:bg-lime-600 text-lime-700 hover:text-white border-lime-500 hover:border-transparent"
-                  onClick={(e) => editOfferCb(props.offer.postID)}               
-                >
-                  Edit{' '}
-                </button>
+                <Link
+                to={'/service-post'}>
+                  <button
+                    type="button"
+                    className="px-4 py-2 font-semibold bg-transparent border rounded hover:bg-lime-600 text-lime-700 hover:text-white border-lime-500 hover:border-transparent"
+                    onClick={(e) => toEditCb(props.offer.postID)}               
+                  >
+                    Edit{' '}
+                  </button>
+               </Link>
               </>
             )}
           </div>
@@ -89,3 +92,6 @@ export default function OfferCard(props) {
     </div>
   );
 }
+
+
+

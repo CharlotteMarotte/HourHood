@@ -2,16 +2,33 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
 export default function PostOfferView(props) {
-  const EMPTY_FORM = {
-    service_title: '',
-    service_description: '',
+
+  let o = props.offerToEdit[0];
+ // console.log("I am offer:", o)
+ // console.log("offer in view to be edited:", props.offerToEdit)
+ // console.log("test:", o.category.categoryID, o.donation)
+  
+  let EMPTY_FORM = {
+    service_title: "",
+    service_description: "",
     capacity: 0,
     donation: false,
     fk_category_id: 0,
     fk_provider_id: props.user.id,
   };
 
-  const [serviceData, setServiceData] = useState(EMPTY_FORM);
+  let INIT_FORM = {
+    service_title: o.title,
+    service_description: o.description,
+    capacity: o.capacity,
+    donation: o.donation,
+    fk_category_id: o.category.categoryID,
+    fk_provider_id: o.user.userID
+  };
+
+  
+
+  const [serviceData, setServiceData] = useState(o ? INIT_FORM : EMPTY_FORM);
 
   const handleInputChange = (event) => {
     let { name, value } = event.target;
@@ -25,7 +42,7 @@ export default function PostOfferView(props) {
 
   function handleSubmit(event) {
     event.preventDefault();
-    props.postServiceCb(serviceData);
+    o? props.updateOfferCb(serviceData) : props.postServiceCb(serviceData);
     setServiceData(EMPTY_FORM);
   }
 
@@ -170,15 +187,17 @@ export default function PostOfferView(props) {
                 <div className="flex flex-wrap justify-center space-x-2 lg:space-y-0">
                   <Link
                     to={'/'}
+                    
                     className="px-4 py-2 font-semibold bg-transparent border rounded hover:bg-amber-500 text-amber-700 hover:text-white border-amber-500 hover:border-transparent"
                   >
                     Back
                   </Link>
+
                   <button
                     type="submit"
                     className="px-4 py-2 font-semibold bg-transparent border rounded hover:bg-lime-600 text-lime-700 hover:text-white border-lime-600 hover:border-transparent"
                   >
-                    Publish{' '}
+                    {!o? <p>Publish</p> : <p>Update</p>}
                   </button>
                 </div>
               </div>
