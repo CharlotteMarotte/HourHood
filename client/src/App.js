@@ -221,7 +221,7 @@ export default function App() {
       if (response.ok) {
         let selOffer = await response.json();
         setSelectedOffer(selOffer); // set selectedOffer state with the offer that was chosen by the user, so it can be used by other components/views
-        console.log("I am selected offer:", selectedOffer)
+        console.log("I am selected offer from APP:", selectedOffer)
       } else {
         console.log(`Server error: ${response.status} ${response.statusText}`);
       }
