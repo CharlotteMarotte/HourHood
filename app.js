@@ -11,6 +11,7 @@ var servicePostRouter = require('./routes/servicePost');
 var categoriesRouter = require('./routes/categories');
 var authRouter = require('./routes/auth');
 var bookingsRouter = require('./routes/bookings');
+var chatRouter = require('./routes/chat');
 
 var app = express();
 
@@ -26,9 +27,8 @@ app.use('/', authRouter);
 app.use('/users', usersRouter);
 app.use('/servicePost', servicePostRouter);
 app.use('/categories', categoriesRouter);
-
 app.use('/bookings', bookingsRouter);
-
+app.use('/chat', chatRouter);
 
 // 404 error handler
 app.use(function (req, res) {
