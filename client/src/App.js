@@ -116,6 +116,7 @@ export default function App() {
   const [offers, setOffers] = useState([]);
   const [categories, setCategories] = useState([]);
 
+  const [bookings, setBookings] = useState([]);
   const [userBookings, setUserBookings] = useState([]);
   const [selectedOffer, setSelectedOffer] = useState([]);
 
