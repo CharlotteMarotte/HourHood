@@ -3,8 +3,8 @@ import React from 'react';
 export default function SelectedOfferCard(props) {
   return (
     // Code thanks to https://codepen.io/egoistdeveloper/pen/xxYrmgd
-    <div className="grid mx-20 my-10">
-      <div className="block w-full p-6 bg-white border-4 rounded-lg -z-1 md:flex md:flex-row lg:mx-auto lg:w-4/5 border-amber-200/80">
+    <div className="flex mx-20 my-10">
+      <div className={`block w-full p-6 bg-white border-4 rounded-lg -z-1 md:flex md:flex-row lg:mx-auto lg:w-4/5 border-amber-200/80`}>
         <div className="relative">
           <img
             className="object-cover w-64 h-64"
@@ -55,7 +55,7 @@ export default function SelectedOfferCard(props) {
               </div>
             </div>
           </div>
-          <div className="w-full p-5 mt-5 space-y-3 text-left rounded-lg justify bg-amber-200">
+          <div className={`w-full p-5 mt-5 space-y-3 text-left rounded-lg justify ${props.view === 'requests' ? "bg-amber-200" : "bg-orange-200"}`}>
             <p className="leading-relaxed text-amber-700 ">
               Note: "{props.booking.bookingDescription}"
             </p>

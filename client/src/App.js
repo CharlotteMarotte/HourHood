@@ -66,7 +66,7 @@ const requests = [
     description: "I need help because I'm going out for dinner",
     date: '2022-06-23T14:41:13+00:00',
     status: 'pending',
-    img: 'https://media1.thehungryjpeg.com/thumbs2/ori_3828483_pvs5h84dimh89wrk5g11gcc3wjgxg1tts9xyyyfq_flat-illustration-girl-holding-a-laptop.jpg',
+    img: '^1',
   },
   {
     id: 2,
