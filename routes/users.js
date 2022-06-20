@@ -25,8 +25,8 @@ router.get('/', async function(req, res) {
   }
 });
 
-// * Get user by ID.
-router.get('/:userId', async function(req, res, next) {
+// * Get user by ID.    
+router.get('/:userId', ensureSameUser, async function(req, res, next) {
   let { userId } = req.params;
   let sql = `SELECT * FROM users WHERE id = ${userId}`;
   
@@ -109,22 +109,5 @@ router.delete("/:userId", async (req, res) => {
       res.status(500).send({ error: err.message });
   }
 });
-
-
-// // * Get user by ID.
-// router.get('/:userId', ensureSameUser, async function(req, res, next) {
-//   let { userId } = req.params;
-//   let sql = 'SELECT * FROM users WHERE id = ' + userId;
-  
-//   try {
-//       let results = await db(sql);
-//       // We know user exists because he/she is logged in!
-//       let user = results.data[0];
-//       delete user.password;  // don't return the password
-//       res.send(user);
-//   } catch (err) {
-//       res.status(500).send({ error: err.message });
-//   }
-// });
 
 module.exports = router;

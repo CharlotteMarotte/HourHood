@@ -13,7 +13,7 @@ function Navbar(props) {
   return (
     <div className="sticky top-0 z-50">
       <nav className="bg-[#361201] shadow-md shadow-[#361201a2] navbar navbar-expand-lg navbar-light">
-        <div className="sm:flex hidden items-center justify-between sm:px-32 py-3">
+        <div className="items-center justify-between hidden py-3 sm:flex sm:px-32">
           <NavLink
             className="text-xl text-white pr-2 font-semibold hover:text-[#FF9940]"
             to="/"
@@ -34,15 +34,15 @@ function Navbar(props) {
             <>
               <NavLink
                 className="text-xl text-white pr-2 font-semibold hover:text-[#FF9940]"
-                to="/requests"
+                to="/giving-help"
               >
-                Requests
+                Giving help
               </NavLink>
               <NavLink
                 className="text-xl text-white pr-2 font-semibold hover:text-[#FF9940]"
-                to="/bookings"
+                to="/receiving-help"
               >
-                Bookings
+                Receiving help
               </NavLink>
             </>
           )}
@@ -127,7 +127,7 @@ function Navbar(props) {
                           onClick={(e) => {
                             setOpen(!open);
                           }}
-                          className="text-white pr-2 font-semibold"
+                          className="pr-2 font-semibold text-white"
                           to="/requests"
                         >
                           Requests
@@ -136,7 +136,7 @@ function Navbar(props) {
                           onClick={(e) => {
                             setOpen(!open);
                           }}
-                          className="text-white pr-2 font-semibold"
+                          className="pr-2 font-semibold text-white"
                           to="/bookings"
                         >
                           Bookings
@@ -145,7 +145,7 @@ function Navbar(props) {
                           onClick={(e) => {
                             setOpen(!open);
                           }}
-                          className="text-white pr-2 font-semibold"
+                          className="pr-2 font-semibold text-white"
                           to="/profile"
                         >
                           Profile
