@@ -68,7 +68,7 @@ VALUES
         'Spain',
         'karenmagnamara14062022@gmail.com',
         "Hi , I am Karen I would like to be able to have more time to spend with my child.",
-        "",
+        "/karen-profile.jpg",
         '$2b$12$WZcGPyrkCvD5e8m0Qz/nFOdBryUcsp6uDlE2MDo/AjuBhPrQBCfI6'
     ),
      (
@@ -81,7 +81,7 @@ VALUES
         'Spain',
         'jamesobrain18062022@gmail.com',
         "Hi, I live with boyfriend and we have a fluffy dog called Mushroom",
-        "",
+        "/james-profile.jpg",
         '$2b$12$eFzMWbS9SogNtxkmo3J7aO8FQMFQSKbtpwLMIOVsF6GGKpTQdgq.W'
     ),
        (
@@ -94,7 +94,7 @@ VALUES
         'Spain',
         'tyrionlannistes18062022@gmail.com',
         "Nice to meet you, I have just move to the neighborhood and I would like to know you. Carpentry is my passion. ",
-        "",
+        "/tyrion-profile.jpg",
         '$2b$12$eFzMWbS9SogNtxkmo3J7aO8FQMFQSKbtpwLMIOVsF6GGKpTQdgq.W'
     ),
       (
@@ -107,7 +107,7 @@ VALUES
         'Spain',
         'aryastark18062022@gmail.com',
         "Hi , I am Arya. I love do outdoor sports and travel. I work in IT department",
-        "",
+        "/arya-profile.jpg",
         '$2b$12$WZcGPyrkCvD5e8m0Qz/nFOdBryUcsp6uDlE2MDo/AjuBhPrQBCfI6'
     ),
         (
@@ -120,7 +120,7 @@ VALUES
         'Spain',
         'marypoppins18062022@gmail.com',
         "Nice to meet you. I am Mery and always available to take care of kids because I miss my nephews",
-        "",
+        "/mary-profile.jpg",
         '$2b$12$WZcGPyrkCvD5e8m0Qz/nFOdBryUcsp6uDlE2MDo/AjuBhPrQBCfI6'
     );
 
