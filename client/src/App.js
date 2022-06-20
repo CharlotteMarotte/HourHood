@@ -145,6 +145,7 @@ export default function App() {
 
 // sign up
   async function addNewUser(newUser ) {
+    
 
     let myresponse = await Api.RegisterUser(newUser );
     if (myresponse.ok) {
@@ -158,9 +159,8 @@ export default function App() {
       setLoginErrorMsg("Login failed");
     }
 
-    //console.log(user)
+    console.log(user)
   }
-
 // ********* users *************
 
 
