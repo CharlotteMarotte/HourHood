@@ -3,36 +3,36 @@ import SelectedOfferCard from '../components/SelectedOfferCard';
 
 export default function RequestsView(props) {
   return (
-    <div>
+    <div className="columns-2">
       <h1 className="pt-8 text-4xl font-bold text-left ml-14 text-amber-900">
         Giving help{' '}
       </h1>
       <div className="container">
         <h1 className="pt-4 ml-20 text-3xl font-bold text-left border-b-2 border-opacity-25 text-amber-700 border-amber-700">
-          Pending{' '}
+          Requests for your services{' '}
         </h1>
       </div>
-      {props.requests
-        .filter((e) => e.status === 'pending')
+      {props.bookings
+        .filter((e) => e.bookingStatus === 'pending')
         .map((request) => (
           <SelectedOfferCard
             view={'requests'}
-            offer={request}
-            key={request.id}
+            booking={request}
+            key={request.bookingId}
           />
         ))}
       <div className="container ">
         <h1 className="pt-4 ml-20 text-3xl font-bold text-left border-b-2 border-opacity-25 text-amber-700 border-amber-700">
-          Accepted{' '}
+          Services you will give {' '}
         </h1>
       </div>
-      {props.requests
-        .filter((e) => e.status === 'accepted')
+      {props.bookings
+        .filter((e) => e.bookingStatus === 'accepted')
         .map((request) => (
           <SelectedOfferCard
             view={'requests'}
-            offer={request}
-            key={request.id}
+            booking={request}
+            key={request.bookingId}
           />
         ))}{' '}
     </div>

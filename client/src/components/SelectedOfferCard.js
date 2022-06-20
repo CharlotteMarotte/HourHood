@@ -3,12 +3,12 @@ import React from 'react';
 export default function SelectedOfferCard(props) {
   return (
     // Code thanks to https://codepen.io/egoistdeveloper/pen/xxYrmgd
-    <div className="grid mx-20 my-10">
-      <div className="block w-full p-6 bg-white border-4 rounded-lg -z-1 md:flex md:flex-row lg:mx-auto lg:w-4/5 border-amber-200/80">
+    <div className="flex mx-20 my-10">
+      <div className={`block w-full p-6 bg-white border-4 rounded-lg -z-1 md:flex md:flex-row lg:mx-auto lg:w-4/5 border-amber-200/80`}>
         <div className="relative">
           <img
             className="object-cover w-64 h-64"
-            src={props.offer.img}
+            src={props.booking.requestor.profilePicture.length > 0 ? props.booking.requestor.profilePicture.length : "https://media1.thehungryjpeg.com/thumbs2/ori_3828483_pvs5h84dimh89wrk5g11gcc3wjgxg1tts9xyyyfq_flat-illustration-girl-holding-a-laptop.jpg"}
             alt="User"
           />
         </div>
@@ -16,7 +16,7 @@ export default function SelectedOfferCard(props) {
         <div className="flex flex-col w-full px-6">
           <div className="flex flex-row h-8">
             <h2 className="mb-3 text-2xl font-medium title-font text-amber-900">
-              {props.offer.title}
+            {props.booking.servicePost.serviceTitle}
             </h2>
           </div>
 
@@ -34,7 +34,7 @@ export default function SelectedOfferCard(props) {
               </svg>
 
               <div className="text-s text-amber-700/80 ">
-                {props.offer.name}
+                {props.booking.requestor.firstName}
               </div>
             </div>
 
@@ -51,21 +51,21 @@ export default function SelectedOfferCard(props) {
               </svg>
 
               <div className="text-s text-amber-700/80 ">
-                Gracia
+                {props.booking.requestor.cityName}
               </div>
             </div>
           </div>
-          <div className="w-full p-5 mt-5 space-y-3 text-left rounded-lg justify bg-amber-200">
+          <div className={`w-full p-5 mt-5 space-y-3 text-left rounded-lg justify ${props.view === 'requests' ? "bg-amber-200" : "bg-orange-200"}`}>
             <p className="leading-relaxed text-amber-700 ">
-              Note: "{props.offer.description}"
+              Note: "{props.booking.bookingDescription}"
             </p>
 
             <p className="leading-relaxed text-amber-700 ">
-              {new Date(props.offer.date).toLocaleDateString('en-GB', { weekday:"long", year:"numeric", month:"short", day:"numeric", hour:"2-digit", minute:"2-digit"})}
+              {new Date(props.booking.date).toLocaleDateString('en-GB', { weekday:"long", year:"numeric", month:"short", day:"numeric", hour:"2-digit", minute:"2-digit"})}
             </p>
           </div>
           <div className="flex flex-col items-start justify-end flex-grow w-full pt-6 lg:pt-0 w-100">
-            {props.view === 'requests' && props.offer=== 'pending' ? (
+            {props.view === 'requests' && props.booking.bookingStatus=== 'pending' ? (
               <div className="flex flex-row space-x-3">
                 <button
                   type="submit"

@@ -53,9 +53,9 @@ function Error404View() {
           y2="119.327"
           fill="none"
           stroke="#b9d4db"
-          stroke-linecap="round"
-          stroke-miterlimit="10"
-          stroke-width="3"
+          strokeLinecap="round"
+          strokeMiterlimit="10"
+          strokeWidth="3"
         />
         <line
           x1="119.225"
@@ -64,9 +64,9 @@ function Error404View() {
           y2="128.637"
           fill="none"
           stroke="#b9d4db"
-          stroke-linecap="round"
-          stroke-miterlimit="10"
-          stroke-width="3"
+          strokeLinecap="round"
+          strokeMiterlimit="10"
+          strokeWidth="3"
         />
         <line
           x1="119.225"
@@ -75,9 +75,9 @@ function Error404View() {
           y2="137.948"
           fill="none"
           stroke="#b9d4db"
-          stroke-linecap="round"
-          stroke-miterlimit="10"
-          stroke-width="3"
+          strokeLinecap="round"
+          strokeMiterlimit="10"
+          strokeWidth="3"
         />
         <line
           x1="273.595"
@@ -86,9 +86,9 @@ function Error404View() {
           y2="395.257"
           fill="none"
           stroke="#b9d4db"
-          stroke-linecap="round"
-          stroke-miterlimit="10"
-          stroke-width="3"
+          strokeLinecap="round"
+          strokeMiterlimit="10"
+          strokeWidth="3"
         />
         <line
           x1="273.595"
@@ -97,9 +97,9 @@ function Error404View() {
           y2="404.568"
           fill="none"
           stroke="#b9d4db"
-          stroke-linecap="round"
-          stroke-miterlimit="10"
-          stroke-width="3"
+          strokeLinecap="round"
+          strokeMiterlimit="10"
+          strokeWidth="3"
         />
         <line
           x1="273.595"
@@ -108,9 +108,9 @@ function Error404View() {
           y2="413.878"
           fill="none"
           stroke="#b9d4db"
-          stroke-linecap="round"
-          stroke-miterlimit="10"
-          stroke-width="3"
+          strokeLinecap="round"
+          strokeMiterlimit="10"
+          strokeWidth="3"
         />
         <line
           x1="536.115"
@@ -119,9 +119,9 @@ function Error404View() {
           y2="271.982"
           fill="none"
           stroke="#b9d4db"
-          stroke-linecap="round"
-          stroke-miterlimit="10"
-          stroke-width="3"
+          strokeLinecap="round"
+          strokeMiterlimit="10"
+          strokeWidth="3"
         />
         <line
           x1="536.115"
@@ -130,9 +130,9 @@ function Error404View() {
           y2="281.293"
           fill="none"
           stroke="#b9d4db"
-          stroke-linecap="round"
-          stroke-miterlimit="10"
-          stroke-width="3"
+          strokeLinecap="round"
+          strokeMiterlimit="10"
+          strokeWidth="3"
         />
         <line
           x1="536.115"
@@ -141,9 +141,9 @@ function Error404View() {
           y2="290.603"
           fill="none"
           stroke="#b9d4db"
-          stroke-linecap="round"
-          stroke-miterlimit="10"
-          stroke-width="3"
+          strokeLinecap="round"
+          strokeMiterlimit="10"
+          strokeWidth="3"
         />
         <circle cx="80.914" cy="399.628" r="16.428" fill="#b9d4db" />
         <circle cx="101.589" cy="373.267" r="8.557" fill="#b9d4db" />
