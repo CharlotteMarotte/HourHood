@@ -20,6 +20,7 @@ import EditProfileView from './views/EditProfileView';
 import GetStarted from './views/GetStarted';
 import RulesView from './views/RulesView';
 
+
 const postalCodes = [
   '08006',
   '08012',
@@ -68,21 +69,26 @@ export default function App() {
     setUser(null);
   }
 
-  // sign up
-  async function addNewUser(username, password, email) {
-    let myresponse = await Api.RegisterUser(username, password, email);
+// sign up
+  async function addNewUser(newUser ) {
+    
+
+    let myresponse = await Api.RegisterUser(newUser );
     if (myresponse.ok) {
       Local.saveUserInfo(myresponse.data.user, myresponse.data.token);
       setUser(myresponse.data.user);
-      setLoginErrorMsg('');
-
-      navigate('/login');
+      console.log(user)
+      setLoginErrorMsg("");
+      navigate("/login");
+  
     } else {
       setLoginErrorMsg('Login failed');
     }
+
   }
 
   // ********* users *************
+
 
   async function getCategories() {
     try {
@@ -142,6 +148,7 @@ export default function App() {
         let selOffer = await response.json();
         setSelectedOffer(selOffer); // set selectedOffer state with the offer that was chosen by the user, so it can be used by other components/views
         // console.log("I am selected offer:", selectedOffer)
+
       } else {
         console.log(`Server error: ${response.status} ${response.statusText}`);
       }
@@ -289,15 +296,9 @@ export default function App() {
             </AppContext.Provider>
           }
         />
-        <Route
-          path="signup"
-          element={
-            <SignUpView
-              user={user}
-              addNewUserCb={(u, p, e) => addNewUser(u, p, e)}
-            />
-          }
-        />
+
+        <Route path="signup" element={<SignUpView user = {user} addNewUserCb={(newUser ) => addNewUser(newUser )}/>} />
+
         <Route
           path="login"
           element={

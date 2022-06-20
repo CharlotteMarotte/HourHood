@@ -8,6 +8,7 @@ export default function RequestServiceView(props) {
   // console.log("I am the requestor(user):", user)
   // console.log("the offer that I selected is:", selectedOffer)
   // console.log("the id of the service post is:", selectedOffer[0].postID)
+
   
   const INIT_FORM = {
     booking_description: '',
@@ -36,7 +37,8 @@ export default function RequestServiceView(props) {
   function handleSubmit(event) {
     event.preventDefault();
     // Call callback we got from AppContext
-    requestServiceCb(requestData);
+    let newRequestData = {...requestData, fk_service_post_id: selectedOffer[0].postID }
+    requestServiceCb(newRequestData);
     setRequestData(INIT_FORM);
   }
 
