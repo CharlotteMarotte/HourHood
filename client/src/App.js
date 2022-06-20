@@ -148,21 +148,26 @@ export default function App() {
     setUser(null);
   }
 
-  // sign up
-  async function addNewUser(username, password, email) {
-    let myresponse = await Api.RegisterUser(username, password, email);
+// sign up
+  async function addNewUser(newUser ) {
+    
+
+    let myresponse = await Api.RegisterUser(newUser );
     if (myresponse.ok) {
       Local.saveUserInfo(myresponse.data.user, myresponse.data.token);
       setUser(myresponse.data.user);
-      setLoginErrorMsg('');
-
-      navigate('/login');
+      console.log(user)
+      setLoginErrorMsg("");
+      navigate("/login");
+  
     } else {
       setLoginErrorMsg('Login failed');
     }
+
   }
 
   // ********* users *************
+
 
   async function getCategories() {
     try {
@@ -329,15 +334,9 @@ export default function App() {
             </AppContext.Provider>
           }
         />
-        <Route
-          path="signup"
-          element={
-            <SignUpView
-              user={user}
-              addNewUserCb={(u, p, e) => addNewUser(u, p, e)}
-            />
-          }
-        />
+
+        <Route path="signup" element={<SignUpView user = {user} addNewUserCb={(newUser ) => addNewUser(newUser )}/>} />
+
         <Route
           path="login"
           element={
