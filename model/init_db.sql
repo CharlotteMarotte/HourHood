@@ -55,7 +55,7 @@ VALUES
         'Spain',
         'johnsmith14062022@gmail.com',
         "Hi , I love pop-corn and see films with my family on Fridays",
-        "",
+        "/john-profile.jpg",
         '$2b$12$eFzMWbS9SogNtxkmo3J7aO8FQMFQSKbtpwLMIOVsF6GGKpTQdgq.W'
     ),
     (
@@ -189,7 +189,7 @@ VALUES
 CREATE TABLE bookings (
     id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
     booking_description TEXT(255),
-    proposed_date DATETIME,
+    proposed_date DATE,
     estimated_time INT,
     need_donation TINYINT,
     booking_status VARCHAR (100),
