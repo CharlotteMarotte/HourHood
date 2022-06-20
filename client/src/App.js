@@ -221,19 +221,9 @@ export default function App() {
   }
 
 
-  async function selectOffer(id) {
-    try {
-      let response = await fetch(`/servicePost/${id}`); // does GET by default
-      if (response.ok) {
-        let selOffer = await response.json();
-        setSelectedOffer(selOffer); // set selectedOffer state with the offer that was chosen by the user, so it can be used by other components/views
-        console.log("I am selected offer from APP:", selectedOffer)
-      } else {
-        console.log(`Server error: ${response.status} ${response.statusText}`);
-      }
-    } catch (err) {
-      console.log(`Server error: ${err.message}`);
-    }
+  function selectOffer(id) {
+   let selected = offers.filter(e=> e.postID === id);
+   setSelectedOffer(selected);
   }
 
   async function requestService(requestData) {
@@ -307,7 +297,7 @@ export default function App() {
 
   const contextObj = { offers, user, selectOfferCb: selectOffer, deleteServiceCb: deleteService };
   const chosenUserObj = { selectedOffer, user, requestServiceCb: requestService };
-  console.log("I am chosenUserObj", {chosenUserObj});
+ // console.log("I am chosenUserObj", {chosenUserObj});
 
   return (
     <div className="App bg-gradient-to-t from-[#FFF7A3] via-[#FFF7A3] to-[#ff994091] h-full pb-28">

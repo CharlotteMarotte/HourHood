@@ -77,6 +77,7 @@ export default function OfferCard(props) {
                 <button
                   type="button"
                   className="px-4 py-2 font-semibold bg-transparent border rounded hover:bg-lime-600 text-lime-700 hover:text-white border-lime-500 hover:border-transparent"
+                  onClick={(e) => editOfferCb(props.offer.postID)}               
                 >
                   Edit{' '}
                 </button>
