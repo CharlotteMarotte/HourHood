@@ -55,7 +55,7 @@ VALUES
         'Spain',
         'johnsmith14062022@gmail.com',
         "Hi , I love pop-corn and see films with my family on Fridays",
-        "",
+        "/john-profile.jpg",
         '$2b$12$eFzMWbS9SogNtxkmo3J7aO8FQMFQSKbtpwLMIOVsF6GGKpTQdgq.W'
     ),
     (

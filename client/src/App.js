@@ -298,7 +298,7 @@ export default function App() {
           path="profile"
           element={
             <AppContext.Provider value={contextObj}>
-              <ProfileView />
+              <ProfileView user = {user} />
             </AppContext.Provider>
           }
         />

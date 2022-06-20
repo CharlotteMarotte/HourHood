@@ -3,7 +3,7 @@ import AppContext from '../AppContext';
 import OfferCard from '../components/OfferCard';
 import { Link } from 'react-router-dom';
 
-export default function ProfileView() {
+export default function ProfileView(props) {
   let { user, offers } = useContext(AppContext);
   // doesn't work, direct filter before map
   let [myOffers, setMyOffers] = useState(offers);
@@ -29,7 +29,7 @@ export default function ProfileView() {
           <div className="flex flex-wrap items-center h-auto max-w-4xl mx-auto my-24 lg:h-screen lg:my-0">
             <div className="w-full lg:w-2/5">
               <img
-                src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fi.pinimg.com%2Foriginals%2F96%2F24%2Fa8%2F9624a8213b44121b85d6139e3dad1827.png&f=1&nofb=1"
+                src={props.user.photo}
                 className="hidden rounded-none shadow-lg lg:rounded-lg lg:block"
               />
             </div>
