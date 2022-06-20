@@ -20,6 +20,7 @@ import PostOfferView from "./views/PostOfferView";
 import EditProfileView from "./views/EditProfileView";
 import GetStarted from "./views/GetStarted";
 import RulesView from "./views/RulesView";
+import Chat from "./components/Chat";
 
 const bookings = [
   {
@@ -379,6 +380,10 @@ export default function App() {
         <Route path="giving-help" element={<RequestsView bookings={user ? bookings.filter(e=> e.servicePost.serviceProvider === user.id) : []} />} />
         <Route path="*" element={<Error404View />} />
       </Routes>
+      <div>
+        <Chat senderName="Juan" bookingId="1"/>
+        <Chat senderName="Pepe" bookingId="1"/>
+      </div>
     </div>
   );
 }

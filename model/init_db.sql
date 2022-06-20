@@ -256,12 +256,25 @@ VALUES
          "2022-06-23 14:41:13"
     );
 
-    CREATE TABLE messages (
+    -- CREATE TABLE messages (
+    --     id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    --     senderId INT NOT NULL,
+    --     receiverId INT NOT NULL,
+    --     text VARCHAR(250) NOT NULL,
+    --     fk_service_post_id INT NOT NULL,
+    --     fk_booking_id INT NOT NULL,
+    --     dateTime DATETIME DEFAULT CURRENT_TIMESTAMP,
+    --     FOREIGN KEY (senderId) REFERENCES users (id) ON DELETE CASCADE,
+    --     FOREIGN KEY (receiverId) REFERENCES users (id) ON DELETE CASCADE,
+    --     FOREIGN KEY (fk_service_post_id) REFERENCES service_post (id) ON DELETE CASCADE,
+    --     FOREIGN KEY (fk_booking_id) REFERENCES bookings (id) ON DELETE CASCADE
+    -- );
+
+       CREATE TABLE messages (
         id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
-        senderId INT NOT NULL,
-        receiverId INT NOT NULL,
+        senderName VARCHAR(100) NOT NULL,
         text VARCHAR(250) NOT NULL,
+        fk_booking_id INT NOT NULL,
         dateTime DATETIME DEFAULT CURRENT_TIMESTAMP,
-        FOREIGN KEY (senderId) REFERENCES bookings (fk_requestor_id) ON DELETE CASCADE,
-        FOREIGN KEY (receiverId) REFERENCES service_post (fk_provider_id) ON DELETE CASCADE
+        FOREIGN KEY (fk_booking_id) REFERENCES bookings (id) ON DELETE CASCADE
     );

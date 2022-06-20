@@ -4,7 +4,7 @@ const db = require('../model/helper');
 require('dotenv').config();
 const Pusher = require('pusher');
 
-const GET_MESSAGE_COUNT = 5;
+const GET_MESSAGE_COUNT = 25;
 
 /*const channel = new Pusher({ 
     appId: process.env.PUSHER_APP_ID, 
@@ -22,13 +22,12 @@ const channel = new Pusher({
     useTLS: true
 });
 
-router.get('/:senderId/:receiverId', async function(req, res) {
-    let { senderId, receiverId } = req.params;
+router.get('/:bookingId', async function(req, res) {
+    let { bookingId } = req.params;
     try {
         let sql = `
             SELECT * FROM messages
-            WHERE senderId IN (${senderId},${receiverId}) AND 
-                receiverId IN (${senderId},${receiverId})
+            WHERE fk_booking_id=${bookingId}
             ORDER BY dateTime DESC
             LIMIT ${GET_MESSAGE_COUNT}
             `;
@@ -39,16 +38,16 @@ router.get('/:senderId/:receiverId', async function(req, res) {
     }
 });
 
-router.post('/:senderId/:receiverId', async function(req, res) { 
-    let { senderId, receiverId } = req.params; 
-    let { text, socketId } = req.body;
+router.post('/:bookingId', async function(req, res) { 
+    let { bookingId } = req.params; 
+    let { text, senderName, socketId } = req.body;
 
     let text4db = text.replace(/\'/g, "\\'");
     let newMsg = null;
         try{
             let sql = `
-                INSERT INTO messages (senderId, receiverId, text)
-                VALUES (${senderId}, ${receiverId}, '${text4db}');
+                INSERT INTO messages (senderName, text, fk_booking_id)
+                VALUES ('${senderName}', '${text4db}', ${bookingId});
                 SELECT LAST_INSERT_ID()
                 `;
             let results = await db(sql);
@@ -62,8 +61,8 @@ router.post('/:senderId/:receiverId', async function(req, res) {
         }
 
 
-    let ids = [senderId, receiverId].sort();
-    let channelName= 'channel-' + ids.join('-');
+    
+    let channelName= 'channel-' + bookingId;
 
     // let newMsg = { senderId, receiverId, text };
 
