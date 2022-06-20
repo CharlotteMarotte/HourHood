@@ -54,7 +54,7 @@ router.put("/:userId", async (req, res) => {
       } else {
           let sql = `
               UPDATE users 
-              SET first_name = '${first_name}', last_name = '${last_name}', street = '${street}', house_number = '${house_number}', city_code = ${city_code}, city_name = '${city_name}', country = '${country}', email = '${email}', user_description = '${user_description}', hobbies = '${hobbies}', superpower = '${superpower}', photo = '${photo}'
+              SET first_name = "${first_name}", last_name = "${last_name}", street = "${street}", house_number = "${house_number}", city_code = ${city_code}, city_name = "${city_name}", country = "${country}", email = "${email}", user_description = "${user_description}", hobbies = "${hobbies}", superpower = "${superpower}", photo = "${photo}"
               WHERE id = ${userId}
           `;
 
