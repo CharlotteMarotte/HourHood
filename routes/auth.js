@@ -1,8 +1,8 @@
-var express = require('express');
+var express = require("express");
 var router = express.Router();
-const bcrypt = require('bcrypt');
+const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
-const { BCRYPT_WORK_FACTOR, SECRET_KEY } = require('../config');
+const { BCRYPT_WORK_FACTOR, SECRET_KEY } = require("../config");
 const db = require("../model/helper");
 
 
@@ -10,7 +10,7 @@ const db = require("../model/helper");
  * Register a user
  **/
 
-router.post('/signup', async (req, res) => {
+router.post("/signup", async (req, res) => {
     let { first_name, last_name, street, house_number, city_code, city_name, country, email, user_description, hobbies, superpower, photo, password } = req.body;
     
     user_description = user_description.replaceAll(/"/, '\\"');
@@ -20,10 +20,10 @@ router.post('/signup', async (req, res) => {
     try {
         let sql = `
             INSERT INTO users (first_name, last_name, street, house_number, city_code, city_name, country, email, user_description, hobbies, superpower, photo, password)
-            VALUES ('${first_name}', '${last_name}', '${street}', '${house_number}', ${city_code}, '${city_name}', '${country}', '${email}', '${user_description}', '${hobbies}', '${superpower}', '${photo}', '${hashedPassword}');
+            VALUES ("${first_name}", "${last_name}", "${street}", "${house_number}", ${city_code}, "${city_name}", "${country}", "${email}", "${user_description}", "${hobbies}", "${superpower}", "${photo}", "${hashedPassword}");
         `;
         await db(sql);
-        res.send({ message: 'Registration succeeded' });
+        res.send({ message: "Registration succeeded" });
     } catch (err) {
         res.status(500).send({ error: err.message });
     }
@@ -34,16 +34,16 @@ router.post('/signup', async (req, res) => {
  * Log in a user
  **/
 
-router.post('/login', async (req, res) => {
+router.post("/login", async (req, res) => {
     let { email, password } = req.body;
 
     try {
-        let results = await db(`SELECT * FROM users WHERE email = '${email}'`);
+        let results = await db(`SELECT * FROM users WHERE email = "${email}"`);
         if (results.data.length === 0) {
             // Username not found
-            res.status(401).send({ error: 'Login failed' });
+            res.status(401).send({ error: "Login failed" });
         } else {
-            let user = results.data[0];  // the user's row/record from the DB
+            let user = results.data[0];  // the user"s row/record from the DB
             let passwordsEqual = await bcrypt.compare(password, user.password);
             if (passwordsEqual) {
                 // Passwords match
@@ -53,13 +53,13 @@ router.post('/login', async (req, res) => {
                 // Also return user (without password)
                 delete user.password;
                 res.send({
-                    message: 'Login succeeded',
+                    message: "Login succeeded",
                     token: token,
                     user: user
                 });
             } else {
-                // Passwords don't match
-                res.status(401).send({ error: 'Login failed' });
+                // Passwords don"t match
+                res.status(401).send({ error: "Login failed" });
             }
         }
     } catch (err) {

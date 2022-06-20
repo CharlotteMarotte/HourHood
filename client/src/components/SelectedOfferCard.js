@@ -73,13 +73,11 @@ export default function SelectedOfferCard(props) {
             </p>
 
             <p className="leading-relaxed text-amber-700 ">
-              {new Date(props.booking.date).toLocaleDateString('en-GB', {
+              {new Date(props.booking.proposedDate).toLocaleDateString('en-GB', {
                 weekday: 'long',
                 year: 'numeric',
                 month: 'short',
                 day: 'numeric',
-                hour: '2-digit',
-                minute: '2-digit',
               })}
             </p>
           </div>
@@ -89,12 +87,15 @@ export default function SelectedOfferCard(props) {
               <div className="flex flex-row space-x-3">
                 <button
                   type="submit"
+                  onClick={e => reactToRequestCb(props.booking.bookingId, "declined")}
+
                   className="px-4 py-2 font-semibold bg-transparent border rounded hover:bg-amber-500 text-amber-700 hover:text-white border-amber-500 hover:border-transparent"
                 >
                   Decline{' '}
                 </button>{' '}
                 <button
                   type="button"
+                  onClick={e => reactToRequestCb(props.booking.bookingId, "accepted")}
                   className="px-4 py-2 font-semibold bg-transparent border rounded hover:bg-lime-600 text-lime-700 hover:text-white border-lime-600 hover:border-transparent"
                 >
                   Accept
@@ -104,6 +105,7 @@ export default function SelectedOfferCard(props) {
               <div className="flex flex-row space-x-3">
                 <button
                   type="submit"
+                  onClick={e => reactToRequestCb(props.booking.bookingId, "declined")}
                   className="px-4 py-2 font-semibold bg-transparent border rounded hover:bg-amber-500 text-amber-700 hover:text-white border-amber-500 hover:border-transparent"
                 >
                   Cancel{' '}
