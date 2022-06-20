@@ -23,7 +23,7 @@ export default function OfferGrid() {
         >
           <img
             className="object-cover w-2/3 h-auto mx-auto mt-3 border-2 rounded-full border-amber-400 lg:w-3/4"
-            src="https://mir-s3-cdn-cf.behance.net/project_modules/max_1200/285ce8115100471.6047eaa30896a.jpg"
+            src={user.photo}
             alt="avatar"
           />
           <h1 className="my-2 text-2xl font-medium title-font text-amber-900">

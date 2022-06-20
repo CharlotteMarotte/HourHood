@@ -20,6 +20,7 @@ import PostOfferView from "./views/PostOfferView";
 import EditProfileView from "./views/EditProfileView";
 import GetStarted from "./views/GetStarted";
 import RulesView from "./views/RulesView";
+import OfferGrid from './components/OfferGrid';
 
 const bookings = [
   {
