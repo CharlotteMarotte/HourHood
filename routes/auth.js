@@ -20,7 +20,7 @@ router.post('/signup', async (req, res) => {
     try {
         let sql = `
             INSERT INTO users (first_name, last_name, street, house_number, city_code, city_name, country, email, user_description, hobbies, superpower, photo, password)
-            VALUES ('${first_name}', '${last_name}', '${street}', '${house_number}', ${city_code}, '${city_name}', '${country}', '${email}', '${user_description}', '${hobbies}', '${superpower}', '${photo}', '${hashedPassword}');
+            VALUES ("${first_name}", "${last_name}", "${street}", "${house_number}", ${city_code}, "${city_name}", "${country}", "${email}", "${user_description}", "${hobbies}", "${superpower}", "${photo}", "${hashedPassword}");
         `;
         await db(sql);
         res.send({ message: 'Registration succeeded' });

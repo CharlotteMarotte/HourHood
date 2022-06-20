@@ -78,7 +78,7 @@ router.post('/', async (req, res, next) => {
     let hashedPassword = await bcrypt.hash(password, BCRYPT_WORK_FACTOR);
     let sql = `
             INSERT INTO users (first_name, last_name, street, house_number, city_code, city_name, country, email, user_description, hobbies, superpower, photo, password)
-            VALUES ('${first_name}', '${last_name}', '${street}', '${house_number}', ${city_code}, '${city_name}', '${country}', '${email}', '${user_description}', '${hobbies}', '${superpower}', '${photo}', '${hashedPassword}');
+            VALUES ("${first_name}", "${last_name}", "${street}", "${house_number}", ${city_code}, "${city_name}", "${country}", "${email}", "${user_description}", "${hobbies}", "${superpower}", "${photo}", "${hashedPassword}");
         `;
 
     try {
