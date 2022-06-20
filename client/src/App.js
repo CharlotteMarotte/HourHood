@@ -20,7 +20,6 @@ import EditProfileView from './views/EditProfileView';
 import GetStarted from './views/GetStarted';
 import RulesView from './views/RulesView';
 
-
 const postalCodes = [
   '08006',
   '08012',
@@ -69,26 +68,21 @@ export default function App() {
     setUser(null);
   }
 
-// sign up
-  async function addNewUser(newUser ) {
-    
-
-    let myresponse = await Api.RegisterUser(newUser );
+  // sign up
+  async function addNewUser(newUser) {
+    let myresponse = await Api.RegisterUser(newUser);
     if (myresponse.ok) {
       Local.saveUserInfo(myresponse.data.user, myresponse.data.token);
       setUser(myresponse.data.user);
-      console.log(user)
-      setLoginErrorMsg("");
-      navigate("/login");
-  
+      console.log(user);
+      setLoginErrorMsg('');
+      navigate('/login');
     } else {
       setLoginErrorMsg('Login failed');
     }
-
   }
 
   // ********* users *************
-
 
   async function getCategories() {
     try {
@@ -148,7 +142,6 @@ export default function App() {
         let selOffer = await response.json();
         setSelectedOffer(selOffer); // set selectedOffer state with the offer that was chosen by the user, so it can be used by other components/views
         // console.log("I am selected offer:", selectedOffer)
-
       } else {
         console.log(`Server error: ${response.status} ${response.statusText}`);
       }
@@ -228,8 +221,9 @@ export default function App() {
   // PUT: Add status of booking
   async function reactToRequest(id, reply) {
     // Find booking in state and change status
-    let booking = bookings.find((b) => b.id === id);
-    booking.booking_status = reply;
+    let booking = bookings.find((b) => b.bookingId === id);
+    booking.bookingStatus = reply;
+    booking.proposedDate = booking.proposedDate.slice(0, 10);
 
     // Define fetch() options
     let options = {
@@ -265,7 +259,9 @@ export default function App() {
   };
 
   const bookingsObj = {
-    bookings: user ? bookings.filter((e) => e.requestor.userID === user.id) : [],
+    bookings: user && bookings
+      ? bookings.filter((e) => e.requestor.userID === user.id)
+      : [],
     reactToRequestCb: reactToRequest,
   };
 
@@ -297,7 +293,15 @@ export default function App() {
           }
         />
 
-        <Route path="signup" element={<SignUpView user = {user} addNewUserCb={(newUser ) => addNewUser(newUser )}/>} />
+        <Route
+          path="signup"
+          element={
+            <SignUpView
+              user={user}
+              addNewUserCb={(newUser) => addNewUser(newUser)}
+            />
+          }
+        />
 
         <Route
           path="login"
