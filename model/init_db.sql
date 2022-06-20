@@ -9,6 +9,7 @@ DROP TABLE IF EXISTS service_categories;
 
 DROP TABLE IF EXISTS bookings;
 
+DROP TABLE IF EXISTS messages;
 
 SET
     foreign_key_checks = 1;
@@ -253,4 +254,14 @@ VALUES
         2,
         2,
          "2022-06-23 14:41:13"
+    );
+
+    CREATE TABLE messages (
+        id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+        senderId INT NOT NULL,
+        receiverId INT NOT NULL,
+        text VARCHAR(250) NOT NULL,
+        dateTime DATETIME DEFAULT CURRENT_TIMESTAMP,
+        FOREIGN KEY (senderId) REFERENCES bookings (fk_requestor_id) ON DELETE CASCADE,
+        FOREIGN KEY (receiverId) REFERENCES service_post (fk_provider_id) ON DELETE CASCADE
     );
