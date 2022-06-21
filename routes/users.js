@@ -59,7 +59,7 @@ router.put("/:userId", async (req, res) => {
           `;
 
           await db(sql);  // update user
-          let result = await db("SELECT * FROM users");
+          let result = await db("SELECT * FROM users ORDER BY id");
           let users = result.data;
           users.forEach(u => delete u.password);  // don"t return passwords
           res.send(users);  // return updated array

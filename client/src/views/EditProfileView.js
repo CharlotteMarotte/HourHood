@@ -8,7 +8,40 @@ export default function EditProfileView(props) {
     window.scrollTo(0, 0);
   }, []);
   let { user, offers } = useContext(AppContext);
+
+  let DEFAULT_FORM = {
+    first_name: user.first_name,
+    last_name: user.last_name,
+    street: user.street,
+    house_number: user.house_number,
+    city_code: user.city_code,
+    city_name: user.city_name,
+    country: user.country,
+    email: user.email,
+    user_description: user.user_description,
+    hobbies: user.hobbies,
+    superpower: user.superpower,
+    photo: user.photo,
+  };
+
   const [file, setFile] = useState(null);
+  const [profileData, setProfileData] = useState(DEFAULT_FORM);
+
+  const handleInputChange = (event) => {
+    let { name, value } = event.target;
+
+    // gets pressed after each key change
+    setProfileData((state) => ({
+      ...state, // gets replaced by all key-value pairs from obj
+      [name]: value, // updates key [name] with new value
+    }));
+  };
+
+  function handleSubmit(event) {
+    event.preventDefault();
+
+    setProfileData(DEFAULT_FORM);
+  }
 
   function handleFileChange(event) {
     setFile(event.target.files[0]);
@@ -16,9 +49,8 @@ export default function EditProfileView(props) {
 
   function handleSubmit(event) {
     event.preventDefault();
-    // Call callback we got from AppContext
-    // requestServiceCb();
     // Call parent's callback
+    props.updateProfileCb(profileData);
   }
 
   function handlePhotoSubmit(event) {
@@ -44,10 +76,7 @@ export default function EditProfileView(props) {
       <div className="w-full overflow-hidden border-2 border-solid bg-amber-100 text-amber-500 rounded-xl border-amber-200">
         <div className="w-full lg:flex">
           <div className="object-cover px-5 py-5 bg-white border-r-2 border-solid md:block md:w-3/7 lg:w-2/5 border-amber-00">
-            <img
-              className="rounded-xl"
-              src="https://cdn.dribbble.com/users/5352839/screenshots/11892562/character.png"
-            />
+            <img className="rounded-xl" src={profileData.photo} />
             <form onSubmit={handlePhotoSubmit}>
               <input
                 type="file"
@@ -82,7 +111,10 @@ export default function EditProfileView(props) {
                     <div className="flex">
                       <div className="z-10 flex items-center justify-center w-10 text-center pointer-events-none"></div>
                       <input
+                        onChange={handleInputChange}
                         required
+                        name="first_name"
+                        value={profileData.first_name}
                         id="firstname-input"
                         type="text"
                         className="w-full py-2 pl-10 pr-3 -ml-10 border-2 rounded-lg outline-none border-amber-200 focus:border-lime-700"
@@ -92,7 +124,7 @@ export default function EditProfileView(props) {
                   </div>
                   <div className="w-full mb-5 xl:w-1/2">
                     <label
-                      htmlFor="firstname-input"
+                      htmlFor="lastname-input"
                       className="flex items-center justify-center w-full text-center pointer-events-none"
                     >
                       Last Name
@@ -100,8 +132,11 @@ export default function EditProfileView(props) {
                     <div className="flex">
                       <div className="z-10 flex items-center justify-center w-10 text-center pointer-events-none"></div>
                       <input
+                        onChange={handleInputChange}
                         required
-                        id="firstname-input"
+                        id="lastname-input"
+                        name="last_name"
+                        value={profileData.last_name}
                         type="text"
                         className="w-full py-2 pl-10 pr-3 -ml-10 border-2 rounded-lg outline-none border-amber-200 focus:border-lime-700"
                         placeholder="Garcia"
@@ -120,8 +155,11 @@ export default function EditProfileView(props) {
                     <div className="flex">
                       <div className="z-10 flex items-center justify-center w-10 text-center pointer-events-none"></div>
                       <input
+                        onChange={handleInputChange}
                         required
                         id="street-input"
+                        name="street"
+                        value={profileData.street}
                         type="text"
                         className="w-full py-2 pl-10 pr-3 -ml-10 border-2 rounded-lg outline-none border-amber-200 focus:border-lime-700"
                         placeholder="Carrer de Grassot"
@@ -138,8 +176,11 @@ export default function EditProfileView(props) {
                     <div className="flex">
                       <div className="z-10 flex items-center justify-center w-10 text-center pointer-events-none"></div>
                       <input
+                        onChange={handleInputChange}
                         required
                         id="housenumber-input"
+                        name="house_number"
+                        value={profileData.house_number}
                         type="number"
                         className="w-full py-2 pl-10 pr-3 -ml-10 border-2 rounded-lg outline-none border-amber-200 focus:border-lime-700"
                         placeholder="101"
@@ -159,10 +200,12 @@ export default function EditProfileView(props) {
                       </label>
                       <div className="relative">
                         <select
+                          onChange={handleInputChange}
                           require="true"
                           className="p-2.5 mb-0 min-w-full rounded-lg bg-white focus:outline-none focus:border-amber-500 text-md border-solid border-2 border-amber-200 transition ease-in duration-200"
-                          name="category"
+                          name="city_code"
                           id="select_category"
+                          value={profileData.city_code}
                           defaultValue={'DEFAULT'}
                         >
                           <option
@@ -175,6 +218,7 @@ export default function EditProfileView(props) {
                           {props.postalCodes.map((postalCode, index) => (
                             <option
                               key={index}
+                              value={postalCode}
                               className="p-4 hover:bg-amber-100 text-md"
                             >
                               {postalCode}
@@ -196,9 +240,10 @@ export default function EditProfileView(props) {
                       <input
                         readOnly
                         id="city-input"
+                        name="city_name"
+                        value={profileData.city_name}
                         type="text"
                         className="w-full py-2 pl-10 pr-3 -ml-10 border-2 rounded-lg outline-none border-amber-200 focus:border-lime-700"
-                        placeholder="Barcelona"
                       />
                     </div>
                   </div>
@@ -214,9 +259,10 @@ export default function EditProfileView(props) {
                       <input
                         readOnly
                         id="country-input"
+                        name="country"
+                        value={profileData.country}
                         type="text"
                         className="w-full py-2 pl-10 pr-3 -ml-10 border-2 rounded-lg outline-none border-amber-200 focus:border-lime-700"
-                        placeholder="Spain"
                       />
                     </div>
                   </div>
@@ -232,7 +278,10 @@ export default function EditProfileView(props) {
                     <div className="flex">
                       <div className="z-10 flex items-center justify-center w-10 pl-1 text-center pointer-events-none"></div>
                       <input
+                        onChange={handleInputChange}
                         id="hobbies-input"
+                        name="hobbies"
+                        value={profileData.hobbies}
                         placeholder="Using Hour Hood"
                         type="text"
                         className="w-full py-2 pl-10 pr-3 -ml-10 border-2 rounded-lg outline-none border-amber-200 focus:border-lime-700"
@@ -251,7 +300,10 @@ export default function EditProfileView(props) {
                     <div className="flex">
                       <div className="z-10 flex items-center justify-center w-10 pl-1 text-center pointer-events-none"></div>
                       <input
+                        onChange={handleInputChange}
                         id="superpower-input"
+                        name="superpower"
+                        value={profileData.superpower}
                         placeholder="Being part of a loving community"
                         type="text"
                         className="w-full py-2 pl-10 pr-3 -ml-10 border-2 rounded-lg outline-none border-amber-200 focus:border-lime-700"
@@ -271,6 +323,9 @@ export default function EditProfileView(props) {
                       <div className="z-10 flex items-center justify-center w-10 pl-1 text-center pointer-events-none"></div>
                       <textarea
                         id="message-input"
+                        name="user_description"
+                        onChange={handleInputChange}
+                        value={profileData.user_description}
                         placeholder="Write a short introduction about yourself!"
                         rows="3"
                         className="w-full py-2 pl-10 pr-3 -ml-10 border-2 rounded-lg outline-none border-amber-200 focus:border-lime-700"

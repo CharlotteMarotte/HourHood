@@ -112,7 +112,32 @@ export default function App() {
       console.log(`Server error: ${err.message}`);
     }
   }
-  // ********* PROFILE IMAGE *************
+  // ********* PROFILE  *************
+
+
+//PUT method - edit the service post/offer
+async function updateProfile(profileData) {
+    
+  // Define fetch() options
+  let options = {
+    method: 'PUT',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(profileData),
+  };
+
+  try {
+    let response = await fetch(`/users/${user.id}`, options); // do PUT
+    if (response.ok) {
+      let users = await response.json();
+      setUsers(users);
+      navigate(`/profile/${user.id}`);
+    } else {
+      console.log(`Server error: ${response.status} ${response.statusText}`);
+    }
+  } catch (err) {
+    console.log(`Server error: ${err.message}`);
+  }
+}
 
 
   async function getFiles() {
@@ -390,7 +415,7 @@ function toEdit(id) {
           path="profile/edit"
           element={
             <AppContext.Provider value={contextObj}>
-              <EditProfileView postalCodes={postalCodes} uploadCb={fd => uploadFile(fd)}/>
+              <EditProfileView postalCodes={postalCodes} updateProfileCb={pd => updateProfile(pd)} uploadCb={fd => uploadFile(fd)}/>
             </AppContext.Provider>
           }
         />
