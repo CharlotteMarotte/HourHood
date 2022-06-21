@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
 import { useLayoutEffect } from "react";
+
+
 export default function PostOfferView(props) {
   useLayoutEffect(() => {
     window.scrollTo(0, 0);
@@ -9,17 +11,10 @@ export default function PostOfferView(props) {
   const { op } = useParams();
 
   let o = props.offerToEdit[0];
-  let defaultCategory = o.category.categoryID;
-  //console.log("offer to edit:", o)
 
-  let EMPTY_FORM = {
-    service_title: "",
-    service_description: "",
-    capacity: 0,
-    donation: false,
-    fk_category_id: 0,
-    fk_provider_id: props.user.id,
-  };
+  console.log("allofferstoedit:", props.offerToEdit)
+  
+  console.log("offer to edit:", o)
 
   let INIT_FORM = {
     service_title: o.title,
@@ -30,8 +25,17 @@ export default function PostOfferView(props) {
     fk_provider_id: o.user.userID,
   };
 
+  let EMPTY_FORM = {
+    service_title: "",
+    service_description: "",
+    capacity: 0,
+    donation: false,
+    fk_category_id: 0,
+    fk_provider_id: props.user.id,
+  };
+
   let [serviceData, setServiceData] = useState(
-    op === "edit" ? INIT_FORM : EMPTY_FORM
+    op === "add" ? EMPTY_FORM : INIT_FORM
   );
 
   const handleInputChange = (event) => {
@@ -52,6 +56,7 @@ export default function PostOfferView(props) {
     setServiceData(EMPTY_FORM);
   }
 
+  let defaultCategory = o.category.categoryID;
   return (
     // Code thanks to https://codepen.io/atzinn-herrera/pen/JjMMBxy
     <div className="flex min-h-screen px-16 py-16 min-w-screen">
