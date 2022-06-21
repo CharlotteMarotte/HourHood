@@ -44,7 +44,7 @@ export default function ProfileView() {
         <div className="font-sans antialiased leading-normal tracking-wider text-gray-900 bg-cover">
           {user.id !== myData.id && <GoToOfferButton />}
           <div className="flex flex-wrap items-center h-auto max-w-4xl mx-auto my-24 lg:h-screen lg:my-0">
-            <div className="w-full lg:w-2/5">
+            <div className="w-auto md:w-full lg:w-2/5">
               <img
                 src={myData.photo}
                 className="hidden rounded-none shadow-lg lg:rounded-lg lg:block"
@@ -85,7 +85,7 @@ export default function ProfileView() {
                 {user.id === myData.id && (
                   <div className="pt-12 pb-8">
                     <Link
-                      to="edit"
+                      to="/profile/edit"
                       className="px-4 py-2 font-bold text-white rounded-full bg-amber-700 hover:bg-amber-900"
                     >
                       Edit Profile{' '}
