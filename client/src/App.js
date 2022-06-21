@@ -486,7 +486,7 @@ export default function App() {
         <Route path="*" element={<Error404View />} />
       </Routes>
       <div>
-        <Chat senderName={user.first_name} bookingId="1"/>
+        <Chat senderName="Juan" bookingId="1"/>
         <Chat senderName="Pepe" bookingId="1"/>
       </div>
     </div>
