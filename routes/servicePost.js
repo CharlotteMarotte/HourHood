@@ -1,6 +1,6 @@
-var express = require('express');
+var express = require("express");
 var router = express.Router();
-const db = require('../model/helper');
+const db = require("../model/helper");
 
 /**
  * Helpers
@@ -60,14 +60,14 @@ function joinToJson(results) {
 async function ensurePostExists(req, res, next) {
     try {
         let results = await db(`SELECT * FROM service_post WHERE id = ${req.params.id}`);
-        console.log('I am resuts', results);
+        console.log("I am resuts", results);
         if (results.data.length === 1) {
             // post was found; save it in response obj for the route function to use
             res.locals.servicePost = results.data[0];
             // Let next middleware function run
             next();
         } else {
-            res.status(404).send({ error: 'post not found' });
+            res.status(404).send({ error: "post not found" });
         }
     } catch (err) {
         res.status(500).send({ error: err.message });
@@ -79,7 +79,7 @@ async function ensurePostExists(req, res, next) {
  **/
 
 // GET all posts
-router.get('/', async function(req, res) {
+router.get("/", async function(req, res) {
     try {
         sendAllPosts(res);
     } catch (err) {
@@ -89,7 +89,7 @@ router.get('/', async function(req, res) {
 
 
 // GET service_post by ID
-router.get('/:id', ensurePostExists, async function(req, res) {
+router.get("/:id", ensurePostExists, async function(req, res) {
     // If we get here we know the post exists (thanks to guard)
     let servicePost = res.locals.servicePost;
 
@@ -114,7 +114,7 @@ router.get('/:id', ensurePostExists, async function(req, res) {
 
 
 // POST a new post 
-router.post('/', async function(req, res) { 
+router.post("/", async function(req, res) { 
 
     let { service_title, service_description, capacity, donation, fk_category_id, fk_provider_id } = req.body; 
     
@@ -141,16 +141,16 @@ router.put("/:postId", async (req, res) => {
     try {
         let result = await db(`SELECT * FROM service_post WHERE id = ${postId}`);  // does post exist?
         if (result.data.length === 0) {
-            res.status(404).send({ error: 'Post not found' });
+            res.status(404).send({ error: "Post not found" });
         } else {
             let sql = `
                 UPDATE service_post 
-                SET service_title = '${service_title}', service_description = '${service_description}', capacity = '${capacity}', donation = ${donation}, fk_category_id = ${fk_category_id}, fk_provider_id = ${fk_provider_id}
+                SET service_title = "${service_title}", service_description = "${service_description}", capacity = "${capacity}", donation = ${donation}, fk_category_id = ${fk_category_id}, fk_provider_id = ${fk_provider_id}
                 WHERE id = ${postId}
             `;
   
             await db(sql);  // update post
-            let result = await db('SELECT * FROM service_post');
+            let result = await db("SELECT * FROM service_post");
             let posts = result.data;
             res.send(posts);  // return updated array
         }
@@ -161,7 +161,7 @@ router.put("/:postId", async (req, res) => {
     
      
 // DELETE post by ID 
-router.delete('/:id', ensurePostExists, async function(req, res) { 
+router.delete("/:id", ensurePostExists, async function(req, res) { 
     // If we get here we know the post exists (thanks to guard) 
     let post = res.locals.servicePost; 
     console.log(post);

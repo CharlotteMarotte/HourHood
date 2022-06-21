@@ -38,6 +38,7 @@ export default function ProfileView() {
             <div className="w-full lg:w-2/5">
               <img
                 src={myData.photo}
+
                 className="hidden rounded-none shadow-lg lg:rounded-lg lg:block"
               />
             </div>

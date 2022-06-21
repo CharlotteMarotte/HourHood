@@ -5,11 +5,6 @@ import { Link } from 'react-router-dom';
 export default function RequestServiceView(props) {
   let { selectedOffer, user, requestServiceCb } = useContext(BookingContext);
   
-  // console.log("I am the requestor(user):", user)
-  // console.log("the offer that I selected is:", selectedOffer)
-  // console.log("the id of the service post is:", selectedOffer[0].postID)
-
-  
   const INIT_FORM = {
     booking_description: '',
     proposed_date: '',
@@ -31,7 +26,6 @@ export default function RequestServiceView(props) {
       ...state, // gets replaced by all key-value pairs from obj
       [name]: value, // updates key [name] with new value
     }));
-    // console.log(requestData);
   };
 
   function handleSubmit(event) {
