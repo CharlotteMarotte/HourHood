@@ -7,6 +7,7 @@ export default function BookingsView(props) {
 
   return (
     <div>
+      <h1 className='text-red-500 text-8xl'>Guiomar</h1>
       <h1 className="pt-8 text-4xl font-bold text-left ml-14 text-amber-900">
         Receiving help{' '}
       </h1>
