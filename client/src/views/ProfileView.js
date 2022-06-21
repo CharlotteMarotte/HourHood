@@ -3,6 +3,8 @@ import AppContext from '../AppContext';
 import OfferCard from '../components/OfferCard';
 import { Link, useParams } from 'react-router-dom';
 import { useLayoutEffect } from "react";
+import AddOfferButton from '../components/AddOfferButton';
+
 
 export default function ProfileView() {
   let { user, users, offers } = useContext(AppContext);
@@ -37,13 +39,13 @@ export default function ProfileView() {
   return (
     // Code thanks to https://codepen.io/tariq01/pen/jOyLrRJ
     <>
+    {/* only show Profile page if user is logged in */}
       {user ? (
         <div className="font-sans antialiased leading-normal tracking-wider text-gray-900 bg-cover">
           <div className="flex flex-wrap items-center h-auto max-w-4xl mx-auto my-24 lg:h-screen lg:my-0">
             <div className="w-full lg:w-2/5">
               <img
                 src={myData.photo}
-
                 className="hidden rounded-none shadow-lg lg:rounded-lg lg:block"
               />
             </div>
@@ -78,6 +80,7 @@ export default function ProfileView() {
                 <p className="text-sm">
                   {myData.superpower ? myData.superpower : 'No superpower'}
                 </p>
+                {/* only show when profile of user who is currently logged in is shown */}
                 {user.id === myData.id && (
                   <div className="pt-12 pb-8">
                     <Link
@@ -91,6 +94,7 @@ export default function ProfileView() {
               </div>
             </div>
           </div>
+          {/* only show when profile of user who is currently logged in is shown */}
           {user.id === myData.id && (
             <div>
               <div className="container mx-auto ">
@@ -98,22 +102,7 @@ export default function ProfileView() {
                   My current offerings
                 </h1>
               </div>
-              <Link
-                to={'/service-post/add'}
-                className="justify-center block w-1/4 p-3 mx-auto mt-5 overflow-hidden text-lg text-white rounded-lg bg-amber-600"
-              >
-                <svg
-                  className="inline fill-amber-100/80"
-                  xmlns="http://www.w3.org/2000/svg"
-                  version="1.1"
-                  width="48"
-                  height="48"
-                  viewBox="0 0 24 24"
-                >
-                  <path d="M19,13H13V19H11V13H5V11H11V5H13V11H19V13Z" />
-                </svg>
-                Add a new offer{' '}
-              </Link>
+              <AddOfferButton />
               <div className="px-5 py-24 mx-auto -m-4 lg:flex-wrap md:block lg:flex">
                 {myOffers.map((o) => (
                   <OfferCard key={o.postID} offer={o} view={'profile'} />

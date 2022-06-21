@@ -1,7 +1,10 @@
+
 import React, { useContext } from "react";
 import AppContext from "../AppContext";
 import SelectedOfferCard from "../components/SelectedOfferCard";
 import { useLayoutEffect } from "react";
+import AddOfferButton from '../components/AddOfferButton';
+
 
 export default function RequestsView(props) {
   let { bookings } = useContext(AppContext);
@@ -15,6 +18,8 @@ export default function RequestsView(props) {
       <h1 className="pt-8 text-4xl font-bold text-left ml-14 text-amber-900">
         Giving help{" "}
       </h1>
+      <AddOfferButton />
+
       <div className="lg:grid lg:grid-cols-2 ">
         <div className="">
           <div className="container">
