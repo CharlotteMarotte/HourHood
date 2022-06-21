@@ -4,21 +4,103 @@ import Api from '../src/helpers/Api';
 import Local from '../src/helpers/Local';
 import './App.css';
 
-import AppContext from './AppContext';
-import BookingContext from './BookingContext';
-import Navbar from './components/Navbar';
-import ProfileView from './views/ProfileView';
-import BookingsView from './views/BookingsView';
-import RequestsView from './views/RequestsView';
-import HomeView from './views/HomeView';
-import Error404View from './views/Error404View';
-import SignUpView from './views/SignUpView';
-import LogInView from './views/LogInView';
-import RequestServiceView from './views/RequestServiceView';
-import PostOfferView from './views/PostOfferView';
-import EditProfileView from './views/EditProfileView';
-import GetStarted from './views/GetStarted';
-import RulesView from './views/RulesView';
+
+
+import AppContext from "./AppContext";
+import BookingContext from "./BookingContext";
+import Navbar from "./components/Navbar";
+import ProfileView from "./views/ProfileView";
+import BookingsView from "./views/BookingsView";
+import RequestsView from "./views/RequestsView";
+import HomeView from "./views/HomeView";
+import Error404View from "./views/Error404View";
+import SignUpView from "./views/SignUpView";
+import LogInView from "./views/LogInView";
+import RequestServiceView from "./views/RequestServiceView";
+import PostOfferView from "./views/PostOfferView";
+import EditProfileView from "./views/EditProfileView";
+import GetStarted from "./views/GetStarted";
+import RulesView from "./views/RulesView";
+import Chat from "./components/Chat";
+
+const bookings = [
+  {
+    id: 1,
+    title: 'Babysitting',
+    name: 'Rachel',
+    description: 'Only available in evenings Monday/Wednesday/Friday',
+    date: '2022-06-23T14:41:13+00:00',
+    status: 'pending',
+    img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSwhBGoWgheuLGTkcoNqHuBHEiflDd-TBd9OoYARUY2cFq6I6GIjBUvbtI7zwnogvDAwSk&usqp=CAU',
+  },
+  {
+    id: 2,
+    title: 'Watering plants',
+    name: 'Martha',
+    description: 'Only available in summer',
+    date: '2022-07-30T19:41:13+00:00',
+    status: 'accepted',
+    img: 'https://i.pinimg.com/originals/b8/da/8d/b8da8da3ffb8647ce7fa6bd743eeb611.png',
+  },
+  {
+    id: 3,
+    title: 'Teaching guitar',
+    name: 'Lisa',
+    description: 'Only available in evenings Monday/Wednesday/Friday',
+    date: '2022-07-25T08:41:13+00:00',
+    status: 'accepted',
+    img: 'https://i.pinimg.com/originals/34/b1/5d/34b15d58b31424d570d8160d814ca420.png',
+  },
+  {
+    id: 4,
+    title: 'Painting house',
+    name: 'Luis',
+    description: 'Please contact me via email before',
+    date: '2022-07-30T20:05:13+00:00',
+    status: 'pending',
+    img: 'https://i.pinimg.com/originals/8c/22/4c/8c224c88cbfcf226e3ee5d215e4930fa.png',
+  },
+];
+
+const requests = [
+  {
+    id: 1,
+    title: 'Babysitting',
+    name: 'Amelia',
+    description: "I need help because I'm going out for dinner",
+    date: '2022-06-23T14:41:13+00:00',
+    status: 'pending',
+    img: '^1',
+  },
+  {
+    id: 2,
+    title: 'Watering plants',
+    name: 'Elena',
+    description: 'I will be gone on holiday, need watering 1 time/week',
+    date: '2022-07-30T19:41:13+00:00',
+    status: 'accepted',
+    img: 'https://cdn.dribbble.com/users/3543938/screenshots/6603062/flat-illustration.png',
+  },
+  {
+    id: 3,
+    title: 'Teaching guitar',
+    name: 'Lolo',
+    description: 'I want to learn a happy song',
+    date: '2022-07-25T08:41:13+00:00',
+    status: 'accepted',
+    img: 'https://cdn.dribbble.com/users/5352839/screenshots/11892562/character.png',
+  },
+  {
+    id: 4,
+    title: 'Painting house',
+    name: 'Armin',
+    description: 'I broke my arm and cannot hold a brush',
+    date: '2022-07-30T20:05:13+00:00',
+    status: 'pending',
+    img: 'https://www.kindpng.com/picc/m/310-3100872_dancing-man-design-flat-vector-vector-colors-illustration.png',
+  },
+];
+
 
 const postalCodes = [
   '08006',
@@ -387,6 +469,10 @@ export default function App() {
         />
         <Route path="*" element={<Error404View />} />
       </Routes>
+      <div>
+        <Chat senderName="Juan" bookingId="1"/>
+        <Chat senderName="Pepe" bookingId="1"/>
+      </div>
     </div>
   );
 }
