@@ -17,6 +17,7 @@ export default function RequestServiceView(props) {
   };
 
   const [requestData, setRequestData] = useState(INIT_FORM);
+  const [isChecked, setIsChecked] = useState(false);
 
   const handleInputChange = (event) => {
     let { name, value } = event.target;
@@ -28,6 +29,10 @@ export default function RequestServiceView(props) {
     }));
   };
 
+  const handleCheckboxChange = () => {
+    setIsChecked(!isChecked);
+  };
+
   function handleSubmit(event) {
     event.preventDefault();
     // Call callback we got from AppContext
@@ -35,6 +40,7 @@ export default function RequestServiceView(props) {
     requestServiceCb(newRequestData);
     setRequestData(INIT_FORM);
   }
+  
 
 
   return (
