@@ -258,7 +258,8 @@ function toEdit(id) {
       if (response.ok) {
         let offers = await response.json();
         setOffers(offers);
-        navigate('/');
+        navigate(`/profile/${user.id}`);
+        console.log(user)
       } else {
         console.log(`Server error: ${response.status} ${response.statusText}`);
       }
