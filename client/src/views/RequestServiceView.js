@@ -14,11 +14,9 @@ export default function RequestServiceView(props) {
     booking_description: "",
     proposed_date: "",
     estimated_time: 0,
-    need_donation: false,
     booking_status: "pending",
     service_time: null,
     fk_requestor_id: user.id,
-    fk_service_post_id: selectedOffer[0].postID,
   };
 
   const [requestData, setRequestData] = useState(INIT_FORM);
@@ -44,6 +42,7 @@ export default function RequestServiceView(props) {
     let newRequestData = {
       ...requestData,
       fk_service_post_id: selectedOffer[0].postID,
+      need_donation: isChecked
     };
     requestServiceCb(newRequestData);
     setRequestData(INIT_FORM);
@@ -137,8 +136,8 @@ export default function RequestServiceView(props) {
                   <input
                     type="checkbox"
                     name="need_donation"
-                    value={!requestData.need_donation}
-                    onChange={(e) => handleInputChange(e)}
+                    checked={isChecked}
+                    onChange={(e) => handleCheckboxChange(e)}
                     id="donation"
                     className="bg-lime-700 hover:bg-lime-700 focus:bg-lime-700"
                   />
