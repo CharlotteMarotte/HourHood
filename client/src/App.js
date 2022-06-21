@@ -411,7 +411,7 @@ export default function App() {
           }
         />
         <Route path="*" element={<Error404View />} />
-        <Route path="chat" element={<ChatView/>} />
+        <Route path="chat" element={<ChatView bookings={bookings}/>} />
       </Routes>
       <div>
         {/* <Chat user = {user} senderName="Juan" bookingId="1"/>
