@@ -198,10 +198,8 @@ export default function App() {
 
    //PUT method - edit the service post/offer
   async function updateOffer(serviceData) {
-
-    // Find booking in state and change status
-    let id = toBeEdited[0].postID
-    //let offer = offers.find((o) => o.postID === id);
+    
+    let id = toBeEdited[0].postID // get postID from state
 
     // Define fetch() options
     let options = {
@@ -213,8 +211,9 @@ export default function App() {
     try {
       let response = await fetch(`/servicePost/${id}`, options); // do PUT
       if (response.ok) {
-        let bookings = await response.json();
-        setBookings(bookings);
+        let offers = await response.json();
+        setOffers(offers);
+        navigate('/profile');
       } else {
         console.log(`Server error: ${response.status} ${response.statusText}`);
       }
@@ -366,7 +365,7 @@ export default function App() {
           }
         />
         <Route
-          path="service-post"
+          path="service-post/:op"
           element={
             <PostOfferView
               postServiceCb={postService}

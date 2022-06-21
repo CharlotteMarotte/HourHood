@@ -150,9 +150,7 @@ router.put("/:postId", async (req, res) => {
             `;
   
             await db(sql);  // update post
-            let result = await db("SELECT * FROM service_post");
-            let posts = result.data;
-            res.send(posts);  // return updated array
+            await sendAllPosts(res);
         }
     } catch (err) {
         res.status(500).send({ error: err.message });

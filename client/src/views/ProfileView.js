@@ -78,7 +78,7 @@ export default function ProfileView(props) {
               </h1>
             </div>
             <Link
-              to={'/service-post'}
+              to={'/service-post/add'}
               className="justify-center block w-1/4 p-3 mx-auto mt-5 overflow-hidden text-lg text-white rounded-lg bg-amber-600"
             >
               <svg
