@@ -316,10 +316,10 @@ function toEdit(id) {
   };
 
   const bookingsObj = {
-    requests: user && bookings
+    bookings: user && bookings
       ? bookings.filter((e) => e.requestor.userID === user.id)
       : [],
-      bookings: user && bookings
+      requests: user && bookings
       ? bookings.filter((e) => e.servicePost.serviceProvider === user.id)
       : [],
       users,

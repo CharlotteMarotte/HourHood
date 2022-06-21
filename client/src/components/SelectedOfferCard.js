@@ -25,11 +25,11 @@ export default function SelectedOfferCard(props) {
       <div
         className={`block w-full p-6 bg-white border-4 rounded-lg -z-1 md:flex md:flex-row lg:mx-auto lg:w-4/5 border-amber-200/80`}
       >
-        <div className="relative">
+        <div className="relative flex items-center justify-center">
           <img
-            className="object-cover w-64 h-64"
+            className="object-cover w-64 h-64 rounded-lg"
             src={
-              props.view === 'bookings'
+              props.view === 'requests'
                 ? props.booking.requestor.profilePicture
                 : providerData.photo
             }
@@ -38,8 +38,8 @@ export default function SelectedOfferCard(props) {
         </div>
 
         <div className="flex flex-col w-full px-6">
-          <div className="flex flex-row h-8">
-            <h2 className="mb-3 text-2xl font-medium title-font text-amber-900">
+          <div className="flex flex-row h-14">
+            <h2 className="mb-1 text-2xl font-medium title-font text-amber-900">
               {props.booking.servicePost.serviceTitle}
             </h2>
           </div>
@@ -58,7 +58,7 @@ export default function SelectedOfferCard(props) {
               </svg>
 
               <div className="text-s text-amber-700/80 ">
-                {props.view === 'bookings'
+                {props.view === 'requests'
                   ? props.booking.requestor.firstName
                   : providerData.first_name}
               </div>
@@ -77,7 +77,7 @@ export default function SelectedOfferCard(props) {
               </svg>
 
               <div className="text-s text-amber-700/80 ">
-                {props.view === 'bookings'
+                {props.view === 'requests'
                   ? props.booking.requestor.cityName
                   : providerData.city_name}
               </div>
@@ -89,10 +89,14 @@ export default function SelectedOfferCard(props) {
             }`}
           >
             <p className="leading-relaxed text-amber-700 ">
-              {props.view === 'bookings' ? 'Your note: "' : 'Their note: "'}
-              {props.booking.bookingDescription}"
+              Note: "{props.booking.bookingDescription}"
             </p>
-
+          </div>
+          <div
+            className={`w-full p-5 mt-5 space-y-3 text-left rounded-lg justify ${
+              props.view === 'bookings' ? 'bg-blue-200' : 'bg-pink-200'
+            }`}
+          >
             <p className="leading-relaxed text-amber-700 ">
               {new Date(props.booking.proposedDate).toLocaleDateString(
                 'en-GB',
@@ -105,8 +109,8 @@ export default function SelectedOfferCard(props) {
               )}
             </p>
           </div>
-          <div className="flex flex-col items-start justify-end flex-grow w-full pt-6 mt-4 lg:pt-0 w-100">
-            {props.view === 'bookings' &&
+          <div className="flex items-center justify-center flex-grow w-full col-span-2 pt-6 mt-4 lg:pt-0 w-100">
+            {props.view === 'requests' &&
             props.booking.bookingStatus === 'pending' ? (
               <div className="flex flex-row space-x-3">
                 <button
@@ -129,10 +133,11 @@ export default function SelectedOfferCard(props) {
                 </button>
                 <Link
                   to="/chat"
-                  className="px-4 py-2 font-semibold bg-transparent border rounded hover:bg-lime-600 text-lime-700 hover:text-white border-lime-600 hover:border-transparent"
+                  className="px-4 py-2 font-semibold bg-transparent border rounded hover:bg-rose-500 text-rose-700 hover:text-white border-rose-500 hover:border-transparent"
                 >
-                  Chat
-                </Link>
+                  Chat{' '}
+                </Link>{' '}
+
               </div>
             ) : (
               <div className="flex flex-row space-x-3">
@@ -146,8 +151,8 @@ export default function SelectedOfferCard(props) {
                   Cancel{' '}
                 </button>{' '}
                 <Link
-                 to="/chat"
-                  className="px-4 py-2 font-semibold bg-transparent border rounded hover:bg-amber-500 text-amber-700 hover:text-white border-amber-500 hover:border-transparent"
+                  to="/chat"
+                  className="px-4 py-2 font-semibold bg-transparent border rounded hover:bg-lime-500 text-lime-700 hover:text-white border-lime-500 hover:border-transparent"
                 >
                   Chat{' '}
                 </Link>{' '}
