@@ -17,7 +17,7 @@ function Home() {
           <h3 className='sm:text-base 2xl:text-2xl xl:text-lg md:text-xl text-sm'>when an unknown printer took a galley</h3>
           <h2 className="font-bold text-md 2xl:text-xl md:text-2xl xl:text-xl sm:text-lg">Is simply dummy</h2>
           </div>
-          <Link to="signup" className="bg-[#FF9940] hover:bg-[#fe8923] hover:shadow-white hover:shadow-md hover:font-extrabold px-16 py-2 text-lg uppercase text-white font-bold rounded-xl md:mt-10 2xl:my-14 mt-8">Sign up!</Link>
+          <Link to="rules" className="bg-[#FF9940] hover:bg-[#fe8923] hover:shadow-white hover:shadow-md hover:font-extrabold px-16 py-2 text-lg uppercase text-white font-bold rounded-xl md:mt-10 2xl:my-14 mt-8">Sign up!</Link>
           <Link to="offers" className="sm:text-3xl md:text-5xl text-2xl font-bold animate-bounce hover:bg-[#361201] bg-[#957e4e] text-[#FFF701] py-[6px] px-[16px] xl:py-[6px] xl:px-[16px] md:py-5 md:px-8 rounded-full mt-10 xl:mt-12 sm:mt-24 md:mt-36 align-middle">
             v
           </Link>
