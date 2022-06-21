@@ -5,6 +5,7 @@ import Local from '../src/helpers/Local';
 import './App.css';
 
 
+
 import AppContext from "./AppContext";
 import BookingContext from "./BookingContext";
 import Navbar from "./components/Navbar";
@@ -100,6 +101,7 @@ const requests = [
   },
 ];
 
+
 const postalCodes = [
   '08006',
   '08012',
@@ -120,6 +122,7 @@ export default function App() {
   const [bookings, setBookings] = useState([]);
   const [userBookings, setUserBookings] = useState([]);
   const [selectedOffer, setSelectedOffer] = useState([]);
+  const [toBeEdited, setToBeEdited] = useState([]);
 
   useEffect(() => {
     getCategories();
@@ -149,13 +152,13 @@ export default function App() {
   }
 
   // sign up
-  async function addNewUser(username, password, email) {
-    let myresponse = await Api.RegisterUser(username, password, email);
+  async function addNewUser(newUser) {
+    let myresponse = await Api.RegisterUser(newUser);
     if (myresponse.ok) {
       Local.saveUserInfo(myresponse.data.user, myresponse.data.token);
       setUser(myresponse.data.user);
+      console.log(user);
       setLoginErrorMsg('');
-
       navigate('/login');
     } else {
       setLoginErrorMsg('Login failed');
@@ -215,39 +218,27 @@ export default function App() {
     navigate('/');
   }
 
-
-  async function selectOffer(id) {
-    try {
-      let response = await fetch(`/servicePost/${id}`); // does GET by default
-      if (response.ok) {
-        let selOffer = await response.json();
-        setSelectedOffer(selOffer); // set selectedOffer state with the offer that was chosen by the user, so it can be used by other components/views
-        console.log("I am selected offer:", selectedOffer)
-      } else {
-        console.log(`Server error: ${response.status} ${response.statusText}`);
-      }
-    } catch (err) {
-      console.log(`Server error: ${err.message}`);
-    }
+  function selectOffer(id) {
+   let selected = offers.filter(e=> e.postID === id);
+   setSelectedOffer(selected);
   }
 
   async function requestService(requestData) {
-
     let options = {
-      method: "POST",
+      method: 'POST',
       headers: {
-        "Content-Type": "application/json",
+        'Content-Type': 'application/json',
       },
       body: JSON.stringify(requestData),
     };
 
     try {
-      let response = await fetch("/bookings/", options); // do POST
+      let response = await fetch('/bookings/', options); // do POST
       if (response.ok) {
         let userBookings = await response.json(); // set bookings state with all bookings(requests) that the logged in user made, including the new one
         setUserBookings(userBookings);
-        console.log("Service got requested");
-        navigate("/bookings"); // go to all bookings (Receiving help page)
+        console.log('Service got requested');
+        navigate('/bookings'); // go to all bookings (Receiving help page)
       } else {
         console.log(`Server error: ${response.status} ${response.statusText}`);
       }
@@ -280,7 +271,42 @@ export default function App() {
     }
   }
 
-  // DELETE a duck
+  //sava to state the info about the offer which the user wants to edit
+  function toEdit(id) {
+    let offerToEdit = offers.filter(e=> e.postID === id);
+    setToBeEdited(offerToEdit);
+    console.log("to be edited:", toBeEdited)
+   }
+
+   //PUT method - edit the service post/offer
+  async function updateOffer(serviceData) {
+
+    // Find booking in state and change status
+    let id = toBeEdited[0].postID
+    //let offer = offers.find((o) => o.postID === id);
+
+    // Define fetch() options
+    let options = {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(serviceData),
+    };
+
+    try {
+      let response = await fetch(`/servicePost/${id}`, options); // do PUT
+      if (response.ok) {
+        let bookings = await response.json();
+        setBookings(bookings);
+      } else {
+        console.log(`Server error: ${response.status} ${response.statusText}`);
+      }
+    } catch (err) {
+      console.log(`Server error: ${err.message}`);
+    }
+  }
+  
+
+  // DELETE a service
   async function deleteService(id) {
     // Define fetch() options
     let options = {
@@ -300,9 +326,54 @@ export default function App() {
     }
   }
 
-  const contextObj = { offers, user, selectOfferCb: selectOffer, deleteServiceCb: deleteService };
-  const chosenUserObj = { selectedOffer, user, requestServiceCb: requestService };
-  console.log("I am chosenUserObj", {chosenUserObj});
+  // PUT: Add status of booking
+  async function reactToRequest(id, reply) {
+    // Find booking in state and change status
+    let booking = bookings.find((b) => b.bookingId === id);
+    booking.bookingStatus = reply;
+    booking.proposedDate = booking.proposedDate.slice(0, 10);
+
+    // Define fetch() options
+    let options = {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(booking),
+    };
+
+    try {
+      let response = await fetch(`/bookings/${id}`, options); // do PUT
+      if (response.ok) {
+        let bookings = await response.json();
+        setBookings(bookings);
+      } else {
+        console.log(`Server error: ${response.status} ${response.statusText}`);
+      }
+    } catch (err) {
+      console.log(`Server error: ${err.message}`);
+    }
+  }
+
+  const contextObj = {
+    offers,
+    user,
+    selectOfferCb: selectOffer,
+    deleteServiceCb: deleteService,
+    toEditCb: toEdit
+  };
+
+  const chosenUserObj = {
+    selectedOffer,
+    user,
+    requestServiceCb: requestService,
+  };
+
+  const bookingsObj = {
+    bookings: user && bookings
+      ? bookings.filter((e) => e.requestor.userID === user.id)
+      : [],
+    reactToRequestCb: reactToRequest,
+  };
+ 
 
   return (
     <div className="App bg-gradient-to-t from-[#FFF7A3] via-[#FFF7A3] to-[#ff994091] h-full pb-28">
@@ -317,7 +388,7 @@ export default function App() {
           path="profile"
           element={
             <AppContext.Provider value={contextObj}>
-              <ProfileView user = {user} />
+              <ProfileView user={user} />
             </AppContext.Provider>
           }
         />
@@ -329,15 +400,17 @@ export default function App() {
             </AppContext.Provider>
           }
         />
+
         <Route
           path="signup"
           element={
             <SignUpView
               user={user}
-              addNewUserCb={(u, p, e) => addNewUser(u, p, e)}
+              addNewUserCb={(newUser) => addNewUser(newUser)}
             />
           }
         />
+
         <Route
           path="login"
           element={
@@ -348,8 +421,15 @@ export default function App() {
           }
         />
         <Route path="rules" element={<RulesView />} />
-        {/* <Route path="offers" element={<OfferGrid />} /> */}
-        <Route path="receiving-help" element={<BookingsView bookings={user ? bookings.filter(e=> e.requestor.userID === user.id) : []} />} />
+
+        <Route
+          path="receiving-help"
+          element={
+            <AppContext.Provider value={bookingsObj}>
+              <BookingsView />{' '}
+            </AppContext.Provider>
+          }
+        />
         <Route path="getstarted" element={<GetStarted />} />
         <Route
           path="/"
@@ -374,10 +454,19 @@ export default function App() {
               postServiceCb={postService}
               categories={categories}
               user={user}
+              offerToEdit={toBeEdited}
+              updateOfferCb={updateOffer}
             />
           }
         />
-        <Route path="giving-help" element={<RequestsView bookings={user ? bookings.filter(e=> e.servicePost.serviceProvider === user.id) : []} />} />
+        <Route
+          path="giving-help"
+          element={
+            <AppContext.Provider value={bookingsObj}>
+              <RequestsView />{' '}
+            </AppContext.Provider>
+          }
+        />
         <Route path="*" element={<Error404View />} />
       </Routes>
       <div>

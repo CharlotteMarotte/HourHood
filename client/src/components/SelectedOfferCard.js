@@ -1,14 +1,22 @@
-import React from 'react';
-
+import React, { useContext } from 'react';
+import AppContext from '../AppContext';
 export default function SelectedOfferCard(props) {
+  let { reactToRequestCb } = useContext(AppContext);
+
   return (
     // Code thanks to https://codepen.io/egoistdeveloper/pen/xxYrmgd
-    <div className="flex mx-20 my-10">
-      <div className={`block w-full p-6 bg-white border-4 rounded-lg -z-1 md:flex md:flex-row lg:mx-auto lg:w-4/5 border-amber-200/80`}>
+    <div className="mx-8 my-10 ">
+      <div
+        className={`block w-full p-6 bg-white border-4 rounded-lg -z-1 md:flex md:flex-row lg:mx-auto lg:w-4/5 border-amber-200/80`}
+      >
         <div className="relative">
           <img
             className="object-cover w-64 h-64"
-            src={props.booking.requestor.profilePicture.length > 0 ? props.booking.requestor.profilePicture.length : "https://media1.thehungryjpeg.com/thumbs2/ori_3828483_pvs5h84dimh89wrk5g11gcc3wjgxg1tts9xyyyfq_flat-illustration-girl-holding-a-laptop.jpg"}
+            src={
+              props.booking.requestor.profilePicture.length > 0
+                ? props.booking.requestor.profilePicture
+                : 'https://media1.thehungryjpeg.com/thumbs2/ori_3828483_pvs5h84dimh89wrk5g11gcc3wjgxg1tts9xyyyfq_flat-illustration-girl-holding-a-laptop.jpg'
+            }
             alt="User"
           />
         </div>
@@ -16,7 +24,7 @@ export default function SelectedOfferCard(props) {
         <div className="flex flex-col w-full px-6">
           <div className="flex flex-row h-8">
             <h2 className="mb-3 text-2xl font-medium title-font text-amber-900">
-            {props.booking.servicePost.serviceTitle}
+              {props.booking.servicePost.serviceTitle}
             </h2>
           </div>
 
@@ -55,26 +63,39 @@ export default function SelectedOfferCard(props) {
               </div>
             </div>
           </div>
-          <div className={`w-full p-5 mt-5 space-y-3 text-left rounded-lg justify ${props.view === 'requests' ? "bg-amber-200" : "bg-orange-200"}`}>
+          <div
+            className={`w-full p-5 mt-5 space-y-3 text-left rounded-lg justify ${
+              props.view === 'requests' ? 'bg-amber-200' : 'bg-orange-200'
+            }`}
+          >
             <p className="leading-relaxed text-amber-700 ">
               Note: "{props.booking.bookingDescription}"
             </p>
 
             <p className="leading-relaxed text-amber-700 ">
-              {new Date(props.booking.date).toLocaleDateString('en-GB', { weekday:"long", year:"numeric", month:"short", day:"numeric", hour:"2-digit", minute:"2-digit"})}
+              {new Date(props.booking.proposedDate).toLocaleDateString('en-GB', {
+                weekday: 'long',
+                year: 'numeric',
+                month: 'short',
+                day: 'numeric',
+              })}
             </p>
           </div>
-          <div className="flex flex-col items-start justify-end flex-grow w-full pt-6 lg:pt-0 w-100">
-            {props.view === 'requests' && props.booking.bookingStatus=== 'pending' ? (
+          <div className="flex flex-col items-start justify-end flex-grow w-full pt-6 mt-4 lg:pt-0 w-100">
+            {props.view === 'requests' &&
+            props.booking.bookingStatus === 'pending' ? (
               <div className="flex flex-row space-x-3">
                 <button
                   type="submit"
+                  onClick={e => reactToRequestCb(props.booking.bookingId, "declined")}
+
                   className="px-4 py-2 font-semibold bg-transparent border rounded hover:bg-amber-500 text-amber-700 hover:text-white border-amber-500 hover:border-transparent"
                 >
                   Decline{' '}
                 </button>{' '}
                 <button
                   type="button"
+                  onClick={e => reactToRequestCb(props.booking.bookingId, "accepted")}
                   className="px-4 py-2 font-semibold bg-transparent border rounded hover:bg-lime-600 text-lime-700 hover:text-white border-lime-600 hover:border-transparent"
                 >
                   Accept
@@ -84,6 +105,7 @@ export default function SelectedOfferCard(props) {
               <div className="flex flex-row space-x-3">
                 <button
                   type="submit"
+                  onClick={e => reactToRequestCb(props.booking.bookingId, "declined")}
                   className="px-4 py-2 font-semibold bg-transparent border rounded hover:bg-amber-500 text-amber-700 hover:text-white border-amber-500 hover:border-transparent"
                 >
                   Cancel{' '}

@@ -29,7 +29,7 @@ export default function ProfileView(props) {
           <div className="flex flex-wrap items-center h-auto max-w-4xl mx-auto my-24 lg:h-screen lg:my-0">
             <div className="w-full lg:w-2/5">
               <img
-                src={props.user.photo}
+                src={user.photo}
                 className="hidden rounded-none shadow-lg lg:rounded-lg lg:block"
               />
             </div>
