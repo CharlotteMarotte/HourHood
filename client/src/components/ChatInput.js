@@ -16,17 +16,26 @@ function ChatInput(props) {
   return (
     <div className="">
       <form onSubmit={handleSubmit}>
-        <div className="flex gap-8 mx-8 justify-center">
-          <button type="submit" className="bg-[#FF9940] hover:bg-[#fe8923] hover:shadow-white hover:shadow-md hover:font-extrabold px-8 py-2 text-lg uppercase text-white font-bold rounded-xl md:mt-10 2xl:my-14 mt-8">
-            Send
+        <div className="flex mb-10 gap-8 mx-12 justify-center items-center rounded-full bg-white h-20 shadow-lg shadow-[#ff994091]">
+          <button
+            type="submit"
+            className="sm:text-3xl md:text-5xl text-2xl font-bold hover:bg-[#361201] bg-[#957e4e] text-[#FFF701] py-[6px] px-[16px] xl:py-[6px] xl:px-[16px] md:py-5 md:px-8 rounded-full align-middle ml-4"
+          >
+            >
           </button>
-          <textarea
+          <input
             type="text"
-            className="form-control w-10/12"
+            className="form-control w-10/12 px-4 py-4 rounded-3xl bg-white"
             name="text"
             value={text}
             onChange={handleChange}
           />
+          <div className="w-28 h-28">
+            <img
+              src={props.user.photo}
+              className="object-cover h-full w-full rounded-full shadow-[#ff994091] shadow-lg"
+            />
+          </div>
         </div>
       </form>
     </div>
