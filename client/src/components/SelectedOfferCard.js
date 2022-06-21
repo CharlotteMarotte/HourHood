@@ -1,4 +1,5 @@
 import React, { useContext, useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import AppContext from '../AppContext';
 export default function SelectedOfferCard(props) {
   let { reactToRequestCb, users } = useContext(AppContext);
@@ -123,6 +124,12 @@ export default function SelectedOfferCard(props) {
                 >
                   Accept
                 </button>
+                <Link
+                  to="/chat"
+                  className="px-4 py-2 font-semibold bg-transparent border rounded hover:bg-lime-600 text-lime-700 hover:text-white border-lime-600 hover:border-transparent"
+                >
+                  Chat
+                </Link>
               </div>
             ) : (
               <div className="flex flex-row space-x-3">
