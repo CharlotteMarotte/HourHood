@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 export default function AddOfferButton() {
   return (
     <Link
-      to={'/service-post'}
+      to={'/service-post/add'}
       className="block w-1/4 p-3 mx-auto mt-5 overflow-hidden text-lg text-white rounded-lg justify-left bg-[#FF9940]"
     >
       <svg

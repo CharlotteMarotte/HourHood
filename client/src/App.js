@@ -205,7 +205,7 @@ export default function App() {
       if (response.ok) {
         let offers = await response.json(); // set invoices state with all invoices including new ones
         setOffers(offers);
-        navigate('/profile/:id');
+        navigate('/');
       } else {
         console.log(`Server error: ${response.status} ${response.statusText}`);
       }
@@ -238,7 +238,7 @@ export default function App() {
       if (response.ok) {
         let offers = await response.json();
         setOffers(offers);
-        navigate('/profile');
+        navigate('/');
       } else {
         console.log(`Server error: ${response.status} ${response.statusText}`);
       }
