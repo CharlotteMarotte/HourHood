@@ -36,6 +36,7 @@ export default function App() {
   const [loginErrorMsg, setLoginErrorMsg] = useState('');
   const [offers, setOffers] = useState([]);
   const [categories, setCategories] = useState([]);
+  const [users, setUsers] = useState([]);
 
   const [bookings, setBookings] = useState([]);
   const [userBookings, setUserBookings] = useState([]);
@@ -44,6 +45,7 @@ export default function App() {
   useEffect(() => {
     getCategories();
     getOffers();
+    getUsers();
   }, []);
 
   // ********* users *************
@@ -104,6 +106,20 @@ export default function App() {
       if (response.ok) {
         let offers = await response.json();
         setOffers(offers); // set billCats state with all categories, so it can be used by other components/views
+      } else {
+        console.log(`Server error: ${response.status} ${response.statusText}`);
+      }
+    } catch (err) {
+      console.log(`Server error: ${err.message}`);
+    }
+  }
+
+  async function getUsers() {
+    try {
+      let response = await fetch('/users'); // does GET by default
+      if (response.ok) {
+        let users = await response.json();
+        setUsers(users); // set billCats state with all categories, so it can be used by other components/views
       } else {
         console.log(`Server error: ${response.status} ${response.statusText}`);
       }
@@ -248,6 +264,7 @@ export default function App() {
   const contextObj = {
     offers,
     user,
+    users,
     selectOfferCb: selectOffer,
     deleteServiceCb: deleteService,
   };
@@ -265,7 +282,6 @@ export default function App() {
     reactToRequestCb: reactToRequest,
   };
 
-  // console.log('I am chosenUserObj', { chosenUserObj });
 
   return (
     <div className="App bg-gradient-to-t from-[#FFF7A3] via-[#FFF7A3] to-[#ff994091] h-full pb-28">
@@ -277,10 +293,10 @@ export default function App() {
 
       <Routes>
         <Route
-          path="profile"
+          path="profile/:id"
           element={
             <AppContext.Provider value={contextObj}>
-              <ProfileView user={user} />
+              <ProfileView/>
             </AppContext.Provider>
           }
         />

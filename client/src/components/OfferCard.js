@@ -51,7 +51,7 @@ export default function OfferCard(props) {
             {props.view === 'offers' ? (
               <>
                 <Link
-                  to={user ? '/' : '/login'}
+                  to={user ? `/profile/${props.offer.user.userID}` : '/login'}
                   className="px-4 py-2 font-semibold bg-transparent border rounded hover:bg-amber-500 text-amber-700 hover:text-white border-amber-500 hover:border-transparent"
                 >
                   {props.offer.user.firstName}'s Profile{' '}
