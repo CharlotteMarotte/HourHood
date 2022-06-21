@@ -9,7 +9,7 @@ export default function OfferGrid() {
   return (
     // Code thanks to https://codepen.io/asdasdadddddddddd/pen/ExXjdPM
     <div>
-      <div className="container px-5 py-24 mx-auto space-x-6 md:block lg:flex" id="offers">
+      <div className="container px-3 py-24 mx-auto space-x-6 md:block lg:flex" id="offers">
         <div className="flex flex-wrap items-stretch w-full -m-4 ">
           {offers.map((o) => (
             <OfferCard key={o.postID} offer={o} view={'offers'} />
@@ -19,16 +19,16 @@ export default function OfferGrid() {
         <div
           className={`${
             user ? 'lg:block ' : 'hidden'
-          } pb-6 w-full mt-10 lg:mt-0 lg:w-1/6 xl:w-1/5 h-1/2 bg-white shadow-lg shadow-amber-400 border-amber-200 border-2  rounded-lg`}
+          } pb-6 w-full mt-10 lg:mt-0 lg:w-1/5 xl:w-1/4 h-1/2 bg-white shadow-lg shadow-amber-400 border-amber-200 border-2  rounded-lg`}
         >
-          <div className='w-2/3 mx-4 my-6 h-2/3 lg:w-48 lg:h-48'>
+          <div className='mx-4 my-6'>
           <img
-            className="object-cover w-2/3 border-2 rounded-full h-2/3 lg:w-48 lg:h-48 border-amber-400"
+            className="object-cover border-2 rounded-full border-amber-400"
             src={user.photo}
             alt="avatar"
           />
           </div>
-          <h1 className="my-2 text-2xl font-medium title-font text-amber-900">
+          <h1 className="px-2 my-2 text-2xl font-medium title-font text-amber-900">
             Hello {user.first_name}!
           </h1>
           <p className="my-2 leading-relaxed text-amber-500 ">Wallet: 10h</p>

@@ -2,7 +2,6 @@ import React, { useContext, useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import AppContext from '../AppContext';
 
-
 export default function SelectedOfferCard(props) {
   let { reactToRequestCb, users, offers } = useContext(AppContext);
 
