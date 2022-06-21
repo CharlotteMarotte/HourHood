@@ -185,6 +185,70 @@ VALUES
         0,
         3,
         2
+    ),
+    (
+        'Explaing Math',
+        'I can teach up to grade 8',
+        1,
+        0,
+        6,
+        4
+    ),
+    (
+        'Making Sauerkraut',
+        'I am from Germany and I like fermenting things',
+        1,
+        0,
+        1,
+        5
+    ),
+    (
+        'Repair your laundry machine',
+        'I can solve all problems by watching a youtube video',
+        1,
+        0,
+        2,
+        2
+    ),
+    (
+        'Explaining Bootstrap',
+        'Why learn vanilla CSS when all websites can look the same',
+        1,
+        0,
+        7,
+        3
+    ),
+    (
+        'Planning my funeral',
+        'I love Pinterest and sad music',
+        1,
+        0,
+        10,
+        2
+    ),
+    (
+        'Take you to the airport',
+        'I like driving, you like holiday?',
+        1,
+        0,
+        5,
+        4
+    ),
+    (
+        'Polish your CV',
+        'I work in HR and am great at closing the gap in your CV by inventing useless start-ups',
+        1,
+        0,
+        9,
+        2
+    ),
+    (
+        'Teaching Guitar',
+        'We can sit in a circle and sing Kumabaya my lord',
+        1,
+        0,
+        4,
+        5
     );
 
 CREATE TABLE bookings (
@@ -236,16 +300,6 @@ VALUES
          "2022-06-23 14:41:13"
     ), 
     (
-        "I haven't ot been to the hair dresser since the beginning of the pandemic, I need help!",
-        2,
-        null,
-        1,
-        "pending",
-        1,
-        2,
-         "2022-06-23 14:41:13"
-    ), 
-    (
         'We will get married on Sunday, could you watch our children?',
         8,
         null,
@@ -254,6 +308,86 @@ VALUES
         2,
         2,
          "2022-06-23 14:41:13"
+    ),
+    (
+        'Hi Arya! Could I also borrow a guitar from you?',
+        1,
+        3,
+        0,
+        "accepted",
+        3,
+        10,
+         "2022-06-23 14:41:13"
+    ),
+    (
+        'I want to apply at Flex & Kale, could you help me?',
+        1,
+        3,
+        0,
+        "pending",
+        4,
+        9,
+         "2022-06-25 14:41:13"
+    ),
+    (
+        'Can you fit three suitcases in your car? I am fleeing the country.',
+        1,
+        3,
+        0,
+        "pending",
+        1,
+        8,
+         "2022-06-19 14:41:13"
+    ),
+    (
+        'I love dealing with death, that sounds fun',
+        1,
+        3,
+        0,
+        "accepted",
+        4,
+        7,
+         "2022-06-23 14:41:13"
+    ),
+    (
+        'I am a big fan of responsive design, I would love to learn this',
+        1,
+        3,
+        0,
+        "pending",
+        3,
+        6,
+         "2022-06-23 15:41:13"
+    ),
+    (
+        'It broke down half a year ago but maybe you can still fix it?',
+        1,
+        3,
+        0,
+        "pending",
+        4,
+        5,
+         "2022-06-23 14:41:13"
+    ),
+    (
+        'Can you also make Kimchi?',
+        1,
+        3,
+        0,
+        "pending",
+        6,
+        4,
+         "2022-06-26 15:41:13"
+    ),
+    (
+        "I still don't understand exponential growth, can you explain this to me?",
+        1,
+        3,
+        0,
+        "pending",
+        3,
+        3,
+         "2022-06-23 15:41:13"
     );
 
 
