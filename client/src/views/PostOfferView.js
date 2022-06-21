@@ -1,14 +1,17 @@
-import React, { useState, useEffect } from 'react';
-import { Link, useParams } from 'react-router-dom';
-
+import React, { useState, useEffect } from "react";
+import { Link, useParams } from "react-router-dom";
+import { useLayoutEffect } from "react";
 export default function PostOfferView(props) {
+  useLayoutEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   const { op } = useParams();
 
   let o = props.offerToEdit[0];
-  let defaultCategory = o.category.categoryID
+  let defaultCategory = o.category.categoryID;
   //console.log("offer to edit:", o)
-  
+
   let EMPTY_FORM = {
     service_title: "",
     service_description: "",
@@ -24,11 +27,12 @@ export default function PostOfferView(props) {
     capacity: o.capacity,
     donation: o.donation,
     fk_category_id: o.category.categoryID,
-    fk_provider_id: o.user.userID
+    fk_provider_id: o.user.userID,
   };
 
-  
-  let [serviceData, setServiceData] = useState( op === "edit"? INIT_FORM : EMPTY_FORM);
+  let [serviceData, setServiceData] = useState(
+    op === "edit" ? INIT_FORM : EMPTY_FORM
+  );
 
   const handleInputChange = (event) => {
     let { name, value } = event.target;
@@ -42,7 +46,9 @@ export default function PostOfferView(props) {
 
   function handleSubmit(event) {
     event.preventDefault();
-    op === "edit"? props.updateOfferCb(serviceData) : props.postServiceCb(serviceData);
+    op === "edit"
+      ? props.updateOfferCb(serviceData)
+      : props.postServiceCb(serviceData);
     setServiceData(EMPTY_FORM);
   }
 
@@ -137,8 +143,9 @@ export default function PostOfferView(props) {
                         name="fk_category_id"
                         id="select_category"
                         onChange={(e) => handleInputChange(e)}
-                        defaultValue= {op === "edit" ? defaultCategory : 'DEFAULT' }
-
+                        defaultValue={
+                          op === "edit" ? defaultCategory : "DEFAULT"
+                        }
                       >
                         <option
                           className="p-4 hover:bg-amber-100 text-md "
@@ -187,8 +194,7 @@ export default function PostOfferView(props) {
 
                 <div className="flex flex-wrap justify-center space-x-2 lg:space-y-0">
                   <Link
-                    to={'/'}
-                    
+                    to={"/"}
                     className="px-4 py-2 font-semibold bg-transparent border rounded hover:bg-amber-500 text-amber-700 hover:text-white border-amber-500 hover:border-transparent"
                   >
                     Back
@@ -198,7 +204,7 @@ export default function PostOfferView(props) {
                     type="submit"
                     className="px-4 py-2 font-semibold bg-transparent border rounded hover:bg-lime-600 text-lime-700 hover:text-white border-lime-600 hover:border-transparent"
                   >
-                    {op === "edit"? <p>Update</p> : <p>Publish</p>}
+                    {op === "edit" ? <p>Update</p> : <p>Publish</p>}
                   </button>
                 </div>
               </div>

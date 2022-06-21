@@ -1,28 +1,32 @@
-import React, { useContext } from 'react';
-import AppContext from '../AppContext';
-import SelectedOfferCard from '../components/SelectedOfferCard';
+import React, { useContext } from "react";
+import AppContext from "../AppContext";
+import SelectedOfferCard from "../components/SelectedOfferCard";
+import { useLayoutEffect } from "react";
 
 export default function RequestsView(props) {
   let { bookings } = useContext(AppContext);
 
+  useLayoutEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   return (
     <div>
       <h1 className="pt-8 text-4xl font-bold text-left ml-14 text-amber-900">
-        Giving help{' '}
+        Giving help{" "}
       </h1>
       <div className="lg:grid lg:grid-cols-2 ">
         <div className="">
           <div className="container">
             <h1 className="pt-4 ml-20 text-3xl font-bold text-left border-b-2 border-opacity-25 text-amber-700 border-amber-700">
-              Pending{' '}
+              Pending{" "}
             </h1>
           </div>
           {bookings
-            .filter((e) => e.bookingStatus === 'pending')
+            .filter((e) => e.bookingStatus === "pending")
             .map((request) => (
               <SelectedOfferCard
-                view={'requests'}
+                view={"requests"}
                 booking={request}
                 key={request.bookingId}
               />
@@ -31,18 +35,18 @@ export default function RequestsView(props) {
         <div>
           <div className="container ">
             <h1 className="pt-4 ml-20 mr-20 text-3xl font-bold text-left border-b-2 border-opacity-25 text-amber-700 border-amber-700">
-              Accepted{' '}
+              Accepted{" "}
             </h1>
           </div>
           {bookings
-            .filter((e) => e.bookingStatus === 'accepted')
+            .filter((e) => e.bookingStatus === "accepted")
             .map((request) => (
               <SelectedOfferCard
-                view={'requests'}
+                view={"requests"}
                 booking={request}
                 key={request.bookingId}
               />
-            ))}{' '}
+            ))}{" "}
         </div>
       </div>
     </div>

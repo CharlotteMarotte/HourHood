@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import map from "../img/tempMap.png";
+import { useLayoutEffect } from "react";
 
 const EMPTY_FORM = {
   first_name: "",
@@ -11,15 +12,17 @@ const EMPTY_FORM = {
   city_name: "",
   country: "",
   email: "",
-  user_description: null, 
-  hobbies:  null, 
-  superpower: null, 
+  user_description: null,
+  hobbies: null,
+  superpower: null,
   photo: null,
   password: "",
 };
 export default function SignUpView(props) {
+  useLayoutEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
   const [newUser, setNewUser] = useState(EMPTY_FORM);
-
 
   function handleChange(event) {
     let { name, value } = event.target;
@@ -33,7 +36,7 @@ export default function SignUpView(props) {
     // user.id =  props.user.id;
     // console.log("linea34" , user.id)
     // user.joining = new Date().toISOString().slice(0,12); //we modify the date format
-    props.addNewUserCb(newUser); 
+    props.addNewUserCb(newUser);
     setNewUser(EMPTY_FORM);
   }
 
@@ -45,112 +48,97 @@ export default function SignUpView(props) {
           <span className="text-[#fe8923] text-3xl">Sign Up</span>
         </h3>
         <p className="text-sm text-[#ff994093] font-semibold">( It's free )</p>
-        <form className="flex flex-col items-center gap-5 mt-10" onSubmit={e => handleSubmit(e)}>
+        <form
+          className="flex flex-col items-center gap-5 mt-10"
+          onSubmit={(e) => handleSubmit(e)}
+        >
           <div className="flex gap-10 items-center">
             <input
               required
-
               name="first_name"
-
               type="text"
               className="rounded-lg py-2 w-64 px-8 border-2 text-text-[#fe8923] border-[#fe8923] outline-none focus:border-[#C8E242]"
               placeholder="First Name"
               value={newUser.first_name}
-              onChange={e => handleChange(e)}
+              onChange={(e) => handleChange(e)}
             />
             <input
               required
-
               name="last_name"
-
               type="text"
               className="rounded-lg py-2 w-64 px-8 border-2 text-[#fe8923] border-[#fe8923] outline-none focus:border-[#C8E242]"
               placeholder="Last Name"
               value={newUser.last_name}
-              onChange={e => handleChange(e)}
+              onChange={(e) => handleChange(e)}
             />
           </div>
           <div className="flex gap-10 items-center">
             <input
               required
-
               name="street"
-
               type="text"
               className="rounded-lg w-64 py-2 px-8 border-2 text-text-[#fe8923] border-[#fe8923] outline-none focus:border-[#C8E242]"
               placeholder="E.g. : Carrer d'en Grassot"
               value={newUser.street}
-              onChange={e => handleChange(e)}
+              onChange={(e) => handleChange(e)}
             />
             <input
               required
-
               name="house_number"
-
               type="text"
               className="rounded-lg py-2 px-8 w-64 border-2 text-[#fe8923] border-[#fe8923] outline-none focus:border-[#C8E242]"
               placeholder="E.g. : 101 "
               value={newUser.house_number}
-              onChange={e => handleChange(e)}
+              onChange={(e) => handleChange(e)}
             />
           </div>
           <div className="flex gap-10 items-center">
             <input
               required
-
               name="city_code"
-
               type="text"
               className="rounded-lg w-64 py-2 px-8 border-2 text-text-[#fe8923] border-[#fe8923] outline-none focus:border-[#C8E242]"
               placeholder="E.g. : 08025"
               value={newUser.city_code}
-              onChange={e => handleChange(e)}
+              onChange={(e) => handleChange(e)}
             />
             <input
               required
-
               name="city_name"
-
               type="text"
               className="rounded-lg py-2 px-8 w-64 border-2 text-[#fe8923] border-[#fe8923] outline-none focus:border-[#C8E242]"
               placeholder="E.g. : Barcelona "
               value={newUser.city_name}
-              onChange={e => handleChange(e)}
+              onChange={(e) => handleChange(e)}
             />
           </div>
           <input
             required
-
             name="country"
-
             type="text"
             className="rounded-lg py-2 px-8 w-[553px] border-2 text-[#fe8923] border-[#fe8923] outline-none focus:border-[#C8E242]"
             placeholder="E.g. : Spain "
             value={newUser.country}
-            onChange={e => handleChange(e)}
+            onChange={(e) => handleChange(e)}
           />
           <img src={map} alt="location" className="w-[553px] rounded-lg" />
           <input
             required
-
             name="email"
-
             type="email"
             className="rounded-lg py-2 px-8 w-[553px] border-2 text-[#fe8923] border-[#fe8923] outline-none focus:border-[#C8E242]"
             placeholder="E.g. : codeop@grassot.com "
             value={newUser.email}
-            onChange={e => handleChange(e)}
+            onChange={(e) => handleChange(e)}
           />
           <input
             required
-
             name="password"
-
             type="text"
             className="rounded-lg py-2 px-8 w-[553px] border-2 text-[#fe8923] border-[#fe8923] outline-none focus:border-[#C8E242]"
             placeholder="Password"
             value={newUser.password}
-            onChange={e => handleChange(e)}
+            onChange={(e) => handleChange(e)}
           />
           <button
             type="submit"

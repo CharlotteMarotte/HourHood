@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from 'react';
 import AppContext from '../AppContext';
 import OfferCard from '../components/OfferCard';
 import { Link, useParams } from 'react-router-dom';
+import { useLayoutEffect } from "react";
 
 export default function ProfileView() {
   let { user, users, offers } = useContext(AppContext);
@@ -13,6 +14,10 @@ export default function ProfileView() {
     getMyOffers();
     getMyUserData();
   }, []);
+
+  useLayoutEffect(() => {
+    window.scrollTo(0, 0)
+}, []);
 
   const { id } = useParams();
 
