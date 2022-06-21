@@ -1,8 +1,9 @@
 import React, { useContext, useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import AppContext from '../AppContext';
+
 export default function SelectedOfferCard(props) {
-  let { reactToRequestCb, users } = useContext(AppContext);
+  let { reactToRequestCb, users, offers, openChatCb } = useContext(AppContext);
 
   const [providerData, setProviderData] = useState(users[0]);
 
@@ -23,9 +24,9 @@ export default function SelectedOfferCard(props) {
       <div
         className={`block w-full p-6 bg-white border-4 rounded-lg -z-1 md:flex md:flex-row lg:mx-auto lg:w-4/5 border-amber-200/80`}
       >
-        <div className="relative">
+        <div className="relative flex items-center justify-center">
           <img
-            className="object-cover w-64 h-64"
+            className="object-cover w-64 h-64 rounded-lg"
             src={
               props.view === 'requests'
                 ? props.booking.requestor.profilePicture
@@ -36,8 +37,8 @@ export default function SelectedOfferCard(props) {
         </div>
 
         <div className="flex flex-col w-full px-6">
-          <div className="flex flex-row h-8">
-            <h2 className="mb-3 text-2xl font-medium title-font text-amber-900">
+          <div className="flex flex-row h-14">
+            <h2 className="mb-1 text-2xl font-medium title-font text-amber-900">
               {props.booking.servicePost.serviceTitle}
             </h2>
           </div>
@@ -83,13 +84,18 @@ export default function SelectedOfferCard(props) {
           </div>
           <div
             className={`w-full p-5 mt-5 space-y-3 text-left rounded-lg justify ${
-              props.view === 'requests' ? 'bg-amber-200' : 'bg-orange-200'
+              props.view === 'bookings' ? 'bg-amber-200' : 'bg-orange-200'
             }`}
           >
             <p className="leading-relaxed text-amber-700 ">
               Note: "{props.booking.bookingDescription}"
             </p>
-
+          </div>
+          <div
+            className={`w-full p-5 mt-5 space-y-3 text-left rounded-lg justify ${
+              props.view === 'bookings' ? 'bg-blue-200' : 'bg-pink-200'
+            }`}
+          >
             <p className="leading-relaxed text-amber-700 ">
               {new Date(props.booking.proposedDate).toLocaleDateString(
                 'en-GB',
@@ -102,35 +108,52 @@ export default function SelectedOfferCard(props) {
               )}
             </p>
           </div>
-          <div className="flex flex-col items-start justify-end flex-grow w-full pt-6 mt-4 lg:pt-0 w-100">
+          <div className="flex items-center justify-center flex-grow w-full col-span-2 pt-6 mt-4 lg:pt-0 w-100">
             {props.view === 'requests' &&
-            props.booking.bookingStatus === 'pending' ? (
-              <div className="flex flex-row space-x-3">
-                <button
-                  type="submit"
-                  onClick={(e) =>
-                    reactToRequestCb(props.booking.bookingId, 'declined')
-                  }
-                  className="px-4 py-2 font-semibold bg-transparent border rounded hover:bg-amber-500 text-amber-700 hover:text-white border-amber-500 hover:border-transparent"
-                >
-                  Decline{' '}
-                </button>{' '}
-                <button
-                  type="button"
-                  onClick={(e) =>
-                    reactToRequestCb(props.booking.bookingId, 'accepted')
-                  }
-                  className="px-4 py-2 font-semibold bg-transparent border rounded hover:bg-lime-600 text-lime-700 hover:text-white border-lime-600 hover:border-transparent"
-                >
-                  Accept
-                </button>
-                <Link
-                  to="/chat"
-                  className="px-4 py-2 font-semibold bg-transparent border rounded hover:bg-lime-600 text-lime-700 hover:text-white border-lime-600 hover:border-transparent"
-                >
-                  Chat
-                </Link>
-              </div>
+                props.booking.bookingStatus === 'pending' ? (
+                  <div className="flex flex-row space-x-3">
+                    <button
+                      type="submit"
+                      onClick={(e) =>
+                        reactToRequestCb(props.booking.bookingId, 'declined')
+                      }
+                      className="px-4 py-2 font-semibold bg-transparent border rounded hover:bg-amber-500 text-amber-700 hover:text-white border-amber-500 hover:border-transparent"
+                    >
+                      Decline{' '}
+                    </button>{' '}
+                    <button
+                      type="button"
+                      onClick={(e) =>
+                        reactToRequestCb(props.booking.bookingId, 'accepted')
+                      }
+                      className="px-4 py-2 font-semibold bg-transparent border rounded hover:bg-lime-600 text-lime-700 hover:text-white border-lime-600 hover:border-transparent"
+                    >
+                      Accept
+                    </button>
+
+                    <button
+                      type="button"
+                      onClick={(e) =>
+                        openChatCb(props.booking.bookingId)
+                      }
+                      className="px-4 py-2 font-semibold bg-transparent border rounded hover:bg-rose-500 text-rose-700 hover:text-white border-rose-500 hover:border-transparent"
+                      >
+                      Chat{' '}
+                    </button>
+
+                    
+                    {/* <Link
+                      onClick={(e) =>
+                        selectBookingCb(props.booking.bookingId)
+                      }
+                      to="/chat"
+                      className="px-4 py-2 font-semibold bg-transparent border rounded hover:bg-rose-500 text-rose-700 hover:text-white border-rose-500 hover:border-transparent"
+                    >
+                      Chat{' '}
+                    </Link>{' '} */}
+                    {/* cambiar LINK a onblick  */}
+
+                  </div>
             ) : (
               <div className="flex flex-row space-x-3">
                 <button
@@ -142,6 +165,25 @@ export default function SelectedOfferCard(props) {
                 >
                   Cancel{' '}
                 </button>{' '}
+
+
+                <button
+                      type="button"
+                      onClick={(e) =>
+                        openChatCb(props.booking.bookingId)
+                      }
+                      className="px-4 py-2 font-semibold bg-transparent border rounded hover:bg-rose-500 text-rose-700 hover:text-white border-rose-500 hover:border-transparent"
+                      >
+                      Chat{' '}
+                </button>
+
+                {/* <Link
+             
+                  to="/chat"
+                  className="px-4 py-2 font-semibold bg-transparent border rounded hover:bg-lime-500 text-lime-700 hover:text-white border-lime-500 hover:border-transparent"
+                >
+                  Chat{' '}
+                </Link>{' '} */}
               </div>
             )}
           </div>

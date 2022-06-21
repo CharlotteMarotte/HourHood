@@ -26,10 +26,10 @@ export default function OfferCard(props) {
           <h2 className="mb-1 font-medium tracking-widest text-s title-font text-amber-500">
             {props.offer.category.title}
           </h2>
-          <h1 className="mb-3 text-2xl font-medium title-font text-amber-900">
+          <h1 className="h-16 mb-3 text-2xl font-medium title-font text-amber-900">
             {props.offer.title}
           </h1>
-          <div className="h-24 p-2 mb-5 rounded-lg bg-amber-100">
+          <div className="p-2 mb-5 rounded-lg h-28 bg-amber-100">
           <p className="leading-relaxed text-amber-500 ">
             Note: "{props.offer.description}"
           </p>
@@ -70,7 +70,7 @@ export default function OfferCard(props) {
                 <button
                   type="button"
                   onClick={(e) => deleteServiceCb(props.offer.postID)}
-                  className="px-4 py-2 font-semibold bg-transparent border rounded hover:bg-amber-500 text-amber-700 hover:text-white border-amber-500 hover:border-transparent"
+                  className="px-4 py-2 font-semibold bg-transparent border rounded lg:mb-2 hover:bg-amber-500 text-amber-700 hover:text-white border-amber-500 hover:border-transparent"
                 >
                   Delete{' '}
                 </button>

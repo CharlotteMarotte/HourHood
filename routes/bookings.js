@@ -141,7 +141,6 @@ router.post("/", async function(req, res) {
 // PUT - edit the booking
 router.put("/:bookingId", async (req, res) => {
     let { bookingId } = req.params;
-    console.log(req.body);
     let { bookingDescription, proposedDate, estimatedTime, needDonation, bookingStatus, serviceTime, requestor, servicePost } = req.body;
   
     try {
@@ -152,7 +151,7 @@ router.put("/:bookingId", async (req, res) => {
             let sql = `
                 UPDATE bookings 
 
-                SET booking_description = "${booking_description}", proposed_date = "${proposed_date}", estimated_time = ${estimated_time}, need_donation = ${need_donation}, booking_status = "${booking_status}", service_time = ${service_time}, fk_requestor_id = ${fk_requestor_id}, fk_service_post_id = ${fk_service_post_id}
+                SET booking_description = "${bookingDescription}", proposed_date = "${proposedDate}", estimated_time = ${estimatedTime}, need_donation = ${needDonation}, booking_status = "${bookingStatus}", service_time = ${serviceTime}, fk_requestor_id = ${requestor.userID}, fk_service_post_id = ${servicePost.servicePostID}
 
                 WHERE id = ${bookingId}
             `;

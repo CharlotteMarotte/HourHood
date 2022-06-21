@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
 import { useLayoutEffect } from "react";
+
+
 export default function PostOfferView(props) {
   useLayoutEffect(() => {
     window.scrollTo(0, 0);
@@ -8,9 +10,11 @@ export default function PostOfferView(props) {
 
   const { op } = useParams();
 
-  let o = props.offerToEdit[0];
-  let defaultCategory = o.category.categoryID;
-  //console.log("offer to edit:", o)
+  let o =  props.offerToEdit ? props.offerToEdit[0] : null;
+
+  console.log("allofferstoedit:", props.offerToEdit)
+  
+  console.log("offer to edit:", o)
 
   let EMPTY_FORM = {
     service_title: "",
@@ -19,19 +23,21 @@ export default function PostOfferView(props) {
     donation: false,
     fk_category_id: 0,
     fk_provider_id: props.user.id,
-  };
-
-  let INIT_FORM = {
+  }; 
+  
+  let INIT_FORM = o ? {
     service_title: o.title,
     service_description: o.description,
     capacity: o.capacity,
     donation: o.donation,
     fk_category_id: o.category.categoryID,
     fk_provider_id: o.user.userID,
-  };
+  } : EMPTY_FORM
+
+ 
 
   let [serviceData, setServiceData] = useState(
-    op === "edit" ? INIT_FORM : EMPTY_FORM
+    op === "add" ? EMPTY_FORM : INIT_FORM
   );
 
   const handleInputChange = (event) => {
@@ -51,6 +57,8 @@ export default function PostOfferView(props) {
       : props.postServiceCb(serviceData);
     setServiceData(EMPTY_FORM);
   }
+
+  //let defaultCategory = op === "add" ? o.category.categoryID : null;
 
   return (
     // Code thanks to https://codepen.io/atzinn-herrera/pen/JjMMBxy
@@ -144,7 +152,7 @@ export default function PostOfferView(props) {
                         id="select_category"
                         onChange={(e) => handleInputChange(e)}
                         defaultValue={
-                          op === "edit" ? defaultCategory : "DEFAULT"
+                          op === "edit" ? o.category.categoryID : "DEFAULT"
                         }
                       >
                         <option

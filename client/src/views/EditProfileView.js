@@ -1,18 +1,41 @@
-import React, { useContext } from "react";
-import AppContext from "../AppContext";
-import { Link } from "react-router-dom";
-import { useLayoutEffect } from "react";
+import React, { useContext, useState } from 'react';
+import AppContext from '../AppContext';
+import { Link } from 'react-router-dom';
+import { useLayoutEffect } from 'react';
 
 export default function EditProfileView(props) {
   useLayoutEffect(() => {
     window.scrollTo(0, 0);
   }, []);
   let { user, offers } = useContext(AppContext);
+  const [file, setFile] = useState(null);
+
+  function handleFileChange(event) {
+    setFile(event.target.files[0]);
+  }
 
   function handleSubmit(event) {
     event.preventDefault();
     // Call callback we got from AppContext
     // requestServiceCb();
+    // Call parent's callback
+  }
+
+  function handlePhotoSubmit(event) {
+    event.preventDefault();
+
+    // Create FormData obj and append everything to upload
+    let formData = new FormData();
+    formData.append('fk_user_id', user.id);
+    formData.append('clientfile', file, file.name);
+
+    // Call parent's callback
+    props.uploadCb(formData);
+    console.log('uploaded');
+
+    // Reset everything
+    setFile(null); // remove filename of previous file
+    event.target.reset();
   }
 
   return (
@@ -25,17 +48,25 @@ export default function EditProfileView(props) {
               className="rounded-xl"
               src="https://cdn.dribbble.com/users/5352839/screenshots/11892562/character.png"
             />
-            <button
-              type="button"
-              className="px-4 py-2 font-semibold bg-transparent border rounded hover:bg-amber-500 text-amber-700 hover:text-white border-amber-500 hover:border-transparent"
-            >
-              Upload a new photo{" "}
-            </button>{" "}
+            <form onSubmit={handlePhotoSubmit}>
+              <input
+                type="file"
+                className="px-4 py-2 mb-2 font-semibold bg-transparent border rounded hover:bg-amber-500 text-amber-700 hover:text-white border-amber-500 hover:border-transparent"
+                onChange={handleFileChange}
+                required
+              />
+              <button
+                type="submit"
+                className="px-4 py-2 font-semibold bg-transparent border rounded hover:bg-amber-500 text-amber-700 hover:text-white border-amber-500 hover:border-transparent"
+              >
+                Upload photo{' '}
+              </button>{' '}
+            </form>
           </div>
           <div className="w-full px-5 py-20 md:w-4/7 lg:w-3/5 md:px-10">
             <header className="mb-10 text-center">
               <h1 className="text-4xl font-bold text-amber-900">
-                Edit your profile{" "}
+                Edit your profile{' '}
               </h1>
             </header>
             <form onSubmit={handleSubmit}>
@@ -124,18 +155,19 @@ export default function EditProfileView(props) {
                         htmlFor="select_category"
                         className="flex items-center justify-center w-full text-center pointer-events-none"
                       >
-                        Postal Code{" "}
+                        Postal Code{' '}
                       </label>
                       <div className="relative">
                         <select
-                          require
+                          require="true"
                           className="p-2.5 mb-0 min-w-full rounded-lg bg-white focus:outline-none focus:border-amber-500 text-md border-solid border-2 border-amber-200 transition ease-in duration-200"
                           name="category"
                           id="select_category"
+                          defaultValue={'DEFAULT'}
                         >
                           <option
                             disabled
-                            selected
+                            value="DEFAULT"
                             className="p-2 hover:bg-amber-100 text-md "
                           >
                             -- Select a postal code --
@@ -250,7 +282,7 @@ export default function EditProfileView(props) {
 
               <div className="flex flex-wrap justify-center space-x-2">
                 <Link
-                  to={"/profile"}
+                  to={'/profile'}
                   className="px-4 py-2 font-semibold bg-transparent border rounded hover:bg-lime-600 text-lime-700 hover:text-white border-lime-600 hover:border-transparent"
                 >
                   Cancel
@@ -259,7 +291,7 @@ export default function EditProfileView(props) {
                   type="submit"
                   className="px-4 py-2 font-semibold bg-transparent border rounded hover:bg-amber-500 text-amber-700 hover:text-white border-amber-500 hover:border-transparent"
                 >
-                  Save{" "}
+                  Save{' '}
                 </button>
               </div>
             </form>
