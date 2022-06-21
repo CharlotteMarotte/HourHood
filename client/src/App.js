@@ -311,8 +311,11 @@ export default function App() {
   };
 
   const bookingsObj = {
-    bookings: user && bookings
+    requests: user && bookings
       ? bookings.filter((e) => e.requestor.userID === user.id)
+      : [],
+      offers: user && bookings
+      ? bookings.filter((e) => e.servicePost.serviceProvider === user.id)
       : [],
       users,
     reactToRequestCb: reactToRequest,
