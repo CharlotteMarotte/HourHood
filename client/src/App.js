@@ -22,6 +22,7 @@ import EditProfileView from "./views/EditProfileView";
 import GetStarted from "./views/GetStarted";
 import RulesView from "./views/RulesView";
 import Chat from "./components/Chat";
+import ChatView from './views/ChatView';
 
 const bookings = [
   {
@@ -483,10 +484,11 @@ export default function App() {
           }
         />
         <Route path="*" element={<Error404View />} />
+        <Route path="chat" element={<ChatView/>} />
       </Routes>
       <div>
-        <Chat senderName="Juan" bookingId="1"/>
-        <Chat senderName="Pepe" bookingId="1"/>
+        {/* <Chat user = {user} senderName="Juan" bookingId="1"/>
+        <Chat senderName="Pepe" bookingId="1"/> */}
       </div>
     </div>
   );
