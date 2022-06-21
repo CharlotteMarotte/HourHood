@@ -7,7 +7,8 @@ import AddOfferButton from '../components/AddOfferButton';
 
 
 export default function RequestsView(props) {
-  let { bookings } = useContext(AppContext);
+  let { requests } = useContext(AppContext);
+
 
   useLayoutEffect(() => {
     window.scrollTo(0, 0);
@@ -27,7 +28,7 @@ export default function RequestsView(props) {
               Pending{" "}
             </h1>
           </div>
-          {bookings
+          {requests
             .filter((e) => e.bookingStatus === "pending")
             .map((request) => (
               <SelectedOfferCard
@@ -43,7 +44,7 @@ export default function RequestsView(props) {
               Accepted{" "}
             </h1>
           </div>
-          {bookings
+          {requests
             .filter((e) => e.bookingStatus === "accepted")
             .map((request) => (
               <SelectedOfferCard
