@@ -18,10 +18,10 @@ function ChatList(props) {
     }
 
     return (
-        <div className="ChatList rounded mb-1" ref={listDiv}>
+        <div className="mb-1 rounded ChatList" ref={listDiv}>
         {
-            props.messages.map(m => (
-                <div>
+            props.messages.map((m, index) => (
+                <div key={index}>
                 <p>
                     <b>{m.senderName}: </b><span title={formatDT(m.dateTime)}>{m.text}</span>
                 </p>
