@@ -10,20 +10,11 @@ export default function PostOfferView(props) {
 
   const { op } = useParams();
 
-  let o = props.offerToEdit[0];
+  let o =  props.offerToEdit ? props.offerToEdit[0] : null;
 
   console.log("allofferstoedit:", props.offerToEdit)
   
   console.log("offer to edit:", o)
-
-  let INIT_FORM = {
-    service_title: o.title,
-    service_description: o.description,
-    capacity: o.capacity,
-    donation: o.donation,
-    fk_category_id: o.category.categoryID,
-    fk_provider_id: o.user.userID,
-  };
 
   let EMPTY_FORM = {
     service_title: "",
@@ -32,7 +23,18 @@ export default function PostOfferView(props) {
     donation: false,
     fk_category_id: 0,
     fk_provider_id: props.user.id,
-  };
+  }; 
+  
+  let INIT_FORM = o ? {
+    service_title: o.title,
+    service_description: o.description,
+    capacity: o.capacity,
+    donation: o.donation,
+    fk_category_id: o.category.categoryID,
+    fk_provider_id: o.user.userID,
+  } : EMPTY_FORM
+
+ 
 
   let [serviceData, setServiceData] = useState(
     op === "add" ? EMPTY_FORM : INIT_FORM
@@ -56,7 +58,8 @@ export default function PostOfferView(props) {
     setServiceData(EMPTY_FORM);
   }
 
-  let defaultCategory = o.category.categoryID;
+  //let defaultCategory = op === "add" ? o.category.categoryID : null;
+
   return (
     // Code thanks to https://codepen.io/atzinn-herrera/pen/JjMMBxy
     <div className="flex min-h-screen px-16 py-16 min-w-screen">
@@ -149,7 +152,7 @@ export default function PostOfferView(props) {
                         id="select_category"
                         onChange={(e) => handleInputChange(e)}
                         defaultValue={
-                          op === "edit" ? defaultCategory : "DEFAULT"
+                          op === "edit" ? o.category.categoryID : "DEFAULT"
                         }
                       >
                         <option
