@@ -2,7 +2,6 @@ import React, { useContext, useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import AppContext from '../AppContext';
 
-
 export default function SelectedOfferCard(props) {
   let { reactToRequestCb, users, offers } = useContext(AppContext);
 
@@ -89,7 +88,8 @@ export default function SelectedOfferCard(props) {
             }`}
           >
             <p className="leading-relaxed text-amber-700 ">
-              Note: "{props.booking.bookingDescription}"
+            {props.view === 'bookings' ? 'You: "': `${props.booking.requestor.firstName}: "`}
+            {props.booking.bookingDescription}"
             </p>
           </div>
           <div

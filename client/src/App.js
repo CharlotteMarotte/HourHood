@@ -43,6 +43,7 @@ export default function App() {
   const [offers, setOffers] = useState([]);
   const [categories, setCategories] = useState([]);
   const [users, setUsers] = useState([]);
+  const [files, setFiles] = useState([]);
 
   const [bookings, setBookings] = useState([]);
   const [userBookings, setUserBookings] = useState([]);
@@ -53,6 +54,7 @@ export default function App() {
     getCategories();
     getOffers();
     getUsers();
+    getFiles();
   }, []);
   
   useLayoutEffect(() => {
@@ -110,7 +112,71 @@ export default function App() {
       console.log(`Server error: ${err.message}`);
     }
   }
+  // ********* PROFILE  *************
+
+
+//PUT method - edit the service post/offer
+async function updateProfile(profileData) {
+    
+  // Define fetch() options
+  let options = {
+    method: 'PUT',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(profileData),
+  };
+
+  try {
+    let response = await fetch(`/users/${user.id}`, options); // do PUT
+    if (response.ok) {
+      let users = await response.json();
+      setUsers(users);
+      navigate(`/profile/${user.id}`);
+    } else {
+      console.log(`Server error: ${response.status} ${response.statusText}`);
+    }
+  } catch (err) {
+    console.log(`Server error: ${err.message}`);
+  }
+}
+
+
+  async function getFiles() {
+    try {
+        let response = await fetch('/photos');
+        if (response.ok) {
+            let data = await response.json();
+            setFiles(data);
+        } else {
+            console.log(`Server error: ${response.status}: ${response.statusText}`);
+        }
+    } catch (err) {
+        console.log(`Network error: ${err.message}`);
+    }
+}
+
+async function uploadFile(formData) {
+    let options = {
+        method: 'POST',
+        body: formData
+    };
+
+    try {
+        let response = await fetch('/photos', options);
+        if (response.ok) {
+            // Server responds with updated array of files
+            let data = await response.json();
+            setFiles(data);
+            navigate(`/profile/${user.id}`);
+
+        } else {
+            console.log(`Server error: ${response.status}: ${response.statusText}`);
+        }
+    } catch (err) {
+        console.log(`Network error: ${err.message}`);
+    }
+}
   // ********* CATEGORIES *************
+
 
   async function getCategories() {
     try {
@@ -349,7 +415,7 @@ function toEdit(id) {
           path="profile/edit"
           element={
             <AppContext.Provider value={contextObj}>
-              <EditProfileView postalCodes={postalCodes} />
+              <EditProfileView postalCodes={postalCodes} updateProfileCb={pd => updateProfile(pd)} uploadCb={fd => uploadFile(fd)}/>
             </AppContext.Provider>
           }
         />
