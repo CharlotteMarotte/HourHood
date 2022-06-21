@@ -51,7 +51,7 @@ function Navbar(props) {
             <div className="flex">
               <NavLink
                 className="text-xl text-white pr-2 font-semibold hover:text-[#FF9940]"
-                to="/profile"
+                to={`/profile/${props.user.id}`}
               >
                 Profile
               </NavLink>
