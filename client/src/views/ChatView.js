@@ -6,11 +6,12 @@ export default function ChatView(props) {
   useLayoutEffect(() => {
     window.scrollTo(0, 0);
   }, []);
+
   return (
     <div>
       ChatView
-      <Chat senderName="Juan" bookingId="1" />
-      <Chat senderName="karen" bookingId="2" />
+      <Chat senderName={props.user ? props.user.first_name : "no one"} bookings={props.bookings} bookingId="1" />
+      
     </div>
   );
 }
