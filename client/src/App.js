@@ -40,6 +40,7 @@ export default function App() {
   const [bookings, setBookings] = useState([]);
   const [userBookings, setUserBookings] = useState([]);
   const [selectedOffer, setSelectedOffer] = useState([]);
+  const [toBeEdited, setToBeEdited] = useState([]);
 
   useEffect(() => {
     getCategories();
@@ -135,19 +136,9 @@ export default function App() {
     navigate('/');
   }
 
-  async function selectOffer(id) {
-    try {
-      let response = await fetch(`/servicePost/${id}`); // does GET by default
-      if (response.ok) {
-        let selOffer = await response.json();
-        setSelectedOffer(selOffer); // set selectedOffer state with the offer that was chosen by the user, so it can be used by other components/views
-        // console.log("I am selected offer:", selectedOffer)
-      } else {
-        console.log(`Server error: ${response.status} ${response.statusText}`);
-      }
-    } catch (err) {
-      console.log(`Server error: ${err.message}`);
-    }
+  function selectOffer(id) {
+   let selected = offers.filter(e=> e.postID === id);
+   setSelectedOffer(selected);
   }
 
   async function requestService(requestData) {
@@ -198,7 +189,42 @@ export default function App() {
     }
   }
 
-  // DELETE a duck
+  //sava to state the info about the offer which the user wants to edit
+  function toEdit(id) {
+    let offerToEdit = offers.filter(e=> e.postID === id);
+    setToBeEdited(offerToEdit);
+    console.log("to be edited:", toBeEdited)
+   }
+
+   //PUT method - edit the service post/offer
+  async function updateOffer(serviceData) {
+
+    // Find booking in state and change status
+    let id = toBeEdited[0].postID
+    //let offer = offers.find((o) => o.postID === id);
+
+    // Define fetch() options
+    let options = {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(serviceData),
+    };
+
+    try {
+      let response = await fetch(`/servicePost/${id}`, options); // do PUT
+      if (response.ok) {
+        let bookings = await response.json();
+        setBookings(bookings);
+      } else {
+        console.log(`Server error: ${response.status} ${response.statusText}`);
+      }
+    } catch (err) {
+      console.log(`Server error: ${err.message}`);
+    }
+  }
+  
+
+  // DELETE a service
   async function deleteService(id) {
     // Define fetch() options
     let options = {
@@ -250,6 +276,7 @@ export default function App() {
     user,
     selectOfferCb: selectOffer,
     deleteServiceCb: deleteService,
+    toEditCb: toEdit
   };
 
   const chosenUserObj = {
@@ -264,8 +291,7 @@ export default function App() {
       : [],
     reactToRequestCb: reactToRequest,
   };
-
-  // console.log('I am chosenUserObj', { chosenUserObj });
+ 
 
   return (
     <div className="App bg-gradient-to-t from-[#FFF7A3] via-[#FFF7A3] to-[#ff994091] h-full pb-28">
@@ -346,6 +372,8 @@ export default function App() {
               postServiceCb={postService}
               categories={categories}
               user={user}
+              offerToEdit={toBeEdited}
+              updateOfferCb={updateOffer}
             />
           }
         />

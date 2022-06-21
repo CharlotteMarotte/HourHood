@@ -13,7 +13,7 @@ const db = require("../model/helper");
 router.post("/signup", async (req, res) => {
     let { first_name, last_name, street, house_number, city_code, city_name, country, email, user_description, hobbies, superpower, photo, password } = req.body;
     
-    user_description = user_description.replaceAll(/"/, '\\"');
+    user_description = user_description.replaceAll(/"/, '\"');
 
     let hashedPassword = await bcrypt.hash(password, BCRYPT_WORK_FACTOR);
 

@@ -1,23 +1,23 @@
-var express = require('express');
+var express = require("express");
 var router = express.Router();
-const { ensureSameUser } = require('../middleware/guards');
-const db = require('../model/helper');
-const bcrypt = require('bcrypt');
-const { BCRYPT_WORK_FACTOR, SECRET_KEY } = require('../config');
+const { ensureSameUser } = require("../middleware/guards");
+const db = require("../model/helper");
+const bcrypt = require("bcrypt");
+const { BCRYPT_WORK_FACTOR, SECRET_KEY } = require("../config");
 
 /**
  * Helpers
  **/
  async function sendAllUsers(res) {
   // We don't need try/catch here because we're always called from within one
-  let results = await db('SELECT * FROM users ORDER BY id');
+  let results = await db("SELECT * FROM users ORDER BY id");
   let users = results.data;
   users.forEach(u => delete u.password);  // don't return passwords
   res.send(users);
 }
 
 // GET all users
-router.get('/', async function(req, res) {
+router.get("/", async function(req, res) {
   try {
       sendAllUsers(res);
   } catch (err) {
@@ -26,7 +26,7 @@ router.get('/', async function(req, res) {
 });
 
 // * Get user by ID.    
-router.get('/:userId', ensureSameUser, async function(req, res, next) {
+router.get("/:userId", ensureSameUser, async function(req, res, next) {
   let { userId } = req.params;
   let sql = `SELECT * FROM users WHERE id = ${userId}`;
   
@@ -50,7 +50,7 @@ router.put("/:userId", async (req, res) => {
   try {
       let result = await db(`SELECT * FROM users WHERE id = ${userId}`);  // does user exist?
       if (result.data.length === 0) {
-          res.status(404).send({ error: 'User not found' });
+          res.status(404).send({ error: "User not found" });
       } else {
           let sql = `
               UPDATE users 
@@ -59,9 +59,9 @@ router.put("/:userId", async (req, res) => {
           `;
 
           await db(sql);  // update user
-          let result = await db('SELECT * FROM users');
+          let result = await db("SELECT * FROM users");
           let users = result.data;
-          users.forEach(u => delete u.password);  // don't return passwords
+          users.forEach(u => delete u.password);  // don"t return passwords
           res.send(users);  // return updated array
       }
   } catch (err) {
@@ -72,7 +72,7 @@ router.put("/:userId", async (req, res) => {
 
 //POST user (sign up)
 
-router.post('/', async (req, res, next) => {
+router.post("/", async (req, res, next) => {
     let { first_name, last_name, street, house_number, city_code, city_name, country, email, user_description, hobbies, superpower, photo, password } = req.body;
     console.log(req.body)
     let hashedPassword = await bcrypt.hash(password, BCRYPT_WORK_FACTOR);
@@ -97,10 +97,10 @@ router.delete("/:userId", async (req, res) => {
   try {
       let result = await db(`SELECT * FROM users WHERE id = ${userId}`);  // does user exist?
       if (result.data.length === 0) {
-          res.status(404).send({ error: 'User not found' });
+          res.status(404).send({ error: "User not found" });
       } else {
           await db(`DELETE FROM users WHERE id = ${userId}`);  // delete user
-          result = await db('SELECT * FROM users');
+          result = await db("SELECT * FROM users");
           let users = result.data;
           users.forEach(u => delete u.password);  // don't return passwords
           res.send(users);  // return updated array
