@@ -4,101 +4,21 @@ import Api from '../src/helpers/Api';
 import Local from '../src/helpers/Local';
 import './App.css';
 
-
-import AppContext from "./AppContext";
-import BookingContext from "./BookingContext";
-import Navbar from "./components/Navbar";
-import ProfileView from "./views/ProfileView";
-import BookingsView from "./views/BookingsView";
-import RequestsView from "./views/RequestsView";
-import HomeView from "./views/HomeView";
-import Error404View from "./views/Error404View";
-import SignUpView from "./views/SignUpView";
-import LogInView from "./views/LogInView";
-import RequestServiceView from "./views/RequestServiceView";
-import PostOfferView from "./views/PostOfferView";
-import EditProfileView from "./views/EditProfileView";
-import GetStarted from "./views/GetStarted";
-import RulesView from "./views/RulesView";
-import OfferGrid from './components/OfferGrid';
-
-const bookings = [
-  {
-    id: 1,
-    title: 'Babysitting',
-    name: 'Rachel',
-    description: 'Only available in evenings Monday/Wednesday/Friday',
-    date: '2022-06-23T14:41:13+00:00',
-    status: 'pending',
-    img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSwhBGoWgheuLGTkcoNqHuBHEiflDd-TBd9OoYARUY2cFq6I6GIjBUvbtI7zwnogvDAwSk&usqp=CAU',
-  },
-  {
-    id: 2,
-    title: 'Watering plants',
-    name: 'Martha',
-    description: 'Only available in summer',
-    date: '2022-07-30T19:41:13+00:00',
-    status: 'accepted',
-    img: 'https://i.pinimg.com/originals/b8/da/8d/b8da8da3ffb8647ce7fa6bd743eeb611.png',
-  },
-  {
-    id: 3,
-    title: 'Teaching guitar',
-    name: 'Lisa',
-    description: 'Only available in evenings Monday/Wednesday/Friday',
-    date: '2022-07-25T08:41:13+00:00',
-    status: 'accepted',
-    img: 'https://i.pinimg.com/originals/34/b1/5d/34b15d58b31424d570d8160d814ca420.png',
-  },
-  {
-    id: 4,
-    title: 'Painting house',
-    name: 'Luis',
-    description: 'Please contact me via email before',
-    date: '2022-07-30T20:05:13+00:00',
-    status: 'pending',
-    img: 'https://i.pinimg.com/originals/8c/22/4c/8c224c88cbfcf226e3ee5d215e4930fa.png',
-  },
-];
-
-const requests = [
-  {
-    id: 1,
-    title: 'Babysitting',
-    name: 'Amelia',
-    description: "I need help because I'm going out for dinner",
-    date: '2022-06-23T14:41:13+00:00',
-    status: 'pending',
-    img: '^1',
-  },
-  {
-    id: 2,
-    title: 'Watering plants',
-    name: 'Elena',
-    description: 'I will be gone on holiday, need watering 1 time/week',
-    date: '2022-07-30T19:41:13+00:00',
-    status: 'accepted',
-    img: 'https://cdn.dribbble.com/users/3543938/screenshots/6603062/flat-illustration.png',
-  },
-  {
-    id: 3,
-    title: 'Teaching guitar',
-    name: 'Lolo',
-    description: 'I want to learn a happy song',
-    date: '2022-07-25T08:41:13+00:00',
-    status: 'accepted',
-    img: 'https://cdn.dribbble.com/users/5352839/screenshots/11892562/character.png',
-  },
-  {
-    id: 4,
-    title: 'Painting house',
-    name: 'Armin',
-    description: 'I broke my arm and cannot hold a brush',
-    date: '2022-07-30T20:05:13+00:00',
-    status: 'pending',
-    img: 'https://www.kindpng.com/picc/m/310-3100872_dancing-man-design-flat-vector-vector-colors-illustration.png',
-  },
-];
+import AppContext from './AppContext';
+import BookingContext from './BookingContext';
+import Navbar from './components/Navbar';
+import ProfileView from './views/ProfileView';
+import BookingsView from './views/BookingsView';
+import RequestsView from './views/RequestsView';
+import HomeView from './views/HomeView';
+import Error404View from './views/Error404View';
+import SignUpView from './views/SignUpView';
+import LogInView from './views/LogInView';
+import RequestServiceView from './views/RequestServiceView';
+import PostOfferView from './views/PostOfferView';
+import EditProfileView from './views/EditProfileView';
+import GetStarted from './views/GetStarted';
+import RulesView from './views/RulesView';
 
 const postalCodes = [
   '08006',
@@ -149,26 +69,21 @@ export default function App() {
     setUser(null);
   }
 
-// sign up
-  async function addNewUser(newUser ) {
-    
-
-    let myresponse = await Api.RegisterUser(newUser );
+  // sign up
+  async function addNewUser(newUser) {
+    let myresponse = await Api.RegisterUser(newUser);
     if (myresponse.ok) {
       Local.saveUserInfo(myresponse.data.user, myresponse.data.token);
       setUser(myresponse.data.user);
-      console.log(user)
-      setLoginErrorMsg("");
-      navigate("/login");
-  
+      console.log(user);
+      setLoginErrorMsg('');
+      navigate('/login');
     } else {
       setLoginErrorMsg('Login failed');
     }
-
   }
 
   // ********* users *************
-
 
   async function getCategories() {
     try {
@@ -221,29 +136,27 @@ export default function App() {
     navigate('/');
   }
 
-
   function selectOffer(id) {
    let selected = offers.filter(e=> e.postID === id);
    setSelectedOffer(selected);
   }
 
   async function requestService(requestData) {
-
     let options = {
-      method: "POST",
+      method: 'POST',
       headers: {
-        "Content-Type": "application/json",
+        'Content-Type': 'application/json',
       },
       body: JSON.stringify(requestData),
     };
 
     try {
-      let response = await fetch("/bookings/", options); // do POST
+      let response = await fetch('/bookings/', options); // do POST
       if (response.ok) {
         let userBookings = await response.json(); // set bookings state with all bookings(requests) that the logged in user made, including the new one
         setUserBookings(userBookings);
-        console.log("Service got requested");
-        navigate("/bookings"); // go to all bookings (Receiving help page)
+        console.log('Service got requested');
+        navigate('/bookings'); // go to all bookings (Receiving help page)
       } else {
         console.log(`Server error: ${response.status} ${response.statusText}`);
       }
@@ -331,9 +244,54 @@ export default function App() {
     }
   }
 
-  const contextObj = { offers, user, selectOfferCb: selectOffer, deleteServiceCb: deleteService, toEditCb: toEdit };
-  const chosenUserObj = { selectedOffer, user, requestServiceCb: requestService };
- // console.log("I am chosenUserObj", {chosenUserObj});
+  // PUT: Add status of booking
+  async function reactToRequest(id, reply) {
+    // Find booking in state and change status
+    let booking = bookings.find((b) => b.bookingId === id);
+    booking.bookingStatus = reply;
+    booking.proposedDate = booking.proposedDate.slice(0, 10);
+
+    // Define fetch() options
+    let options = {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(booking),
+    };
+
+    try {
+      let response = await fetch(`/bookings/${id}`, options); // do PUT
+      if (response.ok) {
+        let bookings = await response.json();
+        setBookings(bookings);
+      } else {
+        console.log(`Server error: ${response.status} ${response.statusText}`);
+      }
+    } catch (err) {
+      console.log(`Server error: ${err.message}`);
+    }
+  }
+
+  const contextObj = {
+    offers,
+    user,
+    selectOfferCb: selectOffer,
+    deleteServiceCb: deleteService,
+    toEditCb: toEdit
+  };
+
+  const chosenUserObj = {
+    selectedOffer,
+    user,
+    requestServiceCb: requestService,
+  };
+
+  const bookingsObj = {
+    bookings: user && bookings
+      ? bookings.filter((e) => e.requestor.userID === user.id)
+      : [],
+    reactToRequestCb: reactToRequest,
+  };
+ 
 
   return (
     <div className="App bg-gradient-to-t from-[#FFF7A3] via-[#FFF7A3] to-[#ff994091] h-full pb-28">
@@ -348,7 +306,7 @@ export default function App() {
           path="profile"
           element={
             <AppContext.Provider value={contextObj}>
-              <ProfileView user = {user} />
+              <ProfileView user={user} />
             </AppContext.Provider>
           }
         />
@@ -361,7 +319,15 @@ export default function App() {
           }
         />
 
-        <Route path="signup" element={<SignUpView user = {user} addNewUserCb={(newUser ) => addNewUser(newUser )}/>} />
+        <Route
+          path="signup"
+          element={
+            <SignUpView
+              user={user}
+              addNewUserCb={(newUser) => addNewUser(newUser)}
+            />
+          }
+        />
 
         <Route
           path="login"
@@ -373,8 +339,15 @@ export default function App() {
           }
         />
         <Route path="rules" element={<RulesView />} />
-        {/* <Route path="offers" element={<OfferGrid />} /> */}
-        <Route path="receiving-help" element={<BookingsView bookings={user ? bookings.filter(e=> e.requestor.userID === user.id) : []} />} />
+
+        <Route
+          path="receiving-help"
+          element={
+            <AppContext.Provider value={bookingsObj}>
+              <BookingsView />{' '}
+            </AppContext.Provider>
+          }
+        />
         <Route path="getstarted" element={<GetStarted />} />
         <Route
           path="/"
@@ -404,7 +377,14 @@ export default function App() {
             />
           }
         />
-        <Route path="giving-help" element={<RequestsView bookings={user ? bookings.filter(e=> e.servicePost.serviceProvider === user.id) : []} />} />
+        <Route
+          path="giving-help"
+          element={
+            <AppContext.Provider value={bookingsObj}>
+              <RequestsView />{' '}
+            </AppContext.Provider>
+          }
+        />
         <Route path="*" element={<Error404View />} />
       </Routes>
     </div>

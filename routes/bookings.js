@@ -141,8 +141,8 @@ router.post("/", async function(req, res) {
 // PUT - edit the booking
 router.put("/:bookingId", async (req, res) => {
     let { bookingId } = req.params;
-    
-    let { booking_description, proposed_date, estimated_time, need_donation, booking_status, service_time, fk_requestor_id, fk_service_post_id } = req.body;
+    console.log(req.body);
+    let { bookingDescription, proposedDate, estimatedTime, needDonation, bookingStatus, serviceTime, requestor, servicePost } = req.body;
   
     try {
         let result = await db(`SELECT * FROM bookings WHERE id = ${bookingId}`);  // does booking exist?
@@ -151,14 +151,14 @@ router.put("/:bookingId", async (req, res) => {
         } else {
             let sql = `
                 UPDATE bookings 
+
                 SET booking_description = "${booking_description}", proposed_date = "${proposed_date}", estimated_time = ${estimated_time}, need_donation = ${need_donation}, booking_status = "${booking_status}", service_time = ${service_time}, fk_requestor_id = ${fk_requestor_id}, fk_service_post_id = ${fk_service_post_id}
+
                 WHERE id = ${bookingId}
             `;
   
             await db(sql);  // update booking
-            let result = await db("SELECT * FROM bookings");
-            let bookings = result.data;
-            res.send(bookings);  // return updated array
+            await sendAllBookings(res); 
         }
     } catch (err) {
         res.status(500).send({ error: err.message });
