@@ -1,7 +1,11 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React from "react";
+import { Link } from "react-router-dom";
+import { useLayoutEffect } from "react";
 
 function Error404View() {
+  useLayoutEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
   return (
     <div className="min-h-screen px-16 py-8 min-w-screen">
       <svg
@@ -155,7 +159,7 @@ function Error404View() {
         <circle cx="266.615" cy="150.456" r="11.833" fill="#b9d4db" />
       </svg>
       <Link
-        to={'/'}
+        to={"/"}
         className="block w-1/5 px-4 py-2 mx-auto my-5 font-semibold bg-transparent border rounded hover:bg-amber-600 text-amber-700 hover:text-white border-amber-600 hover:border-transparent"
       >
         Back to Homepage
@@ -165,16 +169,26 @@ function Error404View() {
         target="_blank"
       >
         Page Not Found Illustration
-      </a>{' '}
-      by{' '}
+      </a>{" "}
+      by{" "}
       <a href="https://iconscout.com/contributors/iconscout" target="_blank">
         IconScout Store
-      </a>{' '}
-      <a href="https://www.freepik.com/vectors/family-cooking">Family cooking vector created by pch.vector - www.freepik.com</a>
-      <a href="https://www.freepik.com/vectors/plant-care">Plant care vector created by freepik - www.freepik.com</a>
-      <a href="https://www.freepik.com/vectors/badminton-player">Badminton player vector created by storyset - www.freepik.com</a>
-      <a href="https://www.freepik.com/vectors/play-guitar">Play guitar vector created by redgreystock - www.freepik.com</a>
-      <a href='https://www.freepik.com/vectors/car-sharing'>Car sharing vector created by vectorjuice - www.freepik.com</a>
+      </a>{" "}
+      <a href="https://www.freepik.com/vectors/family-cooking">
+        Family cooking vector created by pch.vector - www.freepik.com
+      </a>
+      <a href="https://www.freepik.com/vectors/plant-care">
+        Plant care vector created by freepik - www.freepik.com
+      </a>
+      <a href="https://www.freepik.com/vectors/badminton-player">
+        Badminton player vector created by storyset - www.freepik.com
+      </a>
+      <a href="https://www.freepik.com/vectors/play-guitar">
+        Play guitar vector created by redgreystock - www.freepik.com
+      </a>
+      <a href="https://www.freepik.com/vectors/car-sharing">
+        Car sharing vector created by vectorjuice - www.freepik.com
+      </a>
     </div>
   );
 }

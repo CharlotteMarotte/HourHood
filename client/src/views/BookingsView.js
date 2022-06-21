@@ -1,15 +1,21 @@
-import React, { useContext } from 'react';
-import AppContext from '../AppContext';
-import SelectedOfferCard from '../components/SelectedOfferCard';
+
+import React, { useContext } from "react";
+import AppContext from "../AppContext";
+import SelectedOfferCard from "../components/SelectedOfferCard";
+import { useLayoutEffect } from "react";
 import { Link } from 'react-router-dom';
 
+
 export default function BookingsView(props) {
+  useLayoutEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
   let { bookings } = useContext(AppContext);
 
   return (
     <div>
       <h1 className="pt-8 text-4xl font-bold text-left ml-14 text-amber-900">
-        Receiving help{' '}
+        Receiving help{" "}
       </h1>
       <Link
         to={'/'}
@@ -32,10 +38,10 @@ export default function BookingsView(props) {
             Pending
           </h1>
           {bookings
-            .filter((e) => e.bookingStatus === 'pending')
+            .filter((e) => e.bookingStatus === "pending")
             .map((booking) => (
               <SelectedOfferCard
-                view={'bookings'}
+                view={"bookings"}
                 booking={booking}
                 key={booking.bookingId}
               />
@@ -48,14 +54,14 @@ export default function BookingsView(props) {
               Accepted
             </h1>
             {bookings
-              .filter((e) => e.bookingStatus === 'accepted')
+              .filter((e) => e.bookingStatus === "accepted")
               .map((booking) => (
                 <SelectedOfferCard
-                  view={'bookings'}
+                  view={"bookings"}
                   booking={booking}
                   key={booking.bookingId}
                 />
-              ))}{' '}
+              ))}{" "}
           </div>
         </div>
       </div>
