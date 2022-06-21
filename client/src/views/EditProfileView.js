@@ -76,7 +76,7 @@ export default function EditProfileView(props) {
       <div className="w-full overflow-hidden border-2 border-solid bg-amber-100 text-amber-500 rounded-xl border-amber-200">
         <div className="w-full lg:flex">
           <div className="object-cover px-5 py-5 bg-white border-r-2 border-solid md:block md:w-3/7 lg:w-2/5 border-amber-00">
-            <img className="rounded-xl" src={profileData.photo} />
+            <img className="mb-5 rounded-xl" src={profileData.photo} />
             <form onSubmit={handlePhotoSubmit}>
               <input
                 type="file"
@@ -282,7 +282,7 @@ export default function EditProfileView(props) {
                         id="hobbies-input"
                         name="hobbies"
                         value={profileData.hobbies}
-                        placeholder="Using Hour Hood"
+                        placeholder="No hobbies filled in yet"
                         type="text"
                         className="w-full py-2 pl-10 pr-3 -ml-10 border-2 rounded-lg outline-none border-amber-200 focus:border-lime-700"
                       ></input>
@@ -304,7 +304,7 @@ export default function EditProfileView(props) {
                         id="superpower-input"
                         name="superpower"
                         value={profileData.superpower}
-                        placeholder="Being part of a loving community"
+                        placeholder="No superpower filled in yet"
                         type="text"
                         className="w-full py-2 pl-10 pr-3 -ml-10 border-2 rounded-lg outline-none border-amber-200 focus:border-lime-700"
                       ></input>
