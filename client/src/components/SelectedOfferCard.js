@@ -1,7 +1,20 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import AppContext from '../AppContext';
 export default function SelectedOfferCard(props) {
-  let { reactToRequestCb } = useContext(AppContext);
+  let { reactToRequestCb, users } = useContext(AppContext);
+
+  const [providerData, setProviderData] = useState(users[0]);
+
+  useEffect(() => {
+    getProviderData();
+  }, []);
+
+  function getProviderData() {
+    let filteredUsers = users.filter(
+      (u) => u.id === props.booking.servicePost.serviceProvider
+    );
+    setProviderData(filteredUsers[0]);
+  }
 
   return (
     // Code thanks to https://codepen.io/egoistdeveloper/pen/xxYrmgd
@@ -13,9 +26,9 @@ export default function SelectedOfferCard(props) {
           <img
             className="object-cover w-64 h-64"
             src={
-              props.booking.requestor.profilePicture.length > 0
+              props.view === 'requests'
                 ? props.booking.requestor.profilePicture
-                : 'https://media1.thehungryjpeg.com/thumbs2/ori_3828483_pvs5h84dimh89wrk5g11gcc3wjgxg1tts9xyyyfq_flat-illustration-girl-holding-a-laptop.jpg'
+                : providerData.photo
             }
             alt="User"
           />
@@ -42,7 +55,9 @@ export default function SelectedOfferCard(props) {
               </svg>
 
               <div className="text-s text-amber-700/80 ">
-                {props.booking.requestor.firstName}
+                {props.view === 'requests'
+                  ? props.booking.requestor.firstName
+                  : providerData.first_name}
               </div>
             </div>
 
@@ -59,7 +74,9 @@ export default function SelectedOfferCard(props) {
               </svg>
 
               <div className="text-s text-amber-700/80 ">
-                {props.booking.requestor.cityName}
+                {props.view === 'requests'
+                  ? props.booking.requestor.cityName
+                  : providerData.city_name}
               </div>
             </div>
           </div>
@@ -73,12 +90,15 @@ export default function SelectedOfferCard(props) {
             </p>
 
             <p className="leading-relaxed text-amber-700 ">
-              {new Date(props.booking.proposedDate).toLocaleDateString('en-GB', {
-                weekday: 'long',
-                year: 'numeric',
-                month: 'short',
-                day: 'numeric',
-              })}
+              {new Date(props.booking.proposedDate).toLocaleDateString(
+                'en-GB',
+                {
+                  weekday: 'long',
+                  year: 'numeric',
+                  month: 'short',
+                  day: 'numeric',
+                }
+              )}
             </p>
           </div>
           <div className="flex flex-col items-start justify-end flex-grow w-full pt-6 mt-4 lg:pt-0 w-100">
@@ -87,15 +107,18 @@ export default function SelectedOfferCard(props) {
               <div className="flex flex-row space-x-3">
                 <button
                   type="submit"
-                  onClick={e => reactToRequestCb(props.booking.bookingId, "declined")}
-
+                  onClick={(e) =>
+                    reactToRequestCb(props.booking.bookingId, 'declined')
+                  }
                   className="px-4 py-2 font-semibold bg-transparent border rounded hover:bg-amber-500 text-amber-700 hover:text-white border-amber-500 hover:border-transparent"
                 >
                   Decline{' '}
                 </button>{' '}
                 <button
                   type="button"
-                  onClick={e => reactToRequestCb(props.booking.bookingId, "accepted")}
+                  onClick={(e) =>
+                    reactToRequestCb(props.booking.bookingId, 'accepted')
+                  }
                   className="px-4 py-2 font-semibold bg-transparent border rounded hover:bg-lime-600 text-lime-700 hover:text-white border-lime-600 hover:border-transparent"
                 >
                   Accept
@@ -105,7 +128,9 @@ export default function SelectedOfferCard(props) {
               <div className="flex flex-row space-x-3">
                 <button
                   type="submit"
-                  onClick={e => reactToRequestCb(props.booking.bookingId, "declined")}
+                  onClick={(e) =>
+                    reactToRequestCb(props.booking.bookingId, 'declined')
+                  }
                   className="px-4 py-2 font-semibold bg-transparent border rounded hover:bg-amber-500 text-amber-700 hover:text-white border-amber-500 hover:border-transparent"
                 >
                   Cancel{' '}
