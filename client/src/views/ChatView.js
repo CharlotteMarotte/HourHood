@@ -3,10 +3,11 @@ import Chat from "../components/Chat";
 import { useLayoutEffect } from "react";
 
 export default function ChatView(props) {
+
   return (
     <div>
       ChatView
-      <Chat senderName="Juan" bookingId="1" />
+      <Chat senderName={props.user ? props.user.first_name : "no one"} bookings={props.bookings} bookingId="1" />
       
     </div>
   );
