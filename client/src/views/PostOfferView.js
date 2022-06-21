@@ -6,6 +6,7 @@ export default function PostOfferView(props) {
   const { op } = useParams();
 
   let o = props.offerToEdit[0];
+  let defaultCategory = o.category.categoryID
   //console.log("offer to edit:", o)
   
   let EMPTY_FORM = {
@@ -136,7 +137,8 @@ export default function PostOfferView(props) {
                         name="fk_category_id"
                         id="select_category"
                         onChange={(e) => handleInputChange(e)}
-                        defaultValue={'DEFAULT'}
+                        defaultValue= {op === "edit" ? defaultCategory : 'DEFAULT' }
+
                       >
                         <option
                           className="p-4 hover:bg-amber-100 text-md "
