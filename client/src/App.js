@@ -181,7 +181,7 @@ export default function App() {
         let userBookings = await response.json(); // set bookings state with all bookings(requests) that the logged in user made, including the new one
         setUserBookings(userBookings);
         console.log('Service got requested');
-        navigate('/bookings'); // go to all bookings (Receiving help page)
+        navigate('/receiving-help'); // go to all bookings (Receiving help page)
       } else {
         console.log(`Server error: ${response.status} ${response.statusText}`);
       }
@@ -205,7 +205,7 @@ export default function App() {
       if (response.ok) {
         let offers = await response.json(); // set invoices state with all invoices including new ones
         setOffers(offers);
-        navigate('/profile');
+        navigate('/profile/:id');
       } else {
         console.log(`Server error: ${response.status} ${response.statusText}`);
       }

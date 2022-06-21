@@ -22,6 +22,7 @@ export default function RequestServiceView(props) {
   };
 
   const [requestData, setRequestData] = useState(INIT_FORM);
+  const [isChecked, setIsChecked] = useState(false);
 
   const handleInputChange = (event) => {
     let { name, value } = event.target;
@@ -31,6 +32,10 @@ export default function RequestServiceView(props) {
       ...state, // gets replaced by all key-value pairs from obj
       [name]: value, // updates key [name] with new value
     }));
+  };
+
+  const handleCheckboxChange = () => {
+    setIsChecked(!isChecked);
   };
 
   function handleSubmit(event) {
@@ -43,6 +48,7 @@ export default function RequestServiceView(props) {
     requestServiceCb(newRequestData);
     setRequestData(INIT_FORM);
   }
+  
 
   return (
     // Code thanks to https://codepen.io/atzinn-herrera/pen/JjMMBxy
