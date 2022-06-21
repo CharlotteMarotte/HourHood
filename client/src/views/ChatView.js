@@ -6,8 +6,8 @@ export default function ChatView(props) {
   return (
     <div>
       ChatView
-      <Chat senderName="Juan" bookingId="1" />
-      
+      <Chat senderName={} bookingId={props.bookingId} />
+      <Chat senderName={} bookingId={props.bookingId} />
     </div>
   );
 }
