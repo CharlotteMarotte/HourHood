@@ -3,6 +3,7 @@ import { Route, Routes, useNavigate } from 'react-router-dom';
 import Api from '../src/helpers/Api';
 import Local from '../src/helpers/Local';
 import './App.css';
+import { useLayoutEffect } from "react";
 
 
 
@@ -53,7 +54,10 @@ export default function App() {
     getOffers();
     getUsers();
   }, []);
-
+  
+  useLayoutEffect(() => {
+    window.scrollTo(0, 0)
+}, []);
   // ********* users *************
 
   // login

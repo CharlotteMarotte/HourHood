@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import { useLayoutEffect } from "react";
 
 
 
@@ -7,6 +8,11 @@ export default function LogInView(props) {
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+
+
+  useLayoutEffect(() => {
+    window.scrollTo(0, 0)
+}, []);
 
   function handleChange(event) {
     let { name, value } = event.target;

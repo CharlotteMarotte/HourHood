@@ -1,19 +1,24 @@
-import React, { useContext, useState} from 'react';
-import BookingContext from '../BookingContext';
-import { Link } from 'react-router-dom';
+import React, { useContext, useState } from "react";
+import BookingContext from "../BookingContext";
+import { Link } from "react-router-dom";
+import { useLayoutEffect } from "react";
 
 export default function RequestServiceView(props) {
   let { selectedOffer, user, requestServiceCb } = useContext(BookingContext);
-  
+
+  useLayoutEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   const INIT_FORM = {
-    booking_description: '',
-    proposed_date: '',
+    booking_description: "",
+    proposed_date: "",
     estimated_time: 0,
     need_donation: false,
-    booking_status: 'pending',
+    booking_status: "pending",
     service_time: null,
     fk_requestor_id: user.id,
-    fk_service_post_id: selectedOffer[0].postID
+    fk_service_post_id: selectedOffer[0].postID,
   };
 
   const [requestData, setRequestData] = useState(INIT_FORM);
@@ -31,11 +36,13 @@ export default function RequestServiceView(props) {
   function handleSubmit(event) {
     event.preventDefault();
     // Call callback we got from AppContext
-    let newRequestData = {...requestData, fk_service_post_id: selectedOffer[0].postID }
+    let newRequestData = {
+      ...requestData,
+      fk_service_post_id: selectedOffer[0].postID,
+    };
     requestServiceCb(newRequestData);
     setRequestData(INIT_FORM);
   }
-
 
   return (
     // Code thanks to https://codepen.io/atzinn-herrera/pen/JjMMBxy
@@ -53,7 +60,9 @@ export default function RequestServiceView(props) {
               <h1 className="text-4xl font-bold text-amber-900">
                 Request a service
               </h1>
-              <p className="text-2xl font-bold text-amber-600">{selectedOffer[0].title}</p>
+              <p className="text-2xl font-bold text-amber-600">
+                {selectedOffer[0].title}
+              </p>
             </header>
             <form onSubmit={handleSubmit}>
               <div className="space-x-2 xl:flex :lg-flex-col-1">
@@ -65,8 +74,7 @@ export default function RequestServiceView(props) {
                     Time needed (in h)
                   </label>
                   <div className="flex">
-                    <div className="z-10 flex items-center justify-center w-10 text-center poniter-events-none">
-                    </div>
+                    <div className="z-10 flex items-center justify-center w-10 text-center poniter-events-none"></div>
                     <input
                       required
                       id="time-needed-input"
@@ -87,8 +95,7 @@ export default function RequestServiceView(props) {
                     Proposed Date
                   </label>
                   <div className="flex">
-                    <div className="z-10 flex items-center justify-center w-10 text-center poniter-events-none">
-                    </div>
+                    <div className="z-10 flex items-center justify-center w-10 text-center poniter-events-none"></div>
                     <input
                       required
                       id="proposed-date-input"
@@ -107,8 +114,7 @@ export default function RequestServiceView(props) {
                     Message
                   </label>
                   <div className="flex">
-                    <div className="z-10 flex items-center justify-center w-10 pl-1 text-center pointer-events-none">
-                    </div>
+                    <div className="z-10 flex items-center justify-center w-10 pl-1 text-center pointer-events-none"></div>
                     <textarea
                       id="message-input"
                       name="booking_description"
@@ -135,7 +141,7 @@ export default function RequestServiceView(props) {
               </div>
               <div className="flex flex-wrap justify-center space-x-2 lg:space-y-0">
                 <Link
-                  to={'/'}
+                  to={"/"}
                   className="px-4 py-2 font-semibold bg-transparent border rounded hover:bg-lime-600 text-lime-700 hover:text-white border-lime-600 hover:border-transparent"
                 >
                   Back
@@ -144,7 +150,7 @@ export default function RequestServiceView(props) {
                   type="submit"
                   className="px-4 py-2 font-semibold bg-transparent border rounded hover:bg-amber-500 text-amber-700 hover:text-white border-amber-500 hover:border-transparent"
                 >
-                  Request{' '}
+                  Request{" "}
                 </button>
               </div>
             </form>
