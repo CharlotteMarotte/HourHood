@@ -314,10 +314,11 @@ export default function App() {
     requests: user && bookings
       ? bookings.filter((e) => e.requestor.userID === user.id)
       : [],
-      offers: user && bookings
+      bookings: user && bookings
       ? bookings.filter((e) => e.servicePost.serviceProvider === user.id)
       : [],
       users,
+      offers,
     reactToRequestCb: reactToRequest,
   };
 
@@ -414,7 +415,7 @@ export default function App() {
           }
         />
         <Route path="*" element={<Error404View />} />
-        <Route path="chat" element={<ChatView/>} />
+        <Route path="chat" element={<ChatView user={user} bookings={bookings}/>} />
       </Routes>
       <div>
         {/* <Chat user = {user} senderName="Juan" bookingId="1"/>

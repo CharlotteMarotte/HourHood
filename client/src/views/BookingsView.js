@@ -10,7 +10,7 @@ export default function BookingsView(props) {
   useLayoutEffect(() => {
     window.scrollTo(0, 0);
   }, []);
-  let { offers } = useContext(AppContext);
+  let { bookings } = useContext(AppContext);
 
   return (
     <div>
@@ -37,7 +37,7 @@ export default function BookingsView(props) {
           <h1 className="pt-4 ml-20 text-3xl font-bold text-left border-b-2 border-opacity-25 text-amber-700 border-amber-700">
             Pending
           </h1>
-          {offers
+          {bookings
             .filter((e) => e.bookingStatus === "pending")
             .map((booking) => (
               <SelectedOfferCard
@@ -53,7 +53,7 @@ export default function BookingsView(props) {
             <h1 className="pt-4 ml-20 mr-20 text-3xl font-bold text-left border-b-2 border-opacity-25 q-100 text-amber-700 border-amber-700">
               Accepted
             </h1>
-            {offers
+            {bookings
               .filter((e) => e.bookingStatus === "accepted")
               .map((booking) => (
                 <SelectedOfferCard

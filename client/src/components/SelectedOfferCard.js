@@ -1,7 +1,9 @@
 import React, { useContext, useState, useEffect } from 'react';
 import AppContext from '../AppContext';
+import { Link } from 'react-router-dom';
+
 export default function SelectedOfferCard(props) {
-  let { reactToRequestCb, users } = useContext(AppContext);
+  let { reactToRequestCb, users, offers } = useContext(AppContext);
 
   const [providerData, setProviderData] = useState(users[0]);
 
@@ -26,7 +28,7 @@ export default function SelectedOfferCard(props) {
           <img
             className="object-cover w-64 h-64"
             src={
-              props.view === 'requests'
+              props.view === 'bookings'
                 ? props.booking.requestor.profilePicture
                 : providerData.photo
             }
@@ -55,7 +57,7 @@ export default function SelectedOfferCard(props) {
               </svg>
 
               <div className="text-s text-amber-700/80 ">
-                {props.view === 'requests'
+                {props.view === 'bookings'
                   ? props.booking.requestor.firstName
                   : providerData.first_name}
               </div>
@@ -74,7 +76,7 @@ export default function SelectedOfferCard(props) {
               </svg>
 
               <div className="text-s text-amber-700/80 ">
-                {props.view === 'requests'
+                {props.view === 'bookings'
                   ? props.booking.requestor.cityName
                   : providerData.city_name}
               </div>
@@ -82,11 +84,12 @@ export default function SelectedOfferCard(props) {
           </div>
           <div
             className={`w-full p-5 mt-5 space-y-3 text-left rounded-lg justify ${
-              props.view === 'requests' ? 'bg-amber-200' : 'bg-orange-200'
+              props.view === 'bookings' ? 'bg-amber-200' : 'bg-orange-200'
             }`}
           >
             <p className="leading-relaxed text-amber-700 ">
-              Note: "{props.booking.bookingDescription}"
+              {props.view === 'bookings' ? 'Your note: "' : 'Their note: "'}
+              {props.booking.bookingDescription}"
             </p>
 
             <p className="leading-relaxed text-amber-700 ">
@@ -102,7 +105,7 @@ export default function SelectedOfferCard(props) {
             </p>
           </div>
           <div className="flex flex-col items-start justify-end flex-grow w-full pt-6 mt-4 lg:pt-0 w-100">
-            {props.view === 'requests' &&
+            {props.view === 'bookings' &&
             props.booking.bookingStatus === 'pending' ? (
               <div className="flex flex-row space-x-3">
                 <button
@@ -135,6 +138,12 @@ export default function SelectedOfferCard(props) {
                 >
                   Cancel{' '}
                 </button>{' '}
+                <Link
+                 to="/chat"
+                  className="px-4 py-2 font-semibold bg-transparent border rounded hover:bg-amber-500 text-amber-700 hover:text-white border-amber-500 hover:border-transparent"
+                >
+                  Chat{' '}
+                </Link>{' '}
               </div>
             )}
           </div>
