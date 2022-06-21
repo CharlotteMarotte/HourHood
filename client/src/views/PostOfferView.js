@@ -11,8 +11,10 @@ export default function PostOfferView(props) {
   const { op } = useParams();
 
   let o = props.offerToEdit[0];
+
+  console.log("allofferstoedit:", props.offerToEdit)
   
-  //console.log("offer to edit:", o)
+  console.log("offer to edit:", o)
 
   let INIT_FORM = {
     service_title: o.title,
