@@ -21,9 +21,9 @@ export default function OfferGrid() {
             user ? 'lg:block ' : 'hidden'
           } pb-6 w-full mt-10 lg:mt-0 lg:w-1/6 xl:w-1/5 h-1/2 bg-white shadow-lg shadow-amber-400 border-amber-200 border-2  rounded-lg`}
         >
-          <div className='mx-4 my-6 w-2/3 h-2/3 lg:w-48 lg:h-48'>
+          <div className='w-2/3 mx-4 my-6 h-2/3 lg:w-48 lg:h-48'>
           <img
-            className="border-2 w-2/3 h-2/3 lg:w-48 lg:h-48 object-cover rounded-full border-amber-400"
+            className="object-cover w-2/3 border-2 rounded-full h-2/3 lg:w-48 lg:h-48 border-amber-400"
             src={user.photo}
             alt="avatar"
           />
@@ -33,7 +33,7 @@ export default function OfferGrid() {
           </h1>
           <p className="my-2 leading-relaxed text-amber-500 ">Wallet: 10h</p>
           <Link
-            to="/profile"
+            to={`/profile/${user.id}`}
             className="leading-relaxed underline text-amber-400"
           >
             My Profile
