@@ -12,15 +12,12 @@ export default function PostOfferView(props) {
 
   let o =  props.offerToEdit ? props.offerToEdit[0] : null;
 
-  console.log("allofferstoedit:", props.offerToEdit)
-  
-  console.log("offer to edit:", o)
+
 
   let EMPTY_FORM = {
     service_title: "",
     service_description: "",
     capacity: 0,
-    donation: false,
     fk_category_id: 0,
     fk_provider_id: props.user.id,
   }; 
@@ -29,7 +26,6 @@ export default function PostOfferView(props) {
     service_title: o.title,
     service_description: o.description,
     capacity: o.capacity,
-    donation: o.donation,
     fk_category_id: o.category.categoryID,
     fk_provider_id: o.user.userID,
   } : EMPTY_FORM
@@ -39,6 +35,8 @@ export default function PostOfferView(props) {
   let [serviceData, setServiceData] = useState(
     op === "add" ? EMPTY_FORM : INIT_FORM
   );
+
+  let [isChecked, setIsChecked] = useState(op === "add" ? false : o.donation);
 
   const handleInputChange = (event) => {
     let { name, value } = event.target;
@@ -50,15 +48,22 @@ export default function PostOfferView(props) {
     }));
   };
 
+  const handleCheckboxChange = () => {
+    setIsChecked(!isChecked);
+  };
+
   function handleSubmit(event) {
     event.preventDefault();
-    op === "edit"
-      ? props.updateOfferCb(serviceData)
-      : props.postServiceCb(serviceData);
-    setServiceData(EMPTY_FORM);
-  }
+    let newServiceData = {
+    ...serviceData,
+    donation: isChecked}
 
-  //let defaultCategory = op === "add" ? o.category.categoryID : null;
+    op === "edit"
+      ? props.updateOfferCb(newServiceData)
+      : props.postServiceCb(newServiceData);
+    setServiceData(EMPTY_FORM);
+    setIsChecked(false);
+  }
 
   return (
     // Code thanks to https://codepen.io/atzinn-herrera/pen/JjMMBxy
@@ -128,8 +133,8 @@ export default function PostOfferView(props) {
                       type="checkbox"
                       id="donation"
                       name="donation"
-                      value={!serviceData.donation}
-                      onChange={(e) => handleInputChange(e)}
+                      checked={isChecked}
+                      onChange={(e) => handleCheckboxChange(e)}
                       className="bg-lime-700 hover:bg-lime-700 focus:bg-lime-700"
                     />
                     <label htmlFor="donation">I accept donations</label>

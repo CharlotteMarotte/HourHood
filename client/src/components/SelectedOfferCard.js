@@ -88,7 +88,8 @@ export default function SelectedOfferCard(props) {
             }`}
           >
             <p className="leading-relaxed text-amber-700 ">
-              Note: "{props.booking.bookingDescription}"
+            {props.view === 'bookings' ? 'You: "': `${props.booking.requestor.firstName}: "`}
+            {props.booking.bookingDescription}"
             </p>
           </div>
           <div

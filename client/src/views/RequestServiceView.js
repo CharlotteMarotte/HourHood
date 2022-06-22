@@ -1,28 +1,34 @@
-import React, { useContext, useState } from "react";
-import BookingContext from "../BookingContext";
-import { Link } from "react-router-dom";
-import { useLayoutEffect } from "react";
+import React, { useContext, useState } from 'react';
+import BookingContext from '../BookingContext';
+import { Link } from 'react-router-dom';
+import { useLayoutEffect } from 'react';
 
-export default function RequestServiceView(props) {
-  let { selectedOffer, user, requestServiceCb } = useContext(BookingContext);
+export default function RequestServiceView() {
+  let { selectedOffer, user, requestServiceCb, userWallet } =
+    useContext(BookingContext);
 
   useLayoutEffect(() => {
     window.scrollTo(0, 0);
+    getCurrDate();
   }, []);
 
   const INIT_FORM = {
-    booking_description: "",
-    proposed_date: "",
+    booking_description: '',
+    proposed_date: '',
     estimated_time: 0,
-    need_donation: false,
-    booking_status: "pending",
-    service_time: null,
+    booking_status: 'pending',
     fk_requestor_id: user.id,
-    fk_service_post_id: selectedOffer[0].postID,
   };
 
   const [requestData, setRequestData] = useState(INIT_FORM);
-  const [isChecked, setIsChecked] = useState(false);
+  const [isChecked, setIsChecked] = useState(userWallet < 1 ? true : false);
+  const [date, setDate] = useState(null);
+
+  function getCurrDate() {
+    let yourDate = new Date();
+    yourDate = yourDate.toISOString().split('T')[0];
+    setDate(yourDate);
+  }
 
   const handleInputChange = (event) => {
     let { name, value } = event.target;
@@ -44,11 +50,11 @@ export default function RequestServiceView(props) {
     let newRequestData = {
       ...requestData,
       fk_service_post_id: selectedOffer[0].postID,
+      need_donation: isChecked,
     };
     requestServiceCb(newRequestData);
     setRequestData(INIT_FORM);
   }
-  
 
   return (
     // Code thanks to https://codepen.io/atzinn-herrera/pen/JjMMBxy
@@ -69,6 +75,9 @@ export default function RequestServiceView(props) {
               <p className="text-2xl font-bold text-amber-600">
                 {selectedOffer[0].title}
               </p>
+              <p className="w-1/2 p-5 mx-auto text-xl rounded-lg text-amber-600 bg-rose-200">
+                Time to spend: {userWallet}h
+              </p>
             </header>
             <form onSubmit={handleSubmit}>
               <div className="space-x-2 xl:flex :lg-flex-col-1">
@@ -77,7 +86,7 @@ export default function RequestServiceView(props) {
                     htmlFor="time-needed-input"
                     className="px-1 text-xs font-semibold"
                   >
-                    Time needed (in h)
+                    Request time (in h)
                   </label>
                   <div className="flex">
                     <div className="z-10 flex items-center justify-center w-10 text-center poniter-events-none"></div>
@@ -86,6 +95,7 @@ export default function RequestServiceView(props) {
                       id="time-needed-input"
                       name="estimated_time"
                       value={requestData.estimated_time}
+                      max={isChecked ? '100' : userWallet}
                       onChange={(e) => handleInputChange(e)}
                       type="number"
                       className="w-full py-2 pl-10 pr-3 -ml-10 border-2 rounded-lg outline-none border-amber-200 focus:border-lime-700"
@@ -106,6 +116,7 @@ export default function RequestServiceView(props) {
                       required
                       id="proposed-date-input"
                       name="proposed_date"
+                      min={date}
                       value={requestData.proposed_date}
                       onChange={(e) => handleInputChange(e)}
                       type="date"
@@ -137,8 +148,9 @@ export default function RequestServiceView(props) {
                   <input
                     type="checkbox"
                     name="need_donation"
-                    value={!requestData.need_donation}
-                    onChange={(e) => handleInputChange(e)}
+                    readOnly={userWallet < 1 ? true : false}
+                    checked={isChecked}
+                    onChange={userWallet < 1 ? null : (e) => handleCheckboxChange(e)}
                     id="donation"
                     className="bg-lime-700 hover:bg-lime-700 focus:bg-lime-700"
                   />
@@ -147,7 +159,7 @@ export default function RequestServiceView(props) {
               </div>
               <div className="flex flex-wrap justify-center space-x-2 lg:space-y-0">
                 <Link
-                  to={"/"}
+                  to={'/'}
                   className="px-4 py-2 font-semibold bg-transparent border rounded hover:bg-lime-600 text-lime-700 hover:text-white border-lime-600 hover:border-transparent"
                 >
                   Back
@@ -156,7 +168,7 @@ export default function RequestServiceView(props) {
                   type="submit"
                   className="px-4 py-2 font-semibold bg-transparent border rounded hover:bg-amber-500 text-amber-700 hover:text-white border-amber-500 hover:border-transparent"
                 >
-                  Request{" "}
+                  Request{' '}
                 </button>
               </div>
             </form>

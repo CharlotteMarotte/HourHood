@@ -51,7 +51,7 @@ router.get('/', async function (req, res) {
 /* POST a photo */
 router.post('/', upload.single('clientfile'), async function (req, res) {
   let { fk_user_id } = req.body;
-  console.log("fk", req.body.fk_user_id, "fn", req.file.originalname )
+  // console.log("fk", req.body.fk_user_id, "fn", req.file.originalname )
 
   try {
     // Insert DB record; only save the filename, not the entire path

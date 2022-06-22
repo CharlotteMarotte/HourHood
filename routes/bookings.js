@@ -9,17 +9,17 @@ async function sendAllBookings(res) {
     // We don't need try/catch here because we're always called from within one
 
     let sql = `
-        SELECT bookings.*, service_post.*, users.*, bookings.id AS bookingId, service_post.id AS sPostId, users.id AS userId
-        FROM bookings 
-        LEFT JOIN service_post ON service_post.id = bookings.fk_service_post_id
-        LEFT JOIN users ON users.id = bookings.fk_requestor_id
-        ORDER BY bookingId ASC
+    SELECT bookings.*, service_post.*, r.*, p.first_name AS providerFirstName, p.last_name AS providerLastName, p.photo AS providerProfilePicture, bookings.id AS bookingId, service_post.id AS sPostId
+    FROM bookings 
+    LEFT JOIN service_post ON service_post.id = bookings.fk_service_post_id
+    LEFT JOIN users AS r ON r.id = bookings.fk_requestor_id
+    LEFT JOIN users AS p ON p.id = service_post.fk_provider_id
+    ORDER BY bookingId ASC
     `;
     let results = await db(sql);
     let allBookings = joinToJson(results);
     res.send(allBookings);
 }
-
 
 // Convert the DB results into a useful JSON format:
 // A nested booking obj with nested requestor(user) obj and nested servicePost obj
@@ -32,9 +32,8 @@ function joinToJson(results) {
         estimatedTime: row.estimated_time,
         needDonation: row.need_donation,
         bookingStatus: row.booking_status,
-        serviceTime: row.service_time,
          requestor: {
-            userID: row.userId,
+            userID: row.fk_requestor_id,
             firstName: row.first_name,
             lastName: row.last_name,
             street: row.street,
@@ -53,8 +52,13 @@ function joinToJson(results) {
             serviceCapacity: row.capacity,
             serviceDonation: row.donation,
             serviceCategory: row.fk_category_id,
-            serviceProvider: row.fk_provider_id
-        }
+            serviceProvider: row.fk_provider_id,
+            provider: {
+                firstName: row.providerFirstName,
+                lastName: row.providerLastName,
+                providerProfilePicture: row.providerProfilePicture
+            }
+        },
     }));
     
       return sBooking;
@@ -66,7 +70,7 @@ function joinToJson(results) {
 async function ensureBookingExists(req, res, next) {
     try {
         let results = await db(`SELECT * FROM bookings WHERE id = ${req.params.id}`);
-        console.log("I am a booking result", results);
+        // console.log("I am a booking result", results);
         if (results.data.length === 1) {
             // booking was found; save it in response obj for the route function to use
             res.locals.booking = results.data[0];
@@ -103,11 +107,12 @@ router.get("/:id", ensureBookingExists, async function(req, res) {
         // Get booking; we know it exists, thanks to guard
         // Use LEFT JOIN to also return service_post and user (requestor)
         let sql = `
-        SELECT bookings.*, service_post.*, users.*, bookings.id AS bookingId, service_post.id AS sPostId, users.id AS userId
-        FROM bookings 
-        LEFT JOIN service_post ON service_post.id = bookings.fk_service_post_id
-        LEFT JOIN users ON users.id = bookings.fk_requestor_id
-        WHERE bookings.id = ${booking.id}
+            SELECT bookings.*, service_post.*, r.*, p.first_name AS providerFirstName, p.last_name AS providerLastName, p.photo AS providerProfilePicture, bookings.id AS bookingId, service_post.id AS sPostId
+            FROM bookings 
+            LEFT JOIN service_post ON service_post.id = bookings.fk_service_post_id
+            LEFT JOIN users AS r ON r.id = bookings.fk_requestor_id
+            LEFT JOIN users AS p ON p.id = service_post.fk_provider_id
+            WHERE bookings.id = ${booking.id}
         `;
         let results = await db(sql);
         // Convert DB results into "sensible" JSON
@@ -122,11 +127,11 @@ router.get("/:id", ensureBookingExists, async function(req, res) {
 // POST  - create a booking (request) 
 router.post("/", async function(req, res) { 
 
-    let { booking_description, proposed_date, estimated_time, need_donation, booking_status, service_time, fk_requestor_id, fk_service_post_id } = req.body; 
+    let { booking_description, proposed_date, estimated_time, need_donation, booking_status, fk_requestor_id, fk_service_post_id } = req.body; 
     
     let sql = ` 
-    INSERT INTO bookings (booking_description, proposed_date, estimated_time, need_donation, booking_status, service_time, fk_requestor_id, fk_service_post_id)
-    VALUES ("${booking_description}", "${proposed_date}", ${estimated_time}, ${need_donation}, "${booking_status}", ${service_time}, ${fk_requestor_id}, ${fk_service_post_id})`; 
+    INSERT INTO bookings (booking_description, proposed_date, estimated_time, need_donation, booking_status, fk_requestor_id, fk_service_post_id)
+    VALUES ("${booking_description}", "${proposed_date}", ${estimated_time}, ${need_donation}, "${booking_status}", ${fk_requestor_id}, ${fk_service_post_id})`; 
 
     try { 
     // post the request
@@ -151,7 +156,7 @@ router.put("/:bookingId", async (req, res) => {
             let sql = `
                 UPDATE bookings 
 
-                SET booking_description = "${bookingDescription}", proposed_date = "${proposedDate}", estimated_time = ${estimatedTime}, need_donation = ${needDonation}, booking_status = "${bookingStatus}", service_time = ${serviceTime}, fk_requestor_id = ${requestor.userID}, fk_service_post_id = ${servicePost.servicePostID}
+                SET booking_description = "${bookingDescription}", proposed_date = "${proposedDate}", estimated_time = ${estimatedTime}, need_donation = ${needDonation}, booking_status = "${bookingStatus}", fk_requestor_id = ${requestor.userID}, fk_service_post_id = ${servicePost.servicePostID}
 
                 WHERE id = ${bookingId}
             `;

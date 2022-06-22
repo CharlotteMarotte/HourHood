@@ -1,22 +1,22 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
-import map from "../img/tempMap.png";
-import { useLayoutEffect } from "react";
+import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
+import map from '../img/tempMap.png';
+import { useLayoutEffect } from 'react';
 
 const EMPTY_FORM = {
-  first_name: "",
-  last_name: "",
-  street: "",
-  house_number: "",
-  city_code: 0,
-  city_name: "",
-  country: "",
-  email: "",
+  first_name: '',
+  last_name: '',
+  street: '',
+  house_number: '',
+  city_code: '',
+  city_name: 'Barcelona',
+  country: 'Spain',
+  email: '',
   user_description: null,
   hobbies: null,
   superpower: null,
-  photo: null,
-  password: "",
+  photo: '/penguin.jpg',
+  password: '',
 };
 export default function SignUpView(props) {
   useLayoutEffect(() => {
@@ -52,7 +52,7 @@ export default function SignUpView(props) {
           className="flex flex-col items-center gap-5 mt-10"
           onSubmit={(e) => handleSubmit(e)}
         >
-          <div className="flex gap-10 items-center">
+          <div className="flex items-center gap-10">
             <input
               required
               name="first_name"
@@ -72,7 +72,7 @@ export default function SignUpView(props) {
               onChange={(e) => handleChange(e)}
             />
           </div>
-          <div className="flex gap-10 items-center">
+          <div className="flex items-center gap-10">
             <input
               required
               name="street"
@@ -92,34 +92,48 @@ export default function SignUpView(props) {
               onChange={(e) => handleChange(e)}
             />
           </div>
-          <div className="flex gap-10 items-center">
-            <input
-              required
-              name="city_code"
-              type="text"
+          <div className="flex items-center gap-10">
+            <select
+              require="true"
               className="rounded-lg w-64 py-2 px-8 border-2 text-text-[#fe8923] border-[#fe8923] outline-none focus:border-[#C8E242]"
-              placeholder="E.g. : 08025"
+              name="city_code"
+              id="select_category"
               value={newUser.city_code}
               onChange={(e) => handleChange(e)}
-            />
+              defaultValue={'DEFAULT'}
+            >
+              <option
+                disabled
+                value="DEFAULT"
+                className="p-2 hover:bg-amber-100 text-md "
+              >
+                -- Select a postal code --
+              </option>
+              {props.postalCodes.map((postalCode, index) => (
+                <option
+                  key={index}
+                  value={postalCode}
+                  className="p-4 hover:bg-amber-100 text-md"
+                >
+                  {postalCode}
+                </option>
+              ))}
+            </select>
+
             <input
-              required
+              readOnly
               name="city_name"
               type="text"
               className="rounded-lg py-2 px-8 w-64 border-2 text-[#fe8923] border-[#fe8923] outline-none focus:border-[#C8E242]"
-              placeholder="E.g. : Barcelona "
               value={newUser.city_name}
-              onChange={(e) => handleChange(e)}
             />
           </div>
           <input
-            required
+            readOnly
             name="country"
             type="text"
             className="rounded-lg py-2 px-8 w-[553px] border-2 text-[#fe8923] border-[#fe8923] outline-none focus:border-[#C8E242]"
-            placeholder="E.g. : Spain "
             value={newUser.country}
-            onChange={(e) => handleChange(e)}
           />
           <img src={map} alt="location" className="w-[553px] rounded-lg" />
           <input
@@ -134,7 +148,7 @@ export default function SignUpView(props) {
           <input
             required
             name="password"
-            type="text"
+            type="password"
             className="rounded-lg py-2 px-8 w-[553px] border-2 text-[#fe8923] border-[#fe8923] outline-none focus:border-[#C8E242]"
             placeholder="Password"
             value={newUser.password}
@@ -146,9 +160,8 @@ export default function SignUpView(props) {
           >
             Sign Up
           </button>
-
           <div className="flex flex-col items-center">
-            <div className="flex items-center mt-4 gap-6">
+            <div className="flex items-center gap-6 mt-4">
               <div className="bg-[#C8E242] w-20 h-[0.1rem]"></div>
               <h3 className="text-lg text-[#361201] font-bold">Now</h3>
               <div className="bg-[#C8E242] w-20 h-[0.1rem]"></div>

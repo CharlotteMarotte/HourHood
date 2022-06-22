@@ -83,8 +83,7 @@ function Chat(props) {
 
   return (
     <div>
-        
-      <ChatList messages={messages} bookings={props.bookings} bookingId={props.bookingId}/>
+      <ChatList messages={messages} user={props.user} bookings={props.bookings} bookingId={props.bookingId}/>
       <ChatInput user={props.user} sendCb={(text) => sendMessage(text)} />
     </div>
   );
