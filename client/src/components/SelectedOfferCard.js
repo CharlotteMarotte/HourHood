@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import AppContext from '../AppContext';
 
 export default function SelectedOfferCard(props) {
-  let { reactToRequestCb, users, offers } = useContext(AppContext);
+  let { reactToRequestCb, users, offers, openChatCb } = useContext(AppContext);
 
   const [providerData, setProviderData] = useState(users[0]);
 
@@ -111,34 +111,50 @@ export default function SelectedOfferCard(props) {
           </div>
           <div className="flex items-center justify-center flex-grow w-full col-span-2 pt-6 mt-4 lg:pt-0 w-100">
             {props.view === 'requests' &&
-            props.booking.bookingStatus === 'pending' ? (
-              <div className="flex flex-row space-x-3">
-                <button
-                  type="submit"
-                  onClick={(e) =>
-                    reactToRequestCb(props.booking.bookingId, 'declined')
-                  }
-                  className="px-4 py-2 font-semibold bg-transparent border rounded hover:bg-amber-500 text-amber-700 hover:text-white border-amber-500 hover:border-transparent"
-                >
-                  Decline{' '}
-                </button>{' '}
-                <button
-                  type="button"
-                  onClick={(e) =>
-                    reactToRequestCb(props.booking.bookingId, 'accepted')
-                  }
-                  className="px-4 py-2 font-semibold bg-transparent border rounded hover:bg-lime-600 text-lime-700 hover:text-white border-lime-600 hover:border-transparent"
-                >
-                  Accept
-                </button>
-                <Link
-                  to="/chat"
-                  className="px-4 py-2 font-semibold bg-transparent border rounded hover:bg-rose-500 text-rose-700 hover:text-white border-rose-500 hover:border-transparent"
-                >
-                  Chat{' '}
-                </Link>{' '}
+                props.booking.bookingStatus === 'pending' ? (
+                  <div className="flex flex-row space-x-3">
+                    <button
+                      type="submit"
+                      onClick={(e) =>
+                        reactToRequestCb(props.booking.bookingId, 'declined')
+                      }
+                      className="px-4 py-2 font-semibold bg-transparent border rounded hover:bg-amber-500 text-amber-700 hover:text-white border-amber-500 hover:border-transparent"
+                    >
+                      Decline{' '}
+                    </button>{' '}
+                    <button
+                      type="button"
+                      onClick={(e) =>
+                        reactToRequestCb(props.booking.bookingId, 'accepted')
+                      }
+                      className="px-4 py-2 font-semibold bg-transparent border rounded hover:bg-lime-600 text-lime-700 hover:text-white border-lime-600 hover:border-transparent"
+                    >
+                      Accept
+                    </button>
 
-              </div>
+                    <button
+                      type="button"
+                      onClick={(e) =>
+                        openChatCb(props.booking.bookingId)
+                      }
+                      className="px-4 py-2 font-semibold bg-transparent border rounded hover:bg-rose-500 text-rose-700 hover:text-white border-rose-500 hover:border-transparent"
+                      >
+                      Chat{' '}
+                    </button>
+
+                    
+                    {/* <Link
+                      onClick={(e) =>
+                        selectBookingCb(props.booking.bookingId)
+                      }
+                      to="/chat"
+                      className="px-4 py-2 font-semibold bg-transparent border rounded hover:bg-rose-500 text-rose-700 hover:text-white border-rose-500 hover:border-transparent"
+                    >
+                      Chat{' '}
+                    </Link>{' '} */}
+                    {/* cambiar LINK a onblick  */}
+
+                  </div>
             ) : (
               <div className="flex flex-row space-x-3">
                 <button
@@ -150,12 +166,25 @@ export default function SelectedOfferCard(props) {
                 >
                   Cancel{' '}
                 </button>{' '}
-                <Link
+
+
+                <button
+                      type="button"
+                      onClick={(e) =>
+                        openChatCb(props.booking.bookingId)
+                      }
+                      className="px-4 py-2 font-semibold bg-transparent border rounded hover:bg-rose-500 text-rose-700 hover:text-white border-rose-500 hover:border-transparent"
+                      >
+                      Chat{' '}
+                </button>
+
+                {/* <Link
+             
                   to="/chat"
                   className="px-4 py-2 font-semibold bg-transparent border rounded hover:bg-lime-500 text-lime-700 hover:text-white border-lime-500 hover:border-transparent"
                 >
                   Chat{' '}
-                </Link>{' '}
+                </Link>{' '} */}
               </div>
             )}
           </div>

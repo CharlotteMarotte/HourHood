@@ -27,7 +27,7 @@ router.get('/:bookingId', async function(req, res) {
     try {
         let sql = `
             SELECT * FROM messages
-            WHERE fk_booking_id=${bookingId}
+            WHERE fk_booking_id = ${bookingId}
             ORDER BY dateTime DESC
             LIMIT ${GET_MESSAGE_COUNT}
             `;
