@@ -336,6 +336,7 @@ export default function App() {
         // filter out booking made by system
         bookings = bookings.filter(b => b.requestor.userID !== 1);
         setBookings(bookings); // set bookings state with all categories, so it can be used by other components/views
+        setUserBookings(bookings);
       } else {
         console.log(`Server error: ${response.status} ${response.statusText}`);
       }
@@ -363,10 +364,13 @@ export default function App() {
     try {
       let response = await fetch('/bookings/', options); // do POST
       if (response.ok) {
-        let userBookings = await response.json(); // set bookings state with all bookings(requests) that the logged in user made, including the new one
-        setUserBookings(userBookings);
+        let bookings = await response.json(); // set bookings state with all bookings(requests) that the logged in user made, including the new one
+        setBookings(bookings);
+        setUserBookings(bookings);
         console.log('Service got requested');
         navigate('/receiving-help'); // go to all bookings (Receiving help page)
+        console.log("userBookings:", userBookings)
+        console.log("bookings", bookings)
       } else {
         console.log(`Server error: ${response.status} ${response.statusText}`);
       }
@@ -395,6 +399,8 @@ export default function App() {
         let bookings = await response.json();
         setBookings(bookings);
         await getWalletValue(user.id);
+        setUserBookings(bookings);
+
       } else {
         console.log(`Server error: ${response.status} ${response.statusText}`);
       }

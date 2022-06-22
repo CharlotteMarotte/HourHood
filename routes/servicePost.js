@@ -167,7 +167,7 @@ router.delete("/:id", ensurePostExists, async function(req, res) {
     try { 
     // Delete post and other entires thanks to cascade 
     await db(`DELETE FROM service_post WHERE id = ${post.id}`); 
-    sendAllPosts(res); 
+    await sendAllPosts(res); 
     } catch (err) { 
     res.status(500).send({ error: err.message });  
     } 

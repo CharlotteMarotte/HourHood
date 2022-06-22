@@ -41,7 +41,7 @@ function joinToJson(results) {
             cityCode: row.city_code,
             cityName: row.city_name,
             country: row.country,
-            email: row.email,
+            email: row.email, 
             userDescription: row.user_description,
             profilePicture: row.photo
         },
