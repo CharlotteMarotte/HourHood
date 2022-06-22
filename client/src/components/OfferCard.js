@@ -3,7 +3,7 @@ import AppContext from '../AppContext';
 import { Link } from 'react-router-dom';
 
 export default function OfferCard(props) {
-  let { user, deleteServiceCb, selectOfferCb, toEditCb } =
+  let { user, deleteServiceCb, selectOfferCb, toEditCb, userWallet } =
     useContext(AppContext);
 
   return (
@@ -55,26 +55,24 @@ export default function OfferCard(props) {
                   to={user ? `/profile/${props.offer.user.userID}` : '/login'}
                   className="px-4 py-2 font-semibold bg-transparent border rounded hover:bg-amber-500 text-amber-700 hover:text-white border-amber-500 hover:border-transparent"
                 >
-                  {(!user || user.id !== props.offer.user.userID)
+                  {!user || user.id !== props.offer.user.userID
                     ? `${props.offer.user.firstName}'s Profile`
                     : 'My Profile'}
                 </Link>
                 {/* only show this button if this is not my own offer, check first if user is defined */}
                 {user && user.id !== props.offer.user.userID && (
-                  <Link
-                    to={user ? '/service-request' : '/login'}
+                  <button
+                    disabled={userWallet < 1 ? true : false}
                     onClick={(e) => selectOfferCb(props.offer.postID)}
-                    className="px-4 py-2 font-semibold bg-transparent border rounded hover:bg-lime-600 text-lime-700 hover:text-white border-lime-600 hover:border-transparent"
+                    className="px-4 py-2 font-semibold bg-transparent border rounded disabled:transform-none disabled:transition-none disabled:cursor-not-allowed hover:bg-lime-600 text-lime-700 hover:text-white border-lime-600 hover:border-transparent"
                   >
                     Request
-                  </Link>
+                  </button>
                 )}
               </>
             ) : (
               <>
-
-                <Link
-                to={`/profile/${props.offer.user.userID}`}>
+                <Link to={`/profile/${props.offer.user.userID}`}>
                   <button
                     type="button"
                     onClick={(e) => deleteServiceCb(props.offer.postID)}
@@ -83,8 +81,7 @@ export default function OfferCard(props) {
                     Delete{' '}
                   </button>
                 </Link>
-                <Link
-                to={'/service-post/edit'}>
+                <Link to={'/service-post/edit'}>
                   <button
                     type="button"
                     className="px-4 py-2 font-semibold bg-transparent border rounded hover:bg-lime-600 text-lime-700 hover:text-white border-lime-500 hover:border-transparent"

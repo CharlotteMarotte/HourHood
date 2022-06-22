@@ -132,15 +132,30 @@ router.post('/', async (req, res, next) => {
     photo,
     password,
   } = req.body;
-  console.log(req.body);
   let hashedPassword = await bcrypt.hash(password, BCRYPT_WORK_FACTOR);
   let sql = `
             INSERT INTO users (first_name, last_name, street, house_number, city_code, city_name, country, email, user_description, hobbies, superpower, photo, password)
             VALUES ("${first_name}", "${last_name}", "${street}", "${house_number}", ${city_code}, "${city_name}", "${country}", "${email}", "${user_description}", "${hobbies}", "${superpower}", "${photo}", "${hashedPassword}");
+            SELECT LAST_INSERT_ID();
         `;
 
   try {
-    await db(sql);
+    let userResult = await db(sql);
+    let userID = userResult.data[0].insertId;
+
+    let defaultPostSql = `INSERT INTO service_post ( service_title, service_description, capacity, donation, fk_category_id, fk_provider_id ) VALUES ( 'System Post', '', 1, 0, 1, ${userID}); SELECT LAST_INSERT_ID();`;
+
+    // make one system post for each user who signs up
+    let defaultPostResult = await db(defaultPostSql);
+
+    // save ID of this system post
+    let postID = defaultPostResult.data[0].insertId;
+
+    // now make a bookig from admin user so user who signed up receives 5 hours on sign up
+    let defaultBookingSql = `INSERT INTO bookings (booking_description, estimated_time, need_donation, booking_status, fk_requestor_id, fk_service_post_id, proposed_date ) VALUES ('', 5, 0, "accepted", 1, ${postID}, "2000-01-01 00:00:00" );`;
+
+    await db(defaultBookingSql);
+
     res.status(201);
     sendAllUsers(res);
   } catch (err) {
