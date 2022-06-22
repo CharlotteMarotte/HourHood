@@ -47,6 +47,7 @@ export default function App() {
   const [userBookings, setUserBookings] = useState([]);
   const [selectedOffer, setSelectedOffer] = useState([]);
   const [toBeEdited, setToBeEdited] = useState([]);
+  const [selectedBooking, setSelectedBooking] = useState([]);
 
   useEffect(() => {
     getCategories();
@@ -294,7 +295,18 @@ export default function App() {
 
   // ********* BOOKINGS *************
 
-  // GET all bookings
+
+
+function openChat(id){
+  setSelectedBooking(id);
+  console.log(id);
+  console.log(selectedBooking);
+  navigate("/chat");
+  //it save the ID but not when I need it, it appears with delay.
+}
+
+
+// GET all bookings
 
   async function getBookings() {
     try {
@@ -379,12 +391,13 @@ export default function App() {
     toEditCb: toEdit,
     choseCatCb: choseCat,
     resetFilteredOffersCb: resetFilteredOffers,
+
   };
 
   const chosenUserObj = {
     selectedOffer,
     user,
-    requestServiceCb: requestService,
+    requestServiceCb: requestService
   };
 
   const bookingsObj = {
@@ -399,9 +412,15 @@ export default function App() {
     users,
     offers,
     reactToRequestCb: reactToRequest,
+    openChatCb: openChat
   };
 
   // ********* RETURN *************
+  const chatBookingObj = {
+    bookingId: selectedBooking
+  }
+
+
 
   return (
     <div className="App bg-gradient-to-t from-[#FFF7A3] via-[#FFF7A3] to-[#ff994091] h-full pb-28">
@@ -496,15 +515,15 @@ export default function App() {
           }
         />
         <Route path="*" element={<Error404View />} />
-        <Route
-          path="chat"
-          element={<ChatView user={user} bookings={bookings} />}
-        />
+
+        <Route path="chat" element={
+        <AppContext.Provider value={chatBookingObj}>
+          <ChatView user={user} bookings={bookings}/>
+        </AppContext.Provider>
+        }
+         />
+
       </Routes>
-      <div>
-        {/* <Chat user = {user} senderName="Juan" bookingId="1"/>
-        <Chat senderName="Pepe" bookingId="1"/> */}
-      </div>
     </div>
   );
 }
