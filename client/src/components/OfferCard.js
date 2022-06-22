@@ -62,9 +62,8 @@ export default function OfferCard(props) {
                 {/* only show this button if this is not my own offer, check first if user is defined */}
                 {user && user.id !== props.offer.user.userID && (
                   <button
-                    disabled={userWallet < 1 ? true : false}
                     onClick={(e) => selectOfferCb(props.offer.postID)}
-                    className="px-4 py-2 font-semibold bg-transparent border rounded disabled:transform-none disabled:transition-none disabled:cursor-not-allowed hover:bg-lime-600 text-lime-700 hover:text-white border-lime-600 hover:border-transparent"
+                    className="px-4 py-2 font-semibold bg-transparent border rounded hover:bg-lime-600 text-lime-700 hover:text-white border-lime-600 hover:border-transparent"
                   >
                     Request
                   </button>

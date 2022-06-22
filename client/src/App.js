@@ -107,7 +107,6 @@ export default function App() {
     if (myresponse.ok) {
       Local.saveUserInfo(myresponse.data.user, myresponse.data.token);
       setUser(myresponse.data.user);
-      console.log(user);
       setLoginErrorMsg('');
       navigate('/login');
     } else {
@@ -293,7 +292,6 @@ export default function App() {
         offers = offers.filter((o) => o.category.categoryID !== 1);
         setOffers(offers);
         navigate(`/profile/${user.id}`);
-        console.log(user);
       } else {
         console.log(`Server error: ${response.status} ${response.statusText}`);
       }
@@ -328,8 +326,8 @@ export default function App() {
 
   function openChat(id) {
     setSelectedBooking(id);
-    console.log(id);
-    console.log(selectedBooking);
+    // console.log(id);
+    // console.log(selectedBooking);
     navigate('/chat');
     //it save the ID but not when I need it, it appears with delay.
   }

@@ -65,7 +65,7 @@ function joinToJson(results) {
 async function ensureBookingExists(req, res, next) {
     try {
         let results = await db(`SELECT * FROM bookings WHERE id = ${req.params.id}`);
-        console.log("I am a booking result", results);
+        // console.log("I am a booking result", results);
         if (results.data.length === 1) {
             // booking was found; save it in response obj for the route function to use
             res.locals.booking = results.data[0];
