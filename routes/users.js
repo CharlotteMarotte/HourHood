@@ -30,6 +30,14 @@ router.get('/:userId', ensureSameUser, async function (req, res, next) {
   let { userId } = req.params;
   let sql = `SELECT * FROM users WHERE id = ${userId}`;
 
+
+
+//   SELECT users.*, photos.filename
+//   LEFT JOIN photos ON photos.id = users.fk_photos_id
+//   FROM users 
+//   ORDER BY id
+  
+
   try {
     let results = await db(sql);
     // We know user exists because he/she is logged in!
