@@ -9,7 +9,7 @@ async function sendAllBookings(res) {
     // We don't need try/catch here because we're always called from within one
 
     let sql = `
-    SELECT bookings.*, service_post.*, r.*, p.*, bookings.id AS bookingId, service_post.id AS sPostId
+    SELECT bookings.*, service_post.*, r.*, p.first_name AS providerFirstName, p.last_name AS providerLastName, bookings.id AS bookingId, service_post.id AS sPostId
     FROM bookings 
     LEFT JOIN service_post ON service_post.id = bookings.fk_service_post_id
     LEFT JOIN users AS r ON r.id = bookings.fk_requestor_id
@@ -20,11 +20,6 @@ async function sendAllBookings(res) {
     let allBookings = joinToJson(results);
     res.send(allBookings);
 }
-// SELECT bookings.*, service_post.*, users.*, bookings.id AS bookingId, service_post.id AS sPostId, users.id AS userId
-// FROM bookings 
-// LEFT JOIN service_post ON service_post.id = bookings.fk_service_post_id
-// LEFT JOIN users ON users.id = bookings.fk_requestor_id
-// ORDER BY bookingId ASC
 
 // Convert the DB results into a useful JSON format:
 // A nested booking obj with nested requestor(user) obj and nested servicePost obj
@@ -59,17 +54,8 @@ function joinToJson(results) {
             serviceCategory: row.fk_category_id,
             serviceProvider: row.fk_provider_id,
             provider: {
-                providerID: row.fk_provider_id,
-                firstName: row.first_name,
-                lastName: row.last_name,
-                street: row.street,
-                houseNumber: row.house_number,
-                cityCode: row.city_code,
-                cityName: row.city_name,
-                country: row.country,
-                email: row.email,
-                userDescription: row.user_description,
-                profilePicture: row.photo
+                firstName: row.providerFirstName,
+                lastName: row.providerLastName
             }
         },
     }));
@@ -120,7 +106,7 @@ router.get("/:id", ensureBookingExists, async function(req, res) {
         // Get booking; we know it exists, thanks to guard
         // Use LEFT JOIN to also return service_post and user (requestor)
         let sql = `
-            SELECT bookings.*, service_post.*, r.*, p.*, bookings.id AS bookingId, service_post.id AS sPostId
+            SELECT bookings.*, service_post.*, r.*, p.first_name AS providerFirstName, p.last_name AS providerLastName, bookings.id AS bookingId, service_post.id AS sPostId
             FROM bookings 
             LEFT JOIN service_post ON service_post.id = bookings.fk_service_post_id
             LEFT JOIN users AS r ON r.id = bookings.fk_requestor_id
@@ -135,14 +121,6 @@ router.get("/:id", ensureBookingExists, async function(req, res) {
         res.status(500).send({ error: "problem" });
     }
 });
-
-// SELECT bookings.*, service_post.*, users.*, bookings.id AS bookingId, service_post.id AS sPostId
-//     FROM bookings 
-//     LEFT JOIN service_post ON service_post.id = bookings.fk_service_post_id
-//     LEFT JOIN users AS r ON users.id = bookings.fk_requestor_id
-//     LEFT JOIN users AS p ON users.id = service_post.fk_provider_id
-//     ORDER BY bookingId ASC
-
 
 
 // POST  - create a booking (request) 
