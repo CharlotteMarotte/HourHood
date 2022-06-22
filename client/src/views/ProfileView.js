@@ -15,7 +15,7 @@ export default function ProfileView() {
   useEffect(() => {
     getMyOffers();
     getMyUserData();
-  }, []);
+  }, [offers]);
 
   useLayoutEffect(() => {
     window.scrollTo(0, 0);
