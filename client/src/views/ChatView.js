@@ -12,7 +12,7 @@ export default function ChatView(props) {
   return (
     <div>
       <div className="flex flex-col items-center my-10">
-        {/* <div className="flex"> */}
+       
         <h1 className="text-4xl text-[#FF9940]">
           {" "}
           <span className="text-6xl text-[#361201] font-bold">Chat </span>
@@ -25,7 +25,7 @@ export default function ChatView(props) {
         <div className="relative">
           <img src={chatImage} className="h-80 top-0" />
         </div>
-        {/* </div> */}
+       
       </div>
       <div>
         <Chat

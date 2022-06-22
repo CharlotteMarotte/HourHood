@@ -272,7 +272,7 @@ function openChat(id){
   console.log(id);
   console.log(selectedBooking);
   navigate("/chat");
-  //it save the ID but not when I need it, it appears with delay.
+  
 }
 
 
