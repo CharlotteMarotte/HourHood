@@ -76,7 +76,7 @@ WHERE user_id = ${userId};`;
 // * PUT method (edit information in user profile)
 router.put('/:userId', async (req, res) => {
   let { userId } = req.params;
-  console.log(userId);
+//   console.log(userId);
   let {
     first_name,
     last_name,

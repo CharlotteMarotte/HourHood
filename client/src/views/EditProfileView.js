@@ -63,7 +63,7 @@ export default function EditProfileView(props) {
 
     // Call parent's callback
     props.uploadCb(formData);
-    console.log('uploaded');
+    // console.log('uploaded');
 
     // Reset everything
     setFile(null); // remove filename of previous file

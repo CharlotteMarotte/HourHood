@@ -21,7 +21,7 @@ export default function RequestServiceView() {
   };
 
   const [requestData, setRequestData] = useState(INIT_FORM);
-  const [isChecked, setIsChecked] = useState(false);
+  const [isChecked, setIsChecked] = useState(userWallet < 1 ? true : false);
   const [date, setDate] = useState(null);
 
   function getCurrDate() {
@@ -148,8 +148,9 @@ export default function RequestServiceView() {
                   <input
                     type="checkbox"
                     name="need_donation"
+                    readOnly={userWallet < 1 ? true : false}
                     checked={isChecked}
-                    onChange={(e) => handleCheckboxChange(e)}
+                    onChange={userWallet < 1 ? null : (e) => handleCheckboxChange(e)}
                     id="donation"
                     className="bg-lime-700 hover:bg-lime-700 focus:bg-lime-700"
                   />

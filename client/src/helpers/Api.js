@@ -43,7 +43,7 @@ class Api {
     newUser 
   ) {
     let body = newUser;
-    console.log(body);
+    // console.log(body);
 
     return await this._doFetch("/users", "POST", body);
   }

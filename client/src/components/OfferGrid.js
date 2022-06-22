@@ -7,7 +7,7 @@ export default function OfferGrid() {
   let { offers, user, categories, choseCatCb, resetFilteredOffersCb, userWallet } =
     useContext(AppContext);
 
-  const [chosenCat, setChosenCat] = useState(null);
+  const [chosenCat, setChosenCat] = useState(1);
 
   function handleSubmit(event) {
     event.preventDefault();

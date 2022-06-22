@@ -12,8 +12,7 @@ export default function PostOfferView(props) {
 
   let o =  props.offerToEdit ? props.offerToEdit[0] : null;
 
-  console.log("allofferstoedit:", props.offerToEdit)
-  console.log("offer to edit:", o)
+
 
   let EMPTY_FORM = {
     service_title: "",
