@@ -5,7 +5,7 @@ function ChatList(props) {
   let listDiv = useRef(null);
   let [myBooking, setMyBooking] = useState(props.bookings[0]);
 
-  console.log(myBooking)
+  // console.log(myBooking)
 
   function getMyBooking() {
     let filteredBooking = props.bookings.filter(

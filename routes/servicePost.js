@@ -60,7 +60,7 @@ function joinToJson(results) {
 async function ensurePostExists(req, res, next) {
     try {
         let results = await db(`SELECT * FROM service_post WHERE id = ${req.params.id}`);
-        console.log("I am resuts", results);
+        // console.log("I am resuts", results);
         if (results.data.length === 1) {
             // post was found; save it in response obj for the route function to use
             res.locals.servicePost = results.data[0];
@@ -162,7 +162,7 @@ router.put("/:postId", async (req, res) => {
 router.delete("/:id", ensurePostExists, async function(req, res) { 
     // If we get here we know the post exists (thanks to guard) 
     let post = res.locals.servicePost; 
-    console.log(post);
+    // console.log(post);
     
     try { 
     // Delete post and other entires thanks to cascade 
