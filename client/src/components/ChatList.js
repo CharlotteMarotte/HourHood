@@ -3,7 +3,10 @@ import './ChatList.css';
 
 function ChatList(props) {
   let listDiv = useRef(null);
-  let [myBooking, setMyBooking] = useState(props.bookings[0]);
+  let [myBooking, setMyBooking] = useState(props.bookings);
+  // let [provider, setProvider] =useState(null);
+
+  console.log(myBooking)
 
   function getMyBooking() {
     let filteredBooking = props.bookings.filter(
@@ -11,6 +14,11 @@ function ChatList(props) {
     );
     setMyBooking(filteredBooking[0]);
   }
+
+  // function providerUser(){
+  //   let provider = props.user.filter((e) => { e.id === myBooking.servicePost.serviceProvider})
+  //   setProvider(provider)
+  // }
 
   // When new msg is added, scroll if necessary so it's visible
   useEffect(() => {
@@ -27,7 +35,9 @@ function ChatList(props) {
 
   return (
     <div className="mb-1 rounded ChatList" ref={listDiv}>
-        {myBooking.servicePost.serviceTitle}
+        {/* {myBooking.servicePost.serviceTitle} */}
+        {/* do a filter inside users to find the one that match with the code below and ask for his/her first_name and his/her  photo */}
+        {/* {myBooking.requestor.firstName} */}
       {props.messages.map((m, index) => (
         <div key={index}>
           <p>
