@@ -10,7 +10,12 @@ const { BCRYPT_WORK_FACTOR, SECRET_KEY } = require('../config');
  **/
 async function sendAllUsers(res) {
   // We don't need try/catch here because we're always called from within one
-  let results = await db('SELECT * FROM users ORDER BY id');
+  let sql = `SELECT users.*, photos.filename AS photoPath
+             FROM users 
+             LEFT JOIN photos ON photos.fk_user_id = users.id
+             ORDER BY id`
+             
+  let results = await db(sql);
   let users = results.data;
   users.forEach((u) => delete u.password); // don't return passwords
   res.send(users);
@@ -28,13 +33,14 @@ router.get('/', async function (req, res) {
 // * Get user by ID.
 router.get('/:userId', ensureSameUser, async function (req, res, next) {
   let { userId } = req.params;
-  let sql = `SELECT * FROM users WHERE id = ${userId}`;
+  let sql = `SELECT users.*, photos.filename AS photoPath
+             FROM users 
+             LEFT JOIN photos ON photos.fk_user_id = users.id
+             WHERE id = ${userId}`;
 
-
-
-//   SELECT users.*, photos.filename
-//   LEFT JOIN photos ON photos.id = users.fk_photos_id
+//   SELECT users.*, photos.filename AS photoPath
 //   FROM users 
+//   LEFT JOIN photos ON photos.id = users.fk_photos_id
 //   ORDER BY id
   
 

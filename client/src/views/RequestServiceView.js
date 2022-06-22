@@ -96,6 +96,7 @@ export default function RequestServiceView() {
                       name="estimated_time"
                       value={requestData.estimated_time}
                       max={isChecked ? '100' : userWallet}
+                      min="0"
                       onChange={(e) => handleInputChange(e)}
                       type="number"
                       className="w-full py-2 pl-10 pr-3 -ml-10 border-2 rounded-lg outline-none border-amber-200 focus:border-lime-700"
