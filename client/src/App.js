@@ -314,6 +314,7 @@ function openChat(id){
       if (response.ok) {
         let bookings = await response.json();
         setBookings(bookings); // set bookings state with all categories, so it can be used by other components/views
+        setUserBookings(bookings);
       } else {
         console.log(`Server error: ${response.status} ${response.statusText}`);
       }
@@ -341,10 +342,13 @@ function openChat(id){
     try {
       let response = await fetch('/bookings/', options); // do POST
       if (response.ok) {
-        let userBookings = await response.json(); // set bookings state with all bookings(requests) that the logged in user made, including the new one
-        setUserBookings(userBookings);
+        let bookings = await response.json(); // set bookings state with all bookings(requests) that the logged in user made, including the new one
+        setBookings(bookings);
+        setUserBookings(bookings);
         console.log('Service got requested');
         navigate('/receiving-help'); // go to all bookings (Receiving help page)
+        console.log("userBookings:", userBookings)
+        console.log("bookings", bookings)
       } else {
         console.log(`Server error: ${response.status} ${response.statusText}`);
       }
@@ -372,6 +376,7 @@ function openChat(id){
       if (response.ok) {
         let bookings = await response.json();
         setBookings(bookings);
+        setUserBookings(bookings);
       } else {
         console.log(`Server error: ${response.status} ${response.statusText}`);
       }

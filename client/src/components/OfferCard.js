@@ -67,13 +67,16 @@ export default function OfferCard(props) {
               </>
             ) : (
               <>
-                <button
-                  type="button"
-                  onClick={(e) => deleteServiceCb(props.offer.postID)}
-                  className="px-4 py-2 font-semibold bg-transparent border rounded lg:mb-2 hover:bg-amber-500 text-amber-700 hover:text-white border-amber-500 hover:border-transparent"
-                >
-                  Delete{' '}
-                </button>
+                <Link
+                to={`/profile/${props.offer.user.userID}`}>
+                  <button
+                    type="button"
+                    onClick={(e) => deleteServiceCb(props.offer.postID)}
+                    className="px-4 py-2 font-semibold bg-transparent border rounded lg:mb-2 hover:bg-amber-500 text-amber-700 hover:text-white border-amber-500 hover:border-transparent"
+                  >
+                    Delete{' '}
+                  </button>
+                </Link>
                 <Link
                 to={'/service-post/edit'}>
                   <button
