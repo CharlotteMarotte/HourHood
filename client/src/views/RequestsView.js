@@ -7,7 +7,7 @@ import AddOfferButton from '../components/AddOfferButton';
 
 
 export default function RequestsView(props) {
-  let { requests } = useContext(AppContext);
+  let { requests, userWallet } = useContext(AppContext);
 
 
   useLayoutEffect(() => {

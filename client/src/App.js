@@ -121,7 +121,7 @@ export default function App() {
       let response = await fetch('/users'); // does GET by default
       if (response.ok) {
         let users = await response.json();
-        users = users.filter(u => u.id !== 1);
+        users = users.filter((u) => u.id !== 1);
         setUsers(users); // set users state with all users, so it can be used by other components/views
       } else {
         console.log(`Server error: ${response.status} ${response.statusText}`);
@@ -145,6 +145,8 @@ export default function App() {
       let response = await fetch(`/users/${user.id}`, options); // do PUT
       if (response.ok) {
         let users = await response.json();
+        // don't show admin user
+        users = users.filter((u) => u.id !== 1);
         setUsers(users);
         navigate(`/profile/${user.id}`);
       } else {
@@ -197,7 +199,7 @@ export default function App() {
       if (response.ok) {
         let categories = await response.json();
         // filter out system category
-        categories = categories.filter(c => c.id !== 1);
+        categories = categories.filter((c) => c.id !== 1);
         setCategories(categories); // set categories state with all categories, so it can be used by other components/views
       } else {
         console.log(`Server error: ${response.status} ${response.statusText}`);
@@ -227,7 +229,7 @@ export default function App() {
       if (response.ok) {
         let offers = await response.json();
         // filter out system post to get starting hour debit
-        offers = offers.filter(o => o.category.categoryID !== 1);
+        offers = offers.filter((o) => o.category.categoryID !== 1);
         setOffers(offers); // set offers state with all offers, so it can be used by other components/views
         setUnfilteredOffers(offers);
       } else {
@@ -253,6 +255,8 @@ export default function App() {
       let response = await fetch('/servicePost/', options); // do POST
       if (response.ok) {
         let offers = await response.json(); // set invoices state with all invoices including new ones
+        // don't show offer that was only made by system to give default credit
+        offers = offers.filter((o) => o.category.categoryID !== 1);
         setOffers(offers);
         navigate('/');
       } else {
@@ -285,6 +289,8 @@ export default function App() {
       let response = await fetch(`/servicePost/${id}`, options); // do PUT
       if (response.ok) {
         let offers = await response.json();
+        // don't show offer that was only made by system to give start credit
+        offers = offers.filter((o) => o.category.categoryID !== 1);
         setOffers(offers);
         navigate(`/profile/${user.id}`);
         console.log(user);
@@ -307,6 +313,8 @@ export default function App() {
       let response = await fetch(`/servicePost/${id}`, options); // do DELETE
       if (response.ok) {
         let offers = await response.json();
+        // don't show offers made by system for start credit
+        offers = offers.filter((o) => o.category.categoryID !== 1);
         setOffers(offers);
       } else {
         console.log(`Server error: ${response.status} ${response.statusText}`);
@@ -334,7 +342,7 @@ export default function App() {
       if (response.ok) {
         let bookings = await response.json();
         // filter out booking made by system
-        bookings = bookings.filter(b => b.requestor.userID !== 1);
+        bookings = bookings.filter((b) => b.requestor.userID !== 1);
         setBookings(bookings); // set bookings state with all categories, so it can be used by other components/views
         setUserBookings(bookings);
       } else {
@@ -349,6 +357,7 @@ export default function App() {
   function selectOffer(id) {
     let selected = offers.filter((e) => e.postID === id);
     setSelectedOffer(selected);
+    navigate(user ? '/service-request' : '/login');
   }
 
   // POST a new request (make a booking)
@@ -365,12 +374,14 @@ export default function App() {
       let response = await fetch('/bookings/', options); // do POST
       if (response.ok) {
         let bookings = await response.json(); // set bookings state with all bookings(requests) that the logged in user made, including the new one
+      //  don't show admin bookings
+        bookings = bookings.filter((b) => b.requestor.userID !== 1);
         setBookings(bookings);
         setUserBookings(bookings);
         console.log('Service got requested');
         navigate('/receiving-help'); // go to all bookings (Receiving help page)
-        console.log("userBookings:", userBookings)
-        console.log("bookings", bookings)
+        console.log('userBookings:', userBookings);
+        console.log('bookings', bookings);
       } else {
         console.log(`Server error: ${response.status} ${response.statusText}`);
       }
@@ -397,10 +408,11 @@ export default function App() {
       let response = await fetch(`/bookings/${id}`, options); // do PUT
       if (response.ok) {
         let bookings = await response.json();
+        // don't show admin bookings
+        bookings = bookings.filter(b => b.requestor.userID !== 1);
         setBookings(bookings);
         await getWalletValue(user.id);
         setUserBookings(bookings);
-
       } else {
         console.log(`Server error: ${response.status} ${response.statusText}`);
       }
@@ -426,6 +438,7 @@ export default function App() {
   const chosenUserObj = {
     selectedOffer,
     user,
+    userWallet,
     requestServiceCb: requestService,
   };
 

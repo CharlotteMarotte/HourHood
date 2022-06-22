@@ -153,7 +153,7 @@ router.post('/', async (req, res, next) => {
 
     // now make a bookig from admin user so user who signed up receives 5 hours on sign up
     let defaultBookingSql = `INSERT INTO bookings (booking_description, estimated_time, need_donation, booking_status, fk_requestor_id, fk_service_post_id, proposed_date ) VALUES ('', 5, 0, "accepted", 1, ${postID}, "2000-01-01 00:00:00" );`;
-    
+
     await db(defaultBookingSql);
 
     res.status(201);
