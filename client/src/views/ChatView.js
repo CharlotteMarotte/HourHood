@@ -1,13 +1,14 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext} from "react";
 import Chat from "../components/Chat";
 import { useLayoutEffect } from "react";
 import chatImage from "../img/chat.png";
+import AppContext from '../AppContext';
 
 export default function ChatView(props) {
   useLayoutEffect(() => {
     window.scrollTo(0, 0);
   }, []);
-
+  let { bookingId } = useContext(AppContext);
   return (
     <div>
       <div className="flex flex-col items-center my-10">
@@ -31,7 +32,7 @@ export default function ChatView(props) {
           senderName={props.user ? props.user.first_name : "no one"}
           bookings={props.bookings}
           user={props.user}
-          bookingId="1"
+          bookingId={bookingId}
         />
       </div>
     </div>

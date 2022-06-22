@@ -49,6 +49,7 @@ export default function App() {
   const [userBookings, setUserBookings] = useState([]);
   const [selectedOffer, setSelectedOffer] = useState([]);
   const [toBeEdited, setToBeEdited] = useState([]);
+  const [selectedBooking, setSelectedBooking] = useState([]);
 
   useEffect(() => {
     getCategories();
@@ -291,6 +292,16 @@ function toEdit(id) {
 
 // ********* BOOKINGS *************
 
+
+function openChat(id){
+  setSelectedBooking(id);
+  console.log(id);
+  console.log(selectedBooking);
+  navigate("/chat");
+  //it save the ID but not when I need it, it appears with delay.
+}
+
+
 // GET all bookings
 
   async function getBookings() {
@@ -374,12 +385,13 @@ function toEdit(id) {
     selectOfferCb: selectOffer,
     deleteServiceCb: deleteService,
     toEditCb: toEdit
+
   };
 
   const chosenUserObj = {
     selectedOffer,
     user,
-    requestServiceCb: requestService,
+    requestServiceCb: requestService
   };
 
   const bookingsObj = {
@@ -392,7 +404,12 @@ function toEdit(id) {
       users,
       offers,
     reactToRequestCb: reactToRequest,
+    openChatCb: openChat
   };
+
+  const chatBookingObj = {
+    bookingId: selectedBooking
+  }
 
 // ********* RETURN *************
 
@@ -488,12 +505,13 @@ function toEdit(id) {
           }
         />
         <Route path="*" element={<Error404View />} />
-        <Route path="chat" element={<ChatView user={user} bookings={bookings}/>} />
+        <Route path="chat" element={
+        <AppContext.Provider value={chatBookingObj}>
+          <ChatView user={user} bookings={bookings}/>
+        </AppContext.Provider>
+        }
+         />
       </Routes>
-      <div>
-        {/* <Chat user = {user} senderName="Juan" bookingId="1"/>
-        <Chat senderName="Pepe" bookingId="1"/> */}
-      </div>
     </div>
   );
 }
