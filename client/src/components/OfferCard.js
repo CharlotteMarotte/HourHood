@@ -3,7 +3,8 @@ import AppContext from '../AppContext';
 import { Link } from 'react-router-dom';
 
 export default function OfferCard(props) {
-  let { user, deleteServiceCb, selectOfferCb, toEditCb } = useContext(AppContext);
+  let { user, deleteServiceCb, selectOfferCb, toEditCb } =
+    useContext(AppContext);
 
   return (
     <div
@@ -30,9 +31,9 @@ export default function OfferCard(props) {
             {props.offer.title}
           </h1>
           <div className="p-2 mb-5 rounded-lg h-28 bg-amber-100">
-          <p className="leading-relaxed text-amber-500 ">
-            Note: "{props.offer.description}"
-          </p>
+            <p className="leading-relaxed text-amber-500 ">
+              Note: "{props.offer.description}"
+            </p>
           </div>
           {/* if in profile view show extra information */}
           {props.view === 'profile' && (
@@ -54,16 +55,20 @@ export default function OfferCard(props) {
                   to={user ? `/profile/${props.offer.user.userID}` : '/login'}
                   className="px-4 py-2 font-semibold bg-transparent border rounded hover:bg-amber-500 text-amber-700 hover:text-white border-amber-500 hover:border-transparent"
                 >
-                  {props.offer.user.firstName}'s Profile{' '}
+                  {(!user || user.id !== props.offer.user.userID)
+                    ? `${props.offer.user.firstName}'s Profile`
+                    : 'My Profile'}
                 </Link>
-
-                <Link
-                  to={user ? '/service-request' : '/login'}
-                  onClick={(e) => selectOfferCb(props.offer.postID)}
-                  className="px-4 py-2 font-semibold bg-transparent border rounded hover:bg-lime-600 text-lime-700 hover:text-white border-lime-600 hover:border-transparent"
-                >
-                  Request
-                </Link>
+                {/* only show this button if this is not my own offer, check first if user is defined */}
+                {user && user.id !== props.offer.user.userID && (
+                  <Link
+                    to={user ? '/service-request' : '/login'}
+                    onClick={(e) => selectOfferCb(props.offer.postID)}
+                    className="px-4 py-2 font-semibold bg-transparent border rounded hover:bg-lime-600 text-lime-700 hover:text-white border-lime-600 hover:border-transparent"
+                  >
+                    Request
+                  </Link>
+                )}
               </>
             ) : (
               <>
@@ -74,16 +79,15 @@ export default function OfferCard(props) {
                 >
                   Delete{' '}
                 </button>
-                <Link
-                to={'/service-post/edit'}>
+                <Link to={'/service-post/edit'}>
                   <button
                     type="button"
                     className="px-4 py-2 font-semibold bg-transparent border rounded hover:bg-lime-600 text-lime-700 hover:text-white border-lime-500 hover:border-transparent"
-                    onClick={(e) => toEditCb(props.offer.postID)}               
+                    onClick={(e) => toEditCb(props.offer.postID)}
                   >
                     Edit{' '}
                   </button>
-               </Link>
+                </Link>
               </>
             )}
           </div>
@@ -92,6 +96,3 @@ export default function OfferCard(props) {
     </div>
   );
 }
-
-
-

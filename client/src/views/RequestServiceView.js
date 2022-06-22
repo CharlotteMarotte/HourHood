@@ -15,7 +15,6 @@ export default function RequestServiceView(props) {
     proposed_date: "",
     estimated_time: 0,
     booking_status: "pending",
-    service_time: null,
     fk_requestor_id: user.id,
   };
 
