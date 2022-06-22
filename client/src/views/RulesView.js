@@ -1,14 +1,14 @@
-import React from "react";
-import PropTypes from "prop-types";
-import { Link } from "react-router-dom";
-import { useLayoutEffect } from "react";
+import React from 'react';
+import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
+import { useLayoutEffect } from 'react';
 
 function RulesView() {
   useLayoutEffect(() => {
     window.scrollTo(0, 0);
   }, []);
   return (
-    <div className="container mx-auto my-20 flex flex-col items-center gap-4">
+    <div className="container flex flex-col items-center gap-4 mx-auto my-20">
       <h2 className="text-6xl text-[#361201] bg-[#ffe60099] font-bold">
         Be on time
       </h2>
@@ -37,20 +37,20 @@ function RulesView() {
       <div className="bg-[#fe8923] w-28 h-1"></div>
       <p className="mb-10 w-[400px] font-semibold">
         It’s not about you as an invidiual, it’s about making things happen
-        together.{" "}
+        together.{' '}
       </p>
-      <div className="flex gap-10 justify-center">
-        <Link
-          to="/signup"
-          className="bg-[#ff9940e3] hover:bg-[#fe8923] hover:shadow-[#ffe600] hover:shadow-lg hover:font-extrabold px-10 py-2 text-md uppercase text-white font-bold rounded-xl"
-        >
-          Continue
-        </Link>
+      <div className="flex justify-center gap-10">
         <Link
           to="/getstarted"
           className="bg-[#ff9940e3] hover:bg-[#fe8923] hover:shadow-[#ff994091] hover:shadow-lg hover:font-extrabold px-10 py-2 text-md uppercase text-white font-bold rounded-xl"
         >
           Learn more
+        </Link>
+        <Link
+          to="/signup"
+          className="bg-[#ff9940e3] hover:bg-[#fe8923] hover:shadow-[#ffe600] hover:shadow-lg hover:font-extrabold px-10 py-2 text-md uppercase text-white font-bold rounded-xl"
+        >
+          Continue
         </Link>
       </div>
     </div>

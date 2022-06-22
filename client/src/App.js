@@ -480,6 +480,7 @@ export default function App() {
           element={
             <SignUpView
               user={user}
+              postalCodes={postalCodes}
               addNewUserCb={(newUser) => addNewUser(newUser)}
             />
           }
