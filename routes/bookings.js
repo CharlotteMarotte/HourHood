@@ -32,7 +32,6 @@ function joinToJson(results) {
         estimatedTime: row.estimated_time,
         needDonation: row.need_donation,
         bookingStatus: row.booking_status,
-        serviceTime: row.service_time,
          requestor: {
             userID: row.userId,
             firstName: row.first_name,
@@ -122,11 +121,11 @@ router.get("/:id", ensureBookingExists, async function(req, res) {
 // POST  - create a booking (request) 
 router.post("/", async function(req, res) { 
 
-    let { booking_description, proposed_date, estimated_time, need_donation, booking_status, service_time, fk_requestor_id, fk_service_post_id } = req.body; 
+    let { booking_description, proposed_date, estimated_time, need_donation, booking_status, fk_requestor_id, fk_service_post_id } = req.body; 
     
     let sql = ` 
-    INSERT INTO bookings (booking_description, proposed_date, estimated_time, need_donation, booking_status, service_time, fk_requestor_id, fk_service_post_id)
-    VALUES ("${booking_description}", "${proposed_date}", ${estimated_time}, ${need_donation}, "${booking_status}", ${service_time}, ${fk_requestor_id}, ${fk_service_post_id})`; 
+    INSERT INTO bookings (booking_description, proposed_date, estimated_time, need_donation, booking_status, fk_requestor_id, fk_service_post_id)
+    VALUES ("${booking_description}", "${proposed_date}", ${estimated_time}, ${need_donation}, "${booking_status}", ${fk_requestor_id}, ${fk_service_post_id})`; 
 
     try { 
     // post the request
@@ -151,7 +150,7 @@ router.put("/:bookingId", async (req, res) => {
             let sql = `
                 UPDATE bookings 
 
-                SET booking_description = "${bookingDescription}", proposed_date = "${proposedDate}", estimated_time = ${estimatedTime}, need_donation = ${needDonation}, booking_status = "${bookingStatus}", service_time = ${serviceTime}, fk_requestor_id = ${requestor.userID}, fk_service_post_id = ${servicePost.servicePostID}
+                SET booking_description = "${bookingDescription}", proposed_date = "${proposedDate}", estimated_time = ${estimatedTime}, need_donation = ${needDonation}, booking_status = "${bookingStatus}", fk_requestor_id = ${requestor.userID}, fk_service_post_id = ${servicePost.servicePostID}
 
                 WHERE id = ${bookingId}
             `;
