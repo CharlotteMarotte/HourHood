@@ -284,6 +284,7 @@ export default function App() {
       let response = await fetch(`/servicePost/${id}`, options); // do DELETE
       if (response.ok) {
         let offers = await response.json();
+
         setOffers(offers);
       } else {
         console.log(`Server error: ${response.status} ${response.statusText}`);
