@@ -6,6 +6,7 @@ export default function SelectedOfferCard(props) {
   let { reactToRequestCb, users, offers, openChatCb } = useContext(AppContext);
 
   const [providerData, setProviderData] = useState(users[0]);
+  const [givingHelp, SetGivingHelp] = useState(false);
 
   useEffect(() => {
     getProviderData();
@@ -16,6 +17,12 @@ export default function SelectedOfferCard(props) {
       (u) => u.id === props.booking.servicePost.serviceProvider
     );
     setProviderData(filteredUsers[0]);
+  }
+
+  function switchRequestorUser(){
+    if(props.view === "requests"){
+      SetGivingHelp(!givingHelp);
+    }
   }
 
   return (
@@ -135,7 +142,7 @@ export default function SelectedOfferCard(props) {
                     <button
                       type="button"
                       onClick={(e) =>
-                        openChatCb(props.booking.bookingId)
+                        openChatCb(props.booking.bookingId, givingHelp)
                       }
                       className="px-4 py-2 font-semibold bg-transparent border rounded hover:bg-rose-500 text-rose-700 hover:text-white border-rose-500 hover:border-transparent"
                       >

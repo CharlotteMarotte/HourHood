@@ -31,6 +31,7 @@ export default function ChatView(props) {
         <Chat
           senderName={props.user ? props.user.first_name : "no one"}
           bookings={props.bookings}
+          givingHelp = {true}
           user={props.user}
           bookingId={bookingId}
         />

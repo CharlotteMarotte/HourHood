@@ -1,11 +1,13 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState, useContext } from 'react';
+import AppContext from '../AppContext';
 import './ChatList.css';
 
 function ChatList(props) {
+  // let {requests, bookings} = useContext(AppContext);
   let listDiv = useRef(null);
   let [myBooking, setMyBooking] = useState(props.bookings[0]);
 
-  console.log(myBooking)
+
 
   function getMyBooking() {
     let filteredBooking = props.bookings.filter(
@@ -30,13 +32,19 @@ function ChatList(props) {
   return (
     <div className="mb-1 rounded ChatList" ref={listDiv}>
         {myBooking.servicePost.serviceTitle}
-        {/* do a filter inside users to find the one that match with the code below and ask for his/her first_name and his/her  photo */}
-        {myBooking.requestor.firstName}
-        <img src={myBooking.requestor.profilePicture} className="h-44"/>
+
+       <h1>Receiving Help:{myBooking.requestor.firstName}</h1> 
+       <img src={myBooking.requestor.profilePicture} className="h-44"/>
+
+       <h1>Giving Help:{myBooking.servicePost.provider.firstName}</h1>
+        <img src={myBooking.servicePost.provider.providerProfilePicture} className="h-44"/>
+
+        
+    
       {props.messages.map((m, index) => (
         <div key={index}>
           <p>
-          <img src={props.user.photo} className="h-44"/>
+          { m.senderName === myBooking.requestor.firstName? (<div className="w-20 h-20"><img src={myBooking.requestor.profilePicture} className="h-full w-full object-cover rounded-full"/></div>): (<div className="w-20 h-20"><img src={myBooking.servicePost.provider.providerProfilePicture} className="h-full w-full object-cover rounded-full"/></div>)}
             <b>{m.senderName}: </b>
             <span title={formatDT(m.dateTime)}>{m.text}</span>
           </p>
