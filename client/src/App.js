@@ -42,6 +42,7 @@ export default function App() {
   const [categories, setCategories] = useState([]);
   const [users, setUsers] = useState([]);
   const [files, setFiles] = useState([]);
+  const [userWallet, setUserWallet] = useState(0);
 
   const [bookings, setBookings] = useState([]);
   const [userBookings, setUserBookings] = useState([]);
@@ -70,9 +71,25 @@ export default function App() {
       setUser(myresponse.data.user);
       setLoginErrorMsg('');
       await getBookings();
+      await getWalletValue(myresponse.data.user.id);
       navigate('/');
     } else {
       setLoginErrorMsg('Login failed');
+    }
+  }
+
+  // GET all users
+  async function getWalletValue(id) {
+    try {
+      let response = await fetch(`/users/${id}/wallet`); // does GET by default
+      if (response.ok) {
+        let walletValue = await response.json();
+        setUserWallet(walletValue.hour_balance); // set users state with all users, so it can be used by other components/views
+      } else {
+        console.log(`Server error: ${response.status} ${response.statusText}`);
+      }
+    } catch (err) {
+      console.log(`Server error: ${err.message}`);
     }
   }
 
@@ -81,6 +98,7 @@ export default function App() {
     Local.removeUserInfo();
     setUser(null);
     setUserBookings(null);
+    setUserWallet(0);
   }
 
   // sign up
@@ -89,7 +107,6 @@ export default function App() {
     if (myresponse.ok) {
       Local.saveUserInfo(myresponse.data.user, myresponse.data.token);
       setUser(myresponse.data.user);
-      console.log(user);
       setLoginErrorMsg('');
       navigate('/login');
     } else {
@@ -103,6 +120,7 @@ export default function App() {
       let response = await fetch('/users'); // does GET by default
       if (response.ok) {
         let users = await response.json();
+        users = users.filter((u) => u.id !== 1);
         setUsers(users); // set users state with all users, so it can be used by other components/views
       } else {
         console.log(`Server error: ${response.status} ${response.statusText}`);
@@ -126,6 +144,8 @@ export default function App() {
       let response = await fetch(`/users/${user.id}`, options); // do PUT
       if (response.ok) {
         let users = await response.json();
+        // don't show admin user
+        users = users.filter((u) => u.id !== 1);
         setUsers(users);
         navigate(`/profile/${user.id}`);
       } else {
@@ -177,6 +197,8 @@ export default function App() {
       let response = await fetch('/categories'); // does GET by default
       if (response.ok) {
         let categories = await response.json();
+        // filter out system category
+        categories = categories.filter((c) => c.id !== 1);
         setCategories(categories); // set categories state with all categories, so it can be used by other components/views
       } else {
         console.log(`Server error: ${response.status} ${response.statusText}`);
@@ -205,6 +227,8 @@ export default function App() {
       let response = await fetch('/servicePost'); // does GET by default
       if (response.ok) {
         let offers = await response.json();
+        // filter out system post to get starting hour debit
+        offers = offers.filter((o) => o.category.categoryID !== 1);
         setOffers(offers); // set offers state with all offers, so it can be used by other components/views
         setUnfilteredOffers(offers);
       } else {
@@ -230,6 +254,8 @@ export default function App() {
       let response = await fetch('/servicePost/', options); // do POST
       if (response.ok) {
         let offers = await response.json(); // set invoices state with all invoices including new ones
+        // don't show offer that was only made by system to give default credit
+        offers = offers.filter((o) => o.category.categoryID !== 1);
         setOffers(offers);
         navigate('/');
       } else {
@@ -262,9 +288,10 @@ export default function App() {
       let response = await fetch(`/servicePost/${id}`, options); // do PUT
       if (response.ok) {
         let offers = await response.json();
+        // don't show offer that was only made by system to give start credit
+        offers = offers.filter((o) => o.category.categoryID !== 1);
         setOffers(offers);
         navigate(`/profile/${user.id}`);
-        console.log(user);
       } else {
         console.log(`Server error: ${response.status} ${response.statusText}`);
       }
@@ -284,7 +311,8 @@ export default function App() {
       let response = await fetch(`/servicePost/${id}`, options); // do DELETE
       if (response.ok) {
         let offers = await response.json();
-
+        // don't show offers made by system for start credit
+        offers = offers.filter((o) => o.category.categoryID !== 1);
         setOffers(offers);
       } else {
         console.log(`Server error: ${response.status} ${response.statusText}`);
@@ -296,24 +324,23 @@ export default function App() {
 
   // ********* BOOKINGS *************
 
+  function openChat(id) {
+    setSelectedBooking(id);
+    // console.log(id);
+    // console.log(selectedBooking);
+    navigate('/chat');
+    //it save the ID but not when I need it, it appears with delay.
+  }
 
-
-function openChat(id){
-  setSelectedBooking(id);
-  console.log(id);
-  console.log(selectedBooking);
-  navigate("/chat");
-  //it save the ID but not when I need it, it appears with delay.
-}
-
-
-// GET all bookings
+  // GET all bookings
 
   async function getBookings() {
     try {
       let response = await fetch('/bookings'); // does GET by default
       if (response.ok) {
         let bookings = await response.json();
+        // filter out booking made by system
+        bookings = bookings.filter((b) => b.requestor.userID !== 1);
         setBookings(bookings); // set bookings state with all categories, so it can be used by other components/views
         setUserBookings(bookings);
       } else {
@@ -328,6 +355,7 @@ function openChat(id){
   function selectOffer(id) {
     let selected = offers.filter((e) => e.postID === id);
     setSelectedOffer(selected);
+    navigate(user ? '/service-request' : '/login');
   }
 
   // POST a new request (make a booking)
@@ -344,12 +372,14 @@ function openChat(id){
       let response = await fetch('/bookings/', options); // do POST
       if (response.ok) {
         let bookings = await response.json(); // set bookings state with all bookings(requests) that the logged in user made, including the new one
+      //  don't show admin bookings
+        bookings = bookings.filter((b) => b.requestor.userID !== 1);
         setBookings(bookings);
         setUserBookings(bookings);
         console.log('Service got requested');
         navigate('/receiving-help'); // go to all bookings (Receiving help page)
-        console.log("userBookings:", userBookings)
-        console.log("bookings", bookings)
+        console.log('userBookings:', userBookings);
+        console.log('bookings', bookings);
       } else {
         console.log(`Server error: ${response.status} ${response.statusText}`);
       }
@@ -376,7 +406,10 @@ function openChat(id){
       let response = await fetch(`/bookings/${id}`, options); // do PUT
       if (response.ok) {
         let bookings = await response.json();
+        // don't show admin bookings
+        bookings = bookings.filter(b => b.requestor.userID !== 1);
         setBookings(bookings);
+        await getWalletValue(user.id);
         setUserBookings(bookings);
       } else {
         console.log(`Server error: ${response.status} ${response.statusText}`);
@@ -392,18 +425,19 @@ function openChat(id){
     user,
     users,
     categories,
+    userWallet,
     selectOfferCb: selectOffer,
     deleteServiceCb: deleteService,
     toEditCb: toEdit,
     choseCatCb: choseCat,
     resetFilteredOffersCb: resetFilteredOffers,
-
   };
 
   const chosenUserObj = {
     selectedOffer,
     user,
-    requestServiceCb: requestService
+    userWallet,
+    requestServiceCb: requestService,
   };
 
   const bookingsObj = {
@@ -418,23 +452,13 @@ function openChat(id){
     users,
     offers,
     reactToRequestCb: reactToRequest,
-    openChatCb: openChat
+    openChatCb: openChat,
   };
 
   // ********* RETURN *************
   const chatBookingObj = {
     bookingId: selectedBooking,
-  //   bookings:
-  //   user && bookings
-  //     ? bookings.filter((e) => e.requestor.userID === user.id)
-  //     : [],
-  // requests:
-  //   user && bookings
-  //     ? bookings.filter((e) => e.servicePost.serviceProvider === user.id)
-  //     : []
-  }
-
-
+  };
 
   return (
     <div className="App bg-gradient-to-t from-[#FFF7A3] via-[#FFF7A3] to-[#ff994091] h-full pb-28">
@@ -467,6 +491,7 @@ function openChat(id){
           element={
             <SignUpView
               user={user}
+              postalCodes={postalCodes}
               addNewUserCb={(newUser) => addNewUser(newUser)}
             />
           }
@@ -530,13 +555,14 @@ function openChat(id){
         />
         <Route path="*" element={<Error404View />} />
 
-        <Route path="chat" element={
-        <AppContext.Provider value={chatBookingObj}>
-          <ChatView user={user} bookings={bookings}/>
-        </AppContext.Provider>
-        }
-         />
-
+        <Route
+          path="chat"
+          element={
+            <AppContext.Provider value={chatBookingObj}>
+              <ChatView user={user} bookings={bookings} />
+            </AppContext.Provider>
+          }
+        />
       </Routes>
     </div>
   );

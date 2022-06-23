@@ -12,8 +12,7 @@ export default function PostOfferView(props) {
 
   let o =  props.offerToEdit ? props.offerToEdit[0] : null;
 
-  console.log("allofferstoedit:", props.offerToEdit)
-  console.log("offer to edit:", o)
+
 
   let EMPTY_FORM = {
     service_title: "",
@@ -124,6 +123,7 @@ export default function PostOfferView(props) {
                         value={serviceData.capacity}
                         onChange={(e) => handleInputChange(e)}
                         type="number"
+                        min="0"
                         className="w-full py-2 pl-10 pr-3 -ml-10 border-2 rounded-lg outline-none border-amber-200 focus:border-lime-700"
                         placeholder="1"
                       />

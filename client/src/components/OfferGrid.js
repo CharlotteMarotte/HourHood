@@ -4,10 +4,10 @@ import OfferCard from './OfferCard';
 import { Link } from 'react-router-dom';
 
 export default function OfferGrid() {
-  let { offers, user, categories, choseCatCb, resetFilteredOffersCb } =
+  let { offers, user, categories, choseCatCb, resetFilteredOffersCb, userWallet } =
     useContext(AppContext);
 
-  const [chosenCat, setChosenCat] = useState(null);
+  const [chosenCat, setChosenCat] = useState(1);
 
   function handleSubmit(event) {
     event.preventDefault();
@@ -95,7 +95,7 @@ export default function OfferGrid() {
             <h1 className="px-2 my-2 text-2xl font-medium title-font text-amber-900">
               Hello {user.first_name}!
             </h1>
-            <p className="my-2 leading-relaxed text-amber-500 ">Wallet: 10h</p>
+            <p className="my-2 leading-relaxed text-amber-500 ">Wallet: {userWallet} h</p>
             <Link
               to={`/profile/${user.id}`}
               className="leading-relaxed underline text-amber-400"
