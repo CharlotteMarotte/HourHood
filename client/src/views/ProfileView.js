@@ -11,10 +11,12 @@ export default function ProfileView() {
   // doesn't work, direct filter before map
   let [myOffers, setMyOffers] = useState(offers);
   let [myData, setMyData] = useState(offers[0]);
+  let [myToken, setMyToken] = useState([])
 
   useEffect(() => {
     getMyOffers();
     getMyUserData();
+    
   }, [offers]);
 
   useLayoutEffect(() => {
@@ -36,6 +38,14 @@ export default function ProfileView() {
     setMyData(filteredUsers[0]);
   }
 
+ 
+  function getMyToken(){
+    myToken= Math.random().toString(36).substr(2);
+    console.log(myToken);
+    setMyToken(myToken);
+  };
+  
+  
   return (
     // Code thanks to https://codepen.io/tariq01/pen/jOyLrRJ
     <>
@@ -81,6 +91,8 @@ export default function ProfileView() {
                 <p className="text-sm">
                   {myData.superpower ? myData.superpower : 'No superpower'}
                 </p>
+               
+              </div>
                 {/* only show when profile of user who is currently logged in is shown */}
                 {user.id === myData.id && (
                   <div className="pt-12 pb-8">
@@ -92,8 +104,21 @@ export default function ProfileView() {
                     </Link>
                   </div>
                 )}
-              </div>
+                      <div className="pt-12 pb-8">
+                          <button
+                            className="px-4 py-2 font-bold text-white rounded-full bg-amber-700 hover:bg-amber-900"
+                            onClick={(e) => getMyToken()}
+                          >
+                            Get tokennnn{' '}
+                          </button>
+                          <p>
+                            {myToken}
+                          </p>
+                      </div> 
+                
             </div>
+       
+            
           </div>
           {/* only show when profile of user who is currently logged in is shown */}
           {user.id === myData.id && (
@@ -112,6 +137,7 @@ export default function ProfileView() {
             </div>
           )}
         </div>
+       
       ) : (
         <Link
           className="p-4 my-1 text-2xl font-medium rounded-lg title-font bg-amber-200 text-amber-900"
@@ -120,6 +146,7 @@ export default function ProfileView() {
           No User logged in - back to offers
         </Link>
       )}
+    
     </>
   );
 }
