@@ -148,19 +148,6 @@ export default function SelectedOfferCard(props) {
                       >
                       Chat{' '}
                     </button>
-
-                    
-                    {/* <Link
-                      onClick={(e) =>
-                        selectBookingCb(props.booking.bookingId)
-                      }
-                      to="/chat"
-                      className="px-4 py-2 font-semibold bg-transparent border rounded hover:bg-rose-500 text-rose-700 hover:text-white border-rose-500 hover:border-transparent"
-                    >
-                      Chat{' '}
-                    </Link>{' '} */}
-                    {/* cambiar LINK a onblick  */}
-
                   </div>
             ) : (
               <div className="flex flex-row space-x-3">
@@ -184,14 +171,6 @@ export default function SelectedOfferCard(props) {
                       >
                       Chat{' '}
                 </button>
-
-                {/* <Link
-             
-                  to="/chat"
-                  className="px-4 py-2 font-semibold bg-transparent border rounded hover:bg-lime-500 text-lime-700 hover:text-white border-lime-500 hover:border-transparent"
-                >
-                  Chat{' '}
-                </Link>{' '} */}
               </div>
             )}
           </div>

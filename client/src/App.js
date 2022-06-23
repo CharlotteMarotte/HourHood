@@ -322,7 +322,7 @@ export default function App() {
     }
   }
 
-  // ********* BOOKINGS *************
+
 
   function openChat(id) {
     setSelectedBooking(id);

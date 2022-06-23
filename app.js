@@ -13,6 +13,7 @@ var authRouter = require('./routes/auth');
 var bookingsRouter = require('./routes/bookings');
 var chatRouter = require('./routes/chat');
 var photosRouter = require('./routes/photos');
+var tokensRouter = require('./routes/tokens');
 
 
 var app = express();
@@ -32,7 +33,7 @@ app.use('/categories', categoriesRouter);
 app.use('/bookings', bookingsRouter);
 app.use('/chat', chatRouter);
 app.use('/photos', photosRouter);
-
+app.use('/tokens', tokensRouter);
 
 // 404 error handler
 app.use(function (req, res) {
