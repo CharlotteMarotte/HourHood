@@ -32,9 +32,10 @@ function ChatList(props) {
   return (
     <div className="mb-1 rounded ChatList" ref={listDiv}>
         {myBooking.servicePost.serviceTitle}
-        {/* do a filter inside users to find the one that match with the code below and ask for his/her first_name and his/her  photo */}
         {myBooking.requestor.firstName}
+        {myBooking.servicePost.provider.firstName}
         {/* {requests[0].first_name} */}
+        <img src={myBooking.servicePost.provider.providerProfilePicture} className="h-44"/>
         <img src={myBooking.requestor.profilePicture} className="h-44"/>
       {props.messages.map((m, index) => (
         <div key={index}>
