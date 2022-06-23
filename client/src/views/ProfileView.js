@@ -38,13 +38,47 @@ export default function ProfileView() {
     setMyData(filteredUsers[0]);
   }
 
- 
-  function getMyToken(){
+  // Generate a new token and register into the backend as valid token.
+  async function getMyToken(){
     myToken= Math.random().toString(36).substr(2);
     console.log(myToken);
     setMyToken(myToken);
+
+    let options = {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({token: myToken}),
+    };
+
+    try {
+      let response = await fetch('/tokens', options);
+      if (!response.ok) {
+        console.log(`Server error: ${response.status}: ${response.statusText}`);
+      }
+    } catch (err) {
+      console.log(`Network error: ${err.message}`);
+    }
   };
-  
+
+ // Check if a token is valid or it has been used before.
+  async function checkTokenValid(token){
+    try {
+      let response = await fetch(`/tokens/${token}`);
+      if (!response.ok) {
+        console.log(`Server error: ${response.status}: ${response.statusText}`);
+        return false;
+      }
+    } catch (err) {
+      console.log(`Network error: ${err.message}`);
+      return false;
+    }
+    return true;
+  };
+
+
+
   
   return (
     // Code thanks to https://codepen.io/tariq01/pen/jOyLrRJ

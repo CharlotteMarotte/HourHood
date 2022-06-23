@@ -123,6 +123,7 @@ export default function PostOfferView(props) {
                         value={serviceData.capacity}
                         onChange={(e) => handleInputChange(e)}
                         type="number"
+                        min="0"
                         className="w-full py-2 pl-10 pr-3 -ml-10 border-2 rounded-lg outline-none border-amber-200 focus:border-lime-700"
                         placeholder="1"
                       />

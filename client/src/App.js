@@ -372,7 +372,7 @@ export default function App() {
       let response = await fetch('/bookings/', options); // do POST
       if (response.ok) {
         let bookings = await response.json(); // set bookings state with all bookings(requests) that the logged in user made, including the new one
-      //  don't show admin bookings
+        //  don't show admin bookings
         bookings = bookings.filter((b) => b.requestor.userID !== 1);
         setBookings(bookings);
         setUserBookings(bookings);
@@ -407,7 +407,7 @@ export default function App() {
       if (response.ok) {
         let bookings = await response.json();
         // don't show admin bookings
-        bookings = bookings.filter(b => b.requestor.userID !== 1);
+        bookings = bookings.filter((b) => b.requestor.userID !== 1);
         setBookings(bookings);
         await getWalletValue(user.id);
         setUserBookings(bookings);
