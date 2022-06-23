@@ -1,11 +1,13 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState, useContext } from 'react';
+import AppContext from '../AppContext';
 import './ChatList.css';
 
 function ChatList(props) {
+  // let {requests, bookings} = useContext(AppContext);
   let listDiv = useRef(null);
   let [myBooking, setMyBooking] = useState(props.bookings[0]);
 
-  console.log(myBooking)
+
 
   function getMyBooking() {
     let filteredBooking = props.bookings.filter(
@@ -32,6 +34,7 @@ function ChatList(props) {
         {myBooking.servicePost.serviceTitle}
         {/* do a filter inside users to find the one that match with the code below and ask for his/her first_name and his/her  photo */}
         {myBooking.requestor.firstName}
+        {/* {requests[0].first_name} */}
         <img src={myBooking.requestor.profilePicture} className="h-44"/>
       {props.messages.map((m, index) => (
         <div key={index}>

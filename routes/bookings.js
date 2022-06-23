@@ -107,6 +107,7 @@ router.get("/:id", ensureBookingExists, async function(req, res) {
         FROM bookings 
         LEFT JOIN service_post ON service_post.id = bookings.fk_service_post_id
         LEFT JOIN users ON users.id = bookings.fk_requestor_id
+        
         WHERE bookings.id = ${booking.id}
         `;
         let results = await db(sql);

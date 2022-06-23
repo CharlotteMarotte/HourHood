@@ -423,7 +423,15 @@ function openChat(id){
 
   // ********* RETURN *************
   const chatBookingObj = {
-    bookingId: selectedBooking
+    bookingId: selectedBooking,
+  //   bookings:
+  //   user && bookings
+  //     ? bookings.filter((e) => e.requestor.userID === user.id)
+  //     : [],
+  // requests:
+  //   user && bookings
+  //     ? bookings.filter((e) => e.servicePost.serviceProvider === user.id)
+  //     : []
   }
 
 
