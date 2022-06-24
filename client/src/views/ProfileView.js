@@ -94,7 +94,7 @@ export default function ProfileView() {
       console.log(`Network error: ${err.message}`);
     }
   };
-} 
+ 
 
 
 
