@@ -14,7 +14,7 @@ export default function ChatView(props) {
       <div className="flex flex-col items-center">
         <div className="">
           <div className="">
-            <img src={chatImage} className="xl:h-52 h-40 left-10 sm:h-52 sm:left-1/4 xl:left-1/4 relative" />
+            <img src={chatImage} className="xl:h-52 h-40 left-10 md:h-52 md:left-1/4 xl:left-1/4 relative" />
           </div>
           <div className="flex flex-col relative md:gap-2 -top-6 md:-top-10">
             <h1 className="md:text-4xl text-lg text-[#FF9940]">
