@@ -16,21 +16,21 @@ function ChatInput(props) {
   return (
     <div id="input">
       <form onSubmit={handleSubmit}>
-        <div className="flex mb-10 gap-2 xl:gap-8 xl:mx-12 mx-3 justify-center items-center rounded-full bg-white md:h-20 h-16 shadow-lg shadow-[#ff994091]">
+        <div className="flex mb-10 gap-2 xl:gap-8 xl:mx-12 mx-3 md:mx-6 justify-center items-center rounded-full bg-white md:h-20 h-16 shadow-lg shadow-[#ff994091]">
           <button
             type="submit"
-            className="sm:text-3xl md:text-5xl text-2xl font-bold hover:bg-[#361201] bg-[#957e4e] text-[#FFF701] py-[6px] px-[16px] xl:py-[6px] xl:px-[16px] md:py-5 md:px-8 rounded-full align-middle ml-4"
+            className="sm:text-3xl md:text-5xl text-2xl font-bold hover:bg-[#361201] bg-[#957e4e] text-[#FFF701] py-[6px] px-[16px] xl:py-[6px] xl:px-[16px] md:py-2 md:px-4 rounded-full align-middle ml-4"
           >
             >
           </button>
           <input
             type="text"
-            className="form-control xl:w-10/12 px-4 md:py-4 py-2 rounded-3xl bg-white"
+            className="form-control xl:w-10/12 md:w-8/12 md:mx-4 md:mr-8 px-4 md:py-4 py-2 rounded-3xl bg-white"
             name="text"
             value={text}
             onChange={handleChange}
           />
-          <div className="xl:w-28 w-16 h-16 xl:h-28">
+          <div className="md:w-28 w-16 h-16 md:h-28">
             <img
               src={props.user.photo}
               className="object-cover h-full w-full rounded-full shadow-[#ff994091] shadow-lg"

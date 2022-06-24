@@ -33,7 +33,7 @@ function ChatList(props) {
       ref={listDiv}
     >
       <div className="flex flex-col items-center justify-center">
-        <h2 className="md:text-3xl text-lg xl:mt-0 mt-4 text-[#361201] font-bold uppercase">
+        <h2 className="md:text-3xl text-lg xl:mt-0 mt-4 text-white bg-[#ff994023] shadow-[#ff994091] px-2 shadow-lg font-bold ">
           {myBooking.servicePost.serviceTitle}
         </h2>
         <div className="items-center justify-center">
@@ -48,7 +48,7 @@ function ChatList(props) {
               <div className="h-28 w-28 mt-2">
                 <img
                   src={myBooking.requestor.profilePicture}
-                  className="h-full w-full object-cover rounded-full shadow-lg shadow-[#fff701]"
+                  className="h-full w-full object-cover rounded-full shadow-lg shadow-[#ffe60099]"
                 />
               </div>
             </div>
@@ -63,7 +63,7 @@ function ChatList(props) {
               <div className="h-28 w-28 mt-2">
                 <img
                   src={myBooking.servicePost.provider.providerProfilePicture}
-                  className="h-full w-full object-cover rounded-full shadow-lg shadow-[#c8e242]"
+                  className="h-full w-full object-cover rounded-full shadow-lg shadow-[#C8E242]"
                 />
               </div>
             </div>
@@ -94,7 +94,7 @@ function ChatList(props) {
                 </div>
                 <div className="flex flex-col">
                   <b className="text-[#FF9940] text-start ml-2">{m.senderName}: </b>
-                  <span className="bg-[#ffe60099] py-2 px-2 xl:px-10 w-[250px] rounded-xl xl:rounded-full xl:max-w-2xl text-[#361201] text-lg" title={formatDT(m.dateTime)}>
+                  <span className="bg-[#ffe60099] py-2 px-2 xl:px-10 w-[250px] xl:w-[800px] md:w-[500px] rounded-xl xl:rounded-full xl:max-w-2xl text-[#361201] text-lg" title={formatDT(m.dateTime)}>
                     {m.text}
                   </span>
                 </div>
@@ -109,7 +109,7 @@ function ChatList(props) {
                 </div>
                 <div className="flex flex-col">
                 <b className="text-[#FF9940] text-end mr-2">{m.senderName}: </b>
-                <span className="bg-[#c7e2429c] py-2 xl:max-w-2xl w-[265px] px-2 xl:px-10 rounded-xl xl:rounded-full text-[#361201] text-lg" title={formatDT(m.dateTime)}>
+                <span className="bg-[#c7e2429c] py-2 xl:max-w-2xl w-[265px] xl:w-[800px] md:w-[515px] px-2 xl:px-10 rounded-xl xl:rounded-full text-[#361201] text-lg" title={formatDT(m.dateTime)}>
                   {m.text}
                 </span>
                 </div>
