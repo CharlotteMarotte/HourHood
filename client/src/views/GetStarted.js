@@ -1,8 +1,9 @@
 import React from "react";
 import image1 from "../img/getStarted.png";
+import { Link } from 'react-router-dom';
 import { useLayoutEffect } from "react";
 
-export default function GetStarted() {
+export default function GetStarted(props) {
   useLayoutEffect(() => {
     window.scrollTo(0, 0);
   }, []);
@@ -29,6 +30,9 @@ export default function GetStarted() {
           <div className="bg-[#fe8923] w-28 h-1"></div>
         </div>
       </div>
-    </div>
+      {!props.user && (
+      <Link to="/rules" className="bg-[#FF9940] hover:bg-[#fe8923] hover:shadow-white hover:shadow-md hover:font-extrabold px-16 py-2 text-lg uppercase text-white font-bold rounded-xl md:mt-10 2xl:my-14 mt-8">Sign up!</Link>
+      )}
+      </div>
   );
 }

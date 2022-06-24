@@ -516,7 +516,7 @@ export default function App() {
             </AppContext.Provider>
           }
         />
-        <Route path="getstarted" element={<GetStarted />} />
+        <Route path="getstarted" element={<GetStarted user={user}/>} />
         <Route
           path="/"
           element={
