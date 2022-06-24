@@ -4,11 +4,10 @@ import OfferCard from './OfferCard';
 import { Link } from 'react-router-dom';
 
 export default function OfferGrid() {
-  let { offers, user, categories, choseCatCb, resetFilteredOffersCb, userWallet } = useContext(AppContext);
-  
-  const [chosenCat, setChosenCat] = useState(1);
+  let { offers, user, categories, choseCatCb, resetFilteredOffersCb, userWallet } =
+    useContext(AppContext);
 
- // console.log("photo", user.uploadedPhoto)
+  const [chosenCat, setChosenCat] = useState("default");
 
   let photoUrl = 'http://localhost:5000/clientfiles'
 

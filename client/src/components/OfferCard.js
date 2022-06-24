@@ -36,11 +36,11 @@ export default function OfferCard(props) {
             </p>
           </div>
           {/* if in profile view show extra information */}
-          {props.view === 'profile' && (
+          {/* {props.view === 'profile' && (
             <p className="mb-3 leading-relaxed text-amber-500">
               My capacity: {props.offer.capacity} times/month
             </p>
-          )}
+          )} */}
           {props.view === 'profile' && (
             // depending of donation boolean show relevant string in card
             <p className="mb-3 leading-relaxed text-amber-500">
@@ -62,8 +62,9 @@ export default function OfferCard(props) {
                 {/* only show this button if this is not my own offer, check first if user is defined */}
                 {user && user.id !== props.offer.user.userID && (
                   <button
+                  disabled = {(userWallet < 1 && !props.offer.donation) ? true : false}
                     onClick={(e) => selectOfferCb(props.offer.postID)}
-                    className="px-4 py-2 font-semibold bg-transparent border rounded hover:bg-lime-600 text-lime-700 hover:text-white border-lime-600 hover:border-transparent"
+                    className="px-4 py-2 font-semibold bg-transparent border rounded disabled:transform-none disabled:transition-none disabled:cursor-not-allowed hover:bg-lime-600 text-lime-700 hover:text-white border-lime-600 hover:border-transparent"
                   >
                     Request
                   </button>

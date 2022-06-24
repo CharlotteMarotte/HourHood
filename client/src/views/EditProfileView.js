@@ -72,6 +72,8 @@ export default function EditProfileView(props) {
     event.target.reset();
   }
 
+  
+  
   return (
     // Code thanks to https://codepen.io/atzinn-herrera/pen/JjMMBxy
     <div className="flex px-16 py-16 min-w-screen min-h-scree">
