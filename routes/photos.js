@@ -21,13 +21,16 @@ const upload = multer({
   storage: storage
 });
 
+
 // /* GET files */
 router.get("/",async function(req, res, next) {
   res.status(200).send("Images");
 
 });
 
+
 router.post("/", upload.single('image'),async (req, res, err) =>{
+
 
   if(!req.file.originalname.toLowerCase().match(/\.(jpg|jpeg|png)$/)){
     res.status(425).send({error: "Only image file (jpg, jpeg, png) are supported."})

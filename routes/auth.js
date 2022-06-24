@@ -34,11 +34,20 @@ router.post("/signup", async (req, res) => {
  * Log in a user
  **/
 
+
+
 router.post("/login", async (req, res) => {
     let { email, password } = req.body;
 
     try {
-        let results = await db(`SELECT * FROM users WHERE email = "${email}"`);
+         
+        let sql = `
+            SELECT users.*, photos.filename AS uploadedPhoto, photos.id AS fk_photos_id
+            FROM users 
+            LEFT JOIN photos ON photos.fk_user_id = users.id
+            WHERE email = "${email}"`;
+
+        let results = await db(sql);
         if (results.data.length === 0) {
             // Username not found
             res.status(401).send({ error: "Login failed" });

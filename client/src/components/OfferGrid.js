@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import AppContext from '../AppContext';
 import OfferCard from './OfferCard';
 import { Link } from 'react-router-dom';
@@ -8,6 +8,8 @@ export default function OfferGrid() {
     useContext(AppContext);
 
   const [chosenCat, setChosenCat] = useState("default");
+
+  let photoUrl = 'http://localhost:5000/clientfiles'
 
   function handleSubmit(event) {
     event.preventDefault();
@@ -88,7 +90,7 @@ export default function OfferGrid() {
             <div className="mx-4 my-6">
               <img
                 className="object-cover border-2 rounded-full border-amber-400"
-                src={user.photo}
+                src={user.uploadedPhoto? `${photoUrl}/${user.uploadedPhoto}` : user.photo}
                 alt="avatar"
               />
             </div>
