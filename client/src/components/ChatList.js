@@ -28,12 +28,9 @@ function ChatList(props) {
   }
 
   return (
-    <div
-      className="mb-1 rounded ChatList mt-2"
-      ref={listDiv}
-    >
+    <div className="mb-1 rounded ChatList mt-2" ref={listDiv}>
       <div className="flex flex-col items-center justify-center">
-        <h2 className="md:text-3xl text-lg xl:mt-0 mt-4 text-[#361201] font-bold uppercase">
+        <h2 className="md:text-3xl text-lg xl:mt-0 md:mt-0 mt-4 text-white bg-[#ff994023] shadow-[#ff994091] px-2 shadow-lg font-bold ">
           {myBooking.servicePost.serviceTitle}
         </h2>
         <div className="items-center justify-center">
@@ -48,7 +45,7 @@ function ChatList(props) {
               <div className="h-28 w-28 mt-2">
                 <img
                   src={myBooking.requestor.profilePicture}
-                  className="h-full w-full object-cover rounded-full shadow-lg shadow-[#fff701]"
+                  className="h-full w-full object-cover rounded-full shadow-lg shadow-[#ffe60099]"
                 />
               </div>
             </div>
@@ -63,7 +60,7 @@ function ChatList(props) {
               <div className="h-28 w-28 mt-2">
                 <img
                   src={myBooking.servicePost.provider.providerProfilePicture}
-                  className="h-full w-full object-cover rounded-full shadow-lg shadow-[#c8e242]"
+                  className="h-full w-full object-cover rounded-full shadow-lg shadow-[#C8E242]"
                 />
               </div>
             </div>
@@ -71,7 +68,7 @@ function ChatList(props) {
           <div className="flex flex-col gap-4 items-center">
             <a
               href="#input"
-              className="xl:text-5xl text-3xl mt-8 xl:mt-0font-bold animate-bounce hover:bg-[#361201] bg-[#957e4e] text-[#FFF701] py-[6px] px-[16px] md:hidden xl:inline rounded-full
+              className="xl:text-5xl text-3xl mt-8 xl:mt-0 font-bold animate-bounce hover:bg-[#361201] bg-[#957e4e] text-[#FFF701] py-[6px] px-[16px] md:hidden xl:inline rounded-full
        align-middle"
             >
               v
@@ -79,47 +76,57 @@ function ChatList(props) {
           </div>
         </div>
       </div>
-
-      {props.messages.map((m, index) => (
-        <div key={index} className="mt-10 mb-20 flex justify-center">
-          <p>
-            
-            {m.senderName === myBooking.requestor.firstName ? (
-              <div className="flex items-center -ml-44 gap-8">
-                <div className="w-20 h-20">
-                  <img
-                    src={myBooking.requestor.profilePicture}
-                    className="h-full w-full object-cover rounded-full"
-                  />
+      <div className="overflow-y-auto h-[420px] mb-10 ">
+        {props.messages.map((m, index) => (
+          <div key={index} className="md:mt-10 md:mb-20 mt-10 mb-10 flex justify-center">
+            <p>
+              {m.senderName === myBooking.requestor.firstName ? (
+                <div className="flex items-center xl:-ml-44 gap-4 xl:gap-8">
+                  <div className="md:w-20 md:h-20 w-16 h-16">
+                    <img
+                      src={myBooking.requestor.profilePicture}
+                      className="h-full w-full object-cover rounded-full"
+                    />
+                  </div>
+                  <div className="flex flex-col">
+                    <b className="text-[#FF9940] text-start ml-2">
+                      {m.senderName}:{" "}
+                    </b>
+                    <span
+                      className="bg-[#ffe60099] py-2 px-2 xl:px-10 w-[250px] xl:w-[800px] md:w-[500px] rounded-xl xl:rounded-full xl:max-w-2xl text-[#361201] text-lg"
+                      title={formatDT(m.dateTime)}
+                    >
+                      {m.text}
+                    </span>
+                  </div>
                 </div>
-                <div className="flex flex-col">
-                  <b className="text-[#FF9940] text-start ml-2">{m.senderName}: </b>
-                  <span className="bg-[#ffe60099] py-2 min-w-fit px-10 rounded-full max-w-2xl text-[#361201] text-lg" title={formatDT(m.dateTime)}>
-                    {m.text}
-                  </span>
+              ) : (
+                <div className="flex flex-row-reverse xl:ml-44 items-center gap-4 xl:gap-8">
+                  <div className="md:w-20 md:h-20 w-16 h-16">
+                    <img
+                      src={
+                        myBooking.servicePost.provider.providerProfilePicture
+                      }
+                      className="h-full w-full object-cover rounded-full"
+                    />
+                  </div>
+                  <div className="flex flex-col">
+                    <b className="text-[#FF9940] text-end mr-2">
+                      {m.senderName}:{" "}
+                    </b>
+                    <span
+                      className="bg-[#c7e2429c] py-2 xl:max-w-2xl w-[250px] xl:w-[800px] md:w-[500px] px-2 xl:px-10 rounded-xl xl:rounded-full text-[#361201] text-lg"
+                      title={formatDT(m.dateTime)}
+                    >
+                      {m.text}
+                    </span>
+                  </div>
                 </div>
-              </div>
-            ) : (
-              <div className="flex flex-row-reverse ml-44 items-center gap-8">
-                <div className="w-20 h-20">
-                  <img
-                    src={myBooking.servicePost.provider.providerProfilePicture}
-                    className="h-full w-full object-cover rounded-full"
-                  />
-                </div>
-                <div className="flex flex-col">
-                <b className="text-[#FF9940] text-end mr-2">{m.senderName}: </b>
-                <span className="bg-[#c7e2429c] py-2 min-w-fit max-w-2xl px-10 rounded-full text-[#361201] txt-lg" title={formatDT(m.dateTime)}>
-                  {m.text}
-                </span>
-                </div>
-              </div>
-            )}
-            {/* <b>{m.senderName}: </b> */}
-            {/* <span title={formatDT(m.dateTime)}>{m.text}</span> */}
-          </p>
-        </div>
-      ))}
+              )}
+            </p>
+          </div>
+        ))}
+      </div>
     </div>
   );
 }
