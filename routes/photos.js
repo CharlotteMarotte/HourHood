@@ -37,7 +37,7 @@ async function sendAllFiles(res) {
   } catch (err) {
     res.status(500).send({ error: err.message });
   }
-}
+}                                  
 
 /**
  * Routes
@@ -47,6 +47,9 @@ async function sendAllFiles(res) {
 router.get('/', async function (req, res) {
   sendAllFiles(res);
 });
+
+
+
 
 /* POST a photo */
 router.post('/', upload.single('clientfile'), async function (req, res) {

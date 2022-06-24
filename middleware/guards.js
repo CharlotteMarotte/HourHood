@@ -37,8 +37,11 @@ function ensureSameUser(req, res, next) {
         // Throws error on invalid/missing token
         let payload = jwt.verify(token, SECRET_KEY);
         // If we get here, a valid token was passed
+           // console.log(payload.userId)
+           // console.log(Number(req.params.userId))
         if (payload.userId === Number(req.params.userId)) {
             next();
+            
         } else {
             res.status(403).send({ error: 'Forbidden' });
         }

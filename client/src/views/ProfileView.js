@@ -8,14 +8,16 @@ import GoToOfferButton from '../components/GoToOfferButton';
 
 export default function ProfileView() {
   let { user, users, offers } = useContext(AppContext);
-  // doesn't work, direct filter before map
   let [myOffers, setMyOffers] = useState(offers);
   let [myData, setMyData] = useState(offers[0]);
+
+
+  let photoUrl = 'http://localhost:5000/clientfiles'
 
   useEffect(() => {
     getMyOffers();
     getMyUserData();
-  }, [offers]);
+  }, [offers, users, user]);
 
   useLayoutEffect(() => {
     window.scrollTo(0, 0);
@@ -36,6 +38,9 @@ export default function ProfileView() {
     setMyData(filteredUsers[0]);
   }
 
+ 
+
+
   return (
     // Code thanks to https://codepen.io/tariq01/pen/jOyLrRJ
     <>
@@ -46,7 +51,7 @@ export default function ProfileView() {
           <div className="flex flex-wrap items-center h-auto max-w-4xl mx-auto my-24 lg:h-screen lg:my-0">
             <div className="w-auto md:w-full lg:w-2/5">
               <img
-                src={myData.photo}
+                src={user.uploadedPhoto? `${photoUrl}/${user.uploadedPhoto}` : user.photo}
                 className="hidden rounded-none shadow-lg lg:rounded-lg lg:block"
               />
             </div>
