@@ -8,7 +8,7 @@ const EMPTY_FORM = {
   last_name: '',
   street: '',
   house_number: '',
-  city_code: '',
+  city_code: null,
   city_name: 'Barcelona',
   country: 'Spain',
   email: '',
@@ -57,7 +57,7 @@ export default function SignUpView(props) {
               required
               name="first_name"
               type="text"
-              className="rounded-lg py-2 w-64 px-8 border-2 text-text-[#fe8923] border-[#fe8923] outline-none focus:border-[#C8E242]"
+              className="rounded-lg py-2 w-64 px-8 border-2 text-[#fe8923] border-[#fe8923] outline-none focus:border-[#C8E242]"
               placeholder="First Name"
               value={newUser.first_name}
               onChange={(e) => handleChange(e)}
@@ -77,7 +77,7 @@ export default function SignUpView(props) {
               required
               name="street"
               type="text"
-              className="rounded-lg w-64 py-2 px-8 border-2 text-text-[#fe8923] border-[#fe8923] outline-none focus:border-[#C8E242]"
+              className="rounded-lg w-64 py-2 px-8 border-2 text-[#fe8923] border-[#fe8923] outline-none focus:border-[#C8E242]"
               placeholder="E.g. : Carrer d'en Grassot"
               value={newUser.street}
               onChange={(e) => handleChange(e)}
@@ -95,16 +95,16 @@ export default function SignUpView(props) {
           <div className="flex items-center gap-10">
             <select
               require="true"
-              className="rounded-lg w-64 py-2 px-8 border-2 text-text-[#fe8923] border-[#fe8923] outline-none focus:border-[#C8E242]"
+              className="rounded-lg w-64 py-2 px-8 border-2 text-[#fe8923] border-[#fe8923] outline-none focus:border-[#C8E242]"
               name="city_code"
-              id="select_category"
-              value={newUser.city_code}
+              id="select_city_code"
+              // value={newUser.city_code}
               onChange={(e) => handleChange(e)}
-              defaultValue={'DEFAULT'}
+              defaultValue={'default'}
             >
               <option
+                value='default'
                 disabled
-                value="DEFAULT"
                 className="p-2 hover:bg-amber-100 text-md "
               >
                 -- Select a postal code --
@@ -112,7 +112,7 @@ export default function SignUpView(props) {
               {props.postalCodes.map((postalCode, index) => (
                 <option
                   key={index}
-                  value={postalCode}
+                  value={newUser.city_code}
                   className="p-4 hover:bg-amber-100 text-md"
                 >
                   {postalCode}
