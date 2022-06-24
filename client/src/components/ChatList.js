@@ -85,8 +85,8 @@ function ChatList(props) {
           <p>
             
             {m.senderName === myBooking.requestor.firstName ? (
-              <div className="flex items-center -ml-44 gap-8">
-                <div className="w-20 h-20">
+              <div className="flex items-center xl:-ml-44 gap-8">
+                <div className="md:w-20 md:h-20 w-16 h-16">
                   <img
                     src={myBooking.requestor.profilePicture}
                     className="h-full w-full object-cover rounded-full"
@@ -94,14 +94,14 @@ function ChatList(props) {
                 </div>
                 <div className="flex flex-col">
                   <b className="text-[#FF9940] text-start ml-2">{m.senderName}: </b>
-                  <span className="bg-[#ffe60099] py-2 min-w-fit px-10 rounded-full max-w-2xl text-[#361201] text-lg" title={formatDT(m.dateTime)}>
+                  <span className="bg-[#ffe60099] py-2 px-2 xl:px-10 w-[250px] rounded-xl xl:rounded-full xl:max-w-2xl text-[#361201] text-lg" title={formatDT(m.dateTime)}>
                     {m.text}
                   </span>
                 </div>
               </div>
             ) : (
-              <div className="flex flex-row-reverse ml-44 items-center gap-8">
-                <div className="w-20 h-20">
+              <div className="flex flex-row-reverse xl:ml-44 items-center gap-4 xl:gap-8">
+                <div className="md:w-20 md:h-20 w-16 h-16">
                   <img
                     src={myBooking.servicePost.provider.providerProfilePicture}
                     className="h-full w-full object-cover rounded-full"
@@ -109,7 +109,7 @@ function ChatList(props) {
                 </div>
                 <div className="flex flex-col">
                 <b className="text-[#FF9940] text-end mr-2">{m.senderName}: </b>
-                <span className="bg-[#c7e2429c] py-2 min-w-fit max-w-2xl px-10 rounded-full text-[#361201] txt-lg" title={formatDT(m.dateTime)}>
+                <span className="bg-[#c7e2429c] py-2 xl:max-w-2xl w-[265px] px-2 xl:px-10 rounded-xl xl:rounded-full text-[#361201] text-lg" title={formatDT(m.dateTime)}>
                   {m.text}
                 </span>
                 </div>
