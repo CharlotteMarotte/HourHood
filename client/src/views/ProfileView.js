@@ -41,7 +41,6 @@ export default function ProfileView() {
   // Generate a new token and register into the backend as valid token.
   async function getMyToken(){
     myToken= Math.random().toString(36).substr(2);
-    console.log(myToken);
     setMyToken(myToken);
 
     let options = {
