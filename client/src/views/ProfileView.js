@@ -49,7 +49,7 @@ export default function ProfileView() {
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({token: myToken}),
+      body: JSON.stringify({token: myToken, valid: 1}),
     };
 
     try {
@@ -76,6 +76,25 @@ export default function ProfileView() {
     }
     return true;
   };
+
+  async function setInvalidToken(token){
+    let options = {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({token: token, valid: 0}),
+    };
+    try {
+      let response = await fetch('/tokens', options);
+      if (!response.ok) {
+        console.log(`Server error: ${response.status}: ${response.statusText}`);
+      }
+    } catch (err) {
+      console.log(`Network error: ${err.message}`);
+    }
+  };
+} 
 
 
 
