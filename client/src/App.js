@@ -501,7 +501,7 @@ export default function App() {
 // ********* RETURN *************
 
   return (
-    <div className="App bg-gradient-to-t from-[#FFF7A3] via-[#FFF7A3] to-[#ff994091] h-full pb-10 md:pb-20">
+    <div className="App bg-gradient-to-t from-[#FFF7A3] via-[#FFF7A3] to-[#ff994091] min-h-screen pb-10 md:pb-20">
       <Navbar user={user} logoutCb={doLogout} />
 
       <Routes>
