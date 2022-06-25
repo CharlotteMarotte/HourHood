@@ -22,6 +22,9 @@ export default function ProfileView(props) {
     user,
   ]);
 
+  // console.log("user", user);
+  // console.log("myData", myData);
+
 
   useLayoutEffect(() => {
     window.scrollTo(0, 0)
@@ -109,14 +112,18 @@ export default function ProfileView(props) {
         <div className="font-sans antialiased leading-normal tracking-wider text-gray-900 bg-cover">
           <div className="flex flex-wrap items-center h-auto max-w-4xl mx-auto my-24 lg:h-screen lg:my-0">
             <div className="w-full lg:w-2/5">
-              <img
-                src={
-                  user.uploadedPhoto
-                    ? `${photoUrl}/${user.uploadedPhoto}`
-                    : user.photo
-                }
-                className="hidden rounded-none shadow-lg lg:rounded-lg lg:block"
-              />
+              {Number(id) === user.id && 
+                <img
+                  src={user.uploadedPhoto ? `${photoUrl}/${user.uploadedPhoto}`
+                      : user.photo}
+                  className="hidden rounded-none shadow-lg lg:rounded-lg lg:block"
+                />}
+               {Number(id) !== user.id &&
+                <img
+                  src={myData.uploadedPhoto ? `${photoUrl}/${myData.uploadedPhoto}`
+                      : myData.photo}
+                  className="hidden rounded-none shadow-lg lg:rounded-lg lg:block"
+                />}
             </div>
             <div
               id="profile"
