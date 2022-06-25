@@ -21,11 +21,11 @@ function ChatInput(props) {
             type="submit"
             className="sm:text-3xl md:text-5xl text-2xl font-bold hover:bg-[#361201] bg-[#957e4e] text-[#FFF701] py-[6px] px-[16px] xl:py-[6px] xl:px-[16px] md:py-5 md:px-8 rounded-full align-middle ml-4"
           >
-            >
+            
           </button>
           <input
             type="text"
-            className="form-control w-10/12 px-4 py-4 rounded-3xl bg-white"
+            className="w-10/12 px-4 py-4 bg-white form-control rounded-3xl"
             name="text"
             value={text}
             onChange={handleChange}

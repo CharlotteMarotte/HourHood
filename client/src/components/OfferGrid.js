@@ -21,6 +21,9 @@ export default function OfferGrid() {
     setChosenCat(event.target.value); // updates key [name] with new value
   };
 
+
+
+
   return (
     // Code thanks to https://codepen.io/asdasdadddddddddd/pen/ExXjdPM
     <div>
@@ -95,7 +98,7 @@ export default function OfferGrid() {
             <h1 className="px-2 my-2 text-2xl font-medium title-font text-amber-900">
               Hello {user.first_name}!
             </h1>
-            <p className="my-2 leading-relaxed text-amber-500 ">Wallet: {userWallet} h</p>
+            <p className={`my-2 leading-relaxed  ${userWallet < 1 ? "text-red-700 font-semibold hover:text-xl animate-pulse" : "text-amber-500"}`}>Wallet: {userWallet} h</p>
             <Link
               to={`/profile/${user.id}`}
               className="leading-relaxed underline text-amber-400"

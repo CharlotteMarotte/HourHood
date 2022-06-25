@@ -6,6 +6,7 @@ export default function OfferCard(props) {
   let { user, deleteServiceCb, selectOfferCb, toEditCb, userWallet } =
     useContext(AppContext);
 
+
   return (
     <div
       className={`p-4 w-full ${
@@ -62,9 +63,10 @@ export default function OfferCard(props) {
                 {/* only show this button if this is not my own offer, check first if user is defined */}
                 {user && user.id !== props.offer.user.userID && (
                   <button
-                  disabled = {(userWallet < 1 && !props.offer.donation) ? true : false}
-                    onClick={(e) => selectOfferCb(props.offer.postID)}
-                    className="px-4 py-2 font-semibold bg-transparent border rounded disabled:transform-none disabled:transition-none disabled:cursor-not-allowed hover:bg-lime-600 text-lime-700 hover:text-white border-lime-600 hover:border-transparent"
+                  title={(userWallet < 1 && !props.offer.donation) ? "You don't have enough credit in your wallet and the service is not available for donation" : null}
+                  // disabled = {(userWallet < 1 && !props.offer.donation) ? true : false}
+                    onClick={(userWallet < 1 && !props.offer.donation) ? (e => alert("Service is not available for donation")) : ((e) => selectOfferCb(props.offer.postID))}
+                    className={`px-4 py-2 font-semibold bg-transparent border rounded ${(userWallet < 1 && !props.offer.donation) ? "transform-none transition-none cursor-not-allowed hover:bg-gray-300 text-gray-400 hover:text-white border-gray-300 hover:border-transparent" : "hover:bg-lime-600 text-lime-700 hover:text-white border-lime-600 hover:border-transparent"}`}
                   >
                     Request
                   </button>
