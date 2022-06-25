@@ -37,7 +37,6 @@ export default function OfferGrid() {
             id="select_category"
             onChange={(e) => handleInputChange(e)}
             value={chosenCat}
-            defaultValue={'default'}
           >
             <option
               className="p-4 hover:bg-amber-100 text-md "

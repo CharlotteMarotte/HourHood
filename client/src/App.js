@@ -509,7 +509,7 @@ export default function App() {
           path="profile/:id"
           element={
             <AppContext.Provider value={contextObj}>
-              <ProfileView />
+              <ProfileView offers={unfilteredOffers}/>
             </AppContext.Provider>
           }
         />
