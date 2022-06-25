@@ -13,7 +13,7 @@ function Navbar(props) {
   return (
     <div className="sticky top-0 z-50">
       <nav className="bg-[#361201] shadow-md shadow-[#361201a2] navbar navbar-expand-lg navbar-light">
-        <div className="items-center justify-between hidden py-3 sm:flex sm:px-32">
+        <div className="items-center justify-between hidden py-3 sm:flex xl:px-32 md:px-10">
           <NavLink
             className="text-xl text-white pr-2 font-semibold hover:text-[#FF9940]"
             to="/"
@@ -57,7 +57,7 @@ function Navbar(props) {
               </NavLink>
             </div>
           )}
-          <div className="flex gap-4 py-4 pr-10">
+          <div className="flex gap-4 py-4 pr-0 xl:pr-10">
             {props.user ? (
               <NavLink
                 className="text-xl text-white pr-2 font-semibold hover:text-[#FF9940]"
@@ -117,9 +117,9 @@ function Navbar(props) {
                         setOpen(!open);
                       }}
                       className="text-white hover:bg-[#361201] hover:text-[#FF9940] pr-2 font-semibold"
-                      to="/"
+                      to="/getstarted"
                     >
-                      Offers
+                      Get started
                     </NavLink>
                     {props.user && (
                       <>
@@ -128,18 +128,18 @@ function Navbar(props) {
                             setOpen(!open);
                           }}
                           className="pr-2 font-semibold text-white"
-                          to="/requests"
+                          to="/giving-help"
                         >
-                          Requests
+                          Giving help
                         </NavLink>
                         <NavLink
                           onClick={(e) => {
                             setOpen(!open);
                           }}
                           className="pr-2 font-semibold text-white"
-                          to="/bookings"
+                          to="/receiving-help"
                         >
-                          Bookings
+                          Receiving help
                         </NavLink>
                         <NavLink
                           onClick={(e) => {
@@ -154,7 +154,7 @@ function Navbar(props) {
                     )}
                     {props.user ? (
                       <NavLink
-                        className="text-xl text-white pr-2 font-semibold hover:text-[#FF9940]"
+                        className=" text-white pr-2 font-semibold hover:text-[#FF9940]"
                         to="/"
                         onClick={(e) => {
                           props.logoutCb();
@@ -165,7 +165,7 @@ function Navbar(props) {
                       </NavLink>
                     ) : (
                       <NavLink
-                        className="text-xl text-white pr-2 font-semibold hover:text-[#FF9940]"
+                        className=" text-white pr-2 font-semibold hover:text-[#FF9940]"
                         to="/login"
                       >
                         Login
