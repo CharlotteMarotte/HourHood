@@ -76,7 +76,7 @@ function ChatList(props) {
           </div>
         </div>
       </div>
-      <div className="overflow-y-auto h-[420px] mb-10 ">
+      <div className="overflow-y-auto max-h-[420px] min-h-fit mb-10 ">
         {props.messages.map((m, index) => (
           <div key={index} className="flex justify-center mt-10 mb-10 md:mt-10 md:mb-20">
             <div>

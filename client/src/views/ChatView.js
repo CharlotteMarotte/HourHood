@@ -4,10 +4,11 @@ import { useLayoutEffect } from "react";
 import chatImage from "../img/chat.png";
 import AppContext from "../AppContext";
 
+
 export default function ChatView(props) {
-  useLayoutEffect(() => {
-    window.scrollTo(0, 0);
-  }, []);
+  // useLayoutEffect(() => {
+  //   window.scrollTo(0,0);
+  // }, []);
   let { bookingId } = useContext(AppContext);
   return (
     <div>
