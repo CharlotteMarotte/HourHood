@@ -110,6 +110,7 @@ export default function App() {
     setUser(null);
     setUserBookings(null);
     setUserWallet(0);
+    resetFilteredOffers()
   }
 
   // sign up

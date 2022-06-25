@@ -22,8 +22,8 @@ export default function ProfileView(props) {
     user,
   ]);
 
-  // console.log("user", user);
-  // console.log("myData", myData);
+  console.log("user", user);
+   console.log("myData", myData);
 
 
   useLayoutEffect(() => {
@@ -129,37 +129,57 @@ export default function ProfileView(props) {
               id="profile"
               className="w-full mx-6 bg-white rounded-lg shadow-lg opacity-75 lg:w-3/5 lg:rounded-r-lg lg:rounded-l-none lg:mx-0 "
             >
-              <div className="p-4 text-center md:p-12 lg:text-left">
+              <div className="p-4 text-center md:p-12 lg:text-left">    
                 <h1 className="pt-8 text-3xl font-bold lg:pt-0">
-                  {myData.first_name}'s Profile
+                  {Number(id) === user.id ? `${user.first_name}'s Profile`
+                    : `${myData.first_name}'s Profile`
+                  }
                 </h1>
                 <div className="w-4/5 pt-3 mx-auto border-b-2 opacity-25 lg:mx-0 border-amber-500"></div>
 
                 <p className="flex items-center justify-center pt-4 text-base font-bold lg:justify-start">
                   About Me{' '}
                 </p>
-                <p className="text-sm">
-                  {myData.user_description
-                    ? myData.user_description
-                    : 'No description'}
-                </p>
+                {Number(id) === user.id && 
+                  <p className="text-sm">
+                    {user.user_description
+                      ? user.user_description
+                      : 'No information provided'}
+                  </p>}
+                {Number(id) !== user.id && 
+                  <p className="text-sm">
+                    {myData.user_description
+                      ? myData.user_description
+                      : 'No information provided'}
+                  </p>}
 
                 <p className="flex items-center justify-center pt-4 text-base font-bold lg:justify-start">
                   My Hobbies{' '}
                 </p>
-                <p className="text-sm">
-                  {myData.hobbies ? myData.hobbies : 'No Hobbies'}
-                </p>
-                <p className="flex items-center justify-center pt-4 text-base font-bold lg:justify-start">
+                {Number(id) === user.id && 
+                  <p className="text-sm">
+                    {user.hobbies ? user.hobbies : 'No hobbies shared with us yet'}
+                  </p>}
+                {Number(id) !== user.id && 
+                  <p className="text-sm">
+                   {myData.hobbies ? myData.hobbies : 'No hobbies shared with us yet'}
+                   </p>}
+               
+               <p className="flex items-center justify-center pt-4 text-base font-bold lg:justify-start">
                   My Superpower is...{' '}
                 </p>
-                <p className="text-sm">
-                  {myData.superpower ? myData.superpower : 'No superpower'}
-                </p>
+                {Number(id) === user.id && 
+                  <p className="text-sm">
+                    {user.superpower ? user.superpower : 'No superpower disclosed'}
+                  </p>}
+                {Number(id) !== user.id && 
+                  <p className="text-sm">
+                   {myData.superpower ? myData.superpower : 'No superpower disclosed'}
+                   </p>}
                 
               </div>
               {/* only show when profile of user who is currently logged in is shown */}
-              {user.id === myData.id && (
+              {user.id === Number(id) && (
                 <div className="pt-12 pb-8">
                   <Link
                     to="/profile/edit"
@@ -169,6 +189,7 @@ export default function ProfileView(props) {
                   </Link>
                 </div>
               )}
+            {user.id === Number(id) && (
               <div className="pt-12 pb-8">
                 <button
                   className="px-4 py-2 font-bold text-white rounded-full bg-amber-700 hover:bg-amber-900"
@@ -177,12 +198,12 @@ export default function ProfileView(props) {
                   Get tokennnn{' '}
                 </button>
                 <p>{myToken}</p>
-
               </div>
+              )}
             </div>
           </div>
           {/* only show when profile of user who is currently logged in is shown */}
-          {user.id === myData.id && (
+          {user.id === Number(id) && (
             <div>
               <div className="container mx-auto ">
                 <h1 className="pt-8 text-3xl font-bold border-b-2 border-opacity-25 text-amber-900 lg:pt-0 border-amber-700">
