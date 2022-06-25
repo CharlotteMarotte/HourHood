@@ -2,9 +2,8 @@ import React, { useContext, useEffect, useState } from 'react';
 import AppContext from '../AppContext';
 import OfferCard from '../components/OfferCard';
 import { Link, useParams } from 'react-router-dom';
-import { useLayoutEffect } from 'react';
+import { useLayoutEffect } from "react";
 import AddOfferButton from '../components/AddOfferButton';
-import GoToOfferButton from '../components/GoToOfferButton';
 
 export default function ProfileView(props) {
   let { user, users } = useContext(AppContext);
@@ -23,9 +22,10 @@ export default function ProfileView(props) {
     user,
   ]);
 
+
   useLayoutEffect(() => {
-    window.scrollTo(0, 0);
-  }, []);
+    window.scrollTo(0, 0)
+}, []);
 
   const { id } = useParams();
 
@@ -104,12 +104,11 @@ export default function ProfileView(props) {
   return (
     // Code thanks to https://codepen.io/tariq01/pen/jOyLrRJ
     <>
-      {/* only show Profile page if user is logged in */}
+    {/* only show Profile page if user is logged in */}
       {user ? (
         <div className="font-sans antialiased leading-normal tracking-wider text-gray-900 bg-cover">
-          {user.id !== myData.id && <GoToOfferButton />}
           <div className="flex flex-wrap items-center h-auto max-w-4xl mx-auto my-24 lg:h-screen lg:my-0">
-            <div className="w-auto md:w-full lg:w-2/5">
+            <div className="w-full lg:w-2/5">
               <img
                 src={
                   user.uploadedPhoto
@@ -150,6 +149,7 @@ export default function ProfileView(props) {
                 <p className="text-sm">
                   {myData.superpower ? myData.superpower : 'No superpower'}
                 </p>
+                
               </div>
               {/* only show when profile of user who is currently logged in is shown */}
               {user.id === myData.id && (
@@ -170,6 +170,7 @@ export default function ProfileView(props) {
                   Get tokennnn{' '}
                 </button>
                 <p>{myToken}</p>
+
               </div>
             </div>
           </div>
