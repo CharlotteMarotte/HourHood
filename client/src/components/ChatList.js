@@ -45,7 +45,7 @@ function ChatList(props) {
               <div className="h-28 w-28 mt-2">
                 <img
                   src={myBooking.requestor.profilePicture}
-                  className="h-full w-full object-cover rounded-full shadow-lg shadow-[#ffe60099]"
+                  className="h-full w-full object-cover rounded-full border-2 border-[#FFE500] shadow-md shadow-[#ffe60099]"
                 />
               </div>
             </div>
@@ -60,7 +60,7 @@ function ChatList(props) {
               <div className="h-28 w-28 mt-2">
                 <img
                   src={myBooking.servicePost.provider.providerProfilePicture}
-                  className="h-full w-full object-cover rounded-full shadow-lg shadow-[#C8E242]"
+                  className="h-full w-full object-cover rounded-full shadow-md border-2 border-[#C8E242] shadow-[#C8E242]"
                 />
               </div>
             </div>
