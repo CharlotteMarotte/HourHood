@@ -44,7 +44,6 @@ export default function App() {
   const [users, setUsers] = useState([]);
   const [files, setFiles] = useState([]);
   const [userWallet, setUserWallet] = useState(0);
-
   const [bookings, setBookings] = useState([]);
   const [userBookings, setUserBookings] = useState([]);
   const [selectedOffer, setSelectedOffer] = useState([]);
@@ -60,6 +59,7 @@ export default function App() {
     getFiles();
     getCurrDate();
   }, []);
+
 
   useLayoutEffect(() => {
     window.scrollTo(0, 0);
@@ -141,6 +141,29 @@ export default function App() {
       console.log(`Server error: ${err.message}`);
     }
   }
+
+  // GET user by ID
+
+  async function getUser(id) {
+
+    let options = { 
+      method: "GET"
+    };
+
+    try {
+      let response = await fetch(`/users/${id}`, options);
+      if (response.ok) {
+        let data = await response.json();
+        setUser(data);
+      } else {
+        console.log(`Server error: ${response.status} ${response.statusText}`);
+      }
+    } catch (err) {
+      console.log(`Server error: ${err.message}`);
+    }
+  }
+
+
   // ********* PROFILE  *************
 
   //PUT method - edit the service post/offer
@@ -194,6 +217,7 @@ export default function App() {
         // Server responds with updated array of files
         let data = await response.json();
         setFiles(data);
+        await getUser(user.id);
         navigate(`/profile/${user.id}`);
       } else {
         console.log(`Server error: ${response.status}: ${response.statusText}`);
@@ -334,7 +358,7 @@ export default function App() {
     }
   }
 
-  // ********* BOOKINGS *************
+
 
   function openChat(id) {
     setSelectedBooking(id);
@@ -469,13 +493,15 @@ export default function App() {
     openChatCb: openChat,
   };
 
-  // ********* RETURN *************
+  
   const chatBookingObj = {
     bookingId: selectedBooking,
   };
 
+// ********* RETURN *************
+
   return (
-    <div className="App bg-gradient-to-t from-[#FFF7A3] via-[#FFF7A3] to-[#ff994091] h-full pb-28">
+    <div className="App bg-gradient-to-t from-[#FFF7A3] via-[#FFF7A3] to-[#ff994091] h-full pb-10 md:pb-20">
       <Navbar user={user} logoutCb={doLogout} />
 
       <Routes>

@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import AppContext from '../AppContext';
 import { Link } from 'react-router-dom';
 import { useLayoutEffect } from 'react';
@@ -7,7 +7,10 @@ export default function EditProfileView(props) {
   useLayoutEffect(() => {
     window.scrollTo(0, 0);
   }, []);
-  let { user, offers } = useContext(AppContext);
+
+  let { user, updateUserInfoCb } = useContext(AppContext);
+  let photoUrl = 'http://localhost:5000/clientfiles'
+
 
   let DEFAULT_FORM = {
     first_name: user.first_name,
@@ -37,11 +40,7 @@ export default function EditProfileView(props) {
     }));
   };
 
-  function handleSubmit(event) {
-    event.preventDefault();
-
-    setProfileData(DEFAULT_FORM);
-  }
+  
 
   function handleFileChange(event) {
     setFile(event.target.files[0]);
@@ -51,6 +50,9 @@ export default function EditProfileView(props) {
     event.preventDefault();
     // Call parent's callback
     props.updateProfileCb(profileData);
+
+    setProfileData(DEFAULT_FORM);
+
   }
 
   function handlePhotoSubmit(event) {
@@ -70,13 +72,15 @@ export default function EditProfileView(props) {
     event.target.reset();
   }
 
+  
+  
   return (
     // Code thanks to https://codepen.io/atzinn-herrera/pen/JjMMBxy
     <div className="flex px-16 py-16 min-w-screen min-h-scree">
       <div className="w-full overflow-hidden border-2 border-solid bg-amber-100 text-amber-500 rounded-xl border-amber-200">
         <div className="w-full lg:flex">
           <div className="object-cover px-5 py-5 bg-white border-r-2 border-solid md:block md:w-3/7 lg:w-2/5 border-amber-00">
-            <img className="mb-5 rounded-xl" src={profileData.photo} />
+            <img className="mb-5 rounded-xl" src={user.uploadedPhoto? `${photoUrl}/${user.uploadedPhoto}` : user.photo} />
             <form onSubmit={handlePhotoSubmit}>
               <input
                 type="file"

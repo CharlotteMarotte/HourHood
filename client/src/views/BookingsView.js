@@ -8,7 +8,7 @@ export default function BookingsView(props) {
   useLayoutEffect(() => {
     window.scrollTo(0, 0);
   }, []);
-  let { bookings } = useContext(AppContext);
+  let { bookings, requests } = useContext(AppContext);
 
   return (
     <div>

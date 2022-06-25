@@ -5,16 +5,58 @@ const db = require('../model/helper');
 const fs = require('fs/promises');
 const multer = require('multer');
 
-const PUBLIC_DIR_URL = 'http://localhost:5000/clientfiles';
+ const PUBLIC_DIR_URL = 'http://localhost:5000/clientfiles';
 
-/**
- * Multer initialization
- **/
+// /**
+//  * Multer initialization
+//  **/
+// const storage = multer.diskStorage({
+//   destination: './files',
+//   filename: function(req, file, cb) {
+//     cb(null,file.originalname);
+//   }
+// });
+
+// const upload = multer({
+//   storage: storage
+// });
+
+
+// // /* GET files */
+// router.get("/",async function(req, res, next) {
+//   res.status(200).send("Images");
+
+// });
+
+
+// router.post("/", upload.single('image'),async (req, res, err) =>{
+
+
+//   if(!req.file.originalname.toLowerCase().match(/\.(jpg|jpeg|png)$/)){
+//     res.status(425).send({error: "Only image file (jpg, jpeg, png) are supported."})
+//   }else{
+
+//     let { fk_user_id } = req.body;
+//     let sql = `
+//                 INSERT INTO photos (fk_user_id, filename)
+//                 VALUES ('${fk_user_id}', '${req.file.originalname}')
+//             `;
+//     try {
+//       await db(sql); // add new item (do the insert)
+//       res.status(201).send("Images added succesfully");
+//     } catch (err) {
+//       res.status(500).send({ error: err.message });
+//     }
+//   }
+
+// }
+// );
+
 
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
     cb(null, './public/clientfiles'); // store files here
-  },
+   },
   filename: function (req, file, cb) {
     cb(null, file.originalname); // keep original filename
   },
@@ -32,8 +74,11 @@ async function sendAllFiles(res) {
     let withUrls = results.data.map((r) => ({
       ...r,
       url: `${PUBLIC_DIR_URL}/${r.filename}`,
+      
     }));
+    console.log(withUrls)
     res.send(withUrls);
+    console.log(withUrls)
   } catch (err) {
     res.status(500).send({ error: err.message });
   }
@@ -69,5 +114,6 @@ router.post('/', upload.single('clientfile'), async function (req, res) {
     res.status(500).send({ error: err.message });
   }
 });
+
 
 module.exports = router;

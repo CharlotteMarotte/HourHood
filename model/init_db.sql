@@ -16,6 +16,8 @@ DROP TABLE IF EXISTS bookings;
 
 DROP TABLE IF EXISTS messages;
 
+DROP TABLE IF EXISTS tokens;
+
 SET
     foreign_key_checks = 1;
 
@@ -557,4 +559,10 @@ CREATE TABLE messages (
     fk_booking_id INT NOT NULL,
     dateTime DATETIME DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (fk_booking_id) REFERENCES bookings (id) ON DELETE CASCADE
+);
+
+CREATE TABLE tokens (
+    id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    token VARCHAR(100) UNIQUE NOT NULL,
+    valid TINYINT NOT NULL
 );
