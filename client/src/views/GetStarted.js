@@ -10,9 +10,9 @@ export default function GetStarted(props) {
     window.scrollTo(0, 0);
   }, []);
   return (
-    <div className="mb-20 flex items-center flex-col">
+    <div className="mb-5 md:mt-8 xl:mt-0 md:mb-20 flex items-center md:gap-10 flex-col">
       <div className="xl:relative">
-        <img src={image2} className="xl:w-[400px] w-[300px] left-14 xl:left-0 relative top-8" />
+        <img src={image2} className="xl:w-[400px] w-[300px] left-14 xl:left-0 relative top-8 " />
         <div className="flex flex-col items-center">
           <h1 className="text-6xl text-[#361201] font-bold mb-8">
             Hour Hood App
@@ -25,14 +25,14 @@ export default function GetStarted(props) {
         </div>
         {/* <img src={image3} className="w-[200px] " /> */}
       </div>
-      <div className="flex items-center mx-20">
-        <img src={image1} className="xl:w-[900px] relative -mt-20" />
-        <div className="flex flex-col items-center  gap-2 justify-center">
+      <div className="flex md:mt-10 xl:mt-0 flex-wrap md:flex-nowrap content-center xl:gap-2 md:mx-4 xl:mx-44">
+        <img src={image1} className="xl:w-[900px] w-[400px] relative -mt-4 xl:-mt-8" />
+        <div className="flex flex-col items-center xl:-ml-20 xl:mr-5 gap-2 justify-center">
           <div className="bg-[#fe8923] w-28 h-1"></div>
-          <h1 className="text-6xl text-[#361201] font-bold">
+          <h1 className="xl:text-6xl text-5xl text-[#361201] font-bold">
             Why did we do this project?
           </h1>
-          <p className="w-[400px] font-semibold">
+          <p className="xl:w-[400px] w-[300px] font-semibold">
             scrambled it to make a type specimen book. It has survived not only
             five centuries, but also the leap into electronic typesetting,
             remaining essentially unchanged.
@@ -40,6 +40,9 @@ export default function GetStarted(props) {
           <div className="bg-[#fe8923] w-28 h-1"></div>
         </div>
       </div>
+      <p className=" mt-10 md:-mb-10 xl:mb-0 md:w-[600px] w-[300px] font-semibold">
+      Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s
+          </p>
       {!props.user && (
         <Link
           to="/rules"
