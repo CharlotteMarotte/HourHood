@@ -56,7 +56,6 @@ export default function App() {
     getFiles();
   }, []);
 
-
   useLayoutEffect(() => {
     window.scrollTo(0, 0);
   }, []);
@@ -281,6 +280,7 @@ export default function App() {
         // don't show offer that was only made by system to give default credit
         offers = offers.filter((o) => o.category.categoryID !== 1);
         setOffers(offers);
+        setUnfilteredOffers(offers);
         navigate('/');
       } else {
         console.log(`Server error: ${response.status} ${response.statusText}`);

@@ -7,6 +7,8 @@ export default function OfferGrid() {
   let { offers, user, categories, choseCatCb, resetFilteredOffersCb, userWallet } =
     useContext(AppContext);
 
+  
+
   const [chosenCat, setChosenCat] = useState("default");
 
   let photoUrl = 'http://localhost:5000/clientfiles'
@@ -34,7 +36,7 @@ export default function OfferGrid() {
             id="select_category"
             onChange={(e) => handleInputChange(e)}
             value={chosenCat}
-            defaultValue={'default'}
+            //defaultValue={'default'}
           >
             <option
               className="p-4 hover:bg-amber-100 text-md "
