@@ -5,17 +5,23 @@ import { Link, useParams } from 'react-router-dom';
 import { useLayoutEffect } from "react";
 import AddOfferButton from '../components/AddOfferButton';
 
+export default function ProfileView(props) {
+  let { user, users } = useContext(AppContext);
+  let [myOffers, setMyOffers] = useState(props.offers);
+  let [myData, setMyData] = useState(props.offers[0]);
+  let [myToken, setMyToken] = useState([]);
 
-export default function ProfileView() {
-  let { user, users, offers } = useContext(AppContext);
-  // doesn't work, direct filter before map
-  let [myOffers, setMyOffers] = useState(offers);
-  let [myData, setMyData] = useState(offers[0]);
+  let photoUrl = 'http://localhost:5000/clientfiles';
 
   useEffect(() => {
     getMyOffers();
     getMyUserData();
-  }, []);
+  }, [
+    // offers,
+    users,
+    user,
+  ]);
+
 
   useLayoutEffect(() => {
     window.scrollTo(0, 0)
@@ -26,7 +32,9 @@ export default function ProfileView() {
   // filters for offers where user that is currently logged in provider
   function getMyOffers() {
     if (user) {
-      let filteredOffers = offers.filter((e) => e.user.userID === Number(id));
+      let filteredOffers = props.offers.filter(
+        (e) => e.user.userID === Number(id)
+      );
       setMyOffers(filteredOffers);
     }
   }
@@ -34,6 +42,63 @@ export default function ProfileView() {
   function getMyUserData() {
     let filteredUsers = users.filter((u) => u.id === Number(id));
     setMyData(filteredUsers[0]);
+  }
+
+  // Generate a new token and register into the backend as valid token.
+  async function getMyToken() {
+    myToken = Math.random().toString(36).substr(2);
+    console.log(myToken);
+    setMyToken(myToken);
+
+    let options = {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ token: myToken, valid: 1 }),
+    };
+
+    try {
+      let response = await fetch('/tokens', options);
+      if (!response.ok) {
+        console.log(`Server error: ${response.status}: ${response.statusText}`);
+      }
+    } catch (err) {
+      console.log(`Network error: ${err.message}`);
+    }
+  }
+
+  // Check if a token is valid or it has been used before.
+  async function checkTokenValid(token) {
+    try {
+      let response = await fetch(`/tokens/${token}`);
+      if (!response.ok) {
+        console.log(`Server error: ${response.status}: ${response.statusText}`);
+        return false;
+      }
+    } catch (err) {
+      console.log(`Network error: ${err.message}`);
+      return false;
+    }
+    return true;
+  }
+
+  async function setInvalidToken(token) {
+    let options = {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ token: token, valid: 0 }),
+    };
+    try {
+      let response = await fetch('/tokens', options);
+      if (!response.ok) {
+        console.log(`Server error: ${response.status}: ${response.statusText}`);
+      }
+    } catch (err) {
+      console.log(`Network error: ${err.message}`);
+    }
   }
 
   return (
@@ -45,7 +110,11 @@ export default function ProfileView() {
           <div className="flex flex-wrap items-center h-auto max-w-4xl mx-auto my-24 lg:h-screen lg:my-0">
             <div className="w-full lg:w-2/5">
               <img
-                src={myData.photo}
+                src={
+                  user.uploadedPhoto
+                    ? `${photoUrl}/${user.uploadedPhoto}`
+                    : user.photo
+                }
                 className="hidden rounded-none shadow-lg lg:rounded-lg lg:block"
               />
             </div>
@@ -80,17 +149,28 @@ export default function ProfileView() {
                 <p className="text-sm">
                   {myData.superpower ? myData.superpower : 'No superpower'}
                 </p>
-                {/* only show when profile of user who is currently logged in is shown */}
-                {user.id === myData.id && (
-                  <div className="pt-12 pb-8">
-                    <Link
-                      to="edit"
-                      className="px-4 py-2 font-bold text-white rounded-full bg-amber-700 hover:bg-amber-900"
-                    >
-                      Edit Profile{' '}
-                    </Link>
-                  </div>
-                )}
+                
+              </div>
+              {/* only show when profile of user who is currently logged in is shown */}
+              {user.id === myData.id && (
+                <div className="pt-12 pb-8">
+                  <Link
+                    to="/profile/edit"
+                    className="px-4 py-2 font-bold text-white rounded-full bg-amber-700 hover:bg-amber-900"
+                  >
+                    Edit Profile{' '}
+                  </Link>
+                </div>
+              )}
+              <div className="pt-12 pb-8">
+                <button
+                  className="px-4 py-2 font-bold text-white rounded-full bg-amber-700 hover:bg-amber-900"
+                  onClick={(e) => getMyToken()}
+                >
+                  Get tokennnn{' '}
+                </button>
+                <p>{myToken}</p>
+
               </div>
             </div>
           </div>

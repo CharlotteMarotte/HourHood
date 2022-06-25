@@ -28,13 +28,13 @@ function ChatList(props) {
   }
 
   return (
-    <div className="mb-1 rounded ChatList mt-2" ref={listDiv}>
+    <div className="mt-2 mb-1 rounded ChatList" ref={listDiv}>
       <div className="flex flex-col items-center justify-center">
         <h2 className="md:text-3xl text-lg xl:mt-0 md:mt-0 mt-4 text-white bg-[#ff994023] shadow-[#ff994091] px-2 shadow-lg font-bold ">
           {myBooking.servicePost.serviceTitle}
         </h2>
         <div className="items-center justify-center">
-          <div className="flex justify-center gap-8 md:gap-20 mt-8 mb-6">
+          <div className="flex justify-center gap-8 mt-8 mb-6 md:gap-20">
             <div className="flex flex-col items-center">
               <h4 className="text-[#FF9940] md:text-xl font-semibold">
                 Receiving Help:
@@ -42,10 +42,10 @@ function ChatList(props) {
               <h3 className="md:text-2xl text-xl text-[#361201] font-bold">
                 {myBooking.requestor.firstName}
               </h3>
-              <div className="h-28 w-28 mt-2">
+              <div className="mt-2 h-28 w-28">
                 <img
                   src={myBooking.requestor.profilePicture}
-                  className="h-full w-full object-cover rounded-full shadow-lg shadow-[#ffe60099]"
+                  className="h-full w-full object-cover rounded-full border-2 border-[#FFE500] shadow-md shadow-[#ffe60099]"
                 />
               </div>
             </div>
@@ -57,15 +57,15 @@ function ChatList(props) {
               <h3 className="md:text-2xl text-xl text-[#361201] font-bold">
                 {myBooking.servicePost.provider.firstName}
               </h3>
-              <div className="h-28 w-28 mt-2">
+              <div className="mt-2 h-28 w-28">
                 <img
                   src={myBooking.servicePost.provider.providerProfilePicture}
-                  className="h-full w-full object-cover rounded-full shadow-lg shadow-[#C8E242]"
+                  className="h-full w-full object-cover rounded-full shadow-md border-2 border-[#C8E242] shadow-[#C8E242]"
                 />
               </div>
             </div>
           </div>
-          <div className="flex flex-col gap-4 items-center">
+          <div className="flex flex-col items-center gap-4">
             <a
               href="#input"
               className="xl:text-5xl text-3xl mt-8 xl:mt-0 font-bold animate-bounce hover:bg-[#361201] bg-[#957e4e] text-[#FFF701] py-[6px] px-[16px] md:hidden xl:inline rounded-full
@@ -76,16 +76,16 @@ function ChatList(props) {
           </div>
         </div>
       </div>
-      <div className="overflow-y-auto h-[420px] mb-10 ">
+      <div className="overflow-y-auto max-h-[420px] min-h-fit mb-10 ">
         {props.messages.map((m, index) => (
-          <div key={index} className="md:mt-10 md:mb-20 mt-10 mb-10 flex justify-center">
-            <p>
+          <div key={index} className="flex justify-center mt-10 mb-10 md:mt-10 md:mb-20">
+            <div>
               {m.senderName === myBooking.requestor.firstName ? (
-                <div className="flex items-center xl:-ml-44 gap-4 xl:gap-8">
-                  <div className="md:w-20 md:h-20 w-16 h-16">
+                <div className="flex items-center gap-4 xl:-ml-44 xl:gap-8">
+                  <div className="w-16 h-16 md:w-20 md:h-20">
                     <img
                       src={myBooking.requestor.profilePicture}
-                      className="h-full w-full object-cover rounded-full"
+                      className="object-cover w-full h-full rounded-full"
                     />
                   </div>
                   <div className="flex flex-col">
@@ -101,13 +101,13 @@ function ChatList(props) {
                   </div>
                 </div>
               ) : (
-                <div className="flex flex-row-reverse xl:ml-44 items-center gap-4 xl:gap-8">
-                  <div className="md:w-20 md:h-20 w-16 h-16">
+                <div className="flex flex-row-reverse items-center gap-4 xl:ml-44 xl:gap-8">
+                  <div className="w-16 h-16 md:w-20 md:h-20">
                     <img
                       src={
                         myBooking.servicePost.provider.providerProfilePicture
                       }
-                      className="h-full w-full object-cover rounded-full"
+                      className="object-cover w-full h-full rounded-full"
                     />
                   </div>
                   <div className="flex flex-col">
@@ -123,7 +123,7 @@ function ChatList(props) {
                   </div>
                 </div>
               )}
-            </p>
+            </div>
           </div>
         ))}
       </div>
