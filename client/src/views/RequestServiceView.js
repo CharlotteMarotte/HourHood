@@ -4,12 +4,11 @@ import { Link } from 'react-router-dom';
 import { useLayoutEffect } from 'react';
 
 export default function RequestServiceView() {
-  let { selectedOffer, user, requestServiceCb, userWallet } =
+  let { selectedOffer, user, requestServiceCb, userWallet, currDate } =
     useContext(BookingContext);
 
   useLayoutEffect(() => {
     window.scrollTo(0, 0);
-    getCurrDate();
   }, []);
 
   const INIT_FORM = {
@@ -22,13 +21,7 @@ export default function RequestServiceView() {
 
   const [requestData, setRequestData] = useState(INIT_FORM);
   const [isChecked, setIsChecked] = useState(userWallet < 1 ? true : false);
-  const [date, setDate] = useState(null);
 
-  function getCurrDate() {
-    let yourDate = new Date();
-    yourDate = yourDate.toISOString().split('T')[0];
-    setDate(yourDate);
-  }
 
   const handleInputChange = (event) => {
     let { name, value } = event.target;
@@ -75,9 +68,15 @@ export default function RequestServiceView() {
               <p className="text-2xl font-bold text-amber-600">
                 {selectedOffer[0].title}
               </p>
-              <p className="w-1/2 p-5 mx-auto text-xl rounded-lg text-amber-600 bg-rose-200">
-                Time to spend: {userWallet}h
-              </p>
+              {userWallet < 5 && (
+                <p
+                  className="w-1/2 px-6 py-5 mx-auto my-3 text-base text-red-700 bg-red-100 border-2 border-red-300 rounded-lg"
+                  role="alert"
+                >
+                  {' '}
+                  Time to spend: {userWallet}h
+                </p>
+              )}
             </header>
             <form onSubmit={handleSubmit}>
               <div className="space-x-2 xl:flex :lg-flex-col-1">
@@ -117,7 +116,7 @@ export default function RequestServiceView() {
                       required
                       id="proposed-date-input"
                       name="proposed_date"
-                      min={date}
+                      min={currDate}
                       value={requestData.proposed_date}
                       onChange={(e) => handleInputChange(e)}
                       type="date"
@@ -151,7 +150,9 @@ export default function RequestServiceView() {
                     name="need_donation"
                     readOnly={userWallet < 1 ? true : false}
                     checked={isChecked}
-                    onChange={userWallet < 1 ? null : (e) => handleCheckboxChange(e)}
+                    onChange={
+                      userWallet < 1 ? null : (e) => handleCheckboxChange(e)
+                    }
                     id="donation"
                     className="bg-lime-700 hover:bg-lime-700 focus:bg-lime-700"
                   />

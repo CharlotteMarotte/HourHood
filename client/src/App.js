@@ -23,6 +23,7 @@ import RulesView from './views/RulesView';
 import Chat from './components/Chat';
 import ChatView from './views/ChatView';
 
+
 const postalCodes = [
   '08006',
   '08012',
@@ -48,18 +49,29 @@ export default function App() {
   const [selectedOffer, setSelectedOffer] = useState([]);
   const [toBeEdited, setToBeEdited] = useState([]);
   const [selectedBooking, setSelectedBooking] = useState([]);
+  const [currDate, setCurrDate] = useState(null);
+
 
   useEffect(() => {
     getCategories();
     getOffers();
     getUsers();
     getFiles();
+    getCurrDate();
   }, []);
 
 
   useLayoutEffect(() => {
     window.scrollTo(0, 0);
   }, []);
+
+
+  function getCurrDate() {
+    let yourDate = new Date();
+    yourDate = yourDate.toISOString().split('T')[0];
+    setCurrDate(yourDate);
+  }
+
 
   // ********* USERS *************
 
@@ -414,6 +426,7 @@ export default function App() {
 
   // PUT: Add status of booking
   async function reactToRequest(id, reply) {
+
     // Find booking in state and change status
     let booking = bookings.find((b) => b.bookingId === id);
     booking.bookingStatus = reply;
@@ -461,6 +474,7 @@ export default function App() {
     selectedOffer,
     user,
     userWallet,
+    currDate,
     requestServiceCb: requestService,
   };
 
