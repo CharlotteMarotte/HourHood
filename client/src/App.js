@@ -182,7 +182,9 @@ export default function App() {
         // don't show admin user
         users = users.filter((u) => u.id !== 1);
         setUsers(users);
+        await getUser(user.id);
         navigate(`/profile/${user.id}`);
+        
       } else {
         console.log(`Server error: ${response.status} ${response.statusText}`);
       }
