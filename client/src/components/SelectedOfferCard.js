@@ -8,12 +8,11 @@ export default function SelectedOfferCard(props) {
   const [providerData, setProviderData] = useState(users[0]);
   const [givingHelp, SetGivingHelp] = useState(false);
   let photoUrl = 'http://localhost:5000/clientfiles';
-  console.log("booking", props.booking.requestor)
-  console.log("providerData", providerData)
+  
 
   useEffect(() => {
     getProviderData();
-  }, [users]);
+  }, []);
 
   function getProviderData() {
     let filteredUsers = users.filter(
