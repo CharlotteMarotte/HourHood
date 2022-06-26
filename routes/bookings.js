@@ -5,15 +5,19 @@ const db = require("../model/helper");
 /**
  * Helpers
  **/
+
+    
 async function sendAllBookings(res) {
     // We don't need try/catch here because we're always called from within one
 
     let sql = `
-    SELECT bookings.*, service_post.*, r.*, p.first_name AS providerFirstName, p.last_name AS providerLastName, p.photo AS providerProfilePicture, bookings.id AS bookingId, service_post.id AS sPostId
+    SELECT bookings.*, service_post.*, r.*, p.first_name AS providerFirstName, p.last_name AS providerLastName, p.photo AS providerAvatar, bookings.id AS bookingId, service_post.id AS sPostId, rph.filename AS requestorPhoto, rph.id AS requestorPhotoId, pph.filename AS providerPhoto, pph.id AS providerPhotoId
     FROM bookings 
     LEFT JOIN service_post ON service_post.id = bookings.fk_service_post_id
     LEFT JOIN users AS r ON r.id = bookings.fk_requestor_id
     LEFT JOIN users AS p ON p.id = service_post.fk_provider_id
+    LEFT JOIN photos AS rph ON rph.fk_user_id = r.id
+    LEFT JOIN photos AS pph ON pph.fk_user_id = p.id
     ORDER BY bookingId ASC
     `;
     let results = await db(sql);
@@ -43,7 +47,9 @@ function joinToJson(results) {
             country: row.country,
             email: row.email,
             userDescription: row.user_description,
-            profilePicture: row.photo
+            requestorAvatar: row.photo,
+            requestorProfilePicture: row.requestorPhoto,
+            requestorPhotoId: row.requestorPhotoId
         },
         servicePost: {
             servicePostID: row.sPostId,
@@ -56,7 +62,9 @@ function joinToJson(results) {
             provider: {
                 firstName: row.providerFirstName,
                 lastName: row.providerLastName,
-                providerProfilePicture: row.providerProfilePicture
+                providerAvatar: row.providerAvatar,
+                providerProfilePicture: row.providerPhoto,
+                providerPhotoId: row.providerPhotoId
             }
         },
     }));
@@ -107,12 +115,14 @@ router.get("/:id", ensureBookingExists, async function(req, res) {
         // Get booking; we know it exists, thanks to guard
         // Use LEFT JOIN to also return service_post and user (requestor)
         let sql = `
-            SELECT bookings.*, service_post.*, r.*, p.first_name AS providerFirstName, p.last_name AS providerLastName, p.photo AS providerProfilePicture, bookings.id AS bookingId, service_post.id AS sPostId
-            FROM bookings 
-            LEFT JOIN service_post ON service_post.id = bookings.fk_service_post_id
-            LEFT JOIN users AS r ON r.id = bookings.fk_requestor_id
-            LEFT JOIN users AS p ON p.id = service_post.fk_provider_id
-            WHERE bookings.id = ${booking.id}
+        SELECT bookings.*, service_post.*, r.*, p.first_name AS providerFirstName, p.last_name AS providerLastName, p.photo AS providerAvatar, bookings.id AS bookingId, service_post.id AS sPostId, rph.filename AS requestorPhoto, rph.id AS requestorPhotoId, pph.filename AS providerPhoto, pph.id AS providerPhotoId
+        FROM bookings 
+        LEFT JOIN service_post ON service_post.id = bookings.fk_service_post_id
+        LEFT JOIN users AS r ON r.id = bookings.fk_requestor_id
+        LEFT JOIN users AS p ON p.id = service_post.fk_provider_id
+        LEFT JOIN photos AS rph ON rph.fk_user_id = r.id
+        LEFT JOIN photos AS pph ON pph.fk_user_id = p.id
+        WHERE bookings.id = ${booking.id}
         `;
         let results = await db(sql);
         // Convert DB results into "sensible" JSON

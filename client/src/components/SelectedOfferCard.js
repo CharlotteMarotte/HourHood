@@ -7,10 +7,13 @@ export default function SelectedOfferCard(props) {
 
   const [providerData, setProviderData] = useState(users[0]);
   const [givingHelp, SetGivingHelp] = useState(false);
+  let photoUrl = 'http://localhost:5000/clientfiles';
+  console.log("booking", props.booking.requestor)
+  console.log("providerData", providerData)
 
   useEffect(() => {
     getProviderData();
-  }, []);
+  }, [users]);
 
   function getProviderData() {
     let filteredUsers = users.filter(
@@ -32,15 +35,25 @@ export default function SelectedOfferCard(props) {
         className={`block w-full p-6 bg-white border-4 rounded-lg -z-1 md:flex md:flex-row lg:mx-auto lg:w-4/5 border-amber-200/80`}
       >
         <div className="relative flex items-center justify-center">
-          <img
-            className="object-cover w-64 h-64 rounded-lg"
-            src={
-              props.view === 'requests'
-                ? props.booking.requestor.profilePicture
-                : providerData.photo
-            }
-            alt="User"
-          />
+          {props.view === 'requests' ?
+            <img
+              className="object-cover w-64 h-64 rounded-lg"
+              src={props.booking.requestor.requestorProfilePicture
+                  ? `${photoUrl}/${props.booking.requestor.requestorProfilePicture}`
+                  : props.booking.requestor.requestorAvatar
+              }
+              alt="User"
+            />
+          :
+            <img
+              className="object-cover w-64 h-64 rounded-lg"
+              src={providerData.uploadedPhoto
+                  ? `${photoUrl}/${providerData.uploadedPhoto}`
+                  : providerData.photo
+              }
+              alt="User"
+            /> 
+          }
         </div>
 
         <div className="flex flex-col w-full px-6">
