@@ -127,7 +127,7 @@ export default function ProfileView(props) {
               </div>
               <div
                 id="profile"
-                className="w-full md:mt-10 lg:mt-0 mx-6 bg-white/75 rounded-lg flex flex-col items-center shadow-lg lg:w-3/5 lg:rounded-r-lg lg:rounded-l-none lg:mx-0 "
+                className="w-full md:mt-10 lg:mt-0 mx-6 bg-white/75 rounded-lg flex flex-col items-center shadow-lg shadow-[#ff994091] lg:w-3/5 lg:rounded-r-lg lg:rounded-l-none lg:mx-0 "
               >
                 <div className="w-44 h-44 mt-6 lg:hidden">
                   <img
@@ -136,7 +136,7 @@ export default function ProfileView(props) {
                         ? `${photoUrl}/${user.uploadedPhoto}`
                         : user.photo
                     }
-                    className="h-full w-full object-cover rounded-full shadow-lg lg:rounded-lg lg:hidden"
+                    className="h-full w-full object-cover rounded-full shadow-lg shadow-[#ff994091] lg:rounded-lg lg:hidden"
                   />
                 </div>
                 <div className="p-4 -mt-8 md:-mt-10 lg:mt-0 text-center md:p-12 lg:text-left">
@@ -200,7 +200,7 @@ export default function ProfileView(props) {
           {user.id === myData.id && (
             <div>
               <div className="container mx-auto">
-                <h1 className="pt-8 text-3xl mx-16 font-bold border-b-2 pb-2 border-opacity-25 text-amber-900 lg:pt-0 border-amber-700">
+                <h1 className="pt-8 text-3xl mx-16 font-bold border-b-2 pb-2 border-opacity-25 text-[#361201] lg:pt-0 border-[#fe8923]">
                   My current offerings
                 </h1>
               </div>

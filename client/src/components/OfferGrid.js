@@ -61,13 +61,13 @@ export default function OfferGrid() {
           <button
             type="submit"
             disabled = {chosenCat === "default" ? true : false}
-            className="px-4 py-2 font-semibold bg-transparent border rounded disabled:transform-none disabled:transition-none disabled:cursor-not-allowed hover:bg-amber-500 text-amber-700 hover:text-white border-amber-500 hover:border-transparent"
+            className="px-6 py-2 font-semibold uppercase rounded-xl hover:bg-[#a6c120] bg-[#70840def] hover:shadow-white hover:shadow-md text-white"
           >
             Filter
           </button>
           <button
             onClick={resetFilteredOffersCb}
-            className="px-4 py-2 font-semibold bg-transparent border rounded hover:bg-lime-600 text-lime-700 hover:text-white border-lime-600 hover:border-transparent"
+            className="px-6 py-2 font-semibold rounded-lg uppercase bg-[#ff9940e3]  hover:shadow-md hover:shadow-white text-white hover:bg-[#fe8923]  hover:text-white "
             type="button"
           >
             Reset
