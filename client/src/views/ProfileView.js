@@ -190,12 +190,12 @@ export default function ProfileView(props) {
                 </div>
               )}
             {user.id === Number(id) && (
-              <div className="pt-12 pb-8">
+              <div className="pt-6 pb-12">
                 <button
                   className="px-4 py-2 font-bold text-white rounded-full bg-amber-700 hover:bg-amber-900"
                   onClick={(e) => getMyToken()}
                 >
-                  Get tokennnn{' '}
+                  Get token{' '}
                 </button>
                 <p>{myToken}</p>
               </div>
