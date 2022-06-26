@@ -218,7 +218,8 @@ export default function App() {
         let data = await response.json();
         setFiles(data);
         await getUser(user.id);
-        //navigate(`/profile/${user.id}`);
+       // await getUsers();
+        navigate(`/profile/${user.id}`);
       } else {
         console.log(`Server error: ${response.status}: ${response.statusText}`);
       }

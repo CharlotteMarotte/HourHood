@@ -10,6 +10,7 @@ export default function ProfileView(props) {
   let [myOffers, setMyOffers] = useState(props.offers);
   let [myData, setMyData] = useState(props.offers[0]);
   let [myToken, setMyToken] = useState([]);
+  console.log("myData:", myData)
 
   let photoUrl = 'http://localhost:5000/clientfiles';
 
