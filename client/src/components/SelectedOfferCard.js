@@ -28,10 +28,11 @@ export default function SelectedOfferCard(props) {
   return (
     // Code thanks to https://codepen.io/egoistdeveloper/pen/xxYrmgd
     <div className="mx-8 my-10 ">
-      <div className="flex items-center">
-        <div className="w-64 h-[400px]">
+      <div className="flex flex-col md:flex-row items-center justify-center">
+        
+        <div className="md:w-64 md:h-[400px] w-44 h-44 relative">
           <img
-            className="object-cover rounded-xl shadow-lg shadow-[#ff994091] w-full h-full"
+            className="object-cover rounded-full relative z-20 md:rounded-xl shadow-lg shadow-[#ff994091] w-full h-full"
             src={
               props.view === "requests"
                 ? props.booking.requestor.profilePicture
@@ -40,18 +41,19 @@ export default function SelectedOfferCard(props) {
             alt="User"
           />
         </div>
-        <div className="block h-[380px] py-6 w-full shadow-lg shadow-[#ff994091] bg-white rounded-r-xl -z-1 md:flex md:flex-row lg:mx-auto lg:w-4/5 ">
+    
+        <div className="block h-[380px] mb-16 md:mb-0 md:py-6 py-10 w-full relative -mt-9 md:mt-0 z-10 shadow-lg shadow-[#ff994091] bg-white rounded-xl md:rounded-r-xl -z-1 md:flex md:flex-row lg:mx-auto lg:w-4/5 ">
           <div className="flex flex-col w-full px-6">
             <div className="flex flex-row h-14">
-              <h2 className="mb-1 text-2xl font-medium title-font text-amber-900">
+              <h2 className="mb-1 text-2xl font-semibold title-font text-[#361201]">
                 {props.booking.servicePost.serviceTitle}
               </h2>
             </div>
 
-            <div className="flex flex-row my-2 space-x-2">
+            <div className="flex flex-row my-2 mt-4 md:mt-0 space-x-2">
               <div className="flex flex-row">
                 <svg
-                  className="w-4 h-6 mr-2 fill-amber-700/80"
+                  className="w-4 h-6 mr-2 fill-[#fe8923]"
                   xmlns="http://www.w3.org/2000/svg"
                   version="1.1"
                   width="28"
@@ -61,7 +63,7 @@ export default function SelectedOfferCard(props) {
                   <path d="M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2M7.07,18.28C7.5,17.38 10.12,16.5 12,16.5C13.88,16.5 16.5,17.38 16.93,18.28C15.57,19.36 13.86,20 12,20C10.14,20 8.43,19.36 7.07,18.28M18.36,16.83C16.93,15.09 13.46,14.5 12,14.5C10.54,14.5 7.07,15.09 5.64,16.83C4.62,15.5 4,13.82 4,12C4,7.59 7.59,4 12,4C16.41,4 20,7.59 20,12C20,13.82 19.38,15.5 18.36,16.83M12,6C10.06,6 8.5,7.56 8.5,9.5C8.5,11.44 10.06,13 12,13C13.94,13 15.5,11.44 15.5,9.5C15.5,7.56 13.94,6 12,6M12,11A1.5,1.5 0 0,1 10.5,9.5A1.5,1.5 0 0,1 12,8A1.5,1.5 0 0,1 13.5,9.5A1.5,1.5 0 0,1 12,11Z" />
                 </svg>
 
-                <div className="text-s text-amber-700/80 ">
+                <div className="text-s text-[#fe8923] ">
                   {props.view === "requests"
                     ? props.booking.requestor.firstName
                     : providerData.first_name}
@@ -70,7 +72,7 @@ export default function SelectedOfferCard(props) {
 
               <div className="flex flex-row">
                 <svg
-                  className="w-4 h-6 mr-2 fill-amber-700/80"
+                  className="w-4 h-6 mr-2 fill-[#fe8923]"
                   xmlns="http://www.w3.org/2000/svg"
                   version="1.1"
                   width="28"
@@ -80,7 +82,7 @@ export default function SelectedOfferCard(props) {
                   <path d="M12,6.5A2.5,2.5 0 0,1 14.5,9A2.5,2.5 0 0,1 12,11.5A2.5,2.5 0 0,1 9.5,9A2.5,2.5 0 0,1 12,6.5M12,2A7,7 0 0,1 19,9C19,14.25 12,22 12,22C12,22 5,14.25 5,9A7,7 0 0,1 12,2M12,4A5,5 0 0,0 7,9C7,10 7,12 12,18.71C17,12 17,10 17,9A5,5 0 0,0 12,4Z" />
                 </svg>
 
-                <div className="text-s text-amber-700/80 ">
+                <div className="text-s text-[#fe8923] ">
                   {props.view === "requests"
                     ? props.booking.requestor.cityName
                     : providerData.city_name}
@@ -89,10 +91,10 @@ export default function SelectedOfferCard(props) {
             </div>
             <div
               className={`w-full p-5 mt-5 space-y-3 text-left rounded-lg justify ${
-                props.view === "bookings" ? "bg-amber-200" : "bg-orange-200"
+                props.view === "bookings" ? "bg-red-500" : "bg-orange-200"
               }`}
             >
-              <p className="leading-relaxed text-amber-700 ">
+              <p className="leading-relaxed text-[#fe8923] ">
                 {props.view === "bookings"
                   ? 'You: "'
                   : `${props.booking.requestor.firstName}: "`}
@@ -104,7 +106,7 @@ export default function SelectedOfferCard(props) {
                 props.view === "bookings" ? "bg-blue-200" : "bg-pink-200"
               }`}
             >
-              <p className="leading-relaxed text-amber-700 ">
+              <p className="leading-relaxed text-[#fe8923] ">
                 {new Date(props.booking.proposedDate).toLocaleDateString(
                   "en-GB",
                   {
@@ -125,7 +127,7 @@ export default function SelectedOfferCard(props) {
                     onClick={(e) =>
                       reactToRequestCb(props.booking.bookingId, "declined")
                     }
-                    className="px-4 py-2 font-semibold bg-transparent border rounded hover:bg-amber-500 text-amber-700 hover:text-white border-amber-500 hover:border-transparent"
+                    className="px-4 py-2 font-semibold bg-transparent border rounded hover:bg-amber-500 text-[#fe8923] hover:text-white border-amber-500 hover:border-transparent"
                   >
                     Decline{" "}
                   </button>{" "}
@@ -155,7 +157,7 @@ export default function SelectedOfferCard(props) {
                     onClick={(e) =>
                       reactToRequestCb(props.booking.bookingId, "declined")
                     }
-                    className="px-4 py-2 font-semibold bg-transparent border rounded hover:bg-amber-500 text-amber-700 hover:text-white border-amber-500 hover:border-transparent"
+                    className="px-4 py-2 font-semibold bg-transparent border rounded hover:bg-amber-500 text-[#fe8923] hover:text-white border-amber-500 hover:border-transparent"
                   >
                     Cancel{" "}
                   </button>{" "}

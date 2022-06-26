@@ -23,8 +23,8 @@ export default function RequestsView(props) {
 
       <div className="lg:grid lg:grid-cols-2 ">
         <div className="">
-          <div className="container">
-            <h1 className="pt-4 ml-20 text-3xl font-bold text-left border-b-2 border-opacity-25 text-[#fe8923] border-[#fe8923]">
+          <div className="container mx-auto">
+            <h1 className="pt-4 ml-20 mr-20 text-3xl font-bold text-left border-b-2 border-opacity-25 text-[#fe8923] border-[#fe8923]">
               Pending{" "}
             </h1>
           </div>
@@ -39,7 +39,7 @@ export default function RequestsView(props) {
             ))}
         </div>
         <div>
-          <div className="container ">
+          <div className="container mx-auto">
             <h1 className="pt-4 ml-20 mr-20 text-3xl font-bold text-left border-b-2 border-opacity-25 text-[#fe8923] border-[#fe8923]">
               Accepted{" "}
             </h1>
