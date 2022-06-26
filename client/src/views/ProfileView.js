@@ -164,12 +164,13 @@ export default function ProfileView(props) {
               )}
               <div className="pt-12 pb-8">
                 <button
+                  title="With a token you can invite a friend to become part of the community!"
                   className="px-4 py-2 font-bold text-white rounded-full bg-amber-700 hover:bg-amber-900"
                   onClick={(e) => getMyToken()}
                 >
-                  Get tokennnn{' '}
+                  Get a token{' '}
                 </button>
-                <p>{myToken}</p>
+                <p className={`w-1/4 p-3 mx-auto mt-3 font-mono ${myToken.length>0 && "bg-gray-200 hover:bg-gray-100"}`}>{myToken}</p>
               </div>
             </div>
           </div>
