@@ -22,10 +22,6 @@ export default function ProfileView(props) {
     user,
   ]);
 
-  console.log("user", user);
-   console.log("myData", myData);
-
-
   useLayoutEffect(() => {
     window.scrollTo(0, 0)
 }, []);

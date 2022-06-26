@@ -2,6 +2,8 @@ import React, { useState } from "react";
 
 function ChatInput(props) {
   const [text, setText] = useState("");
+  let photoUrl = 'http://localhost:5000/clientfiles';
+
 
   function handleChange(event) {
     setText(event.target.value);
@@ -20,8 +22,8 @@ function ChatInput(props) {
           <button
             type="submit"
             className="sm:text-3xl md:text-5xl text-2xl font-bold hover:bg-[#361201] bg-[#957e4e] text-[#FFF701] py-[6px] px-[16px] xl:py-[6px] xl:px-[16px] md:py-2 md:px-4 rounded-full align-middle ml-4"
-          >
-            >
+          > 
+          &#62;
           </button>
           <input
             type="text"
@@ -33,7 +35,9 @@ function ChatInput(props) {
           />
           <div className="md:w-28 w-16 h-16 md:h-28">
             <img
-              src={props.user.photo}
+              src={props.user.uploadedPhoto
+                  ? `${photoUrl}/${props.user.uploadedPhoto}` 
+                  : props.user.photo}
               className="object-cover h-full w-full rounded-full shadow-[#ff994091] shadow-lg"
             />
           </div>
