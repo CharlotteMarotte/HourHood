@@ -54,7 +54,7 @@ export default function OfferCard(props) {
               <>
                 <Link
                   to={user ? `/profile/${props.offer.user.userID}` : '/login'}
-                  className="px-4 py-2 font-semibold bg-transparent border rounded hover:bg-amber-500 text-amber-700 hover:text-white border-amber-500 hover:border-transparent"
+                  className="px-2 py-2 font-semibold bg-transparent border rounded hover:bg-amber-500 text-amber-700 hover:text-white border-amber-500 hover:border-transparent"
                 >
                   {!user || user.id !== props.offer.user.userID
                     ? `${props.offer.user.firstName}'s Profile`
@@ -66,7 +66,7 @@ export default function OfferCard(props) {
                   title={(userWallet < 1 && !props.offer.donation) ? "You don't have enough credit in your wallet and the service is not available for donation" : null}
                   // disabled = {(userWallet < 1 && !props.offer.donation) ? true : false}
                     onClick={(userWallet < 1 && !props.offer.donation) ? (e => alert("Service is not available for donation")) : ((e) => selectOfferCb(props.offer.postID))}
-                    className={`px-4 py-2 font-semibold bg-transparent border rounded ${(userWallet < 1 && !props.offer.donation) ? "transform-none transition-none cursor-not-allowed hover:bg-gray-300 text-gray-400 hover:text-white border-gray-300 hover:border-transparent" : "hover:bg-lime-600 text-lime-700 hover:text-white border-lime-600 hover:border-transparent"}`}
+                    className={`px-2 py-2 font-semibold bg-transparent border rounded ${(userWallet < 1 && !props.offer.donation) ? "transform-none transition-none cursor-not-allowed hover:bg-gray-300 text-gray-400 hover:text-white border-gray-300 hover:border-transparent" : "hover:bg-lime-600 text-lime-700 hover:text-white border-lime-600 hover:border-transparent"}`}
                   >
                     Request
                   </button>
