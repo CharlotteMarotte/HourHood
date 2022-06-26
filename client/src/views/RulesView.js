@@ -42,13 +42,13 @@ function RulesView() {
       <div className="flex justify-center gap-10">
         <Link
           to="/getstarted"
-          className="bg-[#ff9940e3] hover:bg-[#fe8923] hover:shadow-[#ff994091] hover:shadow-lg hover:font-extrabold px-10 py-2 text-md uppercase text-white font-bold rounded-xl"
+          className="bg-[#ff9940e3] hover:bg-[#fe8923] hover:shadow-white hover:shadow-md hover:font-extrabold px-10 py-2 text-md uppercase text-white font-bold rounded-xl"
         >
           Learn more
         </Link>
         <Link
           to="/signup"
-          className="bg-[#ff9940e3] hover:bg-[#fe8923] hover:shadow-[#ffe600] hover:shadow-lg hover:font-extrabold px-10 py-2 text-md uppercase text-white font-bold rounded-xl"
+          className="bg-[#ff9940e3] hover:bg-[#fe8923] hover:shadow-white hover:shadow-md hover:font-extrabold px-10 py-2 text-md uppercase text-white font-bold rounded-xl"
         >
           Continue
         </Link>

@@ -1,10 +1,10 @@
-import React, { useContext, useEffect, useState } from 'react';
-import AppContext from '../AppContext';
-import OfferCard from '../components/OfferCard';
-import { Link, useParams } from 'react-router-dom';
-import { useLayoutEffect } from 'react';
-import AddOfferButton from '../components/AddOfferButton';
-import GoToOfferButton from '../components/GoToOfferButton';
+import React, { useContext, useEffect, useState } from "react";
+import AppContext from "../AppContext";
+import OfferCard from "../components/OfferCard";
+import { Link, useParams } from "react-router-dom";
+import { useLayoutEffect } from "react";
+import AddOfferButton from "../components/AddOfferButton";
+import GoToOfferButton from "../components/GoToOfferButton";
 
 export default function ProfileView(props) {
   let { user, users } = useContext(AppContext);
@@ -12,7 +12,7 @@ export default function ProfileView(props) {
   let [myData, setMyData] = useState(props.offers[0]);
   let [myToken, setMyToken] = useState([]);
 
-  let photoUrl = 'http://localhost:5000/clientfiles';
+  let photoUrl = "http://localhost:5000/clientfiles";
 
   useEffect(() => {
     getMyOffers();
@@ -51,15 +51,15 @@ export default function ProfileView(props) {
     setMyToken(myToken);
 
     let options = {
-      method: 'POST',
+      method: "POST",
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
       },
       body: JSON.stringify({ token: myToken, valid: 1 }),
     };
 
     try {
-      let response = await fetch('/tokens', options);
+      let response = await fetch("/tokens", options);
       if (!response.ok) {
         console.log(`Server error: ${response.status}: ${response.statusText}`);
       }
@@ -85,14 +85,14 @@ export default function ProfileView(props) {
 
   async function setInvalidToken(token) {
     let options = {
-      method: 'PUT',
+      method: "PUT",
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
       },
       body: JSON.stringify({ token: token, valid: 0 }),
     };
     try {
-      let response = await fetch('/tokens', options);
+      let response = await fetch("/tokens", options);
       if (!response.ok) {
         console.log(`Server error: ${response.status}: ${response.statusText}`);
       }
@@ -130,46 +130,48 @@ export default function ProfileView(props) {
                 <div className="w-4/5 pt-3 mx-auto border-b-2 opacity-25 lg:mx-0 border-amber-500"></div>
 
                 <p className="flex items-center justify-center pt-4 text-base font-bold lg:justify-start">
-                  About Me{' '}
+                  About Me{" "}
                 </p>
                 <p className="text-sm">
                   {myData.user_description
                     ? myData.user_description
-                    : 'No description'}
+                    : "No description"}
                 </p>
 
                 <p className="flex items-center justify-center pt-4 text-base font-bold lg:justify-start">
-                  My Hobbies{' '}
+                  My Hobbies{" "}
                 </p>
                 <p className="text-sm">
-                  {myData.hobbies ? myData.hobbies : 'No Hobbies'}
+                  {myData.hobbies ? myData.hobbies : "No Hobbies"}
                 </p>
                 <p className="flex items-center justify-center pt-4 text-base font-bold lg:justify-start">
-                  My Superpower is...{' '}
+                  My Superpower is...{" "}
                 </p>
                 <p className="text-sm">
-                  {myData.superpower ? myData.superpower : 'No superpower'}
+                  {myData.superpower ? myData.superpower : "No superpower"}
                 </p>
               </div>
-              {/* only show when profile of user who is currently logged in is shown */}
-              {user.id === myData.id && (
+              <div className="flex justify-center items-center gap-10">
+                {/* only show when profile of user who is currently logged in is shown */}
+                {user.id === myData.id && (
+                  <div className="pt-12 pb-8">
+                    <Link
+                      to="/profile/edit"
+                      className="px-6 py-3 text-lg font-bold uppercase text-white hover:shadow-lg hover:shadow-[#ff994091] rounded-xl bg-[#ff9940e3] hover:bg-[#fe8923]"
+                    >
+                      Edit Profile{" "}
+                    </Link>
+                  </div>
+                )}
                 <div className="pt-12 pb-8">
-                  <Link
-                    to="/profile/edit"
-                    className="px-4 py-2 font-bold text-white rounded-full bg-amber-700 hover:bg-amber-900"
+                  <button
+                    className="px-6 py-2 text-lg font-bold uppercase text-[#361201] rounded-xl hover:shadow-lg hover:shadow-[#ff994091] border-2 border-[#FFE500] bg-[#FFF7A3] hover:bg-[#FFE500]"
+                    onClick={(e) => getMyToken()}
                   >
-                    Edit Profile{' '}
-                  </Link>
+                    Get token{" "}
+                  </button>
+                  <p className="font-semibold">{myToken}</p>
                 </div>
-              )}
-              <div className="pt-12 pb-8">
-                <button
-                  className="px-4 py-2 font-bold text-white rounded-full bg-amber-700 hover:bg-amber-900"
-                  onClick={(e) => getMyToken()}
-                >
-                  Get tokennnn{' '}
-                </button>
-                <p>{myToken}</p>
               </div>
             </div>
           </div>
@@ -184,7 +186,7 @@ export default function ProfileView(props) {
               <AddOfferButton />
               <div className="px-5 py-24 mx-auto -m-4 lg:flex-wrap md:block lg:flex">
                 {myOffers.map((o) => (
-                  <OfferCard key={o.postID} offer={o} view={'profile'} />
+                  <OfferCard key={o.postID} offer={o} view={"profile"} />
                 ))}
               </div>
             </div>
