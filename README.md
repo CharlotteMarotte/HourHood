@@ -66,7 +66,48 @@ Run `npm run migrate` in your terminal in the project folder in order to create 
 
 ## How to use Website
 
-- explained in Get Started Page ?
+- from Startpage go to Offers View by clicking (V) Button
+- Explore Offers without an account, click dropdown menu in Offer View to search by category
+### Create an account
+- if you want to request servers create an account by clicking Login in Navbar and then Signup
+- read the rules and if you accept click continue
+- Fill in your data and create an account
+- log in with your email adress and password
+- for starting you get 5h starting credit
+### Requesting a service
+- Request a service by clicking on request on a service card
+- click '...'s Profile' to watch the profile of the provider
+- choose a time you want to request
+- you can write a note to the provider
+- if you don't have enough hours to pay and the provider allows it you can request a service as a donation
+### Manage your booked services 
+- click 'Receiving help' in the Navbar
+- under 'Pending' you see the services that you requested and the provider hasn't replied yet, you can cancel if you don't longer want to request it
+- under 'Accepted' you can see the services that you requested and the provider has accepted
+- whenever you request a service and the provider accepts the hours that you requested are getting substracted from your wallet
+- if you click on 'Chat' you can talk to the provider in a 1-on-1 Chat
+- click 'Back to offers' to go back to List with all offers
+### Answer to requests of your services
+- click 'Giving help in the Navbar
+- under 'Pending' you see requests that you didn't reply to yet, click accept or deny to answer
+- under 'Accepted' you can see the requests that you accepted, you can cancel them
+- whenever you accept an offer the hours that this person requested are being added to your wallet
+- if you click on 'Chat' you can talk to the requestor in a 1-on-1 Chat
+- click 'Add a new offer' to post a new service
+### Viewing and editing your profile 
+- Click 'Profile' in the Navbar
+- click 'Edit Profile' to edit your information and save to update your profile
+- to upload a new profile photo, click 'Upload a file' (in your computer's systems language) and then 'Upload photo'
+### Viewing your offers
+- Click 'Profile' in the Navbar
+- scroll down to see your offers
+- click delete to remove your offer 
+- click edit to update the service information, change any information and click update to finish
+### Posting a new offer
+- choose a descriptive title for your service
+- choose a category that your service fits into
+- fill in any additional information in the description (like times you are available during the day, estimations how long this service will take)
+- if you would also offer your service as a donation for people who do not have enough hours to pay check the checkbox for donations
 
 ## Technologies used
 
