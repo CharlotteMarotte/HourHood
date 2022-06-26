@@ -127,9 +127,19 @@ export default function ProfileView(props) {
               </div>
               <div
                 id="profile"
-                className="w-full mx-6 bg-white/75 rounded-lg shadow-lg lg:w-3/5 lg:rounded-r-lg lg:rounded-l-none lg:mx-0 "
+                className="w-full md:mt-10 lg:mt-0 mx-6 bg-white/75 rounded-lg flex flex-col items-center shadow-lg lg:w-3/5 lg:rounded-r-lg lg:rounded-l-none lg:mx-0 "
               >
-                <div className="p-4 text-center md:p-12 lg:text-left">
+                <div className="w-44 h-44 mt-6 lg:hidden">
+                  <img
+                    src={
+                      user.uploadedPhoto
+                        ? `${photoUrl}/${user.uploadedPhoto}`
+                        : user.photo
+                    }
+                    className="h-full w-full object-cover rounded-full shadow-lg lg:rounded-lg lg:hidden"
+                  />
+                </div>
+                <div className="p-4 -mt-8 md:-mt-10 lg:mt-0 text-center md:p-12 lg:text-left">
                   <h1 className="pt-8 text-3xl font-bold text-[#fe8923] lg:pt-0">
                     {myData.first_name}'s{" "}
                     <span className="text-[#361201]">Profile</span>
@@ -158,7 +168,6 @@ export default function ProfileView(props) {
                     {myData.superpower ? myData.superpower : "No superpower"}
                   </p>
                 </div>
-
                 {/* only show when profile of user who is currently logged in is shown */}
                 {user.id === myData.id && (
                   <div className="pt-12 pb-8">
@@ -173,7 +182,7 @@ export default function ProfileView(props) {
               </div>
             </div>
           </div>
-          <div className="pt-12 pb-8 text-right mr-64 mb-2 -mt-40">
+          <div className="pt-12 pb-8 lg:text-right -mt-28 md:-mt-24 lg:mr-64 mb-2 lg:-mt-40">
             <p className="text-[#361201] text-lg font-semibold">
               Do you want to invite a friend? <br />
               <span className="text-[#fe8923]">Send him/her a token</span>
@@ -185,18 +194,18 @@ export default function ProfileView(props) {
             >
               Get token{" "}
             </button>
-            <p className="font-semibold mr-5 mt-2">{myToken}</p>
+            <p className="font-semibold lg:mr-5 mt-2">{myToken}</p>
           </div>
           {/* only show when profile of user who is currently logged in is shown */}
           {user.id === myData.id && (
             <div>
-              <div className="container mx-auto ">
+              <div className="container mx-auto">
                 <h1 className="pt-8 text-3xl mx-16 font-bold border-b-2 pb-2 border-opacity-25 text-amber-900 lg:pt-0 border-amber-700">
                   My current offerings
                 </h1>
               </div>
               <AddOfferButton />
-              <div className="px-5 py-24 mx-auto -m-4 lg:flex-wrap md:block lg:flex">
+              <div className="px-5 py-24 mx-auto -m-4 lg:flex-wrap md:justify-center lg:justify-start md:flex">
                 {myOffers.map((o) => (
                   <OfferCard key={o.postID} offer={o} view={"profile"} />
                 ))}
@@ -206,7 +215,6 @@ export default function ProfileView(props) {
         </div>
       ) : (
         <div className="flex flex-col items-center xl:mt-10 md:mt-44 mt-20 relative">
-          
           <img src={noUserImg} className="absolute top-4 z-10" />
           <h3 className="md:mt-48 mt-32 py-4 md:py-9 animate-pulse text-2xl md:text-4xl w-screen z-20 font-medium uppercase bg-[#a81223ca] text-white">
             No User logged in
