@@ -5,6 +5,7 @@ import { Link, useParams } from "react-router-dom";
 import { useLayoutEffect } from "react";
 import AddOfferButton from "../components/AddOfferButton";
 import GoToOfferButton from "../components/GoToOfferButton";
+import noUserImg from "../img/lock.png";
 
 export default function ProfileView(props) {
   let { user, users } = useContext(AppContext);
@@ -106,80 +107,91 @@ export default function ProfileView(props) {
     <>
       {/* only show Profile page if user is logged in */}
       {user ? (
-        <div className="font-sans antialiased leading-normal tracking-wider text-gray-900 bg-cover">
+        <div className="font-sans antialiased leading-normal tracking-wider bg-cover">
           {user.id !== myData.id && <GoToOfferButton />}
-          <div className="flex flex-wrap items-center h-auto max-w-4xl mx-auto my-24 lg:h-screen lg:my-0">
-            <div className="w-auto md:w-full lg:w-2/5">
-              <img
-                src={
-                  user.uploadedPhoto
-                    ? `${photoUrl}/${user.uploadedPhoto}`
-                    : user.photo
-                }
-                className="hidden rounded-none shadow-lg lg:rounded-lg lg:block"
-              />
-            </div>
-            <div
-              id="profile"
-              className="w-full mx-6 bg-white rounded-lg shadow-lg opacity-75 lg:w-3/5 lg:rounded-r-lg lg:rounded-l-none lg:mx-0 "
-            >
-              <div className="p-4 text-center md:p-12 lg:text-left">
-                <h1 className="pt-8 text-3xl font-bold lg:pt-0">
-                  {myData.first_name}'s Profile
-                </h1>
-                <div className="w-4/5 pt-3 mx-auto border-b-2 opacity-25 lg:mx-0 border-amber-500"></div>
+          <h3 className="md:text-5xl text-2xl text-[#361201] font-bold mt-6">
+            Profile
+          </h3>
 
-                <p className="flex items-center justify-center pt-4 text-base font-bold lg:justify-start">
-                  About Me{" "}
-                </p>
-                <p className="text-sm">
-                  {myData.user_description
-                    ? myData.user_description
-                    : "No description"}
-                </p>
-
-                <p className="flex items-center justify-center pt-4 text-base font-bold lg:justify-start">
-                  My Hobbies{" "}
-                </p>
-                <p className="text-sm">
-                  {myData.hobbies ? myData.hobbies : "No Hobbies"}
-                </p>
-                <p className="flex items-center justify-center pt-4 text-base font-bold lg:justify-start">
-                  My Superpower is...{" "}
-                </p>
-                <p className="text-sm">
-                  {myData.superpower ? myData.superpower : "No superpower"}
-                </p>
+          <div className="-mt-[75px]">
+            <div className="flex flex-wrap items-center h-auto max-w-4xl mx-auto my-24 lg:h-screen lg:my-0">
+              <div className="w-auto md:w-full lg:w-2/5">
+                <img
+                  src={
+                    user.uploadedPhoto
+                      ? `${photoUrl}/${user.uploadedPhoto}`
+                      : user.photo
+                  }
+                  className="hidden rounded-none shadow-lg lg:rounded-lg lg:block"
+                />
               </div>
-              <div className="flex justify-center items-center gap-10">
+              <div
+                id="profile"
+                className="w-full mx-6 bg-white/75 rounded-lg shadow-lg lg:w-3/5 lg:rounded-r-lg lg:rounded-l-none lg:mx-0 "
+              >
+                <div className="p-4 text-center md:p-12 lg:text-left">
+                  <h1 className="pt-8 text-3xl font-bold text-[#fe8923] lg:pt-0">
+                    {myData.first_name}'s{" "}
+                    <span className="text-[#361201]">Profile</span>
+                  </h1>
+                  <div className="w-4/5 pt-3 mx-auto border-b-2 opacity-25 lg:mx-0 border-amber-500"></div>
+
+                  <p className="flex items-center text-[#361201] justify-center pt-4 text-base font-bold lg:justify-start">
+                    About Me{" "}
+                  </p>
+                  <p className="text-sm text-[#361201]">
+                    {myData.user_description
+                      ? myData.user_description
+                      : "No description"}
+                  </p>
+
+                  <p className="flex items-center text-[#361201] justify-center pt-4 text-base font-bold lg:justify-start">
+                    My Hobbies{" "}
+                  </p>
+                  <p className="text-sm text-[#361201]">
+                    {myData.hobbies ? myData.hobbies : "No Hobbies"}
+                  </p>
+                  <p className="flex text-[#361201] items-center justify-center pt-4 text-base font-bold lg:justify-start">
+                    My Superpower is...{" "}
+                  </p>
+                  <p className="text-sm text-[#361201]">
+                    {myData.superpower ? myData.superpower : "No superpower"}
+                  </p>
+                </div>
+
                 {/* only show when profile of user who is currently logged in is shown */}
                 {user.id === myData.id && (
                   <div className="pt-12 pb-8">
                     <Link
                       to="/profile/edit"
-                      className="px-6 py-3 text-lg font-bold uppercase text-white hover:shadow-lg hover:shadow-[#ff994091] rounded-xl bg-[#ff9940e3] hover:bg-[#fe8923]"
+                      className="px-10 py-3 text-lg font-bold uppercase text-white hover:shadow-lg hover:shadow-[#ff994091] rounded-xl bg-[#ff9940e3] hover:bg-[#fe8923]"
                     >
                       Edit Profile{" "}
                     </Link>
                   </div>
                 )}
-                <div className="pt-12 pb-8">
-                  <button
-                    className="px-6 py-2 text-lg font-bold uppercase text-[#361201] rounded-xl hover:shadow-lg hover:shadow-[#ff994091] border-2 border-[#FFE500] bg-[#FFF7A3] hover:bg-[#FFE500]"
-                    onClick={(e) => getMyToken()}
-                  >
-                    Get token{" "}
-                  </button>
-                  <p className="font-semibold">{myToken}</p>
-                </div>
               </div>
             </div>
+          </div>
+          <div className="pt-12 pb-8 text-right mr-64 mb-2 -mt-40">
+            <p className="text-[#361201] text-lg font-semibold">
+              Do you want to invite a friend? <br />
+              <span className="text-[#fe8923]">Send him/her a token</span>
+            </p>
+
+            <button
+              className="px-6 py-2 mt-4 text-lg font-bold uppercase text-[#361201] rounded-xl hover:shadow-lg hover:shadow-[#ff994091] border-2 border-[#FFE500] bg-[#FFF7A3] hover:bg-[#FFE500]"
+              onClick={(e) => getMyToken()}
+            >
+              Get token{" "}
+            </button>
+            <p className="font-semibold mr-5 mt-2">{myToken}</p>
           </div>
           {/* only show when profile of user who is currently logged in is shown */}
           {user.id === myData.id && (
             <div>
               <div className="container mx-auto ">
-                <h1 className="pt-8 text-3xl font-bold border-b-2 border-opacity-25 text-amber-900 lg:pt-0 border-amber-700">
+                <h1 className="pt-8 text-3xl mx-16 font-bold border-b-2 pb-2 border-opacity-25 text-amber-900 lg:pt-0 border-amber-700">
                   My current offerings
                 </h1>
               </div>
@@ -193,12 +205,19 @@ export default function ProfileView(props) {
           )}
         </div>
       ) : (
-        <Link
-          className="p-4 my-1 text-2xl font-medium rounded-lg title-font bg-amber-200 text-amber-900"
-          to="/offers"
-        >
-          No User logged in - back to offers
-        </Link>
+        <div className="flex flex-col items-center xl:mt-10 md:mt-44 mt-20 relative">
+          
+          <img src={noUserImg} className="absolute top-4 z-10" />
+          <h3 className="md:mt-48 mt-32 py-4 md:py-9 animate-pulse text-2xl md:text-4xl w-screen z-20 font-medium uppercase bg-[#a81223ca] text-white">
+            No User logged in
+          </h3>
+          <Link
+            to="/login"
+            className="bg-[#ff9940e3] z-20 xl:mt-44 md:mt-60 mt-32 hover:bg-[#fe8923] hover:shadow-white hover:shadow-md hover:font-extrabold px-10 py-2 text-md uppercase text-white font-bold rounded-xl"
+          >
+            Login
+          </Link>
+        </div>
       )}
     </>
   );
