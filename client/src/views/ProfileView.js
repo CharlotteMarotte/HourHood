@@ -320,7 +320,7 @@ export default function ProfileView(props) {
             </div>
           </div>
           {user.id === Number(id) && (
-              <div className="pt-6 pb-12 lg:text-right lg:mx-56 lg:-mt-16">
+              <div className="pt-6 pb-12 lg:text-right lg:mx-56 lg:-mt-16 -mt-16 md:-mt-8 lg:mt-0">
                 <h3 className="text-lg text-[#361201] font-semibold">Do you want to invite a friend?</h3>
                 <h3 className="font-semibold text-lg py-2 text-[#fe8923]">Send him/her a token</h3>
                 <button
