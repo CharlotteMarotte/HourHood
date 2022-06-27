@@ -33,16 +33,24 @@ export default function SelectedOfferCard(props) {
       <div className="flex flex-col md:ml-12 lg:ml-0 md:flex-row items-center justify-center">
         
         <div className="md:w-[400px] md:h-[400px] w-44 h-44 relative">
+        {props.view === 'requests' ?
           <img
             className="object-cover rounded-full relative z-20 md:rounded-xl shadow-lg shadow-[#ff994091] w-full h-full"
-            src={
-              props.view === "requests"
-                ? props.booking.requestor.profilePicture
+            src={props.booking.requestor.requestorProfilePicture
+              ? `${photoUrl}/${props.booking.requestor.requestorProfilePicture}`
+              : props.booking.requestor.requestorAvatar
+          }
+            alt="User"
+          /> :
+          <img
+            className="object-cover rounded-full relative z-20 md:rounded-xl shadow-lg shadow-[#ff994091] w-full h-full"
+            src={providerData.uploadedPhoto
+                ? `${photoUrl}/${providerData.uploadedPhoto}`
                 : providerData.photo
             }
             alt="User"
-          />
-
+          /> 
+          }
         </div>
     
         <div className="block h:[390px] md:h-[380px] mb-16 md:mb-0 md:py-6 py-10 w-full relative -mt-9 md:mt-0 z-10 shadow-lg shadow-[#ff994091] bg-white rounded-xl md:rounded-r-xl -z-1 md:flex md:flex-row lg:mx-auto lg:w-4/5 ">
