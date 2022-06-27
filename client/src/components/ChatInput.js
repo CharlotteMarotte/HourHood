@@ -1,7 +1,9 @@
 import React, { useState } from "react";
+import { useLayoutEffect } from 'react';
 
 function ChatInput(props) {
   const [text, setText] = useState("");
+
 
   function handleChange(event) {
     setText(event.target.value);
