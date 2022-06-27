@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { NavLink } from "react-router-dom";
 import * as ReactDOM from "https://cdn.skypack.dev/react-dom@17.0.1";
+import "./Navbar.css";
 
 function Navbar(props) {
   let [open, setOpen] = useState(false);
@@ -14,7 +15,7 @@ function Navbar(props) {
     <div className="sticky top-0 z-50">
       <nav className="bg-[#361201] shadow-md shadow-[#361201a2] navbar navbar-expand-lg navbar-light">
         <div className="items-center justify-between hidden py-3 sm:flex xl:px-32 md:px-10">
-          <NavLink
+          <NavLink 
             className="text-xl text-white pr-2 font-semibold hover:text-[#FF9940]"
             to="/"
           >
@@ -61,7 +62,7 @@ function Navbar(props) {
             {props.user ? (
               <NavLink
                 className="text-xl text-white pr-2 font-semibold hover:text-[#FF9940]"
-                to="/"
+                to="/login"
                 onClick={props.logoutCb}
               >
                 Logout

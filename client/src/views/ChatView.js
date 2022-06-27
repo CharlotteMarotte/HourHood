@@ -6,9 +6,9 @@ import AppContext from "../AppContext";
 
 
 export default function ChatView(props) {
-  // useLayoutEffect(() => {
-  //   window.scrollTo(0,0);
-  // }, []);
+  useLayoutEffect(() => {
+    window.scrollTo(0, document.body.scrollHeight);
+  }, []);
   let { bookingId } = useContext(AppContext);
   return (
     <div>

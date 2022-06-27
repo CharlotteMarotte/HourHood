@@ -42,22 +42,22 @@ export default function SignUpView(props) {
 
   return (
     <div className="flex justify-center">
-      <div className="bg-white flex flex-col pt-20 w-[600px] rounded-lg shadow-lg shadow-[#ff994091] mt-20 mb-20 pb-20">
+      <div className="bg-white flex flex-col pt-20 md:w-[600px] w-screen rounded-lg shadow-lg shadow-[#ff994091] mt-20 md:mt-12 mb-20 pb-20">
         <h3 className="text-2xl text-[#361201] font-bold mt-2">
           Welcome to the community! <br />
           <span className="text-[#fe8923] text-3xl">Sign Up</span>
         </h3>
         <p className="text-sm text-[#ff994093] font-semibold">( It's free )</p>
         <form
-          className="flex flex-col items-center gap-5 mt-10"
+          className="flex flex-col items-center mx-2 md:mx-0 gap-5 mt-10"
           onSubmit={(e) => handleSubmit(e)}
         >
-          <div className="flex items-center gap-10">
+          <div className="flex items-center gap-2 md:gap-10">
             <input
               required
               name="first_name"
               type="text"
-              className="rounded-lg py-2 w-64 px-8 border-2 text-[#fe8923] border-[#fe8923] outline-none focus:border-[#C8E242]"
+              className="rounded-lg py-2 md:w-64 w-full px-8 border-2 text-[#fe8923] border-[#fe8923] outline-none focus:border-[#C8E242]"
               placeholder="First Name"
               value={newUser.first_name}
               onChange={(e) => handleChange(e)}
@@ -66,18 +66,18 @@ export default function SignUpView(props) {
               required
               name="last_name"
               type="text"
-              className="rounded-lg py-2 w-64 px-8 border-2 text-[#fe8923] border-[#fe8923] outline-none focus:border-[#C8E242]"
+              className="rounded-lg py-2 md:w-64 w-full px-8 border-2 text-[#fe8923] border-[#fe8923] outline-none focus:border-[#C8E242]"
               placeholder="Last Name"
               value={newUser.last_name}
               onChange={(e) => handleChange(e)}
             />
           </div>
-          <div className="flex items-center gap-10">
+          <div className="flex items-center gap-2 md:gap-10">
             <input
               required
               name="street"
               type="text"
-              className="rounded-lg w-64 py-2 px-8 border-2 text-[#fe8923] border-[#fe8923] outline-none focus:border-[#C8E242]"
+              className="rounded-lg md:w-64 w-full py-2 px-8 border-2 text-[#fe8923] border-[#fe8923] outline-none focus:border-[#C8E242]"
               placeholder="E.g. : Carrer d'en Grassot"
               value={newUser.street}
               onChange={(e) => handleChange(e)}
@@ -86,16 +86,16 @@ export default function SignUpView(props) {
               required
               name="house_number"
               type="text"
-              className="rounded-lg py-2 px-8 w-64 border-2 text-[#fe8923] border-[#fe8923] outline-none focus:border-[#C8E242]"
+              className="rounded-lg py-2 px-8 md:w-64 w-full border-2 text-[#fe8923] border-[#fe8923] outline-none focus:border-[#C8E242]"
               placeholder="E.g. : 101 "
               value={newUser.house_number}
               onChange={(e) => handleChange(e)}
             />
           </div>
-          <div className="flex items-center gap-10">
+          <div className="flex items-center gap-2 md:gap-10">
             <select
               require="true"
-              className="rounded-lg w-64 py-2 px-8 border-2 text-[#fe8923] border-[#fe8923] outline-none focus:border-[#C8E242]"
+              className="rounded-lg md:w-64 w-full py-[10px] px-8 border-2 text-[#fe8923] border-[#fe8923] outline-none focus:border-[#C8E242]"
               name="city_code"
               id="select_city_code"
               // value={newUser.city_code}
@@ -124,7 +124,7 @@ export default function SignUpView(props) {
               readOnly
               name="city_name"
               type="text"
-              className="rounded-lg py-2 px-8 w-64 border-2 text-[#fe8923] border-[#fe8923] outline-none focus:border-[#C8E242]"
+              className="rounded-lg py-2 px-8 md:w-64 w-full border-2 text-[#fe8923] border-[#fe8923] outline-none focus:border-[#C8E242]"
               value={newUser.city_name}
             />
           </div>
@@ -132,7 +132,7 @@ export default function SignUpView(props) {
             readOnly
             name="country"
             type="text"
-            className="rounded-lg py-2 px-8 w-[553px] border-2 text-[#fe8923] border-[#fe8923] outline-none focus:border-[#C8E242]"
+            className="rounded-lg py-2 px-8 md:w-[553px] w-full border-2 text-[#fe8923] border-[#fe8923] outline-none focus:border-[#C8E242]"
             value={newUser.country}
           />
           <img src={map} alt="location" className="w-[553px] rounded-lg" />
@@ -140,7 +140,7 @@ export default function SignUpView(props) {
             required
             name="email"
             type="email"
-            className="rounded-lg py-2 px-8 w-[553px] border-2 text-[#fe8923] border-[#fe8923] outline-none focus:border-[#C8E242]"
+            className="rounded-lg py-2 px-8 md:w-[553px] w-full border-2 text-[#fe8923] border-[#fe8923] outline-none focus:border-[#C8E242]"
             placeholder="E.g. : codeop@grassot.com "
             value={newUser.email}
             onChange={(e) => handleChange(e)}
@@ -149,7 +149,7 @@ export default function SignUpView(props) {
             required
             name="password"
             type="password"
-            className="rounded-lg py-2 px-8 w-[553px] border-2 text-[#fe8923] border-[#fe8923] outline-none focus:border-[#C8E242]"
+            className="rounded-lg py-2 px-8 md:w-[553px] w-full border-2 text-[#fe8923] border-[#fe8923] outline-none focus:border-[#C8E242]"
             placeholder="Password"
             value={newUser.password}
             onChange={(e) => handleChange(e)}

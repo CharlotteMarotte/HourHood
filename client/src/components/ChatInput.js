@@ -1,8 +1,10 @@
 import React, { useState } from "react";
+import { useLayoutEffect } from 'react';
 
 function ChatInput(props) {
   const [text, setText] = useState("");
   let photoUrl = 'http://localhost:5000/clientfiles';
+
 
 
   function handleChange(event) {

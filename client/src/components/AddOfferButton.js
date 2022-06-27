@@ -6,7 +6,7 @@ export default function AddOfferButton() {
   return (
     <Link
       to={'/service-post/add'}
-      className="block w-1/4 p-3 mx-auto mt-5 overflow-hidden text-lg text-white rounded-lg justify-left bg-[#FF9940]"
+      className="block lg:w-1/4 w-72 p-3 mx-auto mt-5 overflow-hidden text-lg font-bold text-white rounded-xl uppercase justify-left hover:shadow-lg hover:shadow-white bg-[#ff9940e3] hover:bg-[#fe8923]"
     >
       <svg
         className="inline fill-amber-100/80"

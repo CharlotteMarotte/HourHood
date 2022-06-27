@@ -5,7 +5,7 @@ export default function GoToOfferButton() {
   return (
     <Link
     to={'/'}
-    className="block w-1/4 p-3 mx-auto mt-5 overflow-hidden text-lg text-white font-bold rounded-lg justify-left bg-[#90a32e6d]"
+    className="block w-72 mb-10 md:mb-0 md:w-1/4 p-3 mx-auto mt-5 overflow-hidden text-lg text-white font-bold rounded-lg justify-left hover:bg-[#a6c120] uppercase bg-[#70840def]"
   >
     <svg
       xmlns="http://www.w3.org/2000/svg"

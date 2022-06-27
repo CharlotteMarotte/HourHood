@@ -2,17 +2,13 @@ import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useLayoutEffect } from "react";
 
-
-
 export default function LogInView(props) {
-
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-
   useLayoutEffect(() => {
-    window.scrollTo(0, 0)
-}, []);
+    window.scrollTo(0, 0);
+  }, []);
 
   function handleChange(event) {
     let { name, value } = event.target;
@@ -35,9 +31,13 @@ export default function LogInView(props) {
   return (
     <div className="flex justify-center">
       {props.loginError && (
-        <div className="alert alert-danger">{props.loginError}</div>
+        
+          <div className="alert alert-danger py-4 absolute md:py-9 text-2xl md:text-4xl w-screen z-20 font-bold uppercase bg-[#a81223a7] text-white">
+            {props.loginError}
+          </div>
+
       )}
-      <div className="bg-white flex flex-col pt-20 w-[500px] rounded-lg shadow-lg shadow-[#ff994091] mt-20 mb-20 pb-20">
+      <div className="bg-white flex flex-col pt-20 w-[500px] rounded-lg shadow-lg shadow-[#ff994091] md:mt-20 mt-8 mb-20 pb-20">
         <h3 className="text-2xl text-[#361201] font-bold mt-2">
           Already part of the community? <br />
           <span className="text-[#fe8923] text-3xl">Login</span>
