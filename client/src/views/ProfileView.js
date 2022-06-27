@@ -1,4 +1,3 @@
-
 import React, { useContext, useEffect, useState } from "react";
 import AppContext from "../AppContext";
 import OfferCard from "../components/OfferCard";
@@ -8,13 +7,12 @@ import AddOfferButton from "../components/AddOfferButton";
 import GoToOfferButton from "../components/GoToOfferButton";
 import noUserImg from "../img/lock.png";
 
-
 export default function ProfileView(props) {
   let { user, users } = useContext(AppContext);
   let [myOffers, setMyOffers] = useState(props.offers);
   let [myData, setMyData] = useState(props.offers[0]);
   let [myToken, setMyToken] = useState([]);
-  console.log("myData:", myData)
+  console.log("myData:", myData);
 
   let photoUrl = "http://localhost:5000/clientfiles";
 
@@ -28,8 +26,8 @@ export default function ProfileView(props) {
   ]);
 
   useLayoutEffect(() => {
-    window.scrollTo(0, 0)
-}, []);
+    window.scrollTo(0, 0);
+  }, []);
 
   const { id } = useParams();
 
@@ -108,9 +106,9 @@ export default function ProfileView(props) {
   return (
     // Code thanks to https://codepen.io/tariq01/pen/jOyLrRJ
     <>
-     {/* only show Profile page if user is logged in */}
-       {user ? (
-/*
+      {/* only show Profile page if user is logged in */}
+      {user ? (
+        /*
         <div className="font-sans antialiased leading-normal tracking-wider bg-cover">
           {user.id !== myData.id && <GoToOfferButton />}
           <h3 className="md:text-5xl text-2xl text-[#361201] font-bold mt-6">
@@ -173,7 +171,7 @@ export default function ProfileView(props) {
                   </p>
                 </div>
                 {/* only show when profile of user who is currently logged in is shown */
-                /* {user.id === myData.id && (
+        /* {user.id === myData.id && (
                   <div className="pt-12 pb-8">
                     <Link
                       to="/profile/edit"
@@ -182,98 +180,144 @@ export default function ProfileView(props) {
                       Edit Profile{" "}
                     </Link>
                   </div>
-                )} */ 
+                )} */
 
         <div className="font-sans antialiased leading-normal text-[#361201] tracking-wide bg-cover">
-          <div className="flex flex-wrap items-center h-auto max-w-4xl mx-auto my-24 lg:h-screen lg:my-0">
-            <div className="w-full lg:w-2/5">
-              {Number(id) === user.id && 
+          <div className="flex flex-wrap items-center h-auto max-w-4xl mx-auto my-24 -mt-1 md:mt-10 lg:h-screen lg:my-0">
+            {Number(id) === user.id && (
+              
+                <div className="w-auto md:w-full lg:w-2/5">
+                  <img
+                    src={
+                      user.uploadedPhoto
+                        ? `${photoUrl}/${user.uploadedPhoto}`
+                        : user.photo
+                    }
+                    className="hidden rounded-none shadow-lg lg:rounded-lg lg:block"
+                  />
+                  <div className="w-44 md:w-60 md:h-60 relative z-20 ml-24 md:ml-72 h-44 mt-6 lg:hidden">
+                    <img
+                      src={
+                        user.uploadedPhoto
+                          ? `${photoUrl}/${user.uploadedPhoto}`
+                          : user.photo
+                      }
+                      className="h-full w-full object-cover  rounded-full shadow-lg shadow-[#ff994091] lg:rounded-lg lg:hidden"
+                    />
+                  </div>
+                </div>
+            )}
+            {Number(id) !== user.id && (
+              <div className="w-auto md:w-full lg:w-2/5">
                 <img
-                  src={user.uploadedPhoto ? `${photoUrl}/${user.uploadedPhoto}`
-                      : user.photo}
+                  src={
+                    myData.uploadedPhoto
+                      ? `${photoUrl}/${myData.uploadedPhoto}`
+                      : myData.photo
+                  }
                   className="hidden rounded-none shadow-lg lg:rounded-lg lg:block"
-                />}
-               {Number(id) !== user.id &&
-                <img
-                  src={myData.uploadedPhoto ? `${photoUrl}/${myData.uploadedPhoto}`
-                      : myData.photo}
-                  className="hidden rounded-none shadow-lg lg:rounded-lg lg:block"
-                />}
-            </div>
+                />
+                <div className="w-44 relative md:w-60 md:h-60 z-20 md:ml-72 ml-24 h-44 mt-6 lg:hidden">
+                  <img
+                    src={
+                      myData.uploadedPhoto
+                        ? `${photoUrl}/${myData.uploadedPhoto}`
+                        : myData.photo
+                    }
+                    className="h-full w-full object-cover rounded-full shadow-lg shadow-[#ff994091] lg:rounded-lg lg:hidden"
+                  />
+                </div>
+              </div>
+            )}
+
             <div
               id="profile"
-              className="w-full mx-6 bg-white rounded-lg shadow-lg opacity-75 lg:w-3/5 lg:rounded-r-lg lg:rounded-l-none lg:mx-0 "
+              className="w-full mx-6 z-10 -mt-16 md:-mt-20 lg:mt-0 bg-white rounded-lg shadow-lg opacity-75 lg:w-3/5 lg:rounded-r-lg lg:rounded-l-none lg:mx-0 "
             >
-              <div className="p-4 text-center md:p-12 lg:text-left">    
+              <div className="p-4 text-center md:p-12 lg:text-left">
                 <h1 className="pt-8 text-3xl font-bold text-[#fe8923] lg:pt-0">
-                  {Number(id) === user.id ? <h1 className="pt-8 text-3xl font-bold text-[#fe8923] lg:pt-0">
-                    {myData.first_name}'s{" "}
-                    <span className="text-[#361201]">Profile</span>
-                  </h1>
-                    : <h1 className="pt-8 text-3xl font-bold text-[#fe8923] lg:pt-0">
-                    {myData.first_name}'s{" "}
-                    <span className="text-[#361201]">Profile</span>
-                  </h1>
-                  }
+                  {Number(id) === user.id ? (
+                    <h1 className="pt-8 text-3xl font-bold text-[#fe8923] lg:pt-0">
+                      {myData.first_name}'s{" "}
+                      <span className="text-[#361201]">Profile</span>
+                    </h1>
+                  ) : (
+                    <h1 className="pt-8 text-3xl font-bold text-[#fe8923] lg:pt-0">
+                      {myData.first_name}'s{" "}
+                      <span className="text-[#361201]">Profile</span>
+                    </h1>
+                  )}
                 </h1>
-                
+
                 <div className="w-4/5 pt-3 mx-auto border-b-2 opacity-25 lg:mx-0 border-amber-500"></div>
 
                 <p className="flex items-center justify-center pt-4 text-base font-bold lg:justify-start">
-                  About Me{' '}
+                  About Me{" "}
                 </p>
-                {Number(id) === user.id && 
+                {Number(id) === user.id && (
                   <p className="text-sm">
                     {user.user_description
                       ? user.user_description
-                      : 'No information provided'}
-                  </p>}
-                {Number(id) !== user.id && 
+                      : "No information provided"}
+                  </p>
+                )}
+                {Number(id) !== user.id && (
                   <p className="text-sm">
                     {myData.user_description
                       ? myData.user_description
-                      : 'No information provided'}
-                  </p>}
+                      : "No information provided"}
+                  </p>
+                )}
 
                 <p className="flex items-center justify-center pt-4 text-base font-bold lg:justify-start">
-                  My Hobbies{' '}
+                  My Hobbies{" "}
                 </p>
-                {Number(id) === user.id && 
+                {Number(id) === user.id && (
                   <p className="text-sm">
-                    {user.hobbies ? user.hobbies : 'No hobbies shared with us yet'}
-                  </p>}
-                {Number(id) !== user.id && 
+                    {user.hobbies
+                      ? user.hobbies
+                      : "No hobbies shared with us yet"}
+                  </p>
+                )}
+                {Number(id) !== user.id && (
                   <p className="text-sm">
-                   {myData.hobbies ? myData.hobbies : 'No hobbies shared with us yet'}
-                   </p>}
-               
-               <p className="flex items-center justify-center pt-4 text-base font-bold lg:justify-start">
-                  My Superpower is...{' '}
+                    {myData.hobbies
+                      ? myData.hobbies
+                      : "No hobbies shared with us yet"}
+                  </p>
+                )}
+
+                <p className="flex items-center justify-center pt-4 text-base font-bold lg:justify-start">
+                  My Superpower is...{" "}
                 </p>
-                {Number(id) === user.id && 
+                {Number(id) === user.id && (
                   <p className="text-sm">
-                    {user.superpower ? user.superpower : 'No superpower disclosed'}
-                  </p>}
-                {Number(id) !== user.id && 
+                    {user.superpower
+                      ? user.superpower
+                      : "No superpower disclosed"}
+                  </p>
+                )}
+                {Number(id) !== user.id && (
                   <p className="text-sm">
-                   {myData.superpower ? myData.superpower : 'No superpower disclosed'}
-                   </p>}
-                
+                    {myData.superpower
+                      ? myData.superpower
+                      : "No superpower disclosed"}
+                  </p>
+                )}
               </div>
-             
+
               {user.id === Number(id) && (
                 <div className="pt-12 pb-8">
-                <Link
-                  to="/profile/edit"
-                  className="px-10 py-3 text-lg font-bold uppercase text-white hover:shadow-lg hover:shadow-[#ff994091] rounded-xl bg-[#ff9940e3] hover:bg-[#fe8923]"
-                >
-                  Edit Profile{" "}
-                </Link>
-              </div>
+                  <Link
+                    to="/profile/edit"
+                    className="px-10 py-3 text-lg font-bold uppercase text-white hover:shadow-lg hover:shadow-[#ff994091] rounded-xl bg-[#ff9940e3] hover:bg-[#fe8923]"
+                  >
+                    Edit Profile{" "}
+                  </Link>
+                </div>
               )}
             </div>
           </div>
-          
 
           {user.id === Number(id) && (
             <div>
@@ -305,7 +349,6 @@ export default function ProfileView(props) {
           </Link>
         </div>
       )}
-
     </>
   );
 }
