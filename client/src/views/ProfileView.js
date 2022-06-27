@@ -232,7 +232,7 @@ export default function ProfileView(props) {
 
             <div
               id="profile"
-              className="w-full mx-6 z-10 -mt-16 md:-mt-20 lg:mt-0 bg-white rounded-lg shadow-lg opacity-75 lg:w-3/5 lg:rounded-r-lg lg:rounded-l-none lg:mx-0 "
+              className="w-full mx-6 z-10 -mt-16 md:-mt-20 lg:mt-0 bg-white/60 rounded-lg shadow-lg lg:w-3/5 lg:rounded-r-lg lg:rounded-l-none lg:mx-0 "
             >
               <div className="p-4 text-center md:p-12 lg:text-left">
                 <h1 className="pt-8 text-3xl font-bold text-[#fe8923] lg:pt-0">
@@ -310,14 +310,29 @@ export default function ProfileView(props) {
                 <div className="pt-12 pb-8">
                   <Link
                     to="/profile/edit"
-                    className="px-10 py-3 text-lg font-bold uppercase text-white hover:shadow-lg hover:shadow-[#ff994091] rounded-xl bg-[#ff9940e3] hover:bg-[#fe8923]"
+                    className="px-10 py-3 text-lg font-bold uppercase text-white hover:shadow-md hover:shadow-[#ff994091] rounded-xl bg-[#ff9940e3] hover:bg-[#fe8923]"
                   >
                     Edit Profile{" "}
                   </Link>
                 </div>
               )}
+              
             </div>
           </div>
+          {user.id === Number(id) && (
+              <div className="pt-6 pb-12 lg:text-right lg:mx-56 lg:-mt-16 -mt-16 md:-mt-8 lg:mt-0">
+                <h3 className="text-lg text-[#361201] font-semibold">Do you want to invite a friend?</h3>
+                <h3 className="font-semibold text-lg py-2 text-[#fe8923]">Send him/her a token</h3>
+                <button
+                  title="With a token you can invite a friend to become part of the community!"
+                  className="px-10 py-2 text-lg font-bold uppercase text-[#361201] hover:shadow-md hover:shadow-white rounded-xl bg-[#ffe60072] border-2 border-[#FFE500] hover:bg-[#FFE500]"
+                  onClick={(e) => getMyToken()}
+                >
+                  Get a token{' '}
+                </button>
+                <p className={`w-1/4 p-3 mx-auto mt-3 font-mono ${myToken.length>0 && "bg-gray-200 hover:bg-gray-100"}`}>{myToken}</p>
+              </div>
+              )}
 
           {user.id === Number(id) && (
             <div>
