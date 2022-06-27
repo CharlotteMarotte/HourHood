@@ -30,7 +30,7 @@ function ChatInput(props) {
           <input
             type="text"
 
-            className="form-control xl:w-10/12 md:w-8/12 md:mx-4 md:mr-8 px-4 md:py-4 py-2 rounded-3xl bg-white"
+            className="form-control xl:w-10/12 md:w-8/12 md:mx-4 md:mr-8 focus:border-white px-4 md:py-4 py-2 rounded-3xl bg-white"
             name="text"
             value={text}
             onChange={handleChange}
