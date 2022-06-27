@@ -3,6 +3,7 @@ import { NavLink } from "react-router-dom";
 import * as ReactDOM from "https://cdn.skypack.dev/react-dom@17.0.1";
 import "./Navbar.css";
 
+
 function Navbar(props) {
   let [open, setOpen] = useState(false);
 
@@ -14,22 +15,21 @@ function Navbar(props) {
   return (
     <div className="sticky top-0 z-50">
       <nav className="bg-[#361201] shadow-md shadow-[#361201a2] navbar navbar-expand-lg navbar-light">
-        <div className="items-center justify-between hidden py-3 sm:flex xl:px-32 md:px-10">
+        <div className="items-center md:mx-10 lg:mx-0 justify-between hidden py-3 sm:flex xl:px-32 md:px-10">
           <NavLink 
-            className="text-xl text-white pr-2 font-semibold hover:text-[#FF9940]"
+            className="text-3xl text-white font-Afterglow font-semibold hover:text-[#FF9940]"
             to="/"
           >
             Hour Hood
           </NavLink>
 
-          <div className="flex gap-20">
             <NavLink
-              className="text-xl text-white pr-2 font-semibold hover:text-[#FF9940]"
+              className="text-xl text-white lg:-ml-16 md:-ml-12 font-semibold hover:text-[#FF9940]"
               to="/getstarted"
             >
               Get started
             </NavLink>
-          </div>
+  
 
           {props.user && (
             <>
@@ -61,7 +61,7 @@ function Navbar(props) {
           <div className="flex gap-4 py-4 pr-0 xl:pr-10">
             {props.user ? (
               <NavLink
-                className="text-xl text-white pr-2 font-semibold hover:text-[#FF9940]"
+                className="text-xl text-white font-semibold hover:text-[#FF9940]"
                 to="/login"
                 onClick={props.logoutCb}
               >
@@ -69,7 +69,7 @@ function Navbar(props) {
               </NavLink>
             ) : (
               <NavLink
-                className="text-xl text-white pr-2 font-semibold hover:text-[#FF9940]"
+                className="text-xl text-white font-semibold hover:text-[#FF9940]"
                 to="/login"
               >
                 Login

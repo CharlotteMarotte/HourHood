@@ -320,9 +320,9 @@ export default function ProfileView(props) {
             </div>
           </div>
           {user.id === Number(id) && (
-              <div className="pt-6 pb-12 lg:text-right lg:mx-56 lg:-mt-16 -mt-16 md:-mt-8 lg:mt-0">
-                <h3 className="text-lg text-[#361201] font-semibold">Do you want to invite a friend?</h3>
-                <h3 className="font-semibold text-lg py-2 text-[#fe8923]">Send him/her a token</h3>
+              <div className="pt-6 pb-12 lg:text-right lg:mx-56 -mt-16 md:-mt-8 lg:mt-0">
+                <h3 className="text-lg text-[#361201] font-bold">Do you want to invite a friend?</h3>
+                <h3 className="font-bold text-lg py-2 text-[#fe8923]">Send him/her a token</h3>
                 <button
                   title="With a token you can invite a friend to become part of the community!"
                   className="px-10 py-2 text-lg font-bold uppercase text-[#361201] hover:shadow-md hover:shadow-white rounded-xl bg-[#ffe60072] border-2 border-[#FFE500] hover:bg-[#FFE500]"
@@ -330,7 +330,7 @@ export default function ProfileView(props) {
                 >
                   Get a token{' '}
                 </button>
-                <p className={`w-1/4 p-3 mx-auto mt-3 font-mono ${myToken.length>0 && "bg-gray-200 hover:bg-gray-100"}`}>{myToken}</p>
+                <p className={`lg:mr-9 text-lg mt-3 font-mono ${myToken.length>0 && ""}`}>{myToken}</p>
               </div>
               )}
 
