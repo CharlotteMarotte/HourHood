@@ -28,9 +28,9 @@ export default function SelectedOfferCard(props) {
   return (
     // Code thanks to https://codepen.io/egoistdeveloper/pen/xxYrmgd
     <div className="mx-8 my-10 ">
-      <div className="flex flex-col md:flex-row items-center justify-center">
+      <div className="flex flex-col md:ml-12 lg:ml-0 md:flex-row items-center justify-center">
         
-        <div className="md:w-64 md:h-[400px] w-44 h-44 relative">
+        <div className="md:w-[400px] md:h-[400px] w-44 h-44 relative">
           <img
             className="object-cover rounded-full relative z-20 md:rounded-xl shadow-lg shadow-[#ff994091] w-full h-full"
             src={
@@ -42,7 +42,7 @@ export default function SelectedOfferCard(props) {
           />
         </div>
     
-        <div className="block h-[380px] mb-16 md:mb-0 md:py-6 py-10 w-full relative -mt-9 md:mt-0 z-10 shadow-lg shadow-[#ff994091] bg-white rounded-xl md:rounded-r-xl -z-1 md:flex md:flex-row lg:mx-auto lg:w-4/5 ">
+        <div className="block h:[390px] md:h-[380px] mb-16 md:mb-0 md:py-6 py-10 w-full relative -mt-9 md:mt-0 z-10 shadow-lg shadow-[#ff994091] bg-white rounded-xl md:rounded-r-xl -z-1 md:flex md:flex-row lg:mx-auto lg:w-4/5 ">
           <div className="flex flex-col w-full px-6">
             <div className="flex flex-row h-14">
               <h2 className="mb-1 text-2xl font-semibold title-font text-[#361201]">
@@ -90,8 +90,8 @@ export default function SelectedOfferCard(props) {
               </div>
             </div>
             <div
-              className={`w-full p-5 mt-5 space-y-3 text-left rounded-lg justify ${
-                props.view === "bookings" ? "bg-red-500" : "bg-orange-200"
+              className={`w-full p-5 mt-5 space-y-3 text-left rounded-lg overflow-y-auto h-32 ${
+                props.view === "bookings" ? "bg-gradient-to-b from-[#fff7a382] to-[#ff994021]" : "bg-gradient-to-t from-[#fff7a382] to-[#ff994021]"
               }`}
             >
               <p className="leading-relaxed text-[#fe8923] ">
@@ -102,8 +102,8 @@ export default function SelectedOfferCard(props) {
               </p>
             </div>
             <div
-              className={`w-full p-5 mt-5 space-y-3 text-left rounded-lg justify ${
-                props.view === "bookings" ? "bg-blue-200" : "bg-pink-200"
+              className={`w-full p-5 mt-5 py-1 text-left rounded-lg justify ${
+                props.view === "bookings" ? "bg-gradient-to-l from-[#fff7a382] to-[#ff994021]" : "bg-gradient-to-r from-[#fff7a382] to-[#ff994021]"
               }`}
             >
               <p className="leading-relaxed text-[#fe8923] ">
@@ -121,31 +121,33 @@ export default function SelectedOfferCard(props) {
             <div className="flex items-center justify-center flex-grow w-full col-span-2 pt-6 mt-4 lg:pt-0 w-100">
               {props.view === "requests" &&
               props.booking.bookingStatus === "pending" ? (
-                <div className="flex flex-row space-x-3">
-                  <button
-                    type="submit"
-                    onClick={(e) =>
-                      reactToRequestCb(props.booking.bookingId, "declined")
-                    }
-                    className="px-4 py-2 font-semibold bg-transparent border rounded hover:bg-amber-500 text-[#fe8923] hover:text-white border-amber-500 hover:border-transparent"
-                  >
-                    Decline{" "}
-                  </button>{" "}
+                <div className="flex flex-col md:flex-row gap-4 md:gap-2 lg:mt-4 items-center">
+                  <div className="flex gap-6 md:gap-2">
                   <button
                     type="button"
                     onClick={(e) =>
                       reactToRequestCb(props.booking.bookingId, "accepted")
                     }
-                    className="px-4 py-2 font-semibold bg-transparent border rounded hover:bg-lime-600 text-lime-700 hover:text-white border-lime-600 hover:border-transparent"
+                    className="hover:bg-[#a6c120] bg-[#70840def] hover:shadow-[#fe8923] hover:shadow-md px-5 py-2 text-sm uppercase text-white font-bold rounded-xl"
                   >
                     Accept
                   </button>
+                  <button
+                    type="submit"
+                    onClick={(e) =>
+                      reactToRequestCb(props.booking.bookingId, "declined")
+                    }
+                    className="hover:bg-red-500 bg-red-400 hover:shadow-[#fe8923] hover:shadow-md px-5 py-2 text-sm uppercase text-white font-bold rounded-xl"
+                  >
+                    Decline{" "}
+                  </button>{" "}
+                  </div>
                   <button
                     type="button"
                     onClick={(e) =>
                       openChatCb(props.booking.bookingId, givingHelp)
                     }
-                    className="px-4 py-2 font-semibold bg-transparent border rounded hover:bg-rose-500 text-rose-700 hover:text-white border-rose-500 hover:border-transparent"
+                    className="bg-[#ff9940e3] hover:bg-[#fe8923] hover:shadow-[#fe8923] hover:shadow-md w-full md:px-8 py-2 text-sm uppercase text-white font-bold rounded-xl"
                   >
                     Chat{" "}
                   </button>
@@ -157,14 +159,14 @@ export default function SelectedOfferCard(props) {
                     onClick={(e) =>
                       reactToRequestCb(props.booking.bookingId, "declined")
                     }
-                    className="px-4 py-2 font-semibold bg-transparent border rounded hover:bg-amber-500 text-[#fe8923] hover:text-white border-amber-500 hover:border-transparent"
+                    className="hover:bg-red-500 bg-red-400 hover:shadow-[#fe8923] hover:shadow-md px-5 py-2 text-sm uppercase text-white font-bold rounded-xl"
                   >
                     Cancel{" "}
                   </button>{" "}
                   <button
                     type="button"
                     onClick={(e) => openChatCb(props.booking.bookingId)}
-                    className="px-4 py-2 font-semibold bg-transparent border rounded hover:bg-rose-500 text-rose-700 hover:text-white border-rose-500 hover:border-transparent"
+                    className="bg-[#ff9940e3] hover:bg-[#fe8923] hover:shadow-[#fe8923] hover:shadow-md w-full md:px-8 py-2 text-sm uppercase text-white font-bold rounded-xl"
                   >
                     Chat{" "}
                   </button>

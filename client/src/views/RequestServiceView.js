@@ -51,26 +51,26 @@ export default function RequestServiceView() {
 
   return (
     // Code thanks to https://codepen.io/atzinn-herrera/pen/JjMMBxy
-    <div className="flex px-16 py-16 min-w-screen min-h-scree">
-      <div className="w-full overflow-hidden border-2 border-solid bg-amber-100 text-amber-500 rounded-xl border-amber-200">
-        <div className="w-full md:flex">
-          <div className="hidden object-cover px-5 py-5 bg-white border-r-2 border-solid md:block md:w-4/7 lg:w-3/5 border-amber-00">
+    <div className="flex flex-col items-center lg:flex-row px-16 py-16 min-w-screen">
+      <div className="w-screen md:w-full overflow-hidden bg-amber-100 text-[#fe8923] rounded-xl">
+        <div className="w-full flex md:flex-col lg:flex-row">
+          <div className="hidden object-cover md:h-80 lg:h-full px-5 py-5 bg-white border-r-2 border-solid md:block md:w-4/7 lg:w-3/5 border-amber-00">
             <img
-              className="rounded-xl"
+              className="rounded-xl object-cover h-full w-full"
               src="https://i.pinimg.com/originals/01/1b/24/011b24f9cb707b842aeb862ef9d54e5a.gif"
             />
           </div>
           <div className="w-full px-5 py-20 md:w-3/7 lg:w-2/5 md:px-10">
             <header className="mb-10 text-center">
-              <h1 className="text-4xl font-bold text-amber-900">
+              <h1 className="text-4xl font-bold text-[#361201]">
                 Request a service
               </h1>
-              <p className="text-2xl font-bold text-amber-600">
+              <p className="text-2xl font-bold text-[#fe8923]">
                 {selectedOffer[0].title}
               </p>
               {userWallet < 5 && (
                 <p
-                  className="w-1/2 px-6 py-5 mx-auto my-3 text-base text-red-700 bg-red-100 border-2 border-red-300 rounded-lg"
+                  className="w-1/2 px-6 py-5 mx-auto my-3 text-base text-red-700 bg-red-100 rounded-xl"
                   role="alert"
                 >
                   {' '}
@@ -98,7 +98,7 @@ export default function RequestServiceView() {
                       min="0"
                       onChange={(e) => handleInputChange(e)}
                       type="number"
-                      className="w-full py-2 pl-10 pr-3 -ml-10 border-2 rounded-lg outline-none border-amber-200 focus:border-lime-700"
+                      className="w-full py-2 pl-10 pr-3 -ml-10 rounded-xl outline-none focus:border-[#FFE500]"
                       placeholder="1"
                     />
                   </div>
@@ -120,7 +120,7 @@ export default function RequestServiceView() {
                       value={requestData.proposed_date}
                       onChange={(e) => handleInputChange(e)}
                       type="date"
-                      className="w-full py-2 pl-10 pr-3 -ml-10 border-2 rounded-lg outline-none border-amber-200 focus:border-lime-700"
+                      className="w-full py-2 pl-10 pr-3 -ml-10 rounded-xl outline-none focus:border-[#FFE500]"
                     />
                   </div>
                 </div>
@@ -138,7 +138,7 @@ export default function RequestServiceView() {
                       value={requestData.booking_description}
                       onChange={(e) => handleInputChange(e)}
                       rows="3"
-                      className="w-full py-2 pl-10 pr-3 -ml-10 border-2 rounded-lg outline-none border-amber-200 focus:border-lime-700"
+                      className="w-full py-2 pl-10 pr-3 -ml-10 rounded-xl outline-none focus:border-[#FFE500]"
                     ></textarea>
                   </div>
                 </div>
@@ -159,16 +159,16 @@ export default function RequestServiceView() {
                   <label htmlFor="donation">I need a donation</label>
                 </div>
               </div>
-              <div className="flex flex-wrap justify-center space-x-2 lg:space-y-0">
+              <div className="flex flex-wrap justify-center items-center space-x-2 lg:space-y-0">
                 <Link
                   to={'/'}
-                  className="px-4 py-2 font-semibold bg-transparent border rounded hover:bg-lime-600 text-lime-700 hover:text-white border-lime-600 hover:border-transparent"
+                  className="bg-[#ff9940e3] hover:bg-[#fe8923] hover:shadow-[#fe8923] hover:shadow-md px-[45px] py-2 text-sm uppercase text-white font-bold rounded-xl"
                 >
                   Back
                 </Link>
                 <button
                   type="submit"
-                  className="px-4 py-2 font-semibold bg-transparent border rounded hover:bg-amber-500 text-amber-700 hover:text-white border-amber-500 hover:border-transparent"
+                  className="hover:bg-[#a6c120] bg-[#70840def] hover:shadow-[#fe8923] hover:shadow-md px-8 py-2 text-sm uppercase text-white font-bold rounded-xl"
                 >
                   Request{' '}
                 </button>
