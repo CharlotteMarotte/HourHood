@@ -209,16 +209,16 @@ export default function EditProfileView(props) {
                           className="p-2.5 mb-0 min-w-full rounded-lg bg-white focus:outline-none focus:border-amber-500 text-md border-solid border-2 border-amber-200 transition ease-in duration-200"
                           name="city_code"
                           id="select_category"
-                          value={profileData.city_code}
-                          defaultValue={'DEFAULT'}
+                         // value={profileData.city_code}
+                          defaultValue={profileData.city_code}
                         >
-                          <option
+                          {/* <option
                             disabled
                             value="DEFAULT"
                             className="p-2 hover:bg-amber-100 text-md "
                           >
                             -- Select a postal code --
-                          </option>
+                          </option> */}
                           {props.postalCodes.map((postalCode, index) => (
                             <option
                               key={index}
@@ -341,7 +341,7 @@ export default function EditProfileView(props) {
 
               <div className="flex flex-wrap justify-center space-x-2">
                 <Link
-                  to={'/profile'}
+                  to={`/profile/${user.id}`}
                   className="px-4 py-2 font-semibold bg-transparent border rounded hover:bg-lime-600 text-lime-700 hover:text-white border-lime-600 hover:border-transparent"
                 >
                   Cancel

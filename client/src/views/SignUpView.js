@@ -12,9 +12,9 @@ const EMPTY_FORM = {
   city_name: 'Barcelona',
   country: 'Spain',
   email: '',
-  user_description: null,
-  hobbies: null,
-  superpower: null,
+  user_description: '',
+  hobbies: '',
+  superpower: '',
   photo: '/penguin.jpg',
   password: '',
 };

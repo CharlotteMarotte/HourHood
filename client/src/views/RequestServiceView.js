@@ -68,7 +68,7 @@ export default function RequestServiceView() {
               <p className="text-2xl font-bold text-[#fe8923]">
                 {selectedOffer[0].title}
               </p>
-              {userWallet < 5 && (
+              {userWallet <= 1 && (
                 <p
                   className="w-1/2 px-6 py-5 mx-auto my-3 text-base text-red-700 bg-red-100 rounded-xl"
                   role="alert"

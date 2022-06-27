@@ -13,6 +13,8 @@ export default function OfferGrid() {
     userWallet,
   } = useContext(AppContext);
 
+  
+
   const [chosenCat, setChosenCat] = useState("default");
 
   let photoUrl = "http://localhost:5000/clientfiles";

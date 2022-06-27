@@ -106,6 +106,7 @@ export default function PostOfferView(props) {
                     />
                   </div>
                 </div>
+
                 <div className="block lg:flex">
                   <div className="w-full mb-5 lg:w-1/2">
                     <label
@@ -141,6 +142,7 @@ export default function PostOfferView(props) {
                     <label htmlFor="donation">I accept donations</label>
                   </div>
                 </div>
+
                 <div className="w-full px-3 pr-6 mb-5">
                   <div className="block">
                     <div className="flex items-center justify-center w-full text-center poniter-events-none"></div>
@@ -203,7 +205,43 @@ export default function PostOfferView(props) {
                         className="w-full py-2 pl-10 pr-3 -ml-10 rounded-lg outline-none focus:border-[#FFE500]"
                       ></textarea>
                     </div>
+                    <div className="block lg:flex">
+                  {/* <div className="w-full mb-5 lg:w-1/2">
+                    <label
+                      htmlFor="capacity-input"
+                      className="px-1 font-semibold text-s"
+                    >
+                      Capacity (times/month)
+                    </label>
+                    <div className="flex">
+                      <div className="flex items-center justify-center w-10 text-center poniter-events-none"></div>
+                      <input
+                        require="true"
+                        id="capacity-input"
+                        name="capacity"
+                        value={serviceData.capacity}
+                        onChange={(e) => handleInputChange(e)}
+                        type="number"
+                        min="0"
+                        className="w-full py-2 pl-10 pr-3 -ml-10 border-2 rounded-lg outline-none border-amber-200 focus:border-lime-700"
+                        placeholder="1"
+                      />
+                    </div>
+                  </div> */}
+                  <div className="w-full px-3 mx-auto mb-5 space-x-3 lg:w-1/2 mt-7">
+                    <input
+                      type="checkbox"
+                      id="donation"
+                      name="donation"
+                      checked={isChecked}
+                      onChange={(e) => handleCheckboxChange(e)}
+                      className="bg-lime-700 hover:bg-lime-700 focus:bg-lime-700"
+                    />
+                    <label htmlFor="donation">I accept donations</label>
                   </div>
+                </div>
+                  </div>
+                  
                 </div>
 
                 <div className="flex flex-wrap justify-center items-center space-x-2 lg:space-y-0">

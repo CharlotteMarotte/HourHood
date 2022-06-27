@@ -45,7 +45,6 @@ export default function App() {
   const [files, setFiles] = useState([]);
   const [userWallet, setUserWallet] = useState(0);
   const [bookings, setBookings] = useState([]);
-  const [userBookings, setUserBookings] = useState([]);
   const [selectedOffer, setSelectedOffer] = useState([]);
   const [toBeEdited, setToBeEdited] = useState([]);
   const [selectedBooking, setSelectedBooking] = useState([]);
@@ -110,8 +109,8 @@ export default function App() {
   function doLogout() {
     Local.removeUserInfo();
     setUser(null);
-    setUserBookings(null);
     setUserWallet(0);
+    resetFilteredOffers()
   }
 
   // sign up
@@ -188,7 +187,9 @@ export default function App() {
         // don't show admin user
         users = users.filter((u) => u.id !== 1);
         setUsers(users);
+        await getUser(user.id);
         navigate(`/profile/${user.id}`);
+        
       } else {
         console.log(`Server error: ${response.status} ${response.statusText}`);
       }
@@ -228,6 +229,7 @@ export default function App() {
         let data = await response.json();
         setFiles(data);
         await getUser(user.id);
+       // await getUsers();
         navigate(`/profile/${user.id}`);
       } else {
         console.log(`Server error: ${response.status}: ${response.statusText}`);
@@ -309,7 +311,10 @@ export default function App() {
         // don't show offer that was only made by system to give default credit
         offers = offers.filter((o) => o.category.categoryID !== 1);
         setOffers(offers);
-        navigate("/");
+
+        setUnfilteredOffers(offers);
+        navigate('/');
+
       } else {
         console.log(`Server error: ${response.status} ${response.statusText}`);
       }
@@ -398,7 +403,6 @@ export default function App() {
         // filter out booking made by system
         bookings = bookings.filter((b) => b.requestor.userID !== 1);
         setBookings(bookings); // set bookings state with all categories, so it can be used by other components/views
-        setUserBookings(bookings);
       } else {
         console.log(`Server error: ${response.status} ${response.statusText}`);
       }
@@ -433,11 +437,10 @@ export default function App() {
         //  don't show admin bookings
         bookings = bookings.filter((b) => b.requestor.userID !== 1);
         setBookings(bookings);
-        setUserBookings(bookings);
-        console.log("Service got requested");
-        navigate("/receiving-help"); // go to all bookings (Receiving help page)
-        console.log("userBookings:", userBookings);
-        console.log("bookings", bookings);
+        console.log('Service got requested');
+        navigate('/receiving-help'); // go to all bookings (Receiving help page)
+        console.log('bookings', bookings);
+
       } else {
         console.log(`Server error: ${response.status} ${response.statusText}`);
       }
@@ -470,7 +473,6 @@ export default function App() {
         bookings = bookings.filter((b) => b.requestor.userID !== 1);
         setBookings(bookings);
         await getWalletValue(user.id);
-        setUserBookings(bookings);
       } else {
         console.log(`Server error: ${response.status} ${response.statusText}`);
       }

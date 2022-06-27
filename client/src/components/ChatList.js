@@ -6,6 +6,7 @@ function ChatList(props) {
   // let {requests, bookings} = useContext(AppContext);
   let listDiv = useRef(null);
   let [myBooking, setMyBooking] = useState(props.bookings[0]);
+  let photoUrl = 'http://localhost:5000/clientfiles';
 
   function getMyBooking() {
     let filteredBooking = props.bookings.filter(
@@ -44,7 +45,9 @@ function ChatList(props) {
               </h3>
               <div className="mt-2 h-28 w-28">
                 <img
-                  src={myBooking.requestor.profilePicture}
+                  src={myBooking.requestor.requestorProfilePicture
+                    ? `${photoUrl}/${myBooking.requestor.requestorProfilePicture}`
+                    : myBooking.requestor.requestorAvatar}
                   className="h-full w-full object-cover rounded-full border-2 border-[#FFE500] shadow-md shadow-[#ffe60099]"
                 />
               </div>
@@ -59,7 +62,9 @@ function ChatList(props) {
               </h3>
               <div className="mt-2 h-28 w-28">
                 <img
-                  src={myBooking.servicePost.provider.providerProfilePicture}
+                  src={myBooking.servicePost.provider.providerProfilePicture
+                    ? `${photoUrl}/${myBooking.servicePost.provider.providerProfilePicture}` 
+                    : myBooking.servicePost.provider.providerAvatar}
                   className="h-full w-full object-cover rounded-full shadow-md border-2 border-[#C8E242] shadow-[#C8E242]"
                 />
               </div>
@@ -84,7 +89,9 @@ function ChatList(props) {
                 <div className="flex items-center gap-4 xl:-ml-44 xl:gap-8">
                   <div className="w-16 h-16 md:w-20 md:h-20">
                     <img
-                      src={myBooking.requestor.profilePicture}
+                      src={myBooking.requestor.requestorProfilePicture
+                          ? `${photoUrl}/${myBooking.requestor.requestorProfilePicture}` 
+                          : myBooking.requestor.requestorAvatar}
                       className="object-cover w-full h-full rounded-full"
                     />
                   </div>
@@ -104,9 +111,9 @@ function ChatList(props) {
                 <div className="flex flex-row-reverse items-center gap-4 xl:ml-44 xl:gap-8">
                   <div className="w-16 h-16 md:w-20 md:h-20">
                     <img
-                      src={
-                        myBooking.servicePost.provider.providerProfilePicture
-                      }
+                      src={myBooking.servicePost.provider.providerProfilePicture 
+                        ? `${photoUrl}/${myBooking.servicePost.provider.providerProfilePicture}` 
+                        : myBooking.servicePost.provider.providerAvatar}
                       className="object-cover w-full h-full rounded-full"
                     />
                   </div>

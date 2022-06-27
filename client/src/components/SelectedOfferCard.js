@@ -7,6 +7,8 @@ export default function SelectedOfferCard(props) {
 
   const [providerData, setProviderData] = useState(users[0]);
   const [givingHelp, SetGivingHelp] = useState(false);
+  let photoUrl = 'http://localhost:5000/clientfiles';
+  
 
   useEffect(() => {
     getProviderData();
@@ -40,6 +42,7 @@ export default function SelectedOfferCard(props) {
             }
             alt="User"
           />
+
         </div>
     
         <div className="block h:[390px] md:h-[380px] mb-16 md:mb-0 md:py-6 py-10 w-full relative -mt-9 md:mt-0 z-10 shadow-lg shadow-[#ff994091] bg-white rounded-xl md:rounded-r-xl -z-1 md:flex md:flex-row lg:mx-auto lg:w-4/5 ">
