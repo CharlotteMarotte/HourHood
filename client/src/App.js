@@ -1,43 +1,43 @@
-import React, { useState, useEffect } from 'react';
-import { Route, Routes, useNavigate } from 'react-router-dom';
-import Api from '../src/helpers/Api';
-import Local from '../src/helpers/Local';
-import './App.css';
-import { useLayoutEffect } from 'react';
+import React, { useState, useEffect } from "react";
+import { Route, Routes, useNavigate } from "react-router-dom";
+import Api from "../src/helpers/Api";
+import Local from "../src/helpers/Local";
+import "./App.css";
+import { useLayoutEffect } from "react";
 
-import AppContext from './AppContext';
-import BookingContext from './BookingContext';
-import Navbar from './components/Navbar';
-import ProfileView from './views/ProfileView';
-import BookingsView from './views/BookingsView';
-import RequestsView from './views/RequestsView';
-import HomeView from './views/HomeView';
-import Error404View from './views/Error404View';
-import SignUpView from './views/SignUpView';
-import LogInView from './views/LogInView';
-import RequestServiceView from './views/RequestServiceView';
-import PostOfferView from './views/PostOfferView';
-import EditProfileView from './views/EditProfileView';
-import GetStarted from './views/GetStarted';
-import RulesView from './views/RulesView';
-import Chat from './components/Chat';
-import ChatView from './views/ChatView';
-
+import AppContext from "./AppContext";
+import BookingContext from "./BookingContext";
+import Navbar from "./components/Navbar";
+import ProfileView from "./views/ProfileView";
+import BookingsView from "./views/BookingsView";
+import RequestsView from "./views/RequestsView";
+import HomeView from "./views/HomeView";
+import Error404View from "./views/Error404View";
+import SignUpView from "./views/SignUpView";
+import LogInView from "./views/LogInView";
+import RequestServiceView from "./views/RequestServiceView";
+import PostOfferView from "./views/PostOfferView";
+import EditProfileView from "./views/EditProfileView";
+import GetStarted from "./views/GetStarted";
+import RulesView from "./views/RulesView";
+import Chat from "./components/Chat";
+import ChatView from "./views/ChatView";
+import PrivateRoute from "./components/PrivateRoute";
 
 const postalCodes = [
-  '08006',
-  '08012',
-  '08023',
-  '08035',
-  '08024',
-  '08037',
-  '08025',
+  "08006",
+  "08012",
+  "08023",
+  "08035",
+  "08024",
+  "08037",
+  "08025",
 ];
 
 export default function App() {
   const navigate = useNavigate();
   const [user, setUser] = useState(null);
-  const [loginErrorMsg, setLoginErrorMsg] = useState('');
+  const [loginErrorMsg, setLoginErrorMsg] = useState("");
   const [offers, setOffers] = useState([]);
   const [unfilteredOffers, setUnfilteredOffers] = useState(offers);
   const [categories, setCategories] = useState([]);
@@ -50,7 +50,7 @@ export default function App() {
   const [toBeEdited, setToBeEdited] = useState([]);
   const [selectedBooking, setSelectedBooking] = useState([]);
   const [currDate, setCurrDate] = useState(null);
-
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     getCategories();
@@ -60,38 +60,38 @@ export default function App() {
     getCurrDate();
   }, []);
 
-
   useLayoutEffect(() => {
     window.scrollTo(0, 0);
   }, []);
 
-
   function getCurrDate() {
     let yourDate = new Date();
-    yourDate = yourDate.toISOString().split('T')[0];
+    yourDate = yourDate.toISOString().split("T")[0];
     setCurrDate(yourDate);
   }
-
 
   // ********* USERS *************
 
   // login
   async function doLogin(email, password) {
+    setLoading(true);
     let myresponse = await Api.loginUser(email, password);
     if (myresponse.ok) {
       Local.saveUserInfo(myresponse.data.token, myresponse.data.email);
       setUser(myresponse.data.user);
-      setLoginErrorMsg('');
+      setLoginErrorMsg("");
       await getBookings();
       await getWalletValue(myresponse.data.user.id);
-      navigate('/');
+      navigate("/");
     } else {
-      setLoginErrorMsg('Login failed');
+      setLoginErrorMsg("Login failed");
     }
+    setLoading(false);
   }
 
   // GET all users
   async function getWalletValue(id) {
+    setLoading(true);
     try {
       let response = await fetch(`/users/${id}/wallet`); // does GET by default
       if (response.ok) {
@@ -103,6 +103,7 @@ export default function App() {
     } catch (err) {
       console.log(`Server error: ${err.message}`);
     }
+    setLoading(false);
   }
 
   // logout
@@ -115,21 +116,24 @@ export default function App() {
 
   // sign up
   async function addNewUser(newUser) {
+    setLoading(true);
     let myresponse = await Api.RegisterUser(newUser);
     if (myresponse.ok) {
       Local.saveUserInfo(myresponse.data.user, myresponse.data.token);
       setUser(myresponse.data.user);
-      setLoginErrorMsg('');
-      navigate('/login');
+      setLoginErrorMsg("");
+      navigate("/login");
     } else {
-      setLoginErrorMsg('Login failed');
+      setLoginErrorMsg("Login failed");
     }
+    setLoading(false);
   }
 
   // GET all users
   async function getUsers() {
+    setLoading(true);
     try {
-      let response = await fetch('/users'); // does GET by default
+      let response = await fetch("/users"); // does GET by default
       if (response.ok) {
         let users = await response.json();
         users = users.filter((u) => u.id !== 1);
@@ -140,14 +144,15 @@ export default function App() {
     } catch (err) {
       console.log(`Server error: ${err.message}`);
     }
+    setLoading(false);
   }
 
   // GET user by ID
 
   async function getUser(id) {
-
-    let options = { 
-      method: "GET"
+    setLoading(true);
+    let options = {
+      method: "GET",
     };
 
     try {
@@ -161,17 +166,18 @@ export default function App() {
     } catch (err) {
       console.log(`Server error: ${err.message}`);
     }
+    setLoading(false);
   }
-
 
   // ********* PROFILE  *************
 
   //PUT method - edit the service post/offer
   async function updateProfile(profileData) {
+    setLoading(true);
     // Define fetch() options
     let options = {
-      method: 'PUT',
-      headers: { 'Content-Type': 'application/json' },
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
       body: JSON.stringify(profileData),
     };
 
@@ -189,11 +195,13 @@ export default function App() {
     } catch (err) {
       console.log(`Server error: ${err.message}`);
     }
+    setLoading(false);
   }
 
   async function getFiles() {
+    setLoading(true);
     try {
-      let response = await fetch('/photos');
+      let response = await fetch("/photos");
       if (response.ok) {
         let data = await response.json();
         setFiles(data);
@@ -203,16 +211,18 @@ export default function App() {
     } catch (err) {
       console.log(`Network error: ${err.message}`);
     }
+    setLoading(false);
   }
 
   async function uploadFile(formData) {
+    setLoading(true);
     let options = {
-      method: 'POST',
+      method: "POST",
       body: formData,
     };
 
     try {
-      let response = await fetch('/photos', options);
+      let response = await fetch("/photos", options);
       if (response.ok) {
         // Server responds with updated array of files
         let data = await response.json();
@@ -225,12 +235,14 @@ export default function App() {
     } catch (err) {
       console.log(`Network error: ${err.message}`);
     }
+    setLoading(false);
   }
   // ********* CATEGORIES *************
 
   async function getCategories() {
+    setLoading(true);
     try {
-      let response = await fetch('/categories'); // does GET by default
+      let response = await fetch("/categories"); // does GET by default
       if (response.ok) {
         let categories = await response.json();
         // filter out system category
@@ -242,6 +254,7 @@ export default function App() {
     } catch (err) {
       console.log(`Server error: ${err.message}`);
     }
+    setLoading(false);
   }
 
   // ********* OFFERS *************
@@ -259,8 +272,9 @@ export default function App() {
 
   // GET all offers
   async function getOffers() {
+    setLoading(true);
     try {
-      let response = await fetch('/servicePost'); // does GET by default
+      let response = await fetch("/servicePost"); // does GET by default
       if (response.ok) {
         let offers = await response.json();
         // filter out system post to get starting hour debit
@@ -273,50 +287,54 @@ export default function App() {
     } catch (err) {
       console.log(`Server error: ${err.message}`);
     }
+    setLoading(false);
   }
 
   // POST a new service/offer
   async function postService(serviceData) {
+    setLoading(true);
     // Define fetch() options
     let options = {
-      method: 'POST',
+      method: "POST",
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
       },
       body: JSON.stringify(serviceData),
     };
 
     try {
-      let response = await fetch('/servicePost/', options); // do POST
+      let response = await fetch("/servicePost/", options); // do POST
       if (response.ok) {
         let offers = await response.json(); // set invoices state with all invoices including new ones
         // don't show offer that was only made by system to give default credit
         offers = offers.filter((o) => o.category.categoryID !== 1);
         setOffers(offers);
-        navigate('/');
+        navigate("/");
       } else {
         console.log(`Server error: ${response.status} ${response.statusText}`);
       }
     } catch (err) {
       console.log(`Server error: ${err.message}`);
     }
+    setLoading(false);
   }
 
   //save to state the info about the offer which the user wants to edit (callback used in OfferCard, id saved with click on "Edit" button)
   function toEdit(id) {
     let offerToEdit = offers.filter((e) => e.postID === id);
     setToBeEdited(offerToEdit);
-    console.log('to be edited:', toBeEdited);
+    console.log("to be edited:", toBeEdited);
   }
 
   //PUT method - edit the service post/offer
   async function updateOffer(serviceData) {
+    setLoading(true);
     let id = toBeEdited[0].postID; // get postID from state
 
     // Define fetch() options
     let options = {
-      method: 'PUT',
-      headers: { 'Content-Type': 'application/json' },
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
       body: JSON.stringify(serviceData),
     };
 
@@ -334,13 +352,15 @@ export default function App() {
     } catch (err) {
       console.log(`Server error: ${err.message}`);
     }
+    setLoading(false);
   }
 
   // DELETE a service/offer
   async function deleteService(id) {
+    setLoading(true);
     // Define fetch() options
     let options = {
-      method: 'DELETE',
+      method: "DELETE",
     };
 
     try {
@@ -356,23 +376,23 @@ export default function App() {
     } catch (err) {
       console.log(`Server error: ${err.message}`);
     }
+    setLoading(false);
   }
-
-
 
   function openChat(id) {
     setSelectedBooking(id);
     // console.log(id);
     // console.log(selectedBooking);
-    navigate('/chat');
+    navigate("/chat");
     //it save the ID but not when I need it, it appears with delay.
   }
 
   // GET all bookings
 
   async function getBookings() {
+    setLoading(true);
     try {
-      let response = await fetch('/bookings'); // does GET by default
+      let response = await fetch("/bookings"); // does GET by default
       if (response.ok) {
         let bookings = await response.json();
         // filter out booking made by system
@@ -385,48 +405,51 @@ export default function App() {
     } catch (err) {
       console.log(`Server error: ${err.message}`);
     }
+    setLoading(false);
   }
 
   // save selected offer to selected state based on the id (callback used in OfferCard with click on Request button )
   function selectOffer(id) {
     let selected = offers.filter((e) => e.postID === id);
     setSelectedOffer(selected);
-    navigate(user ? '/service-request' : '/login');
+    navigate(user ? "/service-request" : "/login");
   }
 
   // POST a new request (make a booking)
   async function requestService(requestData) {
+    setLoading(true);
     let options = {
-      method: 'POST',
+      method: "POST",
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
       },
       body: JSON.stringify(requestData),
     };
 
     try {
-      let response = await fetch('/bookings/', options); // do POST
+      let response = await fetch("/bookings/", options); // do POST
       if (response.ok) {
         let bookings = await response.json(); // set bookings state with all bookings(requests) that the logged in user made, including the new one
         //  don't show admin bookings
         bookings = bookings.filter((b) => b.requestor.userID !== 1);
         setBookings(bookings);
         setUserBookings(bookings);
-        console.log('Service got requested');
-        navigate('/receiving-help'); // go to all bookings (Receiving help page)
-        console.log('userBookings:', userBookings);
-        console.log('bookings', bookings);
+        console.log("Service got requested");
+        navigate("/receiving-help"); // go to all bookings (Receiving help page)
+        console.log("userBookings:", userBookings);
+        console.log("bookings", bookings);
       } else {
         console.log(`Server error: ${response.status} ${response.statusText}`);
       }
     } catch (err) {
       console.log(`Server error: ${err.message}`);
     }
+    setLoading(false);
   }
 
   // PUT: Add status of booking
   async function reactToRequest(id, reply) {
-
+    setLoading(true);
     // Find booking in state and change status
     let booking = bookings.find((b) => b.bookingId === id);
     booking.bookingStatus = reply;
@@ -434,8 +457,8 @@ export default function App() {
 
     // Define fetch() options
     let options = {
-      method: 'PUT',
-      headers: { 'Content-Type': 'application/json' },
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
       body: JSON.stringify(booking),
     };
 
@@ -454,6 +477,7 @@ export default function App() {
     } catch (err) {
       console.log(`Server error: ${err.message}`);
     }
+    setLoading(false);
   }
 
   // ********* OBJECT FOR APP CONTEXT *************
@@ -493,26 +517,45 @@ export default function App() {
     openChatCb: openChat,
   };
 
-  
   const chatBookingObj = {
     bookingId: selectedBooking,
   };
 
-// ********* RETURN *************
+  // ********* RETURN *************
 
   return (
     <div className="App bg-gradient-to-t from-[#FFF7A3] via-[#FFF7A3] to-[#ff994091] min-h-screen pb-10 md:pb-20">
       <Navbar user={user} logoutCb={doLogout} />
+      {/* {loading && (
+        <div>
+          <div className="giphy-embed w-full h-full relative">
+            <iframe
+              src="https://giphy.com/embed/ZAqy8JqMwiyeUprHUI"
+              frameBorder="0"
+              allowFullScreen
+              className="w-full h-full absolute"
+            ></iframe>
+          </div>
+          <p>
+            <a href="https://giphy.com/gifs/community-takecare-holdon-ZAqy8JqMwiyeUprHUI">
+              via GIPHY
+            </a>
+          </p>
+        </div>
+      )} */}
 
       <Routes>
+        {/* <PrivateRoute> */}
         <Route
           path="profile/:id"
           element={
             <AppContext.Provider value={contextObj}>
-              <ProfileView offers={unfilteredOffers}/>
+              <ProfileView offers={unfilteredOffers} />
             </AppContext.Provider>
           }
         />
+        {/* </PrivateRoute> */}
+        {/* <PrivateRoute> */}
         <Route
           path="profile/edit"
           element={
@@ -525,6 +568,7 @@ export default function App() {
             </AppContext.Provider>
           }
         />
+        {/* </PrivateRoute> */}
 
         <Route
           path="signup"
@@ -547,16 +591,17 @@ export default function App() {
           }
         />
         <Route path="rules" element={<RulesView />} />
-
+        {/* <PrivateRoute> */}
         <Route
           path="receiving-help"
           element={
             <AppContext.Provider value={bookingsObj}>
-              <BookingsView />{' '}
+              <BookingsView />{" "}
             </AppContext.Provider>
           }
         />
-        <Route path="getstarted" element={<GetStarted user={user}/>} />
+        {/* </PrivateRoute> */}
+        <Route path="getstarted" element={<GetStarted user={user} loading={loading} />} />
         <Route
           path="/"
           element={
@@ -565,6 +610,7 @@ export default function App() {
             </AppContext.Provider>
           }
         />
+        {/* <PrivateRoute> */}
         <Route
           path="service-request"
           element={
@@ -573,6 +619,8 @@ export default function App() {
             </BookingContext.Provider>
           }
         />
+        {/* </PrivateRoute> */}
+        {/* <PrivateRoute> */}
         <Route
           path="service-post/:op"
           element={
@@ -585,16 +633,19 @@ export default function App() {
             />
           }
         />
+        {/* </PrivateRoute> */}
+        {/* <PrivateRoute> */}
         <Route
           path="giving-help"
           element={
             <AppContext.Provider value={bookingsObj}>
-              <RequestsView />{' '}
+              <RequestsView />{" "}
             </AppContext.Provider>
           }
         />
+        {/* </PrivateRoute> */}
         <Route path="*" element={<Error404View />} />
-
+        {/* <PrivateRoute> */}
         <Route
           path="chat"
           element={
@@ -603,6 +654,7 @@ export default function App() {
             </AppContext.Provider>
           }
         />
+        {/* </PrivateRoute> */}
       </Routes>
     </div>
   );

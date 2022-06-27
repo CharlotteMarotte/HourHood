@@ -31,7 +31,7 @@ export default function OfferGrid() {
 
   return (
     // Code thanks to https://codepen.io/asdasdadddddddddd/pen/ExXjdPM
-    <div>
+    <div className="mt-10">
       <form onSubmit={handleSubmit}>
         <div className="inline space-x-3">
           <select
@@ -64,13 +64,13 @@ export default function OfferGrid() {
           <button
             type="submit"
             disabled={chosenCat === "default" ? true : false}
-            className="px-6 py-2 font-semibold uppercase rounded-xl hover:bg-[#a6c120] bg-[#70840def] hover:shadow-white hover:shadow-md text-white"
+            className="md:px-6 px-4 py-2 text-xs md:text-base font-semibold uppercase rounded-xl hover:bg-[#a6c120] bg-[#70840def] hover:shadow-white hover:shadow-md text-white"
           >
             Filter
           </button>
           <button
             onClick={resetFilteredOffersCb}
-            className="px-6 py-2 font-semibold rounded-lg uppercase bg-[#ff9940e3]  hover:shadow-md hover:shadow-white text-white hover:bg-[#fe8923]  hover:text-white "
+            className="md:px-6 px-4 py-2 font-semibold text-xs md:text-base rounded-lg uppercase bg-[#ff9940e3]  hover:shadow-md hover:shadow-white text-white hover:bg-[#fe8923]  hover:text-white "
             type="button"
           >
             Reset

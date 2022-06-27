@@ -11,6 +11,23 @@ export default function GetStarted(props) {
   }, []);
   return (
     <div className="mb-5 md:mt-8 xl:mt-0 md:mb-20 flex items-center md:gap-10 flex-col">
+            {props.loading && (
+        <div>
+          <div className="giphy-embed w-full h-full relative">
+            <iframe
+              src="https://giphy.com/embed/ZAqy8JqMwiyeUprHUI"
+              frameBorder="0"
+              allowFullScreen
+              className="w-full h-full absolute"
+            ></iframe>
+          </div>
+          <p>
+            <a href="https://giphy.com/gifs/community-takecare-holdon-ZAqy8JqMwiyeUprHUI" className="text-3xl text-[#70840def]">
+              loading...
+            </a>
+          </p>
+        </div>
+      )}
       <div className="xl:relative">
         <img src={image2} className="xl:w-[400px] w-[300px] left-14 xl:left-0 relative top-8 " />
         <div className="flex flex-col items-center">
