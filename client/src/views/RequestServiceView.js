@@ -52,9 +52,9 @@ export default function RequestServiceView() {
   return (
     // Code thanks to https://codepen.io/atzinn-herrera/pen/JjMMBxy
     <div className="flex flex-col items-center lg:flex-row px-16 py-16 min-w-screen">
-      <div className="w-screen md:w-full overflow-hidden bg-amber-100 text-[#fe8923] rounded-xl">
+      <div className="w-screen md:w-full overflow-hidden bg-white/30 text-[#fe8923] rounded-xl">
         <div className="w-full flex md:flex-col lg:flex-row">
-          <div className="hidden object-cover md:h-80 lg:h-full px-5 py-5 bg-white border-r-2 border-solid md:block md:w-4/7 lg:w-3/5 border-amber-00">
+          <div className="hidden object-cover md:h-80 lg:h-full px-5 py-5 bg-white md:block md:w-4/7 lg:w-3/5 border-amber-00">
             <img
               className="rounded-xl object-cover h-full w-full"
               src="https://i.pinimg.com/originals/01/1b/24/011b24f9cb707b842aeb862ef9d54e5a.gif"
